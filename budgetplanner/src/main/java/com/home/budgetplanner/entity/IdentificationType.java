@@ -1,32 +1,37 @@
 package com.home.budgetplanner.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.Setter;
 import lombok.AccessLevel;
 
-@Entity
-@Data( )
+@Entity()
+@Data()
+@Table(name="identification_type")
 public class IdentificationType {
 	
 	@Id
 	@GeneratedValue
 	@Setter(AccessLevel.NONE)
+	@Column(name="id_identification_type")
 	private Long id;
 	
 	private String name;
-	private String nnmonic;
+	private String mnemonic;
+	
 	private String description;
 	
 	
 
-	public IdentificationType(String name, String nnmonic, String description) {
+	public IdentificationType(String name, String mnemonic, String description) {
 		super();
 		this.name = name;
-		this.nnmonic = nnmonic;
+		this.mnemonic = mnemonic;
 		this.description = description;
 	}
 
