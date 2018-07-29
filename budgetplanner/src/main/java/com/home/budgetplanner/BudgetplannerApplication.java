@@ -1,5 +1,7 @@
 package com.home.budgetplanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +11,9 @@ import com.home.budgetplanner.repository.IdentificationTypeRepository;
 
 @SpringBootApplication
 public class BudgetplannerApplication implements CommandLineRunner {
+	
+	private static final Logger logger = LogManager
+			.getLogger(BudgetplannerApplication.class);
 	
 	private IdentificationTypeRepository repository;
 
@@ -20,7 +25,7 @@ public class BudgetplannerApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		IdentificationType identificationType = repository.findById(1L);
-		
+		logger.info("test log4j");
 	}
 	
 }
