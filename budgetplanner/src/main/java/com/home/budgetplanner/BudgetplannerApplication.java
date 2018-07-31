@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.home.budgetplanner.entity.IdentificationType;
-import com.home.budgetplanner.repository.IdentificationTypeRepository;
+import com.home.budgetplanner.repository.IdentificationTypeDao;
 
 @SpringBootApplication
 public class BudgetplannerApplication implements CommandLineRunner {
@@ -17,7 +17,7 @@ public class BudgetplannerApplication implements CommandLineRunner {
 			.getLogger(BudgetplannerApplication.class);
 	
 	@Autowired
-	private IdentificationTypeRepository repository;
+	private IdentificationTypeDao repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BudgetplannerApplication.class, args);
