@@ -12,34 +12,30 @@ import lombok.AccessLevel;
 
 @Entity()
 @Data()
-@Table(name="identification_type")
+@Table(name = "identification_type")
 public class IdentificationType {
-	
-	@Id
-	@GeneratedValue
-	@Setter(AccessLevel.NONE)
-	@Column(name="id_identification_type")
-	private Long id;
-	
-	private String name;
-	private String mnemonic;
-	
-	private String description;
-	
-	
 
-	public IdentificationType(String name, String mnemonic, String description) {
-		super();
-		this.name = name;
-		this.mnemonic = mnemonic;
-		this.description = description;
-	}
+    @Id
+    @GeneratedValue
+    @Setter(AccessLevel.NONE)
+    @Column(name = "id_identification_type")
+    private Long   id;
 
+    private String name;
+    private String mnemonic;
 
+    private String description;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public IdentificationType(String name, String mnemonic, String description) {
+        super();
+        this.name = name;
+        this.mnemonic = mnemonic;
+        this.description = description;
+    }
 
-	}
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+    }
 
 }
