@@ -13,7 +13,7 @@ import com.home.budgetplanner.repository.IdentificationTypeDao;
 @SpringBootApplication
 public class BudgetplannerApplication implements CommandLineRunner {
 
-    private static final Logger   logger = LogManager.getLogger(BudgetplannerApplication.class);
+    private static final Logger logger = LogManager.getLogger(BudgetplannerApplication.class);
 
     @Autowired
     private IdentificationTypeDao repository;
