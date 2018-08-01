@@ -6,10 +6,12 @@ import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.home.budgetplanner.entity.IdentificationType;
 
 @Repository
+@Transactional
 public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
 
     @Autowired
@@ -53,6 +55,13 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
     public List<IdentificationType> searchCustomers(String theSearchName) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        IdentificationType identificationType = findById(id);
+        em.remove(identificationType);
+        
     }
 
 }

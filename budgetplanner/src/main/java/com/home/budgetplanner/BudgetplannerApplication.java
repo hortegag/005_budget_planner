@@ -25,7 +25,10 @@ public class BudgetplannerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        IdentificationType identificationType = repository.findById(1001L);
+        IdentificationType identificationType = repository.findById(1002L);
+        logger.info("test log4j {}", identificationType);
+        
+        repository.deleteById(1002L);
         logger.info("test log4j {}", identificationType);
     }
 

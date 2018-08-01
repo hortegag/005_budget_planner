@@ -8,3 +8,6 @@ CREATE TABLE public.identification_type(
 );
 
 insert into identification_type values (1001,'Cedula','CI','Cedula de Identidad de la persona');
+
+insert into identification_type values (1002,'Dummy','DM','Dummy Identification');
+insert into identification_type values (1003,'Pasaporte','PS','Pasaporte de la persona');
