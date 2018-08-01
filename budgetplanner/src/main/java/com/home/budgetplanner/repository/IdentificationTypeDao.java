@@ -14,7 +14,7 @@ public interface IdentificationTypeDao {
 
     public List<IdentificationType> getCustomers();
 
-    public void saveCustomer(IdentificationType customer);
+    public IdentificationType save(IdentificationType identificationType);
 
     public IdentificationType getCustomer(int id);
 

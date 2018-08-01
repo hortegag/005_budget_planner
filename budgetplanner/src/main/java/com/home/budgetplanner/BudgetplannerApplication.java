@@ -13,7 +13,7 @@ import com.home.budgetplanner.repository.IdentificationTypeDao;
 @SpringBootApplication
 public class BudgetplannerApplication implements CommandLineRunner {
 
-    private static final Logger logger = LogManager.getLogger(BudgetplannerApplication.class);
+    private static final Logger   logger = LogManager.getLogger(BudgetplannerApplication.class);
 
     @Autowired
     private IdentificationTypeDao repository;
@@ -25,12 +25,15 @@ public class BudgetplannerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        //Commented Code because when the unit test is executed, this metodo also is called and delete the records
-        //IdentificationType identificationType = repository.findById(1002L);
-        //logger.info("test log4j {}", identificationType);
-        
-        //repository.deleteById(1002L);
-        //logger.info("test log4j {}", identificationType);
+        // Commented Code because when the unit test is executed, this metodo
+        // also is called and delete the records
+        // IdentificationType identificationType = repository.findById(1002L);
+        // logger.info("test log4j {}", identificationType);
+
+        // repository.deleteById(1002L);
+        // logger.info("test log4j {}", identificationType);
+        IdentificationType identificationType = new IdentificationType("My dummy IT", "MIT", "This is a dummmy Identification");
+        repository.save(identificationType);
     }
 
 }

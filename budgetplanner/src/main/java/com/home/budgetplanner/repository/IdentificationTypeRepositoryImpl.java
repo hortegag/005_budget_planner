@@ -33,11 +33,6 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
         return null;
     }
 
-    @Override
-    public void saveCustomer(IdentificationType customer) {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
     public IdentificationType getCustomer(int id) {
@@ -62,6 +57,17 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
         IdentificationType identificationType = findById(id);
         em.remove(identificationType);
         
+    }
+    
+    @Override
+    public IdentificationType save(IdentificationType identificationType) {
+        
+        if (identificationType.getId() == null){
+            em.persist(identificationType);
+        } else {
+            em.merge(identificationType);
+        }
+        return identificationType;
     }
 
 }
