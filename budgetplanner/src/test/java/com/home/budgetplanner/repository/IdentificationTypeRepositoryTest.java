@@ -39,15 +39,25 @@ public class IdentificationTypeRepositoryTest {
     //the test is executed
     @DirtiesContext
     public void deleteById_basic() {
-
-        logger.info("Testing delete");
-
         identificationTypeDao.deleteById(1002L);
-        logger.info("Testing delete 2");
-
         assertNull(identificationTypeDao.findById(1002L));
-        logger.info("Testing delete 3");
+    }
+    
+    
+    @Test
+    @DirtiesContext
+    public void save_basic() {
+
+
+        IdentificationType identificationType = identificationTypeDao.findById(1001L);
+
+        assertEquals("Cedula de Identidad de la persona", identificationType.getDescription());
+
+        identificationType.setDescription("CI de la persona");
+        
+        identificationTypeDao.save(identificationType);
+        
+        assertEquals("CI de la persona", identificationType.getDescription());
 
     }
-
 }

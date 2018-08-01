@@ -32,8 +32,8 @@ public class BudgetplannerApplication implements CommandLineRunner {
 
         // repository.deleteById(1002L);
         // logger.info("test log4j {}", identificationType);
-        IdentificationType identificationType = new IdentificationType("My dummy IT", "MIT", "This is a dummmy Identification");
-        repository.save(identificationType);
+        // IdentificationType identificationType = new IdentificationType("My dummy IT", "MIT", "This is a dummmy Identification");
+        // repository.save(identificationType);
     }
 
 }
