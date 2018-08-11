@@ -28,24 +28,22 @@ public class People {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     @Column(name = "id_person")
-    private Long       id;
+    private Long               id;
 
-    private String     name;
+    private String             name;
 
     @Column(name = "last_name")
-    private String     lastName;
+    private String             lastName;
 
-    private String     email;
+    private String             email;
 
     @Column(name = "born_date")
-    private LocalDate  bornDate;
+    private LocalDate          bornDate;
 
-    private String     identification;
+    private String             identification;
 
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "id_identification_type")
     private IdentificationType identificationType;
-    
-    
 
 }

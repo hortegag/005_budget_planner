@@ -22,7 +22,7 @@ CREATE TABLE public.people(
 	last_name varchar(500),
 	email varchar(250),
 	born_date date,
-	indentification varchar(100),
+	identification varchar(100),
 	id_identification_type bigint,
 	CONSTRAINT people_pk PRIMARY KEY (id_person)
 
