@@ -1,4 +1,4 @@
-package com.home.budgetplanner.repository;
+package com.home.budgetplanner.repository.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.home.budgetplanner.entity.IdentificationType;
+import com.home.budgetplanner.repository.IdentificationTypeDao;
 
 @Repository
 @Transactional
