@@ -1,10 +1,13 @@
-package com.home.budgetplanner.repository;
+package com.home.budgetplanner.service;
+
 
 import java.util.List;
 
 import com.home.budgetplanner.entity.People;
 
-public interface PeopleDAO extends BaseDAO<People, Long> {
+public interface PeopleService extends BaseService<People, Long> {
 
+     
     public List<People> findPeopleByName(String name);
+
 }
