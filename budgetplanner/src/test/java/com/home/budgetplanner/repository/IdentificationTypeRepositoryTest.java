@@ -51,7 +51,6 @@ public class IdentificationTypeRepositoryTest {
 
         IdentificationType identificationType = identificationTypeDao.findById(1001L);
         
-        
         assertEquals("Cedula de Identidad de la persona", identificationType.getDescription());
 
         identificationType.setDescription("CI de la persona");
