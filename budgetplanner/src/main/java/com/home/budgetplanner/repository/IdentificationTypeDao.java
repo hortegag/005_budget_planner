@@ -12,7 +12,7 @@ public interface IdentificationTypeDao {
 
     
 
-    public List<IdentificationType> getCustomers();
+    public List<IdentificationType> findAll();
 
     public IdentificationType save(IdentificationType identificationType);
 

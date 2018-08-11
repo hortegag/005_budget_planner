@@ -1,5 +1,7 @@
 package com.home.budgetplanner.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.home.budgetplanner.entity.IdentificationType;
@@ -24,6 +26,11 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService 
     @Override
     public IdentificationType save(IdentificationType identificationType) {
         return identificationTypeDao.save(identificationType);
+    }
+
+    @Override
+    public List<IdentificationType> findAll() {
+        return identificationTypeDao.findAll();
     }
 
 }

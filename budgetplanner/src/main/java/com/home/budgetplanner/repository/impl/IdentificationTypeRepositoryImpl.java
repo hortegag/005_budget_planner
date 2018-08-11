@@ -3,12 +3,17 @@ package com.home.budgetplanner.repository.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.home.budgetplanner.entity.IdentificationType;
+import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.repository.IdentificationTypeDao;
 
 @Repository
@@ -29,9 +34,16 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
     }
 
     @Override
-    public List<IdentificationType> getCustomers() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<IdentificationType> findAll() {
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<IdentificationType> criteriaQuery = criteriaBuilder.createQuery(IdentificationType.class);
+
+        Root<IdentificationType> root = criteriaQuery.from(IdentificationType.class);
+        CriteriaQuery<IdentificationType> select = criteriaQuery.select(root);
+
+        TypedQuery<IdentificationType> typedQuery = em.createQuery(select);
+
+        return typedQuery.getResultList();
     }
 
 

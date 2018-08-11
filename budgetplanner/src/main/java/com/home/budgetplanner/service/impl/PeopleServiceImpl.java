@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.home.budgetplanner.entity.People;
-import com.home.budgetplanner.repository.IdentificationTypeDao;
 import com.home.budgetplanner.repository.PeopleDAO;
 import com.home.budgetplanner.service.PeopleService;
 
