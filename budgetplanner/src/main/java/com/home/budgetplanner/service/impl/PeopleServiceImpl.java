@@ -3,11 +3,13 @@ package com.home.budgetplanner.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.repository.PeopleDAO;
 import com.home.budgetplanner.service.PeopleService;
 
+@Service
 public class PeopleServiceImpl implements PeopleService {
 
     

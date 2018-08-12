@@ -14,21 +14,19 @@ import com.home.budgetplanner.service.IdentificationTypeService;
 @Controller
 @RequestMapping("/identificationType")
 public class IdentificationTypeController {
-    
+
     @Autowired
     private IdentificationTypeService identificationTypeService;
-    
-    
+
     @GetMapping("/list")
-    public String listIdentificationType(Model model){
-            
-            List<IdentificationType> identificationsType = identificationTypeService.findAll();
-            
-            // add the customer to the model
-            model.addAttribute("identificationsType",identificationsType);
-            
-            return "list-identificationsType";
+    public String listIdentificationType(Model model) {
+
+        List<IdentificationType> identificationsType = identificationTypeService.findAll();
+
+        // add the customer to the model
+        model.addAttribute("identificationsType", identificationsType);
+
+        return "list-identificationsType";
     }
-    
 
 }

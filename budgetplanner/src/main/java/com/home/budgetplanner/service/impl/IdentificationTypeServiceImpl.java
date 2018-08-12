@@ -3,11 +3,13 @@ package com.home.budgetplanner.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.repository.IdentificationTypeDao;
 import com.home.budgetplanner.service.IdentificationTypeService;
 
+@Service
 public class IdentificationTypeServiceImpl implements IdentificationTypeService {
 
     @Autowired
