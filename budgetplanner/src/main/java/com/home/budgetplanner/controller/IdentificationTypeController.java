@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.service.IdentificationTypeService;
@@ -26,7 +28,19 @@ public class IdentificationTypeController {
         // add the customer to the model
         model.addAttribute("identificationsType", identificationsType);
 
-        return "list-identificationsType";
+        return "identificationType/list-identificationsType";
+    }
+
+    @PostMapping("/search")
+    public String searchCustomers(@RequestParam("searchName") String searchName,
+            @RequestParam(name = "startPosition", defaultValue = "1") int startPosition,
+            @RequestParam(name = "maxResult", defaultValue = "10") int maxResult, Model theModel) {
+
+        List<IdentificationType> indentifications = identificationTypeService.findByName(searchName, startPosition, maxResult);
+
+        theModel.addAttribute("identificationsType", indentifications);
+
+        return "identificationType/list-identificationsType";
     }
 
 }

@@ -20,6 +20,7 @@ public interface IdentificationTypeDao {
 
     public void deleteCustomer(int theId);
 
-    public List<IdentificationType> searchCustomers(String theSearchName);
+    public List<IdentificationType> findByName(String searchName, int startPosition, int maxResult);
+    
 
 }

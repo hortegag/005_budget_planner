@@ -35,4 +35,9 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService 
         return identificationTypeDao.findAll();
     }
 
+    @Override
+    public List<IdentificationType> findByName(String searchName, int startPosition, int maxResult) {
+        return identificationTypeDao.findByName(searchName, startPosition, maxResult);
+    }
+
 }

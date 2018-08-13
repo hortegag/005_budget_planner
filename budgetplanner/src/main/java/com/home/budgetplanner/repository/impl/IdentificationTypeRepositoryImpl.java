@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,6 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
 
     }
 
-    public static void main(String[] args) {
-
-    }
-
     @Override
     public List<IdentificationType> findAll() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -45,7 +42,6 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
 
         return typedQuery.getResultList();
     }
-
 
     @Override
     public IdentificationType getCustomer(int id) {
@@ -60,22 +56,39 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
     }
 
     @Override
-    public List<IdentificationType> searchCustomers(String theSearchName) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<IdentificationType> findByName(String searchName, int startPosition, int maxResult) {
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<IdentificationType> criteriaQuery = criteriaBuilder.createQuery(IdentificationType.class);
+
+        Root<IdentificationType> root = criteriaQuery.from(IdentificationType.class);
+
+        Path<String> path = root.<String>get("name");
+        criteriaQuery.where(criteriaBuilder.equal(path, searchName));
+
+        // Root<People> root = criteriaQuery.from(People.class);
+        CriteriaQuery<IdentificationType> select = criteriaQuery.select(root);
+
+        TypedQuery<IdentificationType> typedQuery = em.createQuery(select);
+
+        typedQuery.setFirstResult(startPosition);
+        typedQuery.setMaxResults(maxResult);
+
+        return em.createQuery(criteriaQuery).getResultList();
+
     }
 
     @Override
     public void deleteById(Long id) {
         IdentificationType identificationType = findById(id);
         em.remove(identificationType);
-        
+
     }
-    
+
     @Override
     public IdentificationType save(IdentificationType identificationType) {
-        
-        if (identificationType.getId() == null){
+
+        if (identificationType.getId() == null) {
             em.persist(identificationType);
         } else {
             em.merge(identificationType);

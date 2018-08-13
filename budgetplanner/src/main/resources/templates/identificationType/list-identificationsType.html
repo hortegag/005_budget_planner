@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List Identifications Types</title>
+</head>
+<body>
+	<form action="#" th:action="@{/identificationType/search}"
+		method="post">
+		<p>
+			Search Identification Type: <input type="text" name="searchName" />
+		</p>
+
+		<input type="submit" value="Search" />
+	</form>
+
+	<div th:unless="${#lists.isEmpty(identificationsType)}">
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Mnmonic</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="identification, iStat : ${identificationsType}"
+					th:style="${iStat.odd}? 'font-weight: bold;'"
+					th:alt-title="${iStat.even}? 'even' : 'odd'">
+					<td th:text="${identification.id}" />
+					<td th:text="${identification.name}" />
+					<td th:text="${identification.mnemonic}" />
+					<td th:text="${identification.description}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p>Hecthor Ortega</p>
+</body>
+</html>

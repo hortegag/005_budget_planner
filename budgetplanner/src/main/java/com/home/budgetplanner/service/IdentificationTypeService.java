@@ -13,6 +13,7 @@ public interface IdentificationTypeService {
     public IdentificationType save(IdentificationType identificationType);
     
     public List<IdentificationType> findAll();
-
+    
+    public List<IdentificationType> findByName(String searchName, int startPosition, int maxResult);
 
 }
