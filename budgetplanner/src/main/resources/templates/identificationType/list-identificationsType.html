@@ -6,33 +6,49 @@
 <title th:text="#{identificationType.list.title}"></title>
 </head>
 <body>
-	<div class="row" layout:fragment="content">
+	<div layout:fragment="content">
+		<h1 class="mt-5" th:text="#{identificationType.list.title}"></h1>
 		<form action="#" th:action="@{/identificationType/search}"
 			method="post">
-			<p>
-				<!-- <input type="text" name="searchName" /> -->
+
+			<div class="form-group">
 				<label for="searchIdentification"
 					th:text="#{identificationType.list.search.label}">searchIdentification</label>
-				<input id="text" type="text" name="searchName" />
+
+
+				<input id="searchIdentification" type="text" name="searchName"
+					class="form-control"
+					th:placeholder="#{identificationType.list.search.input.placeholder}" />
+			</div>
+
+			<input type="submit" class="btn btn-primary"
+				th:value="#{identificationType.list.search.button}" />
+			<p>
+				<!-- <input type="text" name="searchName" /> -->
+				<!--	<label for="searchIdentification"
+					th:text="#{identificationType.list.search.label}">searchIdentification</label>
+				<input id="text" type="text" name="searchName" />  -->
 			</p>
 			<!-- <input type="submit" value="Search" /> -->
-			<input type="submit"
-				th:value="#{identificationType.list.search.button}" />
+			<!--<input type="submit"
+				th:value="#{identificationType.list.search.button}" />-->
 		</form>
-		<div th:unless="${#lists.isEmpty(identificationsType)}">
-			<table>
-				<thead>
+		<h2 class="mt-5"
+			th:text="#{identificationType.list.search.result.title}"></h2>
+		<div class="mt-5" th:unless="${#lists.isEmpty(identificationsType)}">
+			<table class="table table-striped">
+				<thead class="thead-dark">
 					<tr>
-						<th>Id</th>
-						<th>Name</th>
-						<th>Mnmonic</th>
-						<th>Description</th>
+						<th scope="col">#</th>
+						<th scope="col" th:text="#{identificationType.list.search.table.id}"></th>
+						<th scope="col" th:text="#{identificationType.list.search.table.name}"></th>
+						<th scope="col" th:text="#{identificationType.list.search.table.mnmonic}"></th>
+						<th scope="col" th:text="#{identificationType.list.search.table.description}"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="identification, iStat : ${identificationsType}"
-						th:style="${iStat.odd}? 'font-weight: bold;'"
-						th:alt-title="${iStat.even}? 'even' : 'odd'">
+					<tr th:each="identification: ${identificationsType}">
+						<th scope="row"></th>
 						<td th:text="${identification.id}" />
 						<td th:text="${identification.name}" />
 						<td th:text="${identification.mnemonic}" />
@@ -41,8 +57,6 @@
 				</tbody>
 			</table>
 		</div>
-		<p>Hecthor Ortega</p>
-
 	</div>
 </body>
 </html>
