@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,6 +42,25 @@ public class IdentificationTypeController {
         theModel.addAttribute("identificationsType", indentifications);
 
         return "identificationType/list-identificationsType";
+    }
+
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
+
+        IdentificationType customer = new IdentificationType();
+        model.addAttribute("identificationType", customer);
+
+        return "identificationType/identificationType-form";
+    }
+
+    @PostMapping("/saveIdentificationType")
+    public String saveIdentificationType(@ModelAttribute("identificationType") IdentificationType identificationType) {
+
+        // save the customer using service
+
+        identificationTypeService.save(identificationType);
+
+        return "redirect:/identificationType/list";
     }
 
 }

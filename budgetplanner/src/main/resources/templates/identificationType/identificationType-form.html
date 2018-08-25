@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<head>
+<title th:text="#{identificationType.list.title}"></title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 class="mt-5" th:text="#{identificationType.list.title}"></h1>
+
+
+		<form action="#"
+			th:action="@{/identificationType/saveIdentificationType}"
+			th:object="${identificationType}" method="post">
+
+
+
+			<!-- keep track of the id that is being updated -->
+			<input type="hidden" th:field="*{id}" />
+			<div class="form-group">
+				<label  for="name">Name:</label> <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter name" />
+			</div>
+			<div class="form-group">
+				<label for="mnmonic">Mnemonic:</label> <input type="text" th:field="*{mnemonic}" class="form-control" id="mnmonic" placeholder="Enter mnemonic" />
+			</div>
+			<div class="form-group">
+
+				<label for="description">Description:</label> <input type="text"
+					th:field="*{description}" class="form-control" id="description" placeholder="Enter description" />
+			</div>
+			<input type="submit" class="btn btn-primary"
+				th:value="#{identificationType.list.search.button}" />
+
+		</form>
+
+		<div style=""></div>
+		<p>
+			<a href="#" th:href="@{/identificationType/list}">Back to List </a>
+		</p>
+	</div>
+</body>
+</html>

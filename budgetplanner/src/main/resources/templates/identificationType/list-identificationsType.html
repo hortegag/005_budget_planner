@@ -35,15 +35,28 @@
 		</form>
 		<h2 class="mt-5"
 			th:text="#{identificationType.list.search.result.title}"></h2>
+
+		<input type="button" value="Add Customer"
+			onclick="window.location.href='showFormForAdd'; return false;"
+			class="add-button" />
 		<div class="mt-5" th:unless="${#lists.isEmpty(identificationsType)}">
 			<table class="table table-striped">
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col" th:text="#{identificationType.list.search.table.id}"></th>
-						<th scope="col" th:text="#{identificationType.list.search.table.name}"></th>
-						<th scope="col" th:text="#{identificationType.list.search.table.mnmonic}"></th>
-						<th scope="col" th:text="#{identificationType.list.search.table.description}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.id}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.name}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.mnmonic}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.description}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.edit}"></th>
+
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.delete}"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -53,6 +66,20 @@
 						<td th:text="${identification.name}" />
 						<td th:text="${identification.mnemonic}" />
 						<td th:text="${identification.description}" />
+						<td><a href="#" th:href="@{/order/list}">
+								<button type="button" class="btn btn-default"
+									aria-label="Edit user">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+						</a></td>
+						<td><a href="#" th:href="@{/order/list}">
+								<button type="button" class="btn btn-default"
+									aria-label="Delete user">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+						</a></td>
+
+
 					</tr>
 				</tbody>
 			</table>
