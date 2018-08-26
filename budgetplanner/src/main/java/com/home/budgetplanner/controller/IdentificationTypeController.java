@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.service.IdentificationTypeService;
+import com.home.springdemo.validator.IdentificationTypeValidator;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/identificationType")
@@ -54,13 +59,24 @@ public class IdentificationTypeController {
     }
 
     @PostMapping("/saveIdentificationType")
-    public String saveIdentificationType(@ModelAttribute("identificationType") IdentificationType identificationType) {
+    public String saveIdentificationType(@Valid @ModelAttribute("identificationType") IdentificationType identificationType, BindingResult result) {
 
+        
+        if(result.hasErrors()){
+            return "identificationType/identificationType-form";
+        }
+        
         // save the customer using service
 
         identificationTypeService.save(identificationType);
 
         return "redirect:/identificationType/list";
+    }
+    
+    
+    @InitBinder("identificationType")
+    public void initBinder(WebDataBinder binder) {
+       binder.addValidators(new IdentificationTypeValidator());
     }
 
 }

@@ -19,15 +19,26 @@
 			<!-- keep track of the id that is being updated -->
 			<input type="hidden" th:field="*{id}" />
 			<div class="form-group">
-				<label  for="name">Name:</label> <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter name" />
+				<label for="name">Name:</label> <input type="text"
+					th:field="*{name}" class="form-control" id="name"
+					placeholder="Enter name" />
+				<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+					Error</p>
+
 			</div>
 			<div class="form-group">
-				<label for="mnmonic">Mnemonic:</label> <input type="text" th:field="*{mnemonic}" class="form-control" id="mnmonic" placeholder="Enter mnemonic" />
+				<label for="mnemonic">Mnemonic:</label> <input type="text"
+					th:field="*{mnemonic}" class="form-control" id="mnemonic"
+					placeholder="Enter mnemonic" />
+				<p th:if="${#fields.hasErrors('mnemonic')}" th:errors="*{mnemonic}">mnemonic
+					Error</p>
+
 			</div>
 			<div class="form-group">
 
 				<label for="description">Description:</label> <input type="text"
-					th:field="*{description}" class="form-control" id="description" placeholder="Enter description" />
+					th:field="*{description}" class="form-control" id="description"
+					placeholder="Enter description" />
 			</div>
 			<input type="submit" class="btn btn-primary"
 				th:value="#{identificationType.list.search.button}" />

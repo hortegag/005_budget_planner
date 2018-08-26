@@ -16,16 +16,17 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 @ComponentScan(basePackages = "com.home.budgetplanner.beans")
 public class MessageConfiguration implements WebMvcConfigurer {
-    
-  @Bean
+
+    @Bean
     public MessageSource messageSource() {
-    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-    messageSource.setBasename("classpath:messages");
-    messageSource.setDefaultEncoding("UTF-8");
-    
-  //  messageSource.setBasenames("messages");
-   // messageSource.setUseCodeAsDefaultMessage(true);
-    return messageSource;
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("classpath:messages","classpath:errors");
+        //messageSource.setBasename("classpath:errors");
+        messageSource.setDefaultEncoding("UTF-8");
+
+        // messageSource.setBasenames("messages");
+        // messageSource.setUseCodeAsDefaultMessage(true);
+        return messageSource;
 
     }
 
@@ -35,14 +36,14 @@ public class MessageConfiguration implements WebMvcConfigurer {
         slr.setDefaultLocale(Locale.US);
         return slr;
     }
-    
+
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;
     }
-    
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
