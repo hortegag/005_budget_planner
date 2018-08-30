@@ -8,7 +8,8 @@
 <body>
 	<div layout:fragment="content">
 		<h1 class="mt-5" th:text="#{identificationType.list.title}"></h1>
-		<form action="#" th:action="@{/identificationType/search}"
+		<!-- You cand add the action attribute or you can skip it, If you skip it the browser will call the same url in the bar direction but in the case with a post method. -->
+		<form action="#" th:action="@{/identificationType/list}"
 			method="post">
 
 			<div class="form-group">
