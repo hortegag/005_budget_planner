@@ -38,6 +38,13 @@
 				result="flowScope.identificationType" />
 
 		</transition>
+
+		<transition on="edit" to="addEntity">
+			<evaluate
+				expression="servicio.findById(requestParameters.id)"
+				result="flowScope.identificationType" />
+
+		</transition>
 	</view-state>
 
 

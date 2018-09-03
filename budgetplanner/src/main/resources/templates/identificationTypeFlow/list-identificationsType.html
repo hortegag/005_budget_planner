@@ -44,8 +44,8 @@
 		<h2 class="mt-5"
 			th:text="#{identificationType.list.search.result.title}"></h2>
 
-
-		<form action="#" method="post">
+<!-- 
+		<form action="#" method="post"> -->
 
 			<br></br>
 
@@ -80,23 +80,35 @@
 							<td th:text="${identification.name}" />
 							<td th:text="${identification.mnemonic}" />
 							<td th:text="${identification.description}" />
-							<td><a href="#" th:href="@{/order/list}">
-									<button type="button" class="btn btn-default"
+							
+							
+							
+							<td>
+				          	
+				          	
+            				
+							<!-- <a href="#" th:href="@{${flowExecutionUrl}(id=*{identification.id},_eventId='edit')}" >  -->
+							<a href="#" th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=edit)}">
+							
+									
+									<button type="button" class="btn btn-light"
 										aria-label="Edit user">
 										<i class="fas fa-pencil-alt"></i>
 									</button>
 							</a></td>
-							<td><a href="#" th:href="@{/order/list}">
-									<button type="button" class="btn btn-default"
+							<td>
+							    <a href="#" th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=delte)}">
+									<button type="button" class="btn btn-light"
 										aria-label="Delete user">
 										<i class="fas fa-trash-alt"></i>
 									</button>
-							</a></td>
+							    </a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		</form>
+		<!-- </form>  -->
 	</div>
 </body>
 </html>
