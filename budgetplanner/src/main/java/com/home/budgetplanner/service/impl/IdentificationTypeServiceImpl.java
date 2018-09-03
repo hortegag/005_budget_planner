@@ -1,6 +1,8 @@
 package com.home.budgetplanner.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,11 +11,17 @@ import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.repository.IdentificationTypeDao;
 import com.home.budgetplanner.service.IdentificationTypeService;
 
+//@Service("identificationTypeService")
 @Service
-public class IdentificationTypeServiceImpl implements IdentificationTypeService {
+//@Component
+//@Scope( value="session")
+public class IdentificationTypeServiceImpl implements IdentificationTypeService, Serializable {
 
+    //This bean has to be transient, to save the the service as a variable in the spring web flow.
+    //Another option could be create an Action Object with the annotation Component and that declare de service variable with the transient modifier
+    
     @Autowired
-    private IdentificationTypeDao identificationTypeDao;
+    private transient IdentificationTypeDao identificationTypeDao;
 
     @Override
     public IdentificationType findById(Long id) {
@@ -38,6 +46,19 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService 
     @Override
     public List<IdentificationType> findByName(String searchName, int startPosition, int maxResult) {
         return identificationTypeDao.findByName(searchName, startPosition, maxResult);
+    }
+    
+    public IdentificationType saveNewData() {
+        IdentificationType identificationType = new IdentificationType();
+        
+       
+        
+        identificationType.setName("Hector");
+        identificationType.setDescription("HectorDescription");
+        identificationType.setMnemonic("hor");        
+
+        return identificationTypeDao.save(identificationType);
+        //return "";
     }
 
 }

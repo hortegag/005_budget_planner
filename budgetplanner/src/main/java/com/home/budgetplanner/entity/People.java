@@ -1,5 +1,6 @@
 package com.home.budgetplanner.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Table(name = "people")
 @NoArgsConstructor
 @AllArgsConstructor
-public class People {
+public class People implements Serializable {
 
     @Id
     @GeneratedValue

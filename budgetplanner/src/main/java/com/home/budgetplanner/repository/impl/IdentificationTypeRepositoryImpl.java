@@ -1,5 +1,6 @@
 package com.home.budgetplanner.repository.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;

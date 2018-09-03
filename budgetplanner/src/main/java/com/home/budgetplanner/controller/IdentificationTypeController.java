@@ -21,20 +21,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.home.budgetplanner.BudgetplannerApplication;
+import com.home.budgetplanner.controller.form.SearchIdentificationTypeForm;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.service.IdentificationTypeService;
-import com.home.springdemo.validator.IdentificationTypeValidator;
+import com.home.budgetplanner.validator.IdentificationTypeValidator;
+
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/identificationType")
 @SessionAttributes("identificationType")
-
 public class IdentificationTypeController {
 
-    private static final Logger logger = LogManager.getLogger(BudgetplannerApplication.class);
+    private static final Logger       logger = LogManager.getLogger(BudgetplannerApplication.class);
 
-    
     @Autowired
     private IdentificationTypeService identificationTypeService;
 
@@ -95,7 +95,8 @@ public class IdentificationTypeController {
     }
 
     @PostMapping("/showFormForAdd")
-    public String saveIdentificationType(@Valid @ModelAttribute("identificationType") IdentificationType identificationType, BindingResult result, SessionStatus status) {
+    public String saveIdentificationType(@Valid @ModelAttribute("identificationType") IdentificationType identificationType, BindingResult result,
+            SessionStatus status) {
         logger.info("***********************");
 
         logger.info(identificationType);
@@ -108,18 +109,17 @@ public class IdentificationTypeController {
             // result.addError(error );
             // There should be a best practice to pass this validation and show
             // it on the form
-  
-            
+
             throw new RuntimeException("Attempting to bind disallowed fields: " + StringUtils.arrayToCommaDelimitedString(suppressedFields));
         }
         if (result.hasErrors()) {
-            //return "identificationType/identificationType-form";
+            // return "identificationType/identificationType-form";
             return "redirect:/identificationType/showFormForAdd";
         }
         System.out.print(identificationType);
         // save the customer using service
 
-        //identificationTypeService.save(identificationType);
+        identificationTypeService.save(identificationType);
         status.setComplete();
         return "redirect:/identificationType/list";
     }
@@ -127,9 +127,62 @@ public class IdentificationTypeController {
     @InitBinder("identificationType")
     public void initBinder(WebDataBinder binder) {
 
-        //binder.setAllowedFields("id", "name", "mnemonic", "description");
+        // binder.setAllowedFields("id", "name", "mnemonic", "description");
 
-        binder.addValidators(new IdentificationTypeValidator());
+        //se comenta momentaneamente para probar validador de web flow
+       // binder.addValidators(new IdentificationTypeValidator());
     }
+
+    public SearchIdentificationTypeForm initializeForm() {
+        SearchIdentificationTypeForm searchIdentificationTypeForm = new SearchIdentificationTypeForm();
+
+        return searchIdentificationTypeForm;
+    }
+
+    public List<IdentificationType> searchIdentifications(SearchIdentificationTypeForm searchIdentificationTypeForm) {
+        List<IdentificationType> indentifications = identificationTypeService.findByName(searchIdentificationTypeForm.getName(), searchIdentificationTypeForm.getStartPosition(),
+                searchIdentificationTypeForm.getMaxResult());
+
+        return indentifications;
+    }
+    
+    public IdentificationType initializeIdentificationType() {
+
+        IdentificationType identificationType = new IdentificationType();
+
+        return identificationType;
+    }
+    
+    
+    public String saveNewIdentificationType(@Valid @ModelAttribute("identificationType") IdentificationType identificationType, BindingResult result,
+            SessionStatus status) {
+        logger.info("***********************");
+
+        logger.info(identificationType);
+        String[] suppressedFields = result.getSuppressedFields();
+        if (suppressedFields.length > 0) {
+            // String defaultMessage ="Attempting to bind disallowed fields: " +
+            StringUtils.arrayToCommaDelimitedString(suppressedFields);
+            // String objectName ="Binding problem";
+            // ObjectError error = new ObjectError(objectName, defaultMessage);
+            // result.addError(error );
+            // There should be a best practice to pass this validation and show
+            // it on the form
+
+            throw new RuntimeException("Attempting to bind disallowed fields: " + StringUtils.arrayToCommaDelimitedString(suppressedFields));
+        }
+        if (result.hasErrors()) {
+            // return "identificationType/identificationType-form";
+            return "redirect:/identificationType/showFormForAdd";
+        }
+        System.out.print(identificationType);
+        // save the customer using service
+
+        identificationTypeService.save(identificationType);
+        status.setComplete();
+        return "redirect:/identificationType/list";
+    }
+    
+
 
 }

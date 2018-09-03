@@ -1,5 +1,6 @@
 package com.home.budgetplanner.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,7 +23,8 @@ import lombok.AllArgsConstructor;
 @Table(name = "identification_type")
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdentificationType {
+
+public class IdentificationType implements Serializable {
 
     @Id
     @GeneratedValue

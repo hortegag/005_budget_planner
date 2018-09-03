@@ -1,0 +1,130 @@
+package com.home.budgetplanner.validator;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.validation.ValidationContext;
+import org.springframework.binding.message.MessageContext;
+
+import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+import org.springframework.webflow.action.EventFactorySupport;
+import org.springframework.webflow.execution.Event;
+
+import com.home.budgetplanner.BudgetplannerApplication;
+import com.home.budgetplanner.entity.IdentificationType;
+
+@Component
+public class IdentificationTypeValidator /* implements Validator */ {
+
+    private static final Logger logger = LogManager.getLogger(IdentificationTypeValidator.class);
+
+    public IdentificationTypeValidator() {
+        logger.info("============================================================================IdentificationTypeValidator created");
+
+    }
+
+    //It could be enable to validate the form from the controller
+//    @Override
+//    public boolean supports(Class<?> clazz) {
+//        return clazz.isAssignableFrom(IdentificationType.class);
+//    }
+
+//    @Override
+//    public void validate(Object target, Errors errors) {
+//        IdentificationType identificationType = (IdentificationType) target;
+//
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "error.required", new Object[] { "Identification name" });
+//        ValidationUtils.rejectIfEmpty(errors, "mnemonic", "error.required");
+//    }
+
+    public Event test(IdentificationType identificationType, ValidationContext validationContext) {
+
+        if (identificationType.getName() == null) {
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("name");
+            // errorMessageBuilder.code("error.page.selectdeliveryoptions.deliverydate.required");
+            // validationContext.addMessage(errorMessageBuilder.build());
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            return new EventFactorySupport().error(this);
+        }
+
+        validationContext.getMessageContext().addMessage(
+                new MessageBuilder().error().source("person").code("Size.person.firstName").defaultText("Length must be between 2 and 50").build());
+
+        /*
+         * if (!orderForm.getDeliveryDate().after(DateUtils.truncate(orderForm.
+         * getOrderDate(), Calendar.DAY_OF_MONTH))) { MessageBuilder
+         * errorMessageBuilder = new MessageBuilder().error();
+         * errorMessageBuilder.source("deliveryDate"); errorMessageBuilder.code(
+         * "error.page.selectdeliveryoptions.deliverydate.in.past");
+         * messageContext.addMessage(errorMessageBuilder.build()); return new
+         * EventFactorySupport().error(this); }
+         */
+        return new EventFactorySupport().success(this);
+
+    }
+
+    public void validateAddEntityFuncionalTres(IdentificationType identificationType, Errors errors) {
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        // ValidationUtils.rejectIfEmpty(validationContext.getMessageContext().g,
+        // "mnemonic", "error.required");
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "error.required", new Object[] { "Identification name" });
+
+    }
+
+    public void validateAddEntity(IdentificationType identificationType, ValidationContext validationContext) {
+
+        // This one is being called automatically by spring web flow
+        logger.info("fffffffffffffffffff Se realiza la validacion");
+        logger.info("Valor del objet" + identificationType.toString());
+
+        if (identificationType.getName() == null || identificationType.getName().equals("")) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("name");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Identification name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            // return new EventFactorySupport().error(this);
+        }
+
+        if (identificationType.getMnemonic() == null || identificationType.getMnemonic().equals("")) {
+            logger.info("el vaobjeto no tiene nombres");
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("mnemonic");
+            errorMessageBuilder.code("error.required");
+            errorMessageBuilder.resolvableArg("Identification mnemonic");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        }
+        if (identificationType.getDescription() == null || identificationType.getDescription().equals("")) {
+            logger.info("el vaobjeto no tiene nombres");
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("description");
+            errorMessageBuilder.code("error.required");
+            errorMessageBuilder.resolvableArg("Description");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        }
+    }
+
+
+    public void validateAddEntityFuncionalDos(IdentificationType identificationType, MessageContext validationContext) {
+
+        logger.info("Se realiza la validacionfffffffffffffffffffffffffffffffffffffffffffffff");
+        if (identificationType.getName() == null) {
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("name");
+            // errorMessageBuilder.code("error.page.selectdeliveryoptions.deliverydate.required");
+            // validationContext.addMessage(errorMessageBuilder.build());
+            validationContext.addMessage(errorMessageBuilder.build());
+            // return new EventFactorySupport().error(this);
+        }
+    }
+
+}
