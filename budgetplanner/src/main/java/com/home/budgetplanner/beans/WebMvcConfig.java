@@ -1,12 +1,19 @@
 package com.home.budgetplanner.beans;
 
+import org.springframework.context.MessageSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
@@ -29,6 +36,11 @@ public class WebMvcConfig  implements WebMvcConfigurer {
     
     @Autowired
     private SpringTemplateEngine springTemplateEngine;
+    
+    
+    @Autowired
+    LocaleChangeInterceptor localeChangeInterceptor;
+    
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -74,10 +86,24 @@ public class WebMvcConfig  implements WebMvcConfigurer {
         return viewResolver;
     }
 */
+    
+    
+    
+    
+    
+    
+    
+    /////remover temporalmente ------------quizas se debe habilitar para que funcione
+    
     @Bean
     public FlowHandlerMapping flowHandlerMapping() {
         FlowHandlerMapping handlerMapping = new FlowHandlerMapping();
         handlerMapping.setOrder(-1);
+        
+        //se agrega locale interceptor
+        handlerMapping.setInterceptors(new Object[] { localeChangeInterceptor });
+        
+        
         handlerMapping.setFlowRegistry(this.webFlowConfig.flowRegistry());
         return handlerMapping;
     }
@@ -135,6 +161,7 @@ public class WebMvcConfig  implements WebMvcConfigurer {
         templateResolver.setTemplateMode( "HTML5" );
         templateResolver.setCacheable(false);
         templateResolver.setCharacterEncoding("UTF-8");
+        
 
  
         return templateResolver;
@@ -145,9 +172,11 @@ public class WebMvcConfig  implements WebMvcConfigurer {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver( templateResolver() );
         templateEngine.addDialect(new LayoutDialect());
+        
         return templateEngine;
     }
- 
+    
+
     ////////////// this works
 
     
@@ -157,7 +186,8 @@ public class WebMvcConfig  implements WebMvcConfigurer {
                 
         viewResolver.setTemplateEngine( templateEngine() );
         viewResolver.setOrder( 1 );
- 
+        viewResolver.setCharacterEncoding("UTF-8");
+        
         return viewResolver;
     }
     

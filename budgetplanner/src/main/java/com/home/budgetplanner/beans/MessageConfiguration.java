@@ -8,13 +8,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
-@ComponentScan(basePackages = "com.home.budgetplanner.beans")
+//@ComponentScan(basePackages = "com.home.budgetplanner.beans")
 public class MessageConfiguration implements WebMvcConfigurer {
 
     @Bean
@@ -32,9 +34,15 @@ public class MessageConfiguration implements WebMvcConfigurer {
 
     @Bean
     public LocaleResolver localeResolver() {
-        SessionLocaleResolver slr = new SessionLocaleResolver();
+       // SessionLocaleResolver slr = new SessionLocaleResolver();
+        //slr.setDefaultLocale(Locale.US);
+        CookieLocaleResolver slr = new CookieLocaleResolver();
         slr.setDefaultLocale(Locale.US);
+        
+        // return new CookieLocaleResolver();
         return slr;
+        
+       // return new CookieLocaleResolver();
     }
 
     @Bean
@@ -44,7 +52,7 @@ public class MessageConfiguration implements WebMvcConfigurer {
         return lci;
     }
 
-    @Override
+    //@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }

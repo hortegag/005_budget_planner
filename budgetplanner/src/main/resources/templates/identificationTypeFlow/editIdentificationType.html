@@ -4,13 +4,13 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout/default">
 <head>
-<title th:text="#{identificationType.add.title}"></title>
+<title th:text="#{identificationType.edit.title}"></title>
 </head>
 <body>
     <div layout:fragment="content">
         <h1
             class="mt-5"
-            th:text="#{identificationType.add.title}"></h1>
+            th:text="#{identificationType.edit.title}"></h1>
 
         <!-- 		
 		<form action="#"
@@ -27,7 +27,7 @@
 		<form action="#" th:object="${identificationType}" method="post">
 		-->
 
-            <!--	
+            <!--	es agregado automaticamente por thymeleaf
 		<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />  -->
 
@@ -35,9 +35,7 @@
             <!-- <input type="hidden" th:field="*{id}" /> -->
 
             <div class="form-group">
-                <label
-                    for="name"
-                    th:text="#{identificationType.entity.name}">Name label::</label>
+                <label for="name">Name:</label>
                 <input
                     type="text"
                     th:field="*{name}"
@@ -52,9 +50,7 @@
 
             </div>
             <div class="form-group">
-                <label
-                    for="mnemonic"
-                    th:text="#{identificationType.entity.mnemonic}">Description label:</label>
+                <label for="mnemonic">Mnemonic:</label>
                 <input
                     type="text"
                     th:field="*{mnemonic}"
@@ -70,9 +66,7 @@
             </div>
             <div class="form-group">
 
-                <label
-                    for="description"
-                    th:text="#{identificationType.entity.description}">Description label:</label>
+                <label for="description">Description:</label>
                 <input
                     type="text"
                     th:field="*{description}"
@@ -92,13 +86,14 @@
                 class="btn btn-primary"
                 name="_eventId_save"
                 type="submit"
-                th:value="#{identificationType.add.save.button}"></input>
+                th:value="#{identificationType.edit.save.button}"></input>
+
             <input
                 id="addIdentificationType"
                 class="btn btn-dark"
                 name="_eventId_cancel"
                 type="submit"
-                th:value="#{identificationType.add.cancel.button}"></input>
+                th:value="#{identificationType.edit.cancel.button}"></input>
 
         </form>
     </div>

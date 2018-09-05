@@ -44,70 +44,66 @@
 		<h2 class="mt-5"
 			th:text="#{identificationType.list.search.result.title}"></h2>
 
-<!-- 
+		<!-- 
 		<form action="#" method="post"> -->
 
-			<br></br>
-
+		<br></br>
+		<form action="#" method="post">
 			<input id="addIdentificationType" class="btn btn-primary"
 				name="_eventId_add" type="submit"
 				th:value="#{identificationType.list.add.button}"></input>
+		</form>
+		<div class="mt-5" th:unless="${#lists.isEmpty(identificationsType)}">
+			<table class="table table-striped">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.id}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.name}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.mnemonic}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.description}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.edit}"></th>
 
-			<div class="mt-5" th:unless="${#lists.isEmpty(identificationsType)}">
-				<table class="table table-striped">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col"
-								th:text="#{identificationType.list.search.table.id}"></th>
-							<th scope="col"
-								th:text="#{identificationType.list.search.table.name}"></th>
-							<th scope="col"
-								th:text="#{identificationType.list.search.table.mnmonic}"></th>
-							<th scope="col"
-								th:text="#{identificationType.list.search.table.description}"></th>
-							<th scope="col"
-								th:text="#{identificationType.list.search.table.edit}"></th>
+						<th scope="col"
+							th:text="#{identificationType.list.search.table.delete}"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="identification: ${identificationsType}">
+						<th scope="row"></th>
+						<td th:text="${identification.id}" />
+						<td th:text="${identification.name}" />
+						<td th:text="${identification.mnemonic}" />
+						<td th:text="${identification.description}" />
 
-							<th scope="col"
-								th:text="#{identificationType.list.search.table.delete}"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="identification: ${identificationsType}">
-							<th scope="row"></th>
-							<td th:text="${identification.id}" />
-							<td th:text="${identification.name}" />
-							<td th:text="${identification.mnemonic}" />
-							<td th:text="${identification.description}" />
-							
-							
-							
-							<td>
-				          	
-				          	
-            				
+
+
+						<td>
 							<!-- <a href="#" th:href="@{${flowExecutionUrl}(id=*{identification.id},_eventId='edit')}" >  -->
-							<a href="#" th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=edit)}">
-							
-									
-									<button type="button" class="btn btn-light"
-										aria-label="Edit user">
-										<i class="fas fa-pencil-alt"></i>
-									</button>
-							</a></td>
-							<td>
-							    <a href="#" th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=delte)}">
-									<button type="button" class="btn btn-light"
-										aria-label="Delete user">
-										<i class="fas fa-trash-alt"></i>
-									</button>
-							    </a>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+							<a href="#"
+							th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=edit)}">
+								<button type="button" class="btn btn-light"
+									aria-label="Edit user">
+									<i class="fas fa-pencil-alt"></i>
+								</button>
+						</a>
+						</td>
+						<td><a href="#"
+							th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=delte)}">
+								<button type="button" class="btn btn-light"
+									aria-label="Delete user">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<!-- </form>  -->
 	</div>
 </body>
