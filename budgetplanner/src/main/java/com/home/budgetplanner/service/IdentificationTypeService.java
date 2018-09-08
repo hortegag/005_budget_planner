@@ -2,6 +2,8 @@ package com.home.budgetplanner.service;
 
 import java.util.List;
 
+import javax.persistence.Tuple;
+
 import com.home.budgetplanner.entity.IdentificationType;
 
 public interface IdentificationTypeService {
@@ -15,5 +17,9 @@ public interface IdentificationTypeService {
     public List<IdentificationType> findAll();
     
     public List<IdentificationType> findByName(String searchName, int startPosition, int maxResult);
+    
+    
+    public List<Tuple> findByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult);
+
 
 }

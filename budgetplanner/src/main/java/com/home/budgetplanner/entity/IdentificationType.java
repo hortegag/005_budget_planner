@@ -12,9 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
@@ -23,6 +27,11 @@ import lombok.AllArgsConstructor;
 @Table(name = "identification_type")
 @NoArgsConstructor
 @AllArgsConstructor
+
+@EqualsAndHashCode(exclude={"people"})
+//@ToString(excludes={"people"})
+@ToString(exclude={"people"})
+
 
 public class IdentificationType implements Serializable {
 
@@ -37,7 +46,8 @@ public class IdentificationType implements Serializable {
 
     private String       description;
 
-    @OneToMany(mappedBy = "identificationType", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @OneToMany(mappedBy = "identificationType", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch=FetchType.LAZY)
     private List<People> people;
+   
 
 }

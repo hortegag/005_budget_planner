@@ -8,99 +8,113 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <h1
-            class="mt-5"
-            th:text="#{identificationType.add.title}"></h1>
 
+        <p class="mt-5"></p>
         <!-- 		
 		<form action="#"
 			th:action="@{/identificationType/saveIdentificationType}"
 			th:object="${identificationType}" method="post">   -->
 
         <!-- th:action="@{/identificationType/showFormForAdd}" -->
-
-        <form
-            action="#"
-            th:object="${identificationType}"
-            method="post">
-            <!-- 
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3
+                        class="card-title"
+                        th:text="#{identificationType.add.title}"></h3>
+                </div>
+                <div class="card-body">
+                    <form
+                        action="#"
+                        th:object="${identificationType}"
+                        method="post">
+                        <!-- 
 		<form action="#" th:object="${identificationType}" method="post">
 		-->
 
-            <!--	
+                        <!--	
 		<input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />  -->
 
-            <!-- keep track of the id that is being updated -->
-            <!-- <input type="hidden" th:field="*{id}" /> -->
+                        <!-- keep track of the id that is being updated -->
+                        <!-- <input type="hidden" th:field="*{id}" /> -->
 
-            <div class="form-group">
-                <label
-                    for="name"
-                    th:text="#{identificationType.entity.name}">Name label::</label>
-                <input
-                    type="text"
-                    th:field="*{name}"
-                    class="form-control"
-                    th:classappend="${#fields.hasErrors('name')} ? is-invalid"
-                    id="name"
-                    placeholder="Enter name" />
-                <p
-                    th:if="${#fields.hasErrors('name')}"
-                    th:errors="*{name}"
-                    class="invalid-feedback">Name Error</p>
+                        <div class="form-group">
+                            <label
+                                for="name"
+                                th:text="#{identificationType.entity.name}">Name label::</label>
+                            <input
+                                type="text"
+                                th:field="*{name}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('name')} ? is-invalid"
+                                id="name"
+                                placeholder="Enter name" />
+                            <p
+                                th:if="${#fields.hasErrors('name')}"
+                                th:errors="*{name}"
+                                class="invalid-feedback">Name Error</p>
 
+                        </div>
+                        <div class="form-group">
+                            <label
+                                for="mnemonic"
+                                th:text="#{identificationType.entity.mnemonic}">Description label:</label>
+                            <input
+                                type="text"
+                                th:field="*{mnemonic}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('mnemonic')} ? is-invalid"
+                                id="mnemonic"
+                                placeholder="Enter mnemonic" />
+                            <p
+                                th:if="${#fields.hasErrors('mnemonic')}"
+                                th:errors="*{mnemonic}"
+                                class="invalid-feedback">mnemonic Error</p>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label
+                                for="description"
+                                th:text="#{identificationType.entity.description}">Description label:</label>
+                            <input
+                                type="text"
+                                th:field="*{description}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('description')} ? is-invalid"
+                                id="description"
+                                placeholder="Enter description" />
+                            <p
+                                th:if="${#fields.hasErrors('description')}"
+                                th:errors="*{description}"
+                                class="invalid-feedback">description Error</p>
+
+
+
+
+
+
+                        </div>
+
+                        <input
+                            id="addIdentificationType"
+                            class="btn btn-primary"
+                            name="_eventId_save"
+                            type="submit"
+                            th:value="#{identificationType.add.save.button}"></input>
+                        <input
+                            id="addIdentificationType"
+                            class="btn btn-dark"
+                            name="_eventId_cancel"
+                            type="submit"
+                            th:value="#{identificationType.add.cancel.button}"></input>
+
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label
-                    for="mnemonic"
-                    th:text="#{identificationType.entity.mnemonic}">Description label:</label>
-                <input
-                    type="text"
-                    th:field="*{mnemonic}"
-                    class="form-control"
-                    th:classappend="${#fields.hasErrors('mnemonic')} ? is-invalid"
-                    id="mnemonic"
-                    placeholder="Enter mnemonic" />
-                <p
-                    th:if="${#fields.hasErrors('mnemonic')}"
-                    th:errors="*{mnemonic}"
-                    class="invalid-feedback">mnemonic Error</p>
+        </div>
 
-            </div>
-            <div class="form-group">
-
-                <label
-                    for="description"
-                    th:text="#{identificationType.entity.description}">Description label:</label>
-                <input
-                    type="text"
-                    th:field="*{description}"
-                    class="form-control"
-                    th:classappend="${#fields.hasErrors('description')} ? is-invalid"
-                    id="description"
-                    placeholder="Enter description" />
-                <p
-                    th:if="${#fields.hasErrors('description')}"
-                    th:errors="*{description}"
-                    class="invalid-feedback">description Error</p>
-
-            </div>
-
-            <input
-                id="addIdentificationType"
-                class="btn btn-primary"
-                name="_eventId_save"
-                type="submit"
-                th:value="#{identificationType.add.save.button}"></input>
-            <input
-                id="addIdentificationType"
-                class="btn btn-dark"
-                name="_eventId_cancel"
-                type="submit"
-                th:value="#{identificationType.add.cancel.button}"></input>
-
-        </form>
     </div>
 </body>
 </html>

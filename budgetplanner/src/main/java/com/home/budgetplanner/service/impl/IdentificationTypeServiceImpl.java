@@ -3,6 +3,7 @@ package com.home.budgetplanner.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Tuple;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,13 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService,
         return identificationTypeDao.save(identificationType);
         //return "";
     }
+
+    @Override
+    public List<Tuple> findByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult) {
+        // TODO Auto-generated method stub
+        return identificationTypeDao.findByIdentificationType(identificationType, startPosition, maxResult);
+    }
+    
+    
 
 }
