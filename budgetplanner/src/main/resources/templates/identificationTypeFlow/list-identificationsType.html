@@ -8,7 +8,6 @@
 </head>
 <body>
     <div layout:fragment="content">
-        This is a test of web flow.........
         <h1
             class="mt-5"
             th:text="#{identificationType.list.title}"></h1>
@@ -128,7 +127,7 @@
                         <td>
                             <a
                                 href="#"
-                                th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=delte)}">
+                                th:href="@{'~'+${flowExecutionUrl}(id=*{identification.id},_eventId=delete)}">
                                 <button
                                     type="button"
                                     class="btn btn-light"

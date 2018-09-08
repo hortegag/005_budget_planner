@@ -58,6 +58,16 @@
                 result="flowScope.identificationType" />
 
         </transition>
+
+        <transition
+            on="delete"
+            to="confirmDeleteEntity">
+            <evaluate
+                expression="servicio.findById(requestParameters.id)"
+                result="flowScope.identificationType" />
+
+        </transition>
+
     </view-state>
 
 
@@ -87,7 +97,7 @@
     <view-state
         id="confirmCreateEntity"
         view="#{directorio}/identificationTypeConfirmCreate"
-        model="identificationType"  >
+        model="identificationType">
 
 
         <transition
@@ -158,6 +168,32 @@
 
 
     </view-state>
+
+
+
+
+
+    <view-state
+        id="confirmDeleteEntity"
+        view="#{directorio}/identificationTypeConfirmDelete"
+        model="identificationType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="servicio.deleteById(flowScope.identificationType.id)" />
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
 
     <!-- <view-state id="success" /> -->
 

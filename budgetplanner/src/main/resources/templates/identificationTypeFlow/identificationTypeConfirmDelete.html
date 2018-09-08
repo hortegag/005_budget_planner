@@ -4,7 +4,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorator="layout/default">
 <head>
-<title th:text="#{identificationType.add.confirm.title}"></title>
+<title th:text="#{identificationType.delete.confirm.title}"></title>
 </head>
 <body>
     <div layout:fragment="content">
@@ -99,8 +99,6 @@
                             name="_eventId_cancel"
                             type="submit"
                             th:value="#{identificationType.delete.confirm.button.cancel}"></input>
-
-
                     </form>
 
                 </div>
