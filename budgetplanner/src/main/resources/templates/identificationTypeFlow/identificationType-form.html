@@ -8,7 +8,13 @@
 </head>
 <body>
     <div layout:fragment="content">
+        <!-- 
+    Put Optional next to a label instead an asterisk in required field. Using optional it is more readable, an easy to understand to the user that is filling the form.
+    https://blog.optimalworkshop.com/designing-form-fields-optional-versus-required
+    https://uxdesign.cc/form-field-required-vs-optional-9b4d7cdbf400
 
+
+ -->
         <p class="mt-5"></p>
         <!-- 		
 		<form action="#"
@@ -27,7 +33,8 @@
                     <form
                         action="#"
                         th:object="${identificationType}"
-                        method="post">
+                        method="post"
+                        autocomplete="off">
                         <!-- 
 		<form action="#" th:object="${identificationType}" method="post">
 		-->
