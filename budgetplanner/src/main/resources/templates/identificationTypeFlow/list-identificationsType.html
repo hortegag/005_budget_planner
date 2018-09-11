@@ -74,6 +74,16 @@
                 type="submit"
                 th:value="#{identificationType.list.add.button}"></input>
         </form>
+
+        <div
+            class="mt-5"
+            th:if="${#lists.isEmpty(identificationsType)}">
+            <div
+                class="alert alert-warning"
+                role="alert">
+                <p th:text="#{identificationType.list.search.empty.results}"></p>
+            </div>
+        </div>
         <div
             class="mt-5"
             th:unless="${#lists.isEmpty(identificationsType)}">
