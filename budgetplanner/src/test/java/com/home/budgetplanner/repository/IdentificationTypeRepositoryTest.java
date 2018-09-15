@@ -1,7 +1,10 @@
 package com.home.budgetplanner.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +26,7 @@ public class IdentificationTypeRepositoryTest {
 
     @Autowired
     IdentificationTypeDao       identificationTypeDao;
+    
 
     @Test
     public void findById_basic() {
@@ -59,5 +63,27 @@ public class IdentificationTypeRepositoryTest {
         
         assertEquals("CI de la persona", identificationType.getDescription());
 
+    }
+    
+    
+    
+    
+    @Autowired
+    PagingIdentificationTypeRepository pagingIdentificationTypeRepository;
+    
+    
+
+    @Test
+    public void findByName_basic() {
+
+        logger.info("Testing is Running");
+
+        List<IdentificationType> types = pagingIdentificationTypeRepository.findByName("Dummy");
+        
+        System.out.println(" tes-------->"+types.toString());
+
+        //assertEquals("Cedula de Identidad de la persona", identificationType.getDescription());
+        
+        assertNotNull(types);
     }
 }
