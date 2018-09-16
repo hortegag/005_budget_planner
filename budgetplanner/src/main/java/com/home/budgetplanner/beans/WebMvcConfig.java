@@ -20,6 +20,9 @@ import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.spring5.webflow.view.AjaxThymeleafViewResolver;
+import org.thymeleaf.spring5.webflow.view.FlowAjaxThymeleafView;
+import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
@@ -158,7 +161,9 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 
         templateResolver.setPrefix( "templates/" );
         templateResolver.setSuffix( ".html" );
-        templateResolver.setTemplateMode( "HTML5" );
+        //templateResolver.setTemplateMode( "HTML5" );
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
         templateResolver.setCacheable(false);
         templateResolver.setCharacterEncoding("UTF-8");
         
@@ -179,7 +184,7 @@ public class WebMvcConfig  implements WebMvcConfigurer {
 
     ////////////// this works
 
-    
+  
    @Bean
     public ViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
@@ -195,17 +200,18 @@ public class WebMvcConfig  implements WebMvcConfigurer {
     
     
     
-    /*
+    
     @Bean
-    @Description("Thymeleaf AJAX view resolver for Spring WebFlow")
-    public AjaxThymeleafViewResolver viewResolver() {
+  //  @Description("Thymeleaf AJAX view resolver for Spring WebFlow")
+    public AjaxThymeleafViewResolver ajaxViewResolver() {
             AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
             viewResolver.setViewClass(FlowAjaxThymeleafView.class);
-            viewResolver.setTemplateEngine(this.templateEngine());
+            viewResolver.setOrder( 2 );
+            viewResolver.setTemplateEngine(templateEngine());
             viewResolver.setCharacterEncoding("UTF-8");
             return viewResolver;
     }
-    */
+    
     
    @Bean
    public LayoutDialect layoutDialect() {

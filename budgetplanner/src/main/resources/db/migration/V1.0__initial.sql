@@ -46,7 +46,7 @@ insert into identification_type values (1003,'Pasaporte','PS','Pasaporte de la p
 insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310',1001);
 insert into people values (2004,'Dummy','Smith','dsmith@hotmail.com','1989-01-27','PASS_123XYZ',1003);
 
+insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc',1003);
+insert into people values (2006,'RagnaK','Simons','rsimons@hotmail.com','1983-02-01','PASS_123XYYssz',1003);
 
-
-
-
+insert into people values (2007,'Lakherta','lonbeida','llombeida@hotmail.com','1984-03-03','PASS_1XrykRssz',1003);

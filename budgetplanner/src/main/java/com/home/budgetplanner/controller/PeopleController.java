@@ -57,11 +57,9 @@ public class PeopleController {
         PageRequest pageRequest = null;
 
         if (sort != null) {
-            // pageRequest = new PageRequest(page - 1, rows, sort);
 
             pageRequest = PageRequest.of(page - 1, rows, sort);
         } else {
-            // pageRequest = new PageRequest(page - 1, rows);
             pageRequest = PageRequest.of(page - 1, rows);
         }
 
