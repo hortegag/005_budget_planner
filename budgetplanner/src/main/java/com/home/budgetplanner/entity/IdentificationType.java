@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,7 +45,8 @@ public class IdentificationType implements Serializable {
     private String       mnemonic;
 
     private String       description;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "identificationType", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch=FetchType.LAZY)
     private List<People> people;
    
