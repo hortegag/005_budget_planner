@@ -179,10 +179,18 @@
             <version>2.4.8.RELEASE</version>
         </dependency>
 
+ 
+
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>free-jqgrid</artifactId>
+            <version>4.15.5</version>
+        </dependency>
 
     </dependencies>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.repository.IdentificationTypeDao;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class BudgetplannerApplication implements CommandLineRunner {
 
     private static final Logger   logger = LogManager.getLogger(BudgetplannerApplication.class);

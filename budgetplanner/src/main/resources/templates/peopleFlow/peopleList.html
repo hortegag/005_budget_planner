@@ -5,6 +5,21 @@
     layout:decorate="~{layout/default}">
 <head>
 <title th:text="#{people.list.title}"></title>
+
+
+<link
+    rel="stylesheet"
+    th:href="@{/webjars/free-jqgrid/4.15.5/css/ui.jqgrid.min.css}" />
+
+
+<script
+    th:src="@{/webjars/free-jqgrid/4.15.5/js/i18n/min/grid.locale-en.js}"
+    src=""></script>
+
+<script
+    th:src="@{/webjars/free-jqgrid/4.15.5/js/jquery.jqgrid.min.js}"
+    src=""></script>
+
 </head>
 <body>
     <div layout:fragment="content">
