@@ -74,6 +74,12 @@ public class IdentificationTypeServiceImpl implements IdentificationTypeService,
         // TODO Auto-generated method stub
         return identificationTypeDao.findByIdentificationType(identificationType, startPosition, maxResult);
     }
+    
+    @Override
+    public IdentificationType findOneByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult) {
+        // TODO Auto-generated method stub
+        return identificationTypeDao.findOneByIdentificationType(identificationType, startPosition, maxResult);
+    }
 
     @Autowired
     private transient PagingIdentificationTypeRepository pagingIdentificationTypeRepository;

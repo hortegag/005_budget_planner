@@ -25,5 +25,9 @@ public interface IdentificationTypeDao {
     public List<IdentificationType> findByMnemonic(String searchMnemonic, int startPosition, int maxResult);
     
     public List<Tuple> findByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult);
+    
+    
+    public IdentificationType findOneByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult);
+
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -184,6 +185,81 @@ public class IdentificationTypeRepositoryImpl implements IdentificationTypeDao {
         
         List<Tuple> test = em.createQuery(criteriaQuery).getResultList();
 
+        return test;
+
+    }
+    
+    
+    public IdentificationType findOneByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult) {
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        // CriteriaQuery<Tuple> criteriaQuery =
+        // criteriaBuilder.createQuery(Tuple.class);
+
+        CriteriaQuery<IdentificationType> criteriaQuery = criteriaBuilder.createQuery(IdentificationType.class);
+
+        Root<IdentificationType> root = criteriaQuery.from(IdentificationType.class);
+
+       // criteriaQuery.select(criteriaBuilder.tuple(root.get("name"), root.get("mnemonic")));
+       // Root<IdentificationType> root = criteriaQuery.from(IdentificationType.class);
+
+
+        List<Predicate> predicates = new ArrayList<Predicate>();
+
+        if (identificationType.getName() != null) {
+            Path<String> path = root.<String>get("name");
+            predicates.add(criteriaBuilder.equal(path, identificationType.getName()));
+
+        }
+
+        if (identificationType.getMnemonic() != null) {
+            Path<String> path = root.<String>get("mnemonic");
+            predicates.add( criteriaBuilder.equal(path, identificationType.getMnemonic())  );
+
+        }
+        
+        
+        List<Predicate> predicatesNew = new ArrayList<Predicate>();
+        if (predicates.size() > 1) {
+            predicatesNew.add(criteriaBuilder.or(predicates.toArray(new Predicate[predicates.size()])));
+        } else if (predicates.size() == 1) {
+            predicatesNew.add(predicates.get(0));
+        }
+        
+        
+        
+        if (identificationType.getId() != null) {
+            Path<String> path = root.<String>get("id");
+            //predicatesNew.add( criteriaBuilder.equal(path, identificationType.getId())  );
+            
+            predicatesNew.add(criteriaBuilder.and( criteriaBuilder.notEqual(path, identificationType.getId()) ));
+
+
+        }
+        
+
+        
+        
+
+        // query itself
+        criteriaQuery.where(predicatesNew.toArray(new Predicate[] {}));
+
+        TypedQuery<IdentificationType> typedQuery = em.createQuery(criteriaQuery);
+
+        typedQuery.setFirstResult(1);
+        typedQuery.setMaxResults(1);
+        //  List<Tuple> test = em.createQuery(criteriaQuery).setFirstResult(startPosition).setMaxResults(maxResult).getResultList();
+        
+        IdentificationType test=null;
+        try{
+            
+            test = em.createQuery(criteriaQuery).getSingleResult();
+        }
+        
+        catch(NoResultException e){
+            
+        }
+        
         return test;
 
     }

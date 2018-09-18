@@ -7,6 +7,12 @@
 <title th:text="#{people.list.title}"></title>
 
 
+<!-- 
+<script
+    th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"
+    src=""></script>
+ -->
+
 <link
     rel="stylesheet"
     th:href="@{/webjars/free-jqgrid/4.15.5/css/ui.jqgrid.min.css}" />
@@ -20,9 +26,23 @@
     th:src="@{/webjars/free-jqgrid/4.15.5/js/jquery.jqgrid.min.js}"
     src=""></script>
 
+
+
+
 </head>
 <body>
     <div layout:fragment="content">
+
+
+
+        <table id="list">
+            <tr>
+                <td />
+            </tr>
+        </table>
+
+        <div id="pager"></div>
+
         <h1
             class="mt-5"
             th:text="#{people.list.title}"></h1>
@@ -69,6 +89,11 @@
             <!--<input type="submit"
 				th:value="#{identificationType.list.search.button}" />-->
         </form>
+
+        <div>
+            <p>Hector ortega gonzalez</p>
+        </div>
+        ****************************************************************************************************************************************
 
         <h2
             class="mt-5"
@@ -167,6 +192,73 @@
             </table>
         </div>
         <!-- </form>  -->
+        asdfñjlasdflñasjdflñjasdflñ ---------------------------------------------------------
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+									var urlList = '[(@{/people/listgrid})]';
+									console.log("test:" + urlList);
+									$(function() {
+										$("#list")
+												.jqGrid(
+														{
+															url : urlList,
+															datatype : 'json',
+															mtype : 'GET',
+															colNames : [
+																	'${labelContactFirstName}',
+																	'${labelContactLastName}',
+																	'${labelContactBirthDate}' ],
+															colModel : [
+																	{
+																		name : 'name',
+																		index : 'firstName',
+																		width : 150
+																	},
+																	{
+																		name : 'lastName',
+																		index : 'lastName',
+																		width : 100
+																	},
+																	{
+																		name : 'email',
+																		index : 'email',
+																		width : 100
+																	} ],
+															jsonReader : {
+																root : "peopleData",
+																page : "currentPage",
+																total : "totalPages",
+																records : "totalRecords",
+																repeatitems : false,
+																id : "id"
+															},
+															guiStyle : "bootstrap4",
+															iconSet : "fontAwesome",
+															pager : '#pager',
+															rowNum : 10,
+															rowList : [ 1, 10,
+																	20, 30 ],
+															sortname : 'name',
+															sortorder : 'asc',
+															viewrecords : true,
+															gridview : true,
+															height : 250,
+															width : 500,
+															caption : '${labelContactList}',
+															onSelectRow : function(
+																	id) {
+																document.location.href = "${showContactUrl}/"
+																		+ id;
+															}
+														});
+									});
+								</script>
     </div>
+
+
+
+
 </body>
 </html>

@@ -165,62 +165,49 @@ public class IdentificationTypeValidator /* implements Validator */ {
 
     }
 
-    public void validateEditEntity(IdentificationType identificationType, ValidationContext validationContext) {
+    public void validateEditEntityWithOutReturn(IdentificationType identificationType, ValidationContext validationContext) {
 
         // This one is being called automatically by spring web flow
         logger.info(" Se realiza la validacion");
 
         logger.info("vlor del id:" + identificationType.getId());
-        
-        
-        
-        
+
         IdentificationType identificationTypeOnDataBase = identificationTypeService.findById(identificationType.getId());
-        
-        logger.info("test "+identificationType.toString());
-        
-        
-        logger.info("from database "+identificationTypeOnDataBase.toString());
 
+        logger.info("test " + identificationType.toString());
 
-        
-        if (identificationTypeOnDataBase.equals(identificationType)){
-            //logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
-            
+        logger.info("from database " + identificationTypeOnDataBase.toString());
+
+        if (identificationTypeOnDataBase.equals(identificationType)) {
+            // logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
+
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("global");
-           
-            
-            
+
             errorMessageBuilder.code("error.identificationType.noChangesEntity");
 
-            //errorMessageBuilder.resolvableArg("Identification name");
+            // errorMessageBuilder.resolvableArg("Identification name");
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-            
-            //validationContext.getMessageContext().addMessage( new MessageBuilder().error().defaultText("No room is available at this hotel").build());
-            
-            validationContext.getMessageContext().addMessage( new MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
+
+            // validationContext.getMessageContext().addMessage( new
+            // MessageBuilder().error().defaultText("No room is available at
+            // this hotel").build());
+
+            validationContext.getMessageContext().addMessage(new MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
 
             return;
         }
 
-        
-        
-
         if (StringUtils.isBlank(identificationType.getName())) {
 
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            
+
             errorMessageBuilder.source("name");
             errorMessageBuilder.code("error.required");
 
             errorMessageBuilder.resolvableArg("Identification name");
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-            
-            
 
-           ;
-            
         } else {
             logger.info("++++++++++++++++++++++++++++++++ingreso a la validacion");
 
@@ -239,7 +226,17 @@ public class IdentificationTypeValidator /* implements Validator */ {
             // validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
             // }
 
-            List<Tuple> identifications = identificationTypeService.findByIdentificationType(identificationType, 1, 1);
+            IdentificationType identificationTypeToQuery = new IdentificationType();
+            identificationTypeToQuery.setName(identificationType.getName());
+
+            // List<Tuple> identifications =
+            // identificationTypeService.findByIdentificationType(identificationType,
+            // 1, 1);
+
+            List<Tuple> identifications = identificationTypeService.findByIdentificationType(identificationTypeToQuery, 1, 1);
+            // List<IdentificationType> identifications =
+            // identificationTypeService.findByName(identificationType.getName(),
+            // 1, 1);
 
             if (identifications != null && identifications.size() != 0) {
 
@@ -275,6 +272,121 @@ public class IdentificationTypeValidator /* implements Validator */ {
             // errorMessageBuilder.code("error.identificationType.duplicateMnemonic");
             // validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
             // }
+
+        }
+
+        if (StringUtils.isBlank(identificationType.getDescription())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("description");
+            errorMessageBuilder.code("error.required");
+            errorMessageBuilder.resolvableArg("Description");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        }
+
+    }
+
+    public void validateEditEntity(IdentificationType identificationType, ValidationContext validationContext) {
+
+        // This one is being called automatically by spring web flow
+        logger.info(" Se realiza la validacion");
+
+        logger.info("vlor del id:" + identificationType.getId());
+
+        IdentificationType identificationTypeOnDataBase = identificationTypeService.findById(identificationType.getId());
+
+        logger.info("test " + identificationType.toString());
+
+        logger.info("from database " + identificationTypeOnDataBase.toString());
+
+        if (identificationTypeOnDataBase.equals(identificationType)) {
+            // logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("global");
+
+            errorMessageBuilder.code("error.identificationType.noChangesEntity");
+
+            // errorMessageBuilder.resolvableArg("Identification name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            // validationContext.getMessageContext().addMessage( new
+            // MessageBuilder().error().defaultText("No room is available at
+            // this hotel").build());
+
+            validationContext.getMessageContext().addMessage(new MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
+
+            return;
+        }
+
+        if (StringUtils.isBlank(identificationType.getName())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+
+            errorMessageBuilder.source("name");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Identification name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            return;
+
+        }
+
+        if (StringUtils.isBlank(identificationType.getMnemonic())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("mnemonic");
+            errorMessageBuilder.code("error.required");
+            errorMessageBuilder.resolvableArg("Identification mnemonic");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            return;
+
+        }
+
+        logger.info("++++++++++++++++++++++++++++++++ingreso a la validacion");
+
+        identificationType.setName(StringUtils.capitalize(identificationType.getName().toLowerCase()));
+        identificationType.setMnemonic(identificationType.getMnemonic().toUpperCase());
+
+        IdentificationType identification = identificationTypeService.findOneByIdentificationType(identificationType, 1, 1);
+        // List<IdentificationType> identifications =
+        // identificationTypeService.findByName(identificationType.getName(), 1,
+        // 1);
+        
+        logger.info("********************************************************");
+
+        logger.info(identificationType);
+        
+        logger.info("--------------------------------------------------------");
+
+        
+        logger.info(identification);
+
+        
+        logger.info("-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        
+        
+
+        if (identification != null && identification.getName() != null) {
+
+            if (identificationType.getName().equals(identification.getName())) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("name");
+                errorMessageBuilder.code("error.identificationType.duplicateName");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+            if (identificationType.getMnemonic().equals(identification.getMnemonic())) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("mnemonic");
+                errorMessageBuilder.code("error.identificationType.duplicateMnemonic");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
 
         }
 

@@ -21,5 +21,8 @@ public interface IdentificationTypeService {
     
     public List<Tuple> findByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult);
 
+    
+    public IdentificationType findOneByIdentificationType(IdentificationType identificationType, int startPosition, int maxResult);
+
 
 }
