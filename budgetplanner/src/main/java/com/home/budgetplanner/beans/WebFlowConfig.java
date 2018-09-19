@@ -15,7 +15,6 @@ import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.mvc.builder.MvcViewFactoryCreator;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 
-
 import org.springframework.web.servlet.ViewResolver;
 
 @Configuration
@@ -28,7 +27,9 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     public FlowDefinitionRegistry flowRegistry() {
         return getFlowDefinitionRegistryBuilder(flowBuilderServices()).addFlowLocation("/WEB-INF/flows/activation-flow.xml", "activationFlow")
                 .addFlowLocation("/WEB-INF/flows/identificationType-flow.xml", "identificationTypeFlow")
-                .addFlowLocation("/WEB-INF/flows/people-flow.xml", "peopleFlow").addFlowLocationPattern("/WEB-INF/flows/*-flow.xml").build();
+                .addFlowLocation("/WEB-INF/flows/people-flow.xml", "peopleFlow")
+                .addFlowLocation("/WEB-INF/flows/peopleTest-flow.xml", "peopleFlowTest")
+                .addFlowLocationPattern("/WEB-INF/flows/*-flow.xml").build();
     }
 
     @Bean

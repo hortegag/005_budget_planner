@@ -1,11 +1,12 @@
 package com.home.budgetplanner.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-public class PageWrapper<T> {
+public class PageWrapper<T> implements Serializable {
     public static final int MAX_PAGE_ITEM_DISPLAY = 5;
     private Page<T>         page;
     private List<PageItem>  items;
@@ -85,7 +86,7 @@ public class PageWrapper<T> {
         return page.hasNext();
     }
 
-    public class PageItem {
+    public class PageItem implements Serializable{
         private int     number;
         private boolean current;
 

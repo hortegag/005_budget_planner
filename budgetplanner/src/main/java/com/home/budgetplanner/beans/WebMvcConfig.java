@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -29,84 +33,70 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @EnableWebMvc
+@EnableSpringDataWebSupport
 @Configuration
-public class WebMvcConfig  implements WebMvcConfigurer {
- 
+public class WebMvcConfig implements WebMvcConfigurer {
+
     @Autowired
-    private WebFlowConfig webFlowConfig;
-    
-    
-    
+    private WebFlowConfig        webFlowConfig;
+
     @Autowired
     private SpringTemplateEngine springTemplateEngine;
-    
-    
+
     @Autowired
-    LocaleChangeInterceptor localeChangeInterceptor;
-    
+    LocaleChangeInterceptor      localeChangeInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
-        
+
         registry.addResourceHandler("/**").addResourceLocations("/");
 
-        
-        
     }
-    
-    //////workswith jsp
-    /*
 
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/views/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
-    */
-    
+    ////// workswith jsp
     /*
-    @Bean
-    @Description("Thymeleaf template resolver serving HTML 5")
-    public ClassLoaderTemplateResolver templateResolver() {
-            ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-            templateResolver.setPrefix("templates/");
-            templateResolver.setCacheable(false);
-            templateResolver.setSuffix(".html");
-            templateResolver.setTemplateMode("HTML5");
-            templateResolver.setCharacterEncoding("UTF-8");
-            return templateResolver;
-    }
-    @Bean
-    public AjaxThymeleafViewResolver ajaxThymeleafViewResolver() {
-        AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
-        viewResolver.setViewClass(FlowAjaxThymeleafView.class);
-        viewResolver.setTemplateEngine(springTemplateEngine);
-        return viewResolver;
-    }
-*/
-    
-    
-    
-    
-    
-    
-    
-    /////remover temporalmente ------------quizas se debe habilitar para que funcione
-    
+     * 
+     * @Bean public InternalResourceViewResolver viewResolver() {
+     * InternalResourceViewResolver viewResolver = new
+     * InternalResourceViewResolver();
+     * viewResolver.setViewClass(JstlView.class);
+     * viewResolver.setPrefix("/WEB-INF/views/");
+     * viewResolver.setSuffix(".jsp"); return viewResolver; }
+     */
+
+    /*
+     * @Bean
+     * 
+     * @Description("Thymeleaf template resolver serving HTML 5") public
+     * ClassLoaderTemplateResolver templateResolver() {
+     * ClassLoaderTemplateResolver templateResolver = new
+     * ClassLoaderTemplateResolver(); templateResolver.setPrefix("templates/");
+     * templateResolver.setCacheable(false);
+     * templateResolver.setSuffix(".html");
+     * templateResolver.setTemplateMode("HTML5");
+     * templateResolver.setCharacterEncoding("UTF-8"); return templateResolver;
+     * }
+     * 
+     * @Bean public AjaxThymeleafViewResolver ajaxThymeleafViewResolver() {
+     * AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
+     * viewResolver.setViewClass(FlowAjaxThymeleafView.class);
+     * viewResolver.setTemplateEngine(springTemplateEngine); return
+     * viewResolver; }
+     */
+
+    ///// remover temporalmente ------------quizas se debe habilitar para que
+    ///// funcione
+
     @Bean
     public FlowHandlerMapping flowHandlerMapping() {
         FlowHandlerMapping handlerMapping = new FlowHandlerMapping();
         handlerMapping.setOrder(-1);
-        
-        //se agrega locale interceptor
+
+        // se agrega locale interceptor
         handlerMapping.setInterceptors(new Object[] { localeChangeInterceptor });
-        
-        
+
         handlerMapping.setFlowRegistry(this.webFlowConfig.flowRegistry());
         return handlerMapping;
     }
@@ -118,108 +108,103 @@ public class WebMvcConfig  implements WebMvcConfigurer {
         handlerAdapter.setSaveOutputToFlashScopeOnRedirect(true);
         return handlerAdapter;
     }
-    
-  /*  
-    @Bean
-    @Description("Thymeleaf AJAX view resolver for Spring WebFlow")
-    public AjaxThymeleafViewResolver thymeleafViewResolver() {
-            AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
-            viewResolver.setViewClass(FlowAjaxThymeleafView.class);
-            viewResolver.setTemplateEngine(this.templateEngine());
-            viewResolver.setCharacterEncoding("UTF-8");
-            return viewResolver;
-    }
 
-    @Bean
-    @Description("Thymeleaf template resolver serving HTML 5")
-    public ClassLoaderTemplateResolver templateResolver() {
-            ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-            templateResolver.setPrefix("templates/");
-            templateResolver.setCacheable(false);
-            templateResolver.setSuffix(".html");
-            templateResolver.setTemplateMode("HTML5");
-            templateResolver.setCharacterEncoding("UTF-8");
-            return templateResolver;
-    }
+    /*
+     * @Bean
+     * 
+     * @Description("Thymeleaf AJAX view resolver for Spring WebFlow") public
+     * AjaxThymeleafViewResolver thymeleafViewResolver() {
+     * AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
+     * viewResolver.setViewClass(FlowAjaxThymeleafView.class);
+     * viewResolver.setTemplateEngine(this.templateEngine());
+     * viewResolver.setCharacterEncoding("UTF-8"); return viewResolver; }
+     * 
+     * @Bean
+     * 
+     * @Description("Thymeleaf template resolver serving HTML 5") public
+     * ClassLoaderTemplateResolver templateResolver() {
+     * ClassLoaderTemplateResolver templateResolver = new
+     * ClassLoaderTemplateResolver(); templateResolver.setPrefix("templates/");
+     * templateResolver.setCacheable(false);
+     * templateResolver.setSuffix(".html");
+     * templateResolver.setTemplateMode("HTML5");
+     * templateResolver.setCharacterEncoding("UTF-8"); return templateResolver;
+     * }
+     * 
+     * @Bean
+     * 
+     * @Description("Thymeleaf template engine with Spring integration") public
+     * SpringTemplateEngine templateEngine() { SpringTemplateEngine
+     * templateEngine = new SpringTemplateEngine();
+     * templateEngine.setTemplateResolver(this.templateResolver()); return
+     * templateEngine; }
+     * 
+     */
 
-    @Bean
-    @Description("Thymeleaf template engine with Spring integration")
-    public SpringTemplateEngine templateEngine() {
-            SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-            templateEngine.setTemplateResolver(this.templateResolver());
-            return templateEngine;
-    }
-    
-    */
-    
-    
-    
     @Bean
     public ITemplateResolver templateResolver() {
-        //SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        // SpringResourceTemplateResolver templateResolver = new
+        // SpringResourceTemplateResolver();
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
-        templateResolver.setPrefix( "templates/" );
-        templateResolver.setSuffix( ".html" );
-        //templateResolver.setTemplateMode( "HTML5" );
+        templateResolver.setPrefix("templates/");
+        templateResolver.setSuffix(".html");
+        // templateResolver.setTemplateMode( "HTML5" );
         templateResolver.setTemplateMode(TemplateMode.HTML);
 
         templateResolver.setCacheable(false);
         templateResolver.setCharacterEncoding("UTF-8");
-        
 
- 
         return templateResolver;
     }
- 
+
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver( templateResolver() );
+        templateEngine.setTemplateResolver(templateResolver());
         templateEngine.addDialect(new LayoutDialect());
-        
+
         return templateEngine;
     }
-    
 
     ////////////// this works
 
-  
-   @Bean
+    @Bean
     public ViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-                
-        viewResolver.setTemplateEngine( templateEngine() );
-        viewResolver.setOrder( 1 );
+
+        viewResolver.setTemplateEngine(templateEngine());
+        viewResolver.setOrder(1);
         viewResolver.setCharacterEncoding("UTF-8");
-        
+
         return viewResolver;
     }
-    
-    
-    
-    
-    
-    
+
     @Bean
-  //  @Description("Thymeleaf AJAX view resolver for Spring WebFlow")
+    // @Description("Thymeleaf AJAX view resolver for Spring WebFlow")
     public AjaxThymeleafViewResolver ajaxViewResolver() {
-            AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
-            viewResolver.setViewClass(FlowAjaxThymeleafView.class);
-            viewResolver.setOrder( 2 );
-            viewResolver.setTemplateEngine(templateEngine());
-            viewResolver.setCharacterEncoding("UTF-8");
-            return viewResolver;
+        AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
+        viewResolver.setViewClass(FlowAjaxThymeleafView.class);
+        viewResolver.setOrder(2);
+        viewResolver.setTemplateEngine(templateEngine());
+        viewResolver.setCharacterEncoding("UTF-8");
+        return viewResolver;
     }
+
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
+    }
+
     
-    
-   @Bean
-   public LayoutDialect layoutDialect() {
-       return new LayoutDialect();
-   }
-    
-    
-    
-    
-    
+
+    /*
+     * @Override public void
+     * addArgumentResolvers(List<HandlerMethodArgumentResolver>
+     * argumentResolvers) { PageableHandlerMethodArgumentResolver resolver = new
+     * PageableHandlerMethodArgumentResolver(); resolver.setFallbackPageable(new
+     * PageRequest(0, 5)); argumentResolvers.add(resolver);
+     * super.addArgumentResolvers(argumentResolvers); }
+     */
+
 }

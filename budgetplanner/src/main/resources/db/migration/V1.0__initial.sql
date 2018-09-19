@@ -50,3 +50,17 @@ insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','199
 insert into people values (2006,'RagnaK','Simons','rsimons@hotmail.com','1983-02-01','PASS_123XYYssz',1003);
 
 insert into people values (2007,'Lakherta','lonbeida','llombeida@hotmail.com','1984-03-03','PASS_1XrykRssz',1003);
+
+
+
+
+
+insert into people values (2008,'Jake','Piguave','jpiguave@hotmail.com','1983-01-27','PASS_1234XYZ',1003);
+insert into people values (2009,'Xavier','Chucuca','xchuchuca@hotmail.com','1995-12-27','PASf4xwYzyc',1003);
+insert into people values (2010,'Ney','Díaz','ndiaz@hotmail.com','1980-02-01','PASS_1234XYYssz',1003);
+insert into people values (2011,'Sol','Domenech','llombeida@hotmail.com','1983-03-03','PASS_14XrykRssz',1003);
+
+insert into people values (2012,'Danny','Tevez','jpiguave@hotmail.com','1979-01-27','PASS_1235XYZ',1003);
+insert into people values (2013,'Emy','Pereira','xchuchuca@hotmail.com','1980-12-27','PASf5xwYzyc',1003);
+insert into people values (2014,'Catalina','Jhonson','ndiaz@hotmail.com','1981-02-01','PASS_1235XYYssz',1003);
+insert into people values (2015,'Natasha','Larson','llombeida@hotmail.com','1982-03-03','PASS_15XrykRssz',1003);
