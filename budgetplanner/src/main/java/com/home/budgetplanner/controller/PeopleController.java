@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -118,25 +119,21 @@ public class PeopleController {
         Page<People> contactPage = peopleService.findAllByPage(pageable);
 
         // Construct the grid data that will return as JSON data
-        //PeopleGrid contactGrid = new PeopleGrid();
+        // PeopleGrid contactGrid = new PeopleGrid();
 
-        //contactGrid.setCurrentPage(contactPage.getNumber() + 1);
-        //contactGrid.setTotalPages(contactPage.getTotalPages());
-        //contactGrid.setTotalRecords(contactPage.getTotalElements());
-        
+        // contactGrid.setCurrentPage(contactPage.getNumber() + 1);
+        // contactGrid.setTotalPages(contactPage.getTotalPages());
+        // contactGrid.setTotalRecords(contactPage.getTotalElements());
+
         PageWrapper<People> page = new PageWrapper<People>(contactPage, "/listgridTestWrap");
-        
-        
+
         requestContext.getFlowScope().put("page", page);
         requestContext.getFlashScope().put("page", page);
 
-        
-
-       // contactGrid.setPeopleData(Lists.newArrayList(contactPage.iterator()));
+        // contactGrid.setPeopleData(Lists.newArrayList(contactPage.iterator()));
 
         return page;
     }
-
 
     @ResponseBody
     @RequestMapping(value = "/listgridTestHate", method = RequestMethod.GET, produces = "application/json")
@@ -148,5 +145,22 @@ public class PeopleController {
 
         return contactPage;
     }
+/*
+    @GetMapping("/testPeopleBootstrapTres")
 
+    //@RequestMapping(value = "/testPeopleBootstrapTres", method = RequestMethod.GET, produces = "application/json")
+    public Page<People> listGridTestHate(Pageable pageable) {
+
+        logger.info("Listing contacts for grid with page: {}", pageable);
+        
+        model.addAttribute("identificationsType", identificationsType);
+
+        return "identificationType/list-identificationsType";
+
+        Page<People> contactPage = peopleService.findAllByPage(pageable);
+        @GetMapping("/list")
+
+        return contactPage;
+    }
+*/
 }

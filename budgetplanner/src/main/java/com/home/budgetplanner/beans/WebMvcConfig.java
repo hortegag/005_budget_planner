@@ -38,20 +38,30 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Autowired
-    private WebFlowConfig        webFlowConfig;
+    private WebFlowConfig         webFlowConfig;
 
     @Autowired
-    private SpringTemplateEngine springTemplateEngine;
+    private SpringTemplateEngine  springTemplateEngine;
 
     @Autowired
-    LocaleChangeInterceptor      localeChangeInterceptor;
+    LocaleChangeInterceptor       localeChangeInterceptor;
+
+    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { "/", "classpath:/META-INF/resources/", "classpath:/resources/",
+            "classpath:/static/", "classpath:/public/" };
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
 
-        registry.addResourceHandler("/**").addResourceLocations("/");
+        ///registry.addResourceHandler("/jqgrid/**").addResourceLocations("/jqgrid/");
+
+        //registry.addResourceHandler("/jqgrid/**").addResourceLocations("/jqgrid/");
+        
+        registry.addResourceHandler("/jqgrid/**").addResourceLocations("classpath:/static/jqgrid/");
+
+  
+        registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
 
     }
 
@@ -195,8 +205,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public LayoutDialect layoutDialect() {
         return new LayoutDialect();
     }
-
-    
 
     /*
      * @Override public void

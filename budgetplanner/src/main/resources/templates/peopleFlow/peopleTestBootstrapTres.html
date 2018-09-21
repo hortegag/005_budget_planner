@@ -2,7 +2,7 @@
 <html
     xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/defaultBootstrapTres}">
+    layout:decorate="~{layout/default}">
 <head>
 <title th:text="#{people.list.title}"></title>
 
@@ -12,18 +12,22 @@
     th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"
     src=""></script>
  -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css">
 
 <link
     rel="stylesheet"
-    th:href="@{/webjars/free-jqgrid/4.15.5/css/ui.jqgrid.min.css}" />
+    th:href="@{/jqgrid/css/ui.jqgrid-bootstrap4.css}" />
+
 
 
 <script
-    th:src="@{/webjars/free-jqgrid/4.15.5/js/i18n/min/grid.locale-en.js}"
+    th:src="@{/jqgrid/js/i18n/grid.locale-en.js}"
     src=""></script>
 
 <script
-    th:src="@{/webjars/free-jqgrid/4.15.5/js/jquery.jqgrid.min.js}"
+    th:src="@{/jqgrid/js/jquery.jqGrid.min.js}"
     src=""></script>
 
 </head>
@@ -35,6 +39,19 @@
             th:text="#{people.list.title}"></h1>
         <!-- You cand add the action attribute or you can skip it, If you skip it the browser will call the same url in the bar direction but in the case with a post method. -->
         <!-- th:action="@{/identificationType/list}" -->
+        <p>////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
+
+
+
+
+        <table id="list">
+            <tr>
+                <td />
+            </tr>
+        </table>
+
+        <div id="pager"></div>
+
         <form
             action="#"
             th:object="${searchIdentificationTypeForm}"
@@ -179,6 +196,81 @@
 
         </div>
         <!-- </form>  -->
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+									$.jgrid.defaults.styleUI = 'Bootstrap4';
+									//$.jgrid.defaults.iconSet = 'Octicons';
+									$.jgrid.defaults.iconSet = "fontAwesome";
+									$.jgrid.defaults.width = 'auto';
+									$.jgrid.defaults.responsive = true;
+
+									var urlList = '[(@{/people/listgrid})]';
+									console.log("test:" + urlList);
+									$(function() {
+										$("#list")
+												.jqGrid(
+														{
+															url : urlList,
+															datatype : 'json',
+															mtype : 'GET',
+															colNames : [
+																	'${labelContactFirstName}',
+																	'${labelContactLastName}',
+																	'${labelContactBirthDate}' ],
+															colModel : [
+																	{
+																		name : 'name',
+																		index : 'firstName',
+																		width : 100
+																	},
+																	{
+																		name : 'lastName',
+																		index : 'lastName',
+																		width : 100
+																	},
+																	{
+																		name : 'email',
+																		index : 'email',
+																		width : 100
+																	} ],
+															jsonReader : {
+																root : "peopleData",
+																page : "currentPage",
+																total : "totalPages",
+																records : "totalRecords",
+																repeatitems : false,
+																id : "id"
+															},
+															//styleUI : 'Bootstrap',
+															//guiStyle : "bootstrap4",
+															//iconSet : "fontAwesome",
+															pager : '#pager',
+															rowNum : 10,
+															rowList : [ 1, 10,
+																	20, 30 ],
+															sortname : 'name',
+															sortorder : 'asc',
+															viewrecords : true,
+															gridview : true,
+															width : 780,
+															height : 200,
+															//width : '800',
+															//shrinkToFit : false,
+															//height : 250,
+															//width : 500,
+															caption : '${labelContactList}',
+															onSelectRow : function(
+																	id) {
+																document.location.href = "${showContactUrl}/"
+																		+ id;
+															}
+														});
+										//$("#list").jqGrid("setFrozenColumns");
+
+									});
+								</script>
 
     </div>
 
