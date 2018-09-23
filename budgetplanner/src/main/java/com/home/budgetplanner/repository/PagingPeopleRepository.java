@@ -10,16 +10,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.home.budgetplanner.entity.People;
 
-public interface PagingPeopleRepository extends PagingAndSortingRepository<People, Long>  {
-    
-    
-    
-    List<People> findByName(String name);
-    
-   // Page<People> findAll(Pageable pageable);
-    
-    
-    //List<People> findAll();
+public interface PagingPeopleRepository extends PagingAndSortingRepository<People, Long> {
 
+    List<People> findByName(String name);
+
+    // Page<People> findAll(Pageable pageable);
+
+    // List<People> findAll();
+
+    Page<People> findByNameOrLastName(String name, String lastName, Pageable pageable);
 
 }

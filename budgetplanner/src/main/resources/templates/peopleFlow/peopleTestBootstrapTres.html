@@ -42,16 +42,6 @@
         <p>////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
 
 
-
-
-        <table id="list">
-            <tr>
-                <td />
-            </tr>
-        </table>
-
-        <div id="pager"></div>
-
         <form
             action="#"
             th:object="${searchIdentificationTypeForm}"
@@ -73,9 +63,9 @@
                     th:placeholder="#{identificationType.list.search.input.placeholder}" />
             </div>
             <!-- 
-			<input type="submit" class="btn btn-primary"
-				th:value="#{identificationType.list.search.button}" />
-				 -->
+            <input type="submit" class="btn btn-primary"
+                th:value="#{identificationType.list.search.button}" />
+                 -->
 
             <input
                 id="newSearch"
@@ -85,24 +75,96 @@
                 th:value="#{identificationType.list.search.button}"></input>
             <p>
                 <!-- <input type="text" name="searchName" /> -->
-                <!--	<label for="searchIdentification"
-					th:text="#{identificationType.list.search.label}">searchIdentification</label>
-				<input id="text" type="text" name="searchName" />  -->
+                <!--    <label for="searchIdentification"
+                    th:text="#{identificationType.list.search.label}">searchIdentification</label>
+                <input id="text" type="text" name="searchName" />  -->
             </p>
             <!-- <input type="submit" value="Search" /> -->
             <!--<input type="submit"
-				th:value="#{identificationType.list.search.button}" />-->
+                th:value="#{identificationType.list.search.button}" />-->
         </form>
 
 
+
+        <div class="h">Search By:</div>
+        <div class="form-group">
+            <label
+                for="searchName"
+                th:text="#{identificationType.list.search.label}">searchIdentification</label>
+
+            <input
+                id="searchName"
+                type="text"
+                name="searchName"
+                class="form-control"
+                th:placeholder="#{identificationType.list.search.input.placeholder}" />
+        </div>
+
+        <div class="form-group">
+            <label
+                for="searchLastName"
+                th:text="#{identificationType.list.search.label}">searchIdentification</label>
+
+            <input
+                id="searchLastName"
+                type="text"
+                name="searchLastName"
+                class="form-control"
+                th:placeholder="#{identificationType.list.search.input.placeholder}" />
+
+
+        </div>
+        <input
+            id=submitButton
+            class="btn btn-primary"
+            name="_eventId_search"
+            type="submit"
+            th:value="#{identificationType.list.search.button}"></input>
+
+        <div>
+            <!--     Name
+            <br>
+            <input
+                type="text"
+                id="searchName"
+                name="searchName" />  -->
+
+            <!--   LastName
+            <br>
+            <input
+                type="text"
+                id="searchLastName"
+                name="searchLastName" />  -->
+            <!--      <button
+                onclick="gridReload()"
+                id="submitButton"
+                style="margin-left: 30px;">Search</button>    -->
+
+            <!-- <button
+                id="submitButton"
+                style="margin-left: 30px;">Search</button>  -->
+        </div>
         <h2
             class="mt-5"
             th:text="#{identificationType.list.search.result.title}"></h2>
 
         <!-- 
-		<form action="#" method="post"> -->
+        <form action="#" method="post"> -->
 
         <hr />
+
+        <table id="list">
+            <tr>
+                <td />
+            </tr>
+        </table>
+
+        <div id="pager"></div>
+
+
+
+
+
 
         <form
             action="#"
@@ -206,20 +268,20 @@
 									$.jgrid.defaults.width = 'auto';
 									$.jgrid.defaults.responsive = true;
 
-									var urlList = '[(@{/people/listgrid})]';
+									var urlList = '[(@{/people/listGridBynameAndLastName})]';
 									var tableId = '[(#{people.list.search.table.id})]';
 									var tableName = '[(#{people.list.search.table.name})]';
 									var tableLastName = '[(#{people.list.search.table.lastName})]';
 									var tableEmail = '[(#{people.list.search.table.email})]';
 									var tableBornDate = '[(#{people.list.search.table.bornDate})]';
 									var tableIdentification = '[(#{people.list.search.table.identification})]';
+									var tableIdentificationType = '[(#{people.list.search.table.identification})]';
 
 									//var testEditTwo = '[[${flowExecutionUrl}]]';
 									var testEditTwo = '[(${flowExecutionUrl})]';
 									var testEditTwo = '[(@{"~"+${flowExecutionUrl}})] ';
 									var testEditTwo = "[(@{'~'+${flowExecutionUrl}(_eventId=edit)})]";
-                                    var testDeleteTwo = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
-                                    
+									var testDeleteTwo = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
 
 									console.log("test:" + urlList);
 									$(function() {
@@ -235,7 +297,8 @@
 																	tableLastName,
 																	tableEmail,
 																	tableBornDate,
-																	tableIdentification ],
+																	tableIdentification,
+																	tableIdentificationType ],
 															colModel : [
 																	{
 																		name : 'act',
@@ -256,17 +319,22 @@
 																	{
 																		name : 'email',
 																		index : 'email',
-																		width : 100
+																		width : 150
 																	},
 																	{
-																		name : 'bornDate',
+																		name : 'bornDateString',
 																		index : 'bornDate',
-																		width : 100
+																		width : 75
 																	},
 																	{
 																		name : 'identification',
 																		index : 'identification',
 																		width : 100
+																	},
+																	{
+																		name : 'identificationType',
+																		index : 'identificationType',
+																		width : 75
 																	}
 
 															],
@@ -289,7 +357,7 @@
 															sortorder : 'asc',
 															viewrecords : true,
 															gridview : true,
-															width : 900,
+															width : 1200,
 															//height : 200,
 															//width : '800',
 															//shrinkToFit : false,
@@ -318,11 +386,15 @@
 																			+ cl
 																			+ "');\" />";
 
-                                                                   testEditThree=testEditTwo+'&id='+cl;
-                                                                   testDeleteThree=testDeleteTwo+'&id='+cl;
-                                                                   //console.log(testEditThree);
-																   testEdit = "<a href='"+testEditThree+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
-                                                                   testDelete = "  <a href='"+testDeleteThree+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
+																	testEditThree = testEditTwo
+																			+ '&id='
+																			+ cl;
+																	testDeleteThree = testDeleteTwo
+																			+ '&id='
+																			+ cl;
+																	//console.log(testEditThree);
+																	testEdit = "<a href='"+testEditThree+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
+																	testDelete = "  <a href='"+testDeleteThree+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
 
 																	jQuery(
 																			"#list")
@@ -332,7 +404,7 @@
 																					{
 																						act : testEdit
 																								+ testDelete
-																								///+ ce
+																					///+ ce
 																					});
 																}
 															}
@@ -347,7 +419,55 @@
 													search : false
 												});
 
+										function gridReload() {
+
+											console
+													.log("fffffffffffffffffffffffffffff----------------");
+											var searchName = jQuery(
+													"#searchName").val();
+											var searchLastName = jQuery(
+													"#searchLastName").val();
+											jQuery("#list")
+													.jqGrid(
+															'setGridParam',
+															{
+																url : urlList
+																		+ "?name="
+																		+ searchName
+																		+ "&lastName="
+																		+ searchLastName,
+																page : 1
+															}).trigger(
+															"reloadGrid");
+										}
+										var numeroDocumento = document
+												.querySelector("#submitButton");
+
+										numeroDocumento.addEventListener(
+												'click', function(event) {
+													return gridReload(event);
+												});
+
 									});
+									/*
+									 function gridReload() {
+									 console
+									 .log("tettttttttt----------------");
+									 var nm_mask = jQuery("#item_nm").val();
+									 var cd_mask = jQuery("#search_cd")
+									 .val();
+									 jQuery("#bigset").jqGrid(
+									 'setGridParam',
+									 {
+									 url : "bigset.php?nm_mask="
+									 + nm_mask
+									 + "&cd_mask="
+									 + cd_mask,
+									 page : 1
+									 }).trigger("reloadGrid");
+									 }
+									
+									 */
 								</script>
 
     </div>
