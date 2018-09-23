@@ -44,8 +44,8 @@
             on="add"
             to="addEntity">
             <evaluate
-                expression="identificationTypeController.initializeIdentificationType()"
-                result="flowScope.identificationType" />
+                expression="peopleController.initializePeople()"
+                result="flowScope.people" />
         </transition>
 
         <transition
@@ -69,8 +69,8 @@
 
     <view-state
         id="addEntity"
-        view="#{directorio}/identificationType-form"
-        model="identificationType">
+        view="#{directorio}/peopleCreate"
+        model="people">
 
         <transition
             on="save"

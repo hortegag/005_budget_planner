@@ -208,8 +208,6 @@ public class PeopleController {
             contactPage = peopleService.findPeopleByNameOrLastNamePage(searchForm.getName(), searchForm.getLastName(), pageRequest);
 
         }
-        
-        
 
         // Construct the grid data that will return as JSON data
         PeopleDTOGrid contactGrid = new PeopleDTOGrid();
@@ -264,6 +262,14 @@ public class PeopleController {
 
         return contactPage;
     }
+
+    public People initializePeople() {
+
+        People people = new People();
+
+        return people;
+    }
+
     /*
      * @GetMapping("/testPeopleBootstrapTres")
      * 
