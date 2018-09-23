@@ -39,54 +39,8 @@
             th:text="#{people.list.title}"></h1>
         <!-- You cand add the action attribute or you can skip it, If you skip it the browser will call the same url in the bar direction but in the case with a post method. -->
         <!-- th:action="@{/identificationType/list}" -->
-        <p>////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
 
 
-        <form
-            action="#"
-            th:object="${searchIdentificationTypeForm}"
-            method="post"
-            autocomplete="off">
-
-            <div class="form-group">
-                <label
-                    for="searchIdentification"
-                    th:text="#{identificationType.list.search.label}">searchIdentification</label>
-
-
-                <input
-                    id="searchIdentification"
-                    type="text"
-                    th:field="*{name}"
-                    name="searchName"
-                    class="form-control"
-                    th:placeholder="#{identificationType.list.search.input.placeholder}" />
-            </div>
-            <!-- 
-            <input type="submit" class="btn btn-primary"
-                th:value="#{identificationType.list.search.button}" />
-                 -->
-
-            <input
-                id="newSearch"
-                class="btn btn-primary"
-                name="_eventId_search"
-                type="submit"
-                th:value="#{identificationType.list.search.button}"></input>
-            <p>
-                <!-- <input type="text" name="searchName" /> -->
-                <!--    <label for="searchIdentification"
-                    th:text="#{identificationType.list.search.label}">searchIdentification</label>
-                <input id="text" type="text" name="searchName" />  -->
-            </p>
-            <!-- <input type="submit" value="Search" /> -->
-            <!--<input type="submit"
-                th:value="#{identificationType.list.search.button}" />-->
-        </form>
-
-
-
-        <div class="h">Search By:</div>
         <div class="form-group">
             <label
                 for="searchName"
@@ -148,23 +102,6 @@
             class="mt-5"
             th:text="#{identificationType.list.search.result.title}"></h2>
 
-        <!-- 
-        <form action="#" method="post"> -->
-
-        <hr />
-
-        <table id="list">
-            <tr>
-                <td />
-            </tr>
-        </table>
-
-        <div id="pager"></div>
-
-
-
-
-
 
         <form
             action="#"
@@ -186,78 +123,17 @@
                 <p th:text="#{identificationType.list.search.empty.results}"></p>
             </div>
         </div>
-        <div
-            class="mt-5"
-            th:unless="${#lists.isEmpty(peoples)}">
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th
-                            scope="col"
-                            th:text="#{identificationType.list.search.table.id}"></th>
-                        <th
-                            scope="col"
-                            th:text="#{identificationType.list.search.table.name}"></th>
-                        <th
-                            scope="col"
-                            th:text="#{identificationType.list.search.table.mnemonic}"></th>
-                        <th
-                            scope="col"
-                            th:text="#{identificationType.list.search.table.description}"></th>
-                        <th
-                            scope="col"
-                            th:text="#{identificationType.list.search.table.edit}"></th>
 
-                        <th
-                            scope="col"
-                            th:text="#{identificationType.list.search.table.delete}"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="people: ${peoples}">
-                        <th scope="row"></th>
-                        <td th:text="${people.id}" />
-                        <td th:text="${people.name}" />
-                        <td th:text="${people.lastName}" />
-                        <td th:text="${people.email}" />
+        <hr />
 
+        <table id="list">
+            <tr>
+                <td />
+            </tr>
+        </table>
 
+        <div id="pager"></div>
 
-                        <td>
-                            <!-- <a href="#" th:href="@{${flowExecutionUrl}(id=*{identification.id},_eventId='edit')}" >  -->
-                            <a
-                                href="#"
-                                th:href="@{'~'+${flowExecutionUrl}(id=*{people.id},_eventId=edit)}">
-                                <button
-                                    type="button"
-                                    class="btn btn-light"
-                                    aria-label="Edit user">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </button>
-                            </a>
-                        </td>
-                        <td>
-                            <a
-                                href="#"
-                                th:href="@{'~'+${flowExecutionUrl}(id=*{people.id},_eventId=delete)}">
-                                <button
-                                    type="button"
-                                    class="btn btn-light"
-                                    aria-label="Delete user">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-                
-            <div th:insert="peopleFlow/paginationBar.html :: paginationbar"></div>
-            <p></p>
-
-        </div>
-        <!-- </form>  -->
 
         <script
             type="text/javascript"

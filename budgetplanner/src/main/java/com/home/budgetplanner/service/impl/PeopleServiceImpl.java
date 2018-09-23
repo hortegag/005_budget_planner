@@ -1,11 +1,15 @@
 package com.home.budgetplanner.service.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.home.budgetplanner.BudgetplannerApplication;
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.repository.PagingPeopleRepository;
@@ -18,16 +22,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PeopleServiceImpl implements PeopleService {
+public class PeopleServiceImpl implements PeopleService, Serializable {
+
+    private static final Logger logger = LogManager.getLogger(PeopleServiceImpl.class);
 
     @Autowired
-    private PeopleDAO              peopleDAO;
+    private transient PeopleDAO              peopleDAO;
 
     @Autowired
-    private PagingPeopleRepository pagingPeopleRepository;
+    private transient PagingPeopleRepository pagingPeopleRepository;
 
     @Override
     public People findById(Long id) {
+        
+        logger.info(">>>>>>>>>>>>>>>>>>>>>> se realiza la consulta por id "+id);
+        // TODO Auto-generated method stub
+        return peopleDAO.findById(id);
+    }
+    public People findByTestId(Long id) {
+        
+        logger.info("fffffffffffffffffffffffff se realiza la consulta por id "+id);
         // TODO Auto-generated method stub
         return peopleDAO.findById(id);
     }

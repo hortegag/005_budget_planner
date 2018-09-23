@@ -10,23 +10,14 @@
 
 
 
-    <!-- <var name="servicio" class="com.home.budgetplanner.service.impl.IdentificationTypeServiceImpl"/> -->
 
     <var
         name="servicio"
-        class="com.home.budgetplanner.service.impl.IdentificationTypeServiceImpl" />
+        class="com.home.budgetplanner.service.impl.PeopleServiceImpl" />
     <on-start>
         <set
             name="flowScope.directorio"
             value="'peopleFlow'" />
-        <evaluate
-            expression="identificationTypeController.initializeForm()"
-            result="flowScope.searchIdentificationTypeForm" />
-        <evaluate
-            expression="servicio.findAll()"
-            result="flowScope.identificationsTypeffff" />
-
-
         <!-- <evaluate expression="peopleController.listGridTest(peopleController.initializePageable())" result="flowScope.test" /> -->
 
         <evaluate
@@ -37,21 +28,15 @@
             name="flowScope.peoples"
             value="flowScope.page.getContent()" />
 
-    <!--     <set
-            name="flowScope.pagetest"
-            value="flowScope.test" /> -->
+        <!-- <set name="flowScope.pagetest" value="flowScope.test" /> -->
 
     </on-start>
 
     <view-state
         id="list"
-        view="#{directorio}/peopleTestBootstrapTres"
-        model="flowScope.searchIdentificationTypeForm">
+        view="#{directorio}/peopleTestBootstrapTres">
 
-        <!-- <attribute></attribute>
-        <attribute
-            name="page"
-            value="flowScope.pagetest"></attribute>  -->
+        <!-- <attribute></attribute> <attribute name="page" value="flowScope.pagetest"></attribute> -->
         <transition
             on="search"
             to="list">
@@ -65,7 +50,6 @@
             <evaluate
                 expression="identificationTypeController.initializeIdentificationType()"
                 result="flowScope.identificationType" />
-
         </transition>
 
         <transition
@@ -73,7 +57,7 @@
             to="editEntity">
             <evaluate
                 expression="servicio.findById(requestParameters.id)"
-                result="flowScope.identificationType" />
+                result="flowScope.people" />
 
         </transition>
 
@@ -83,9 +67,7 @@
             <evaluate
                 expression="servicio.findById(requestParameters.id)"
                 result="flowScope.identificationType" />
-
         </transition>
-
     </view-state>
 
 
@@ -93,7 +75,6 @@
         id="addEntity"
         view="#{directorio}/identificationType-form"
         model="identificationType">
-
 
         <transition
             on="save"
@@ -142,8 +123,8 @@
 
     <view-state
         id="editEntity"
-        view="#{directorio}/editIdentificationType"
-        model="identificationType">
+        view="#{directorio}/peopleEdit"
+        model="people">
 
 
         <transition
