@@ -7,10 +7,6 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
     start-state="list">
 
-
-
-
-
     <var
         name="servicio"
         class="com.home.budgetplanner.service.impl.PeopleServiceImpl" />
@@ -146,14 +142,14 @@
 
     <view-state
         id="confirmEditEntity"
-        view="#{directorio}/identificationTypeConfirmEdit"
-        model="identificationType">
+        view="#{directorio}/peopleConfirmEdit"
+        model="people">
 
 
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.save(flowScope.identificationType)" />
+            <evaluate expression="servicio.save(flowScope.people)" />
             <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         </transition>
 
@@ -174,14 +170,14 @@
 
     <view-state
         id="confirmDeleteEntity"
-        view="#{directorio}/identificationTypeConfirmDelete"
-        model="identificationType">
+        view="#{directorio}/peopleConfirmDelete"
+        model="people">
 
 
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.deleteById(flowScope.identificationType.id)" />
+            <evaluate expression="servicio.deleteById(flowScope.people.id)" />
             <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         </transition>
 
