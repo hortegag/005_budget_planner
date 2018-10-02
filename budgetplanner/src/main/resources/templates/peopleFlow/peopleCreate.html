@@ -27,7 +27,7 @@
                 <div class="card-header">
                     <h3
                         class="card-title"
-                        th:text="#{identificationType.add.title}"></h3>
+                        th:text="#{people.add.title}"></h3>
                 </div>
                 <div class="card-body">
                     <form
@@ -49,14 +49,14 @@
                         <div class="form-group">
                             <label
                                 for="name"
-                                th:text="#{identificationType.entity.name}">Name label::</label>
+                                th:text="#{people.entity.name}">Name label::</label>
                             <input
                                 type="text"
                                 th:field="*{name}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('name')} ? is-invalid"
                                 id="name"
-                                placeholder="Enter name" />
+                                th:placeholder="#{people.entity.name.placeholder}" />
                             <p
                                 th:if="${#fields.hasErrors('name')}"
                                 th:errors="*{name}"
@@ -65,37 +65,37 @@
                         </div>
                         <div class="form-group">
                             <label
-                                for="mnemonic"
-                                th:text="#{identificationType.entity.mnemonic}">Description label:</label>
+                                for="lastName"
+                                th:text="#{people.entity.lastName}">Last Name label:</label>
                             <input
                                 type="text"
                                 th:field="*{lastName}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('lastName')} ? is-invalid"
-                                id="mnemonic"
-                                placeholder="Enter mnemonic" />
+                                id="lastName"
+                                th:placeholder="#{people.entity.lastName.placeholder}"  />
                             <p
                                 th:if="${#fields.hasErrors('lastName')}"
                                 th:errors="*{lastName}"
-                                class="invalid-feedback">mnemonic Error</p>
+                                class="invalid-feedback">lastName Error</p>
 
                         </div>
                         <div class="form-group">
 
                             <label
-                                for="description"
-                                th:text="#{identificationType.entity.description}">Description label:</label>
+                                for="email"
+                                th:text="#{people.entity.email}">Email label:</label>
                             <input
                                 type="text"
                                 th:field="*{email}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('email')} ? is-invalid"
-                                id="description"
-                                placeholder="Enter description" />
+                                id="email"
+                                th:placeholder="#{people.entity.email.placeholder}"   />
                             <p
                                 th:if="${#fields.hasErrors('email')}"
                                 th:errors="*{email}"
-                                class="invalid-feedback">description Error</p>
+                                class="invalid-feedback">email Error</p>
 
 
                         </div>
@@ -105,13 +105,13 @@
                             class="btn btn-primary"
                             name="_eventId_save"
                             type="submit"
-                            th:value="#{identificationType.add.save.button}"></input>
+                            th:value="#{people.add.save.button}"></input>
                         <input
                             id="addIdentificationType"
                             class="btn btn-dark"
                             name="_eventId_cancel"
                             type="submit"
-                            th:value="#{identificationType.add.cancel.button}"></input>
+                            th:value="#{people.add.cancel.button}"></input>
 
                     </form>
                 </div>

@@ -44,27 +44,27 @@
         <div class="form-group">
             <label
                 for="searchName"
-                th:text="#{identificationType.list.search.label}">searchIdentification</label>
+                th:text="#{people.list.search.filter.name}">searchName</label>
 
             <input
                 id="searchName"
                 type="text"
                 name="searchName"
                 class="form-control"
-                th:placeholder="#{identificationType.list.search.input.placeholder}" />
+                th:placeholder="#{people.list.search.filter.name.placeholder}" />
         </div>
 
         <div class="form-group">
             <label
                 for="searchLastName"
-                th:text="#{identificationType.list.search.label}">searchIdentification</label>
+                th:text="#{people.list.search.filter.lastName}">searchIdentification</label>
 
             <input
                 id="searchLastName"
                 type="text"
                 name="searchLastName"
                 class="form-control"
-                th:placeholder="#{identificationType.list.search.input.placeholder}" />
+                th:placeholder="#{people.list.search.filter.lastName.placeholder}" />
 
 
         </div>
@@ -107,11 +107,11 @@
             action="#"
             method="post">
             <input
-                id="addIdentificationType"
+                id="addPeople"
                 class="btn btn-primary"
                 name="_eventId_add"
                 type="submit"
-                th:value="#{identificationType.list.add.button}"></input>
+                th:value="#{people.list.add.button}"></input>
         </form>
 
         <div
@@ -125,15 +125,11 @@
         </div>
 
         <hr />
-
-        <table id="list">
-            <tr>
-                <td />
-            </tr>
-        </table>
-
-        <div id="pager"></div>
-
+        <div class="mt-5">
+            <table id="list">
+            </table>
+            <div id="pager"></div>
+        </div>
 
         <script
             type="text/javascript"
@@ -151,7 +147,7 @@
 									var tableEmail = '[(#{people.list.search.table.email})]';
 									var tableBornDate = '[(#{people.list.search.table.bornDate})]';
 									var tableIdentification = '[(#{people.list.search.table.identification})]';
-									var tableIdentificationType = '[(#{people.list.search.table.identification})]';
+									var tableIdentificationType = '[(#{people.list.search.table.identificationType})]';
 
 									//var testEditTwo = '[[${flowExecutionUrl}]]';
 									var testEditTwo = '[(${flowExecutionUrl})]';
@@ -179,7 +175,7 @@
 																	{
 																		name : 'act',
 																		index : 'act',
-																		width : 75,
+																		width : 70,
 																		sortable : false
 																	},
 																	{
@@ -200,7 +196,7 @@
 																	{
 																		name : 'bornDateString',
 																		index : 'bornDate',
-																		width : 75
+																		width : 65
 																	},
 																	{
 																		name : 'identification',
@@ -210,7 +206,7 @@
 																	{
 																		name : 'identificationType',
 																		index : 'identificationType',
-																		width : 75
+																		width : 100
 																	}
 
 															],
@@ -233,7 +229,7 @@
 															sortorder : 'asc',
 															viewrecords : true,
 															gridview : true,
-															width : 1200,
+															width : 1100,
 															//height : 200,
 															//width : '800',
 															//shrinkToFit : false,
@@ -270,7 +266,7 @@
 																			+ cl;
 																	//console.log(testEditThree);
 																	testEdit = "<a href='"+testEditThree+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
-																	testDelete = "  <a href='"+testDeleteThree+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
+																	testDelete = " <a href='"+testDeleteThree+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
 
 																	jQuery(
 																			"#list")
