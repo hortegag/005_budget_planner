@@ -21,14 +21,20 @@
     th:href="@{/jqgrid/css/ui.jqgrid-bootstrap4.css}" />
 
 
-
+<!-- 
 <script
     th:src="@{/jqgrid/js/i18n/grid.locale-en.js}"
+    src=""></script>
+ -->
+<script
+    th:src="@{'/jqgrid/js/i18n/grid.locale-'+${#locale}+'.js'}"
     src=""></script>
 
 <script
     th:src="@{/jqgrid/js/jquery.jqGrid.min.js}"
     src=""></script>
+
+
 
 </head>
 <body>
@@ -125,6 +131,9 @@
         </div>
 
         <hr />
+        mi test:
+        <span th:text="${#locale}">estfff</span>
+
         <div class="mt-5">
             <table id="list">
             </table>
@@ -140,8 +149,19 @@
 									$.jgrid.defaults.width = 'auto';
 									$.jgrid.defaults.responsive = true;
 
+									var language = '[(${#locale})]';
+									/*
+									 $.jgrid.setRegional('grid', {
+									 regional : 'es'
+									 });
+									 */
+									/*	$.jgrid.setRegional('jqGrid', {
+											regional : language
+										});*/
+
 									var urlList = '[(@{/people/listGridBynameAndLastName})]';
 									var tableId = '[(#{people.list.search.table.id})]';
+									var tableActions = '[(#{people.list.search.table.actions})]';
 									var tableName = '[(#{people.list.search.table.name})]';
 									var tableLastName = '[(#{people.list.search.table.lastName})]';
 									var tableEmail = '[(#{people.list.search.table.email})]';
@@ -152,8 +172,8 @@
 									//var testEditTwo = '[[${flowExecutionUrl}]]';
 									var testEditTwo = '[(${flowExecutionUrl})]';
 									var testEditTwo = '[(@{"~"+${flowExecutionUrl}})] ';
-									var testEditTwo = "[(@{'~'+${flowExecutionUrl}(_eventId=edit)})]";
-									var testDeleteTwo = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
+									var editUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=edit)})]";
+									var deleteUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
 
 									console.log("test:" + urlList);
 									$(function() {
@@ -162,9 +182,10 @@
 														{
 															url : urlList,
 															datatype : 'json',
+															//regional : 'es',
 															mtype : 'GET',
 															colNames : [
-																	'Actions',
+																	tableActions,
 																	tableName,
 																	tableLastName,
 																	tableEmail,
@@ -236,11 +257,11 @@
 															height : 'auto',
 															//width : 500,
 															//caption : '${labelContactList}',
-															onSelectRow : function(
-																	id) {
-																document.location.href = "${showContactUrl}/"
-																		+ id;
-															},
+															//onSelectRow : function(
+															//		id) {
+															//	document.location.href = "${showContactUrl}/"
+															//			+ id;
+															//},
 															gridComplete : function() {
 																var ids = jQuery(
 																		"#list")
@@ -258,15 +279,15 @@
 																			+ cl
 																			+ "');\" />";
 
-																	testEditThree = testEditTwo
+																	editUrlWithParameters = editUrl
 																			+ '&id='
 																			+ cl;
-																	testDeleteThree = testDeleteTwo
+																	deleteUrlWithParameters = deleteUrl
 																			+ '&id='
 																			+ cl;
 																	//console.log(testEditThree);
-																	testEdit = "<a href='"+testEditThree+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
-																	testDelete = " <a href='"+testDeleteThree+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
+																	testEdit = "<a href='"+editUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
+																	testDelete = " <a href='"+deleteUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
 
 																	jQuery(
 																			"#list")
