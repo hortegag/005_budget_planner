@@ -4,7 +4,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/default}">
 <head>
-<title th:text="#{identificationType.add.title}"></title>
+<title th:text="#{people.add.title}"></title>
 </head>
 <body>
     <div layout:fragment="content">
@@ -101,13 +101,13 @@
                         </div>
 
                         <input
-                            id="addIdentificationType"
+                            id="addPerson"
                             class="btn btn-primary"
                             name="_eventId_save"
                             type="submit"
                             th:value="#{people.add.save.button}"></input>
                         <input
-                            id="addIdentificationType"
+                            id="cancelAddPerson"
                             class="btn btn-dark"
                             name="_eventId_cancel"
                             type="submit"
