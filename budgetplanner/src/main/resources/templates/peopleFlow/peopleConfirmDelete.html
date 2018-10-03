@@ -4,7 +4,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/default}">
 <head>
-<title th:text="#{identificationType.delete.confirm.title}"></title>
+<title th:text="#{people.delete.confirm.title}"></title>
 </head>
 <body>
     <div layout:fragment="content">
@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <h3
                         class="card-title"
-                        th:text="#{identificationType.delete.confirm.title}"></h3>
+                        th:text="#{people.delete.confirm.title}"></h3>
 
                 </div>
                 <div class="card-body">
@@ -55,7 +55,7 @@
                             <label
                                 for="staticEmail"
                                 class="col-sm-3 col-form-label font-weight-bold"
-                                th:text="#{identificationType.entity.name}">name</label>
+                                th:text="#{people.entity.name}">name</label>
                             <label
                                 for="staticEmail"
                                 class="col-sm-9 col-form-label"
@@ -67,11 +67,11 @@
                             <label
                                 for="staticEmail"
                                 class="col-sm-3 col-form-label font-weight-bold"
-                                th:text="#{identificationType.entity.mnemonic}">mnemonic</label>
+                                th:text="#{people.entity.lastName}">lastName</label>
                             <label
                                 for="staticEmail"
                                 class="col-sm-9 col-form-label"
-                                th:text="*{lastName}">mnemonic</label>
+                                th:text="*{lastName}">lastName</label>
 
                         </div>
 
@@ -79,26 +79,26 @@
                             <label
                                 for="staticEmail"
                                 class="col-sm-3 col-form-label font-weight-bold"
-                                th:text="#{identificationType.entity.description}">description</label>
+                                th:text="#{people.entity.email}">email</label>
                             <label
                                 for="staticEmail"
                                 class="col-sm-9 col-form-label"
-                                th:text="*{email}">description</label>
+                                th:text="*{email}">email</label>
 
                         </div>
 
                         <input
-                            id="addIdentificationType"
+                            id="confirmDelete"
                             class="btn btn-primary"
                             name="_eventId_confirm"
                             type="submit"
-                            th:value="#{identificationType.delete.confirm.button.confirm}"></input>
+                            th:value="#{people.delete.confirm.button.confirm}"></input>
                         <input
-                            id="addIdentificationType"
+                            id="cancelDelete"
                             class="btn btn-dark"
                             name="_eventId_cancel"
                             type="submit"
-                            th:value="#{identificationType.delete.confirm.button.cancel}"></input>
+                            th:value="#{people.delete.confirm.button.cancel}"></input>
                     </form>
 
                 </div>
