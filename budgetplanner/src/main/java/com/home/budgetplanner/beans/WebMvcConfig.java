@@ -195,7 +195,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public AjaxThymeleafViewResolver ajaxViewResolver() {
         AjaxThymeleafViewResolver viewResolver = new AjaxThymeleafViewResolver();
         viewResolver.setViewClass(FlowAjaxThymeleafView.class);
-        viewResolver.setOrder(2);
+        viewResolver.setOrder(1);
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setCharacterEncoding("UTF-8");
         return viewResolver;

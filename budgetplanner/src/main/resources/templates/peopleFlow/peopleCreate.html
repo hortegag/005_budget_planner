@@ -5,6 +5,18 @@
     layout:decorate="~{layout/default}">
 <head>
 <title th:text="#{people.add.title}"></title>
+<!-- 
+<script
+    type="text/javascript"
+    th:src="@{/resources/dojo/dojo.js}"></script>
+<script
+    type="text/javascript"
+    th:src="@{/resources/spring/Spring.js}"></script>
+<script
+    type="text/javascript"
+    th:src="@{/resources/spring/Spring-Dojo.js}"></script>
+    
+     -->
 </head>
 <body>
     <div layout:fragment="content">
@@ -31,7 +43,7 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action="#"
+                        action=""
                         th:object="${people}"
                         method="post"
                         autocomplete="off">
@@ -73,7 +85,7 @@
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('lastName')} ? is-invalid"
                                 id="lastName"
-                                th:placeholder="#{people.entity.lastName.placeholder}"  />
+                                th:placeholder="#{people.entity.lastName.placeholder}" />
                             <p
                                 th:if="${#fields.hasErrors('lastName')}"
                                 th:errors="*{lastName}"
@@ -91,13 +103,66 @@
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('email')} ? is-invalid"
                                 id="email"
-                                th:placeholder="#{people.entity.email.placeholder}"   />
+                                th:placeholder="#{people.entity.email.placeholder}" />
                             <p
                                 th:if="${#fields.hasErrors('email')}"
                                 th:errors="*{email}"
                                 class="invalid-feedback">email Error</p>
 
 
+                        </div>
+                        <div class="form-group">
+
+                            <label
+                                for="bornDate"
+                                th:text="#{people.entity.bornDate}">Born Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{bornDate}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('bornDate')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.bornDate.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('bornDate')}"
+                                th:errors="*{bornDate}"
+                                class="invalid-feedback">bornDate Error</p>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label
+                                for="identification"
+                                th:text="#{people.entity.identification}">Identification Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identification}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identification')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identification.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identification')}"
+                                th:errors="*{identification}"
+                                class="invalid-feedback">identification Error</p>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label
+                                for="identificationType"
+                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identificationType}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identificationType')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identificationType.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identificationType')}"
+                                th:errors="*{identificationType}"
+                                class="invalid-feedback">identification Error</p>
                         </div>
 
                         <input
@@ -118,6 +183,73 @@
             </div>
         </div>
 
+        <form
+            id="triggerform"
+            method="post"
+            th:action="@{'~'+${flowExecutionUrl}}">
+            <input
+                name="nameClient"
+                value="hecthor" />
+            <input
+                type="submit"
+                id="doUpdate"
+                name="_eventId_updateData"
+                value="Update now!" />
+        </form>
+
+
+        <div id="data">
+            This is a content to be changed
+            <p th:text="${param.nameClient}">Test</p>
+        </div>
+        <div
+            id="hoteldata"
+            th:fragment="hoteldata">
+            This is a content to be changed
+            <p th:text="${param.nameClient}">Test</p>
+        </div>
+
+
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+									$("#triggerform")
+											.submit(
+													function(event) {
+														//alert("Handler for .submit() called.");
+
+														$
+																.ajax({
+																	type : "POST",
+																	dataType : 'text',
+																	data : $(
+																			"#triggerform")
+																			.serialize()
+																			//+ "&_eventId=updateData"
+																			+ "&_eventId_updateData=_eventId_updateData"
+																			+ "&ajaxSource=true",
+
+																	url : $(
+																			"#triggerform")
+																			.attr(
+																					"action")
+																			//+ "&_eventId=updateData"
+																			+ "&_eventId_updateData=_eventId_updateData"
+																			+ "&ajaxSource=true",
+																	success : function(
+																			result) {
+																		$(
+																				'#hoteldata')
+																				.replaceWith(
+																						result);
+																	}
+																});
+
+														return false;
+														//event.preventDefault();
+													});
+								</script>
     </div>
 </body>
 </html>

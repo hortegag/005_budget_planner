@@ -86,6 +86,11 @@
             bind="false">
         </transition>
 
+        <transition on="updateData">
+            <!-- <render fragments="[//div[@id='data']]" /> -->
+            <render fragments="hoteldata" />
+
+        </transition>
 
     </view-state>
 

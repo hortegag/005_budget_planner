@@ -37,7 +37,7 @@ public class MessageConfiguration implements WebMvcConfigurer {
        // SessionLocaleResolver slr = new SessionLocaleResolver();
         //slr.setDefaultLocale(Locale.US);
         CookieLocaleResolver slr = new CookieLocaleResolver();
-        slr.setDefaultLocale(Locale.US);
+        slr.setDefaultLocale(Locale.ENGLISH);
         
         // return new CookieLocaleResolver();
         return slr;
