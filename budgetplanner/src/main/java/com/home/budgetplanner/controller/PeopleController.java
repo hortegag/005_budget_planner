@@ -1,5 +1,7 @@
 package com.home.budgetplanner.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +19,9 @@ import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.controller.form.PeopleDTOGrid;
 import com.home.budgetplanner.controller.form.PeopleGrid;
 import com.home.budgetplanner.controller.form.SearchPeopleForm;
+import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
+import com.home.budgetplanner.service.IdentificationTypeService;
 import com.home.budgetplanner.service.PeopleService;
 import com.home.budgetplanner.utils.PageWrapper;
 
@@ -39,6 +43,9 @@ public class PeopleController {
 
     @Autowired
     private PeopleService       peopleService;
+    
+    @Autowired
+    private IdentificationTypeService identificationTypeService;
 
     @ResponseBody
     @RequestMapping(value = "/listgrid", method = RequestMethod.GET, produces = "application/json")
@@ -268,6 +275,13 @@ public class PeopleController {
         People people = new People();
 
         return people;
+    }
+
+    public List<IdentificationType> initializeSelectableIdentificationTypes() {
+        
+        return identificationTypeService.findAll();
+        
+        
     }
 
     /*

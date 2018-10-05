@@ -58,6 +58,73 @@
                         <!-- keep track of the id that is being updated -->
                         <!-- <input type="hidden" th:field="*{id}" /> -->
 
+
+                        <!--  //th:field="*{type}" -->
+
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="identificationType"
+                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
+
+
+                            <select
+                                id="identificationType"
+                                th:field="*{identificationType}"
+                                class="custom-select">
+                                <option
+                                    th:each="type : ${selectableIdentificationTypes}"
+                                    th:value="${type.id}"
+                                    th:text="${type.name}">IdentificationType</option>
+                            </select>
+                            <p
+                                th:if="${#fields.hasErrors('identificationType')}"
+                                th:errors="*{identificationType}"
+                                class="invalid-feedback">identificationType Error</p>
+                        </div>
+
+                        <!-- 
+
+                        <div class="form-group">
+
+                            <label
+                                for="identificationType"
+                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identificationType}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identificationType')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identificationType.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identificationType')}"
+                                th:errors="*{identificationType}"
+                                class="invalid-feedback">identificationType Error</p>
+                        </div>  -->
+
+                        <div class="form-group">
+
+                            <label
+                                for="identification"
+                                th:text="#{people.entity.identification}">Identification Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identification}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identification')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identification.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identification')}"
+                                th:errors="*{identification}"
+                                class="invalid-feedback">identification Error</p>
+                        </div>
+
+
+
                         <div class="form-group">
                             <label
                                 for="name"
@@ -129,41 +196,6 @@
                                 class="invalid-feedback">bornDate Error</p>
                         </div>
 
-                        <div class="form-group">
-
-                            <label
-                                for="identification"
-                                th:text="#{people.entity.identification}">Identification Date label:</label>
-                            <input
-                                type="text"
-                                th:field="*{identification}"
-                                class="form-control"
-                                th:classappend="${#fields.hasErrors('identification')} ? is-invalid"
-                                id="email"
-                                th:placeholder="#{people.entity.identification.placeholder}" />
-                            <p
-                                th:if="${#fields.hasErrors('identification')}"
-                                th:errors="*{identification}"
-                                class="invalid-feedback">identification Error</p>
-                        </div>
-
-                        <div class="form-group">
-
-                            <label
-                                for="identificationType"
-                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
-                            <input
-                                type="text"
-                                th:field="*{identificationType}"
-                                class="form-control"
-                                th:classappend="${#fields.hasErrors('identificationType')} ? is-invalid"
-                                id="email"
-                                th:placeholder="#{people.entity.identificationType.placeholder}" />
-                            <p
-                                th:if="${#fields.hasErrors('identificationType')}"
-                                th:errors="*{identificationType}"
-                                class="invalid-feedback">identification Error</p>
-                        </div>
 
                         <input
                             id="addPerson"
@@ -182,7 +214,8 @@
                 </div>
             </div>
         </div>
-
+        <!-- enable to test ajax -->
+        <!--
         <form
             id="triggerform"
             method="post"
@@ -273,6 +306,7 @@
 
 									});
 								</script>
+                                -->
     </div>
 </body>
 </html>

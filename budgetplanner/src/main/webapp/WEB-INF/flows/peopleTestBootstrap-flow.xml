@@ -71,6 +71,11 @@
         id="addEntity"
         view="#{directorio}/peopleCreate"
         model="people">
+        <on-render>
+            <evaluate
+                expression="peopleController.initializeSelectableIdentificationTypes()"
+                result="flashScope.selectableIdentificationTypes" />
+        </on-render>
 
         <transition
             on="save"
