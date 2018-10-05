@@ -214,41 +214,64 @@
         <script
             type="text/javascript"
             th:inline="javascript">
-									$("#triggerform")
-											.submit(
-													function(event) {
-														//alert("Handler for .submit() called.");
+            
+                                    //review chapther 12 of pro spring mv
+                                    //https://www.safaribooksonline.com/library/view/pro-spring-mvc/9781430241553/Chapter12.html
+									$(function() {
+										var submit = $('#doUpdate');
 
-														$
-																.ajax({
-																	type : "POST",
-																	dataType : 'text',
-																	data : $(
-																			"#triggerform")
-																			.serialize()
-																			//+ "&_eventId=updateData"
-																			+ "&_eventId_updateData=_eventId_updateData"
-																			+ "&ajaxSource=true",
+										$("#triggerform")
+												.submit(
+														function(event) {
+															//alert("Handler for .submit() called.");
 
-																	url : $(
-																			"#triggerform")
-																			.attr(
-																					"action")
-																			//+ "&_eventId=updateData"
-																			+ "&_eventId_updateData=_eventId_updateData"
-																			+ "&ajaxSource=true",
-																	success : function(
-																			result) {
-																		$(
-																				'#hoteldata')
-																				.replaceWith(
-																						result);
-																	}
-																});
+															var form = $('#triggerform');
+															var event = submit
+																	.attr('name');
+															var data = form
+																	.serialize()
+																	+ '&'
+																	+ event
+																	+ '='
+																	+ event
+																	+ '&ajaxSource='
+																	+ submit
+																			.attr('id');
 
-														return false;
-														//event.preventDefault();
-													});
+															$
+																	.ajax({
+																		type : "POST",
+																		dataType : 'text',
+																		data : data,
+                                                                        //$(
+																			//	"#triggerform")
+																			//	.serialize()
+																				//+ "&_eventId=updateData"
+																				//+ "&_eventId_updateData=_eventId_updateData"
+																			//	+ "&ajaxSource=true",
+
+																		url : form.attr( 'action' ),
+                                                                        //$(
+																		//		"#triggerform")
+																		//		.attr(
+																		//				"action")
+																				//+ "&_eventId=updateData"
+																				//+ "&_eventId_updateData=_eventId_updateData"
+																		//		+ "&ajaxSource=true",
+																		success : function(
+																				result) {
+																			$(
+																					'#hoteldata')
+																					.replaceWith(
+																							result);
+																		}
+																	});
+
+															return false;
+															//event.preventDefault();
+														});
+
+									});
 								</script>
     </div>
 </body>
