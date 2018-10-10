@@ -10,12 +10,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -30,12 +32,15 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import com.home.budgetplanner.converter.StringToEntityConverter;
+import com.home.budgetplanner.entity.IdentificationType;
+
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @EnableWebMvc
 @EnableSpringDataWebSupport
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer {
+public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvcConfigurer {
 
     @Autowired
     private WebFlowConfig         webFlowConfig;
@@ -203,6 +208,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
     public LayoutDialect layoutDialect() {
+        System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
         return new LayoutDialect();
     }
 
@@ -214,5 +220,32 @@ public class WebMvcConfig implements WebMvcConfigurer {
      * PageRequest(0, 5)); argumentResolvers.add(resolver);
      * super.addArgumentResolvers(argumentResolvers); }
      */
+    
+    
+    
+    
+    
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
+            registry.addConverter(identificationTypeConverter());
+
+
+            //registry.addConverter(categoryConverter());
+    }
+    
+
+    @Bean
+    public StringToEntityConverter identificationTypeConverter() {
+            return new StringToEntityConverter(IdentificationType.class);
+    }
+
+//    @Bean
+//    public StringToEntityConverter categoryConverter() {
+//            return new StringToEntityConverter(Category.class);
+//    }
+    
+  
 }
