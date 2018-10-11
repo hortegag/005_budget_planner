@@ -101,14 +101,14 @@
 
     <view-state
         id="confirmCreateEntity"
-        view="#{directorio}/identificationTypeConfirmCreate"
+        view="#{directorio}/peopleConfirmCreate"
         model="identificationType">
 
 
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.save(flowScope.identificationType)" />
+            <evaluate expression="servicio.save(flowScope.people)" />
             <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         </transition>
 

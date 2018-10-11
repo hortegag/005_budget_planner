@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +41,7 @@ public class People implements Serializable {
     private String             email;
 
     @Column(name = "born_date")
+    @DateTimeFormat(pattern = "MM-dd-yyyy")
     private LocalDate          bornDate;
 
     private String             identification;

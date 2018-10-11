@@ -18,13 +18,13 @@ public class StringToEntityConverter implements GenericConverter {
 
     private final Class<?> clazz;
 
-    @PersistenceContext
+    //@PersistenceContext
     
-    private EntityManager em;
+    //private EntityManager em;
     
     
-    //@Autowired
-    //EntityManager em;
+    @Autowired
+    EntityManager em;
     
 
     public StringToEntityConverter(Class<?> clazz) {

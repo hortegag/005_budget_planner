@@ -40,11 +40,11 @@ public class PeopleRepositoryImpl implements PeopleDAO {
     @Override
     public People save(People entity) {
 
-        if (entity.getId() == null) {
-            em.persist(entity);
-        } else {
+        //if (entity.getId() == null) {
+        //    em.persist(entity);
+        //} else {
             em.merge(entity);
-        }
+        //}
         return entity;
     }
 
