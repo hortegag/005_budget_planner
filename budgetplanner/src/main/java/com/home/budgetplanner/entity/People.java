@@ -41,7 +41,7 @@ public class People implements Serializable {
     private String             email;
 
     @Column(name = "born_date")
-    @DateTimeFormat(pattern = "MM-dd-yyyy")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate          bornDate;
 
     private String             identification;

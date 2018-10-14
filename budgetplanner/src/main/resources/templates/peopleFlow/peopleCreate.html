@@ -17,6 +17,8 @@
     th:src="@{/resources/spring/Spring-Dojo.js}"></script>
     
      -->
+
+
 </head>
 <body>
     <div layout:fragment="content">
@@ -214,6 +216,33 @@
                 </div>
             </div>
         </div>
+
+     
+        <div class="wrapper">
+
+            <p>
+                Date:
+                <input
+                    type="text"
+                    id="datepicker"
+                    class="form-control">
+            </p>
+
+
+        </div>
+
+        <script type="text/javascript">
+									$(function() {
+										console.log('ttttttttt');
+										$('#bornDate').datepicker({
+											dateFormat : 'dd-mm-yy',
+											changeYear : true
+										});
+										//$("#datepicker").datepicker();
+
+									});
+								</script>
+
         <!-- enable to test ajax -->
         <!--
         <form
@@ -306,7 +335,7 @@
 
 									});
 								</script>
-                                -->
+-->
     </div>
 </body>
 </html>
