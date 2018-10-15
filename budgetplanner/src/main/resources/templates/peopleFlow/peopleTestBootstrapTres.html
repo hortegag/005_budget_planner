@@ -111,6 +111,7 @@
 
         <form
             action="#"
+            th:action="${flowExecutionUrl}"
             method="post">
             <input
                 id="addPeople"
@@ -118,6 +119,7 @@
                 name="_eventId_add"
                 type="submit"
                 th:value="#{people.list.add.button}"></input>
+          
         </form>
 
         <div

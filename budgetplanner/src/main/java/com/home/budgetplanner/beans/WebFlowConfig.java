@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.springframework.webflow.config.AbstractFlowConfiguration;
 import org.springframework.webflow.mvc.builder.MvcViewFactoryCreator;
+import org.springframework.webflow.security.SecurityFlowExecutionListener;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 
 import org.springframework.web.servlet.ViewResolver;
@@ -39,7 +40,7 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
 
     @Bean
     public FlowExecutor flowExecutor() {
-        return getFlowExecutorBuilder(flowRegistry()).build();
+        return getFlowExecutorBuilder(flowRegistry()).addFlowExecutionListener(new SecurityFlowExecutionListener()).build();
     }
 
     @Bean
@@ -47,8 +48,8 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
 
         DefaultConversionService webFlowConversionService = new DefaultConversionService(this.conversionService);
 
-       // webFlowConversionService.addConverter(new StringToNullConverter());
-       // webFlowConversionService.addConverter(this.webMvcConfig.i);
+        // webFlowConversionService.addConverter(new StringToNullConverter());
+        // webFlowConversionService.addConverter(this.webMvcConfig.i);
 
         return getFlowBuilderServicesBuilder().setViewFactoryCreator(mvcViewFactoryCreator()).setConversionService(webFlowConversionService)
                 .setDevelopmentMode(true).build();

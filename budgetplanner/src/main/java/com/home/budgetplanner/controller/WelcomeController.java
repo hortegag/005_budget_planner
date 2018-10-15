@@ -22,4 +22,10 @@ public class WelcomeController {
                 return "welcome";
         }
 
+        
+        @RequestMapping("/")
+        public String index(Map<String, Object> model) {
+                model.put("message", this.message);
+                return "welcome";
+        }
 }
