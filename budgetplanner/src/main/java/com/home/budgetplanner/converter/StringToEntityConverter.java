@@ -42,6 +42,8 @@ public class StringToEntityConverter implements GenericConverter {
 
     @Override
     public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
+        
+        
         if (String.class.equals(sourceType.getType())) {
             if (StringUtils.isBlank((String) source)) {
                 return null;

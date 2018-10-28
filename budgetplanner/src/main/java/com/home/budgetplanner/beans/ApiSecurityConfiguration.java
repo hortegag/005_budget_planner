@@ -8,18 +8,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
-@Order(1)
+//temporary disable becase cause problems with StringtoEntityConverter
+//https://github.com/spring-projects/spring-security/issues/4202
+//@Configuration
+//@Order(2)
 public class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    public void configureAuth(AuthenticationManagerBuilder auth)
-            throws Exception {
-               auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}user").roles("USER").and()
-                .withUser("userflow").password("{noop}userflow").roles("USER","FLOWS").and()                
-                .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
-    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

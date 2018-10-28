@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
@@ -40,6 +41,8 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @EnableWebMvc
 @EnableSpringDataWebSupport
 @Configuration
+@Order(1)
+
 public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvcConfigurer {
 
     @Autowired
@@ -107,7 +110,7 @@ public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvc
     @Bean
     public FlowHandlerMapping flowHandlerMapping() {
         FlowHandlerMapping handlerMapping = new FlowHandlerMapping();
-        handlerMapping.setOrder(-1);
+        handlerMapping.setOrder(0);
 
         // se agrega locale interceptor
         handlerMapping.setInterceptors(new Object[] { localeChangeInterceptor });
@@ -226,6 +229,7 @@ public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvc
     
     
     @Override
+    @Order(1)
     public void addFormatters(FormatterRegistry registry) {
         
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -238,6 +242,7 @@ public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvc
     
 
     @Bean
+    @Order(1)
     public StringToEntityConverter identificationTypeConverter() {
             return new StringToEntityConverter(IdentificationType.class);
     }

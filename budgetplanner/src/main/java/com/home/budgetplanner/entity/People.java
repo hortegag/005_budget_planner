@@ -45,6 +45,10 @@ public class People implements Serializable {
     private LocalDate          bornDate;
 
     private String             identification;
+    
+    private String username;
+    private String password;
+    private String enabled;
 
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "id_identification_type")

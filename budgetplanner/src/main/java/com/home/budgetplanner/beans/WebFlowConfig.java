@@ -3,6 +3,7 @@ package com.home.budgetplanner.beans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.binding.convert.service.DefaultConversionService;
 
@@ -22,6 +23,7 @@ import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 import org.springframework.web.servlet.ViewResolver;
 
 @Configuration
+@Order(1)
 public class WebFlowConfig extends AbstractFlowConfiguration {
 
     @Autowired
