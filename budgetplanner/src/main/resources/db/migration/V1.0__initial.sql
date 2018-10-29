@@ -101,7 +101,7 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 -- object: public.roles | type: TABLE --
 -- DROP TABLE IF EXISTS public.roles CASCADE;
 CREATE TABLE public.roles(
-	id_rol smallint NOT NULL,
+	id_rol bigint NOT NULL,
 	name varchar(100),
 	description varchar(500),
 	CONSTRAINT options_pk PRIMARY KEY (id_rol)
@@ -114,9 +114,8 @@ CREATE TABLE public.roles(
 CREATE TABLE public.groups_roles(
 	id_group_rol bigint,
 	id_group bigint,
-	id_rol smallint
+	id_rol bigint
 );
-
 
 -- object: roles_fk | type: CONSTRAINT --
 -- ALTER TABLE public.groups_roles DROP CONSTRAINT IF EXISTS roles_fk CASCADE;
@@ -124,3 +123,25 @@ ALTER TABLE public.groups_roles ADD CONSTRAINT roles_fk FOREIGN KEY (id_rol)
 REFERENCES public.roles (id_rol) 
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
+
+
+insert into groups values (4000,'USERS','Users of the application');
+insert into groups values (4001,'ADMINS','Admins of the application');
+
+insert into roles values (5000,'ROLE_USER','Role of the users ');
+insert into roles values (5001,'ROLE_ADMIN','Role of the administrators');
+
+insert into groups_roles values (6000,4000,5000);
+insert into groups_roles values (6002,4001,5001);
+
+--dsmith
+insert into users_groups values (7002,4000,2004);
+--hortega
+insert into users_groups values (7001,4001,2003);
+
+
+
+
+
+
+
