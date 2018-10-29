@@ -19,8 +19,10 @@ import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.controller.form.PeopleDTOGrid;
 import com.home.budgetplanner.controller.form.PeopleGrid;
 import com.home.budgetplanner.controller.form.SearchPeopleForm;
+import com.home.budgetplanner.entity.Groups;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
+import com.home.budgetplanner.service.GroupService;
 import com.home.budgetplanner.service.IdentificationTypeService;
 import com.home.budgetplanner.service.PeopleService;
 import com.home.budgetplanner.utils.PageWrapper;
@@ -39,13 +41,16 @@ import com.google.common.collect.Lists;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private static final Logger logger = LogManager.getLogger(BudgetplannerApplication.class);
+    private static final Logger       logger = LogManager.getLogger(BudgetplannerApplication.class);
 
     @Autowired
-    private PeopleService       peopleService;
-    
+    private PeopleService             peopleService;
+
     @Autowired
     private IdentificationTypeService identificationTypeService;
+    
+    @Autowired
+    private GroupService groupService;
 
     @ResponseBody
     @RequestMapping(value = "/listgrid", method = RequestMethod.GET, produces = "application/json")
@@ -278,10 +283,16 @@ public class PeopleController {
     }
 
     public List<IdentificationType> initializeSelectableIdentificationTypes() {
-        
+
         return identificationTypeService.findAll();
-        
-        
+
+    }
+
+    public List<Groups> initializeSelectableGroup() {
+
+        return groupService.findAllOrderByIdAsc();
+        // selectableGroup
+
     }
 
     /*

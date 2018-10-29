@@ -6,9 +6,11 @@
         http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
     start-state="list">
-    
-    <secured attributes="ROLE_FLOWS" match="any" />
-    
+
+    <secured
+        attributes="ROLE_FLOWS"
+        match="any" />
+
 
     <var
         name="servicio"
@@ -78,6 +80,11 @@
             <evaluate
                 expression="peopleController.initializeSelectableIdentificationTypes()"
                 result="flashScope.selectableIdentificationTypes" />
+            <evaluate
+                expression="peopleController.initializeSelectableGroup()"
+                result="flashScope.selectableGroup" />
+
+            
         </on-render>
 
         <transition

@@ -31,7 +31,7 @@ public class Groups implements Serializable {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     @Column(name = "id_group")
-    private String id;
+    private Long id;
     private String name;
     private String description;
     

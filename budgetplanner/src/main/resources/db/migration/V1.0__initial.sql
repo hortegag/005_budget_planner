@@ -83,11 +83,8 @@ CREATE TABLE public.groups(
 );
 
 CREATE TABLE public.users_groups(
-	id_user_group bigint NOT NULL,
 	id_group bigint,
-	id_person bigint,
-	CONSTRAINT users_groups_pk PRIMARY KEY (id_user_group)
-
+	id_person bigint
 );
 
 -- object: groups_fk | type: CONSTRAINT --
@@ -112,10 +109,16 @@ CREATE TABLE public.roles(
 -- object: public.groups_roles | type: TABLE --
 -- DROP TABLE IF EXISTS public.groups_roles CASCADE;
 CREATE TABLE public.groups_roles(
-	id_group_rol bigint,
 	id_group bigint,
 	id_rol bigint
 );
+
+-- object: groups_fk | type: CONSTRAINT --
+-- ALTER TABLE public.groups_roles DROP CONSTRAINT IF EXISTS groups_fk CASCADE;
+ALTER TABLE public.groups_roles ADD CONSTRAINT groups_roles_group_fk FOREIGN KEY (id_group)
+REFERENCES public.groups (id_group) 
+ON DELETE SET NULL ON UPDATE CASCADE;
+-- ddl-end --
 
 -- object: roles_fk | type: CONSTRAINT --
 -- ALTER TABLE public.groups_roles DROP CONSTRAINT IF EXISTS roles_fk CASCADE;
@@ -131,16 +134,13 @@ insert into groups values (4001,'ADMINS','Admins of the application');
 insert into roles values (5000,'ROLE_USER','Role of the users ');
 insert into roles values (5001,'ROLE_ADMIN','Role of the administrators');
 
-insert into groups_roles values (6000,4000,5000);
-insert into groups_roles values (6002,4001,5001);
+insert into groups_roles values (4000,5000);
+insert into groups_roles values (4001,5001);
 
 --dsmith
-insert into users_groups values (7002,4000,2004);
+insert into users_groups values (4000,2004);
 --hortega
-insert into users_groups values (7001,4001,2003);
-
-
-
+insert into users_groups values (4001,2003);
 
 
 

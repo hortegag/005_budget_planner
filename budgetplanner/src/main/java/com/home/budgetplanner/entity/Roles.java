@@ -30,7 +30,7 @@ public class Roles implements Serializable {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     @Column(name = "id_rol")
-    private String id;
+    private Long id;
     private String name;
     private String description;
     
