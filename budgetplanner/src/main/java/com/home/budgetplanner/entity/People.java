@@ -2,6 +2,7 @@ package com.home.budgetplanner.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -53,5 +56,19 @@ public class People implements Serializable {
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "id_identification_type")
     private IdentificationType identificationType;
+    
+    
+    
+    
+    
+    @ManyToMany
+    @JoinTable( 
+        name = "users_groups", 
+        joinColumns = @JoinColumn (
+          name = "id_person"), 
+        inverseJoinColumns = @JoinColumn(
+          name = "id_group")) 
+    private Collection<Groups> groups;
+    
 
 }
