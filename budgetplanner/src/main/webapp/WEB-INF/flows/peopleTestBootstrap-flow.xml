@@ -8,7 +8,7 @@
     start-state="list">
 
     <secured
-        attributes="ROLE_FLOWS"
+        attributes="ROLE_ADMIN"
         match="any" />
 
 

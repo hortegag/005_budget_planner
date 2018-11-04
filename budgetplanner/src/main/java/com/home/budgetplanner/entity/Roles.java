@@ -18,6 +18,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity()
 @Data()
@@ -34,7 +35,7 @@ public class Roles implements Serializable {
     private String name;
     private String description;
     
-    
+    @ToString.Exclude
     @ManyToMany
     @JoinTable( 
         name = "groups_roles", 

@@ -19,5 +19,7 @@ public interface PagingPeopleRepository extends PagingAndSortingRepository<Peopl
     // List<People> findAll();
 
     Page<People> findByNameOrLastName(String name, String lastName, Pageable pageable);
+    
+    People findByUsername(String username);
 
 }

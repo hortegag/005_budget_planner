@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity()
 @Data()
@@ -52,7 +53,18 @@ public class People implements Serializable {
     private String username;
     private String password;
     private String enabled;
+    
+    
+    public boolean isEnable(){
+        
+        if (this.getEnabled()!=null && this.getEnabled().equals("Y")){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    @ToString.Exclude
     @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "id_identification_type")
     private IdentificationType identificationType;
