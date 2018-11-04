@@ -371,7 +371,7 @@ cursor: pointer;
                     <li
                         sec:authorize="isAuthenticated()"
                         class="nav-item">
-                        <a class="nav-link">Welcome User</a>
+                        <a class="nav-link">Welcome <span sec:authentication="name">Bob</span> </a>
                     </li>
 
                     <li
