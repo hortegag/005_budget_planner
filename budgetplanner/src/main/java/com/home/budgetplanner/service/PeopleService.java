@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
+import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
 
 public interface PeopleService extends BaseService<People, Long> {
@@ -19,5 +20,6 @@ public interface PeopleService extends BaseService<People, Long> {
     public Page<PeopleDTO> findPeopleByNameOrLastNamePage(String name, String lastName, Pageable pageable);
 
     public Page<PeopleDTO> findAllPeopleByPage(Pageable pageable);
-
+    
+    public People findByIdentificationAndIdentificationType(String identification, IdentificationType identificationType);
 }

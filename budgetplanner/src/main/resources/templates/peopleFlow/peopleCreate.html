@@ -76,7 +76,9 @@
                             <select
                                 id="identificationType"
                                 th:field="*{identificationType}"
-                                class="custom-select">
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{identificationType}')} ? is-invalid"
+                                >
                                 <option
                                     th:each="type : ${selectableIdentificationTypes}"
                                     th:value="${type.id}"
@@ -224,7 +226,7 @@
                                 for="password"
                                 th:text="#{people.entity.password}">Password label:</label>
                             <input
-                                type="text"
+                                type="password"
                                 th:field="*{password}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('password')} ? is-invalid"
@@ -306,7 +308,7 @@
             </div>
         </div>
 
-
+<!-- 
         <div class="wrapper">
 
             <p>
@@ -319,7 +321,7 @@
 
 
         </div>
-
+ -->
         <script type="text/javascript">
 									$(function() {
 										console.log('ttttttttt');

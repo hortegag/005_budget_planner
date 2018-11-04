@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
 
 public interface PagingPeopleRepository extends PagingAndSortingRepository<People, Long> {
@@ -21,5 +22,8 @@ public interface PagingPeopleRepository extends PagingAndSortingRepository<Peopl
     Page<People> findByNameOrLastName(String name, String lastName, Pageable pageable);
     
     People findByUsername(String username);
+    
+    People findByIdentificationAndIdentificationType(String identification,IdentificationType identificationType);
+
 
 }

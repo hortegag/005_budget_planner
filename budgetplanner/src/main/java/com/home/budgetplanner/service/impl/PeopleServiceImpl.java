@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.home.budgetplanner.BudgetplannerApplication;
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
+import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.repository.PagingPeopleRepository;
 import com.home.budgetplanner.repository.PeopleDAO;
@@ -26,29 +27,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PeopleServiceImpl implements PeopleService, Serializable {
 
-    private static final Logger logger = LogManager.getLogger(PeopleServiceImpl.class);
+    private static final Logger              logger = LogManager.getLogger(PeopleServiceImpl.class);
 
     @Autowired
     private transient PeopleDAO              peopleDAO;
 
     @Autowired
     private transient PagingPeopleRepository pagingPeopleRepository;
-    
-    
-    
+
     @Autowired
-    private transient PasswordEncoder  passwordEncoder;
+    private transient PasswordEncoder        passwordEncoder;
 
     @Override
     public People findById(Long id) {
-        
-        logger.info(">>>>>>>>>>>>>>>>>>>>>> se realiza la consulta por id "+id);
+
+        logger.info(">>>>>>>>>>>>>>>>>>>>>> se realiza la consulta por id " + id);
         // TODO Auto-generated method stub
         return peopleDAO.findById(id);
     }
+
     public People findByTestId(Long id) {
-        
-        logger.info("fffffffffffffffffffffffff se realiza la consulta por id "+id);
+
+        logger.info("fffffffffffffffffffffffff se realiza la consulta por id " + id);
         // TODO Auto-generated method stub
         return peopleDAO.findById(id);
     }
@@ -61,9 +61,9 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
 
     @Override
     public People save(People entity) {
-        
+
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
-        
+
         return peopleDAO.save(entity);
     }
 
@@ -126,6 +126,12 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
             results.add(PeopleDTO.build(people));
         }
         return results;
+    }
+
+    public People findByIdentificationAndIdentificationType(String identification, IdentificationType identificationType) {
+
+        return pagingPeopleRepository.findByIdentificationAndIdentificationType(identification, identificationType);
+
     }
 
 }
