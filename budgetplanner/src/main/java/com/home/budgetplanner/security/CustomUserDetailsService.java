@@ -38,25 +38,32 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         People people = pagingPeopleRepository.findByUsername(username);
 
-        if (people != null) {
-            System.out.println("------------------------------->people" + people.toString());
-        } else {
-            System.out.println("nnot found");
-
-        }
-
-        System.out.println("----------------------------------" + getAuthorities(people.getGroups()));
-
-        UserBuilder builder = null;
-        if (people != null) {
-            builder = org.springframework.security.core.userdetails.User.withUsername(username);
-            builder.password((people.getPassword()));
-            
-            builder.roles("ADMIN","FLOWS");
-            
-        }
+//        if (people != null) {
+//            System.out.println("------------------------------->people" + people.toString());
+//        } else {
+//            System.out.println("nnot found");
+//
+//        }
+//
+//        
+//        
+//        
+//        System.out.println("----------------------------------" + getAuthorities(people.getGroups()));
+//
+//        UserBuilder builder = null;
+//        if (people != null) {
+//            builder = org.springframework.security.core.userdetails.User.withUsername(username);
+//            builder.password((people.getPassword()));
+//            
+//            builder.roles("ADMIN","FLOWS");
+//            
+//        }
+//        
+//        
         
-        
+        if (people == null) {
+            throw new UsernameNotFoundException("Invalid username/password.");
+        }
 
 //        return  builder.build();// new User
 
