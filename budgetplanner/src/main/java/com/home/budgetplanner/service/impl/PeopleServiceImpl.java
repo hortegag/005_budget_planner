@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.home.budgetplanner.BudgetplannerApplication;
@@ -19,6 +20,7 @@ import com.home.budgetplanner.service.PeopleService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -31,6 +33,11 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
 
     @Autowired
     private transient PagingPeopleRepository pagingPeopleRepository;
+    
+    
+    
+    @Autowired
+    private transient PasswordEncoder  passwordEncoder;
 
     @Override
     public People findById(Long id) {
@@ -54,6 +61,9 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
 
     @Override
     public People save(People entity) {
+        
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        
         return peopleDAO.save(entity);
     }
 
