@@ -25,6 +25,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.spring5.webflow.view.AjaxThymeleafViewResolver;
@@ -38,6 +39,8 @@ import com.home.budgetplanner.entity.Groups;
 import com.home.budgetplanner.entity.IdentificationType;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
+
+
 
 @EnableWebMvc
 @EnableSpringDataWebSupport
@@ -181,6 +184,8 @@ public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvc
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.addDialect(new SpringSecurityDialect());
+
         templateEngine.addDialect(new LayoutDialect());
 
         return templateEngine;

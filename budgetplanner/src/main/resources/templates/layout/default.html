@@ -42,7 +42,7 @@
     th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.css}" />    
     
      -->
-    
+
 
 <link
     rel="stylesheet"
@@ -97,7 +97,6 @@ code {
 	font-size: 80%;
 }
 
-
 /*
 How to use fontawesome in other elements than i
 https://github.com/FortAwesome/Font-Awesome/issues/11946
@@ -127,7 +126,6 @@ http://astronautweb.co/snippet/font-awesome/
 Bootstrap-4-Cookbook
 Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 */
-
 .ui-datepicker {
 	background-color: #fff;
 	border: 1px solid #66AFE9;
@@ -164,8 +162,7 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
 	cursor: default;
-	
-    font-family: 'Font Awesome 5 Free';
+	font-family: 'Font Awesome 5 Free';
 	-webkit-font-smoothing: antialiased;
 	font-style: normal;
 	font-weight: normal;
@@ -174,8 +171,7 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 	margin-top: 2px;
 	width: 20px;
 	color: #999;
-    font-weight: 900;
-    
+	font-weight: 900;
 }
 
 .ui-datepicker .ui-datepicker-prev {
@@ -189,8 +185,7 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 }
 
 .ui-datepicker .ui-datepicker-prev:before {
-
-    content: "\f060";
+	content: "\f060";
 }
 
 .ui-datepicker .ui-datepicker-next:before {
@@ -223,12 +218,10 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 	transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
-.ui-datepicker .ui-datepicker-calendar td:hover:not (.ui-datepicker-current-day
-	) {
-	background-color: #eee;
-	cursor: pointer;
+.ui-datepicker ui-datepicker-calendar td :hover :not (.ui-datepicker-current-day){
+background-color: #eee;
+cursor: pointer;
 }
-
 .ui-datepicker .ui-datepicker-calendar td a {
 	text-decoration: none;
 	color: #000;
@@ -369,7 +362,36 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
                                 th:href="@{'~'+${flowExecutionUrl}(lang=en)}"
                                 th:text="#{lang.eng}">english</a>
                         </div>
+
+
+
                     </li>
+
+
+                    <li
+                        sec:authorize="isAuthenticated()"
+                        class="nav-item">
+                        <a class="nav-link">Welcome User</a>
+                    </li>
+
+                    <li
+                        sec:authorize="isAuthenticated()"
+                        class="nav-item">
+                        <a
+                            id="logout"
+                            class="nav-link"
+                            href="#">Logout</a>
+
+                        <form
+                            id="logout-form"
+                            th:action="@{/logout}"
+                            method="POST"
+                            hidden="true"></form>
+                    </li>
+
+
+
+
                 </ul>
 
 
@@ -417,7 +439,16 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 
 
     <script type="text/javascript">
-					$(".dropdown-button").dropdown();
+					//$(".dropdown-button").dropdown();
+
+					$(document).ready(function() {
+
+						$("#logout").click(function(e) {
+							e.preventDefault();
+							$("#logout-form").submit();
+						});
+
+					});
 				</script>
 </body>
 </html>

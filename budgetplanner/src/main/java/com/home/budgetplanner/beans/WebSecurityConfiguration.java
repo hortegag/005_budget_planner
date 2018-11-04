@@ -29,17 +29,19 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .defaultSuccessUrl("/welcome")
-                .and()
-                .logout().logoutSuccessUrl("/login")
+                
                 .and()
                 .authorizeRequests()
                 .antMatchers("/webjars/**", "/login").permitAll()
+                .antMatchers("/logout").permitAll()
                 //.antMatchers("/identificationTypeFlow/**").hasRole("USER") 
                 //.antMatchers("/budgetplanner/**").hasRole("USER") 
                 //.antMatchers("/peopleTestBootstrap-flow/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout=true").permitAll()
                 //.failureUrl("/login-error")
                 ;
     }
