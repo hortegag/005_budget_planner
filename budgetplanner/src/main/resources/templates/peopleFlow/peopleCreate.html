@@ -45,7 +45,7 @@
                 </div>
                 <div class="card-body">
                     <form
-                        action=""
+                        id="formPeople"
                         th:object="${people}"
                         th:action="${flowExecutionUrl}"
                         method="post"
@@ -77,8 +77,7 @@
                                 id="identificationType"
                                 th:field="*{identificationType}"
                                 class=" custom-select form-control"
-                                th:classappend="${#fields.hasErrors('*{identificationType}')} ? is-invalid"
-                                >
+                                th:classappend="${#fields.hasErrors('*{identificationType}')} ? is-invalid">
                                 <option
                                     th:each="type : ${selectableIdentificationTypes}"
                                     th:value="${type.id}"
@@ -211,11 +210,11 @@
                                 th:field="*{username}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('username')} ? is-invalid"
-                                id="bornDate"
+                                id="username"
                                 th:placeholder="#{people.entity.username.placeholder}" />
                             <p
                                 th:if="${#fields.hasErrors('username')}"
-                                th:errors="*{bornDate}"
+                                th:errors="*{username}"
                                 class="invalid-feedback">username Error</p>
                         </div>
 
@@ -230,11 +229,11 @@
                                 th:field="*{password}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('password')} ? is-invalid"
-                                id="bornDate"
+                                id="password"
                                 th:placeholder="#{people.entity.password.placeholder}" />
                             <p
                                 th:if="${#fields.hasErrors('password')}"
-                                th:errors="*{bornDate}"
+                                th:errors="*{password}"
                                 class="invalid-feedback">password Error</p>
                         </div>
 
@@ -243,8 +242,8 @@
                             <label
                                 for="enabled"
                                 th:text="#{people.entity.enabled}">Enabled label:</label>
-                                
-                                
+
+
                             <select
                                 id="identificationType"
                                 th:field="*{enabled}"
@@ -276,7 +275,9 @@
                                 id="groups"
                                 th:field="*{groups}"
                                 multiple="multiple"
-                                class="custom-select">
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid">
+
                                 <option
                                     th:each="type : ${selectableGroup}"
                                     th:value="${type.id}"
@@ -308,7 +309,7 @@
             </div>
         </div>
 
-<!-- 
+        <!-- 
         <div class="wrapper">
 
             <p>
@@ -327,6 +328,8 @@
 										console.log('ttttttttt');
 										$('#bornDate').datepicker({
 											dateFormat : 'dd-mm-yy',
+                                            yearRange: '-120:+0',
+                                            changeMonth: true,
 											changeYear : true
 										});
 										//$("#datepicker").datepicker();

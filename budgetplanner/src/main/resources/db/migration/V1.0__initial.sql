@@ -43,10 +43,10 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 
 
 
-insert into identification_type values (1001,'Cedula','CI','Cedula de Identidad de la persona');
+insert into identification_type values (1001,'Identification','IC','Identification Card of the person');
 
 insert into identification_type values (1002,'Dummy','DM','Dummy Identification');
-insert into identification_type values (1003,'Pasaporte','PS','Pasaporte de la persona');
+insert into identification_type values (1003,'Passport','PS','Pasaporte de la persona');
 
 
 insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y',1001);

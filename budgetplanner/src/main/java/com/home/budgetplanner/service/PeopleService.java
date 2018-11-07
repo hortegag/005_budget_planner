@@ -22,4 +22,10 @@ public interface PeopleService extends BaseService<People, Long> {
     public Page<PeopleDTO> findAllPeopleByPage(Pageable pageable);
     
     public People findByIdentificationAndIdentificationType(String identification, IdentificationType identificationType);
+    
+    
+    public People findByUsername(String username);
+
+    
+    
 }

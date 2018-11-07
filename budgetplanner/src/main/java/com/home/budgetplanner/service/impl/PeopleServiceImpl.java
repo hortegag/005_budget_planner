@@ -133,5 +133,11 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
         return pagingPeopleRepository.findByIdentificationAndIdentificationType(identification, identificationType);
 
     }
+    
+    @Override
+    public People findByUsername(String username){
+        return pagingPeopleRepository.findByUsername(username);
+
+    }
 
 }
