@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.persistence.Tuple;
 
@@ -165,13 +167,29 @@ public class PeopleValidator /* implements Validator */ {
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
         } else {
             people.setEmail(people.getEmail().toLowerCase());
+            
+            
+            
+            Pattern p = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+            Matcher m = p.matcher(people.getEmail());
+
+            if (!m.find()) {
+            
+
+           // if (!people.getPassword().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("email");
+                errorMessageBuilder.code("error.people.emailPattern");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
 
         }
 
         if (people.getBornDate() == null) {
-            
-            logger.info("ffffffffffffffffffffffffffffffffffff");
 
+            logger.info("ffffffffffffffffffffffffffffffffffff");
 
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("bornDate");
@@ -179,14 +197,11 @@ public class PeopleValidator /* implements Validator */ {
 
             errorMessageBuilder.resolvableArg("Born Date");
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-            
-            
-            
+
         } else {
 
-            
             logger.info("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-            
+
             // fixme: handle typemissMatch problem
             LocalDate today = LocalDate.now();
             today = today.minus(18, ChronoUnit.YEARS);
@@ -214,12 +229,9 @@ public class PeopleValidator /* implements Validator */ {
         } else {
 
             people.setUsername(people.getUsername().toLowerCase());
-            
-            
+
             People peopleDao = peopleService.findByUsername(people.getUsername());
-            
-            
-            
+
             if (peopleDao != null) {
 
                 MessageBuilder errorMessageBuilder = new MessageBuilder().error();
@@ -228,11 +240,6 @@ public class PeopleValidator /* implements Validator */ {
                 validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
 
             }
-            
-            
-            
-
-
         }
 
         if (StringUtils.isBlank(people.getPassword())) {
@@ -244,8 +251,37 @@ public class PeopleValidator /* implements Validator */ {
             errorMessageBuilder.resolvableArg("Password");
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
         } else {
-            people.setPassword(people.getPassword().toLowerCase());
-            
+            // people.setPassword(people.getPassword().toLowerCase());
+
+//            if (!people.getPassword().matches("\\Q^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$\\E")) {
+//
+//                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+//                errorMessageBuilder.source("password");
+//                errorMessageBuilder.code("error.people.passwordPattern");
+//                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+//
+//            }
+
+            Pattern p = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$");
+            Matcher m = p.matcher(people.getPassword());
+
+            if (!m.find()) {
+                
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("password");
+                errorMessageBuilder.code("error.people.passwordPattern");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+            //
+            // Pattern p =
+            // Pattern.compile("\\Q^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$\\E");
+            // Matcher m = p.matcher(people.getPassword());
+            //
+            // if (m.matches()){
+            //
+            // }
 
         }
 
