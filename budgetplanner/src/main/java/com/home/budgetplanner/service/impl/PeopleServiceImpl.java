@@ -139,5 +139,27 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
         return pagingPeopleRepository.findByUsername(username);
 
     }
+    
+    
+    public People findByIdentificationAndIdentificationTypeAndIdNot(String identification, IdentificationType identificationType, Long id) {
+        return pagingPeopleRepository.findByIdentificationAndIdentificationTypeAndIdNot(identification, identificationType, id);
+
+    }
+    
+    
+    public People findByEmail(String email){
+        return pagingPeopleRepository.findByEmail(email);
+    }
+
+    public People findByEmailAndIdNot(String email, Long id){
+        return pagingPeopleRepository.findByEmailAndIdNot(email, id);
+    }
+    
+    public People findByUsernameAndIdNot(String username, Long id){
+                
+        return pagingPeopleRepository.findByUsernameAndIdNot(username, id);
+
+    }
+    
 
 }

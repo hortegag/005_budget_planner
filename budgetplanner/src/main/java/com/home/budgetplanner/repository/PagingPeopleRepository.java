@@ -24,6 +24,17 @@ public interface PagingPeopleRepository extends PagingAndSortingRepository<Peopl
     People findByUsername(String username);
     
     People findByIdentificationAndIdentificationType(String identification,IdentificationType identificationType);
+    
+    People findByIdentificationAndIdentificationTypeAndIdNot(String identification, IdentificationType identificationType, Long id);
+    
+    
+    People findByEmail(String email);
+
+    People findByEmailAndIdNot(String email, Long id);
+    
+    
+    People findByUsernameAndIdNot(String username, Long id);
+
 
 
 }

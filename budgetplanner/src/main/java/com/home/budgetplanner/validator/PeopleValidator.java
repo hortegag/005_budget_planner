@@ -27,6 +27,7 @@ import org.springframework.webflow.execution.Event;
 import com.home.budgetplanner.BudgetplannerApplication;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
+import com.home.budgetplanner.repository.PagingPeopleRepository;
 import com.home.budgetplanner.service.IdentificationTypeService;
 import com.home.budgetplanner.service.PeopleService;
 
@@ -167,22 +168,36 @@ public class PeopleValidator /* implements Validator */ {
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
         } else {
             people.setEmail(people.getEmail().toLowerCase());
-            
-            
-            
+
             Pattern p = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
             Matcher m = p.matcher(people.getEmail());
 
             if (!m.find()) {
-            
 
-           // if (!people.getPassword().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+                // if
+                // (!people.getPassword().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"))
+                // {
 
                 MessageBuilder errorMessageBuilder = new MessageBuilder().error();
                 errorMessageBuilder.source("email");
                 errorMessageBuilder.code("error.people.emailPattern");
                 validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
 
+            } else {
+                
+                People peopleDao = peopleService.findByEmail(people.getEmail());
+                
+                
+                if (peopleDao != null) {
+
+                    MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                    errorMessageBuilder.source("email");
+                    errorMessageBuilder.code("error.people.duplicateEmail");
+                    validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+                }
+                
+                
+                
             }
 
         }
@@ -253,20 +268,23 @@ public class PeopleValidator /* implements Validator */ {
         } else {
             // people.setPassword(people.getPassword().toLowerCase());
 
-//            if (!people.getPassword().matches("\\Q^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$\\E")) {
-//
-//                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-//                errorMessageBuilder.source("password");
-//                errorMessageBuilder.code("error.people.passwordPattern");
-//                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-//
-//            }
+            // if
+            // (!people.getPassword().matches("\\Q^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$\\E"))
+            // {
+            //
+            // MessageBuilder errorMessageBuilder = new
+            // MessageBuilder().error();
+            // errorMessageBuilder.source("password");
+            // errorMessageBuilder.code("error.people.passwordPattern");
+            // validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            //
+            // }
 
             Pattern p = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$");
             Matcher m = p.matcher(people.getPassword());
 
             if (!m.find()) {
-                
+
                 MessageBuilder errorMessageBuilder = new MessageBuilder().error();
                 errorMessageBuilder.source("password");
                 errorMessageBuilder.code("error.people.passwordPattern");
@@ -335,26 +353,26 @@ public class PeopleValidator /* implements Validator */ {
 
     }
 
-    public void validateEditEntityWithOutReturn(IdentificationType identificationType, ValidationContext validationContext) {
+    public void validateEditEntity(People people, ValidationContext validationContext) {
 
         // This one is being called automatically by spring web flow
         logger.info(" Se realiza la validacion");
 
-        logger.info("vlor del id:" + identificationType.getId());
+        logger.info("vlor del id:" + people.getId());
 
-        IdentificationType identificationTypeOnDataBase = identificationTypeService.findById(identificationType.getId());
+        People peopleOnDataBase = peopleService.findById(people.getId());
 
-        logger.info("test " + identificationType.toString());
+        logger.info("test " + peopleService.toString());
 
-        logger.info("from database " + identificationTypeOnDataBase.toString());
+        logger.info("from database " + peopleOnDataBase.toString());
 
-        if (identificationTypeOnDataBase.equals(identificationType)) {
+        if (peopleOnDataBase.equals(people)) {
             // logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
 
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
             errorMessageBuilder.source("global");
 
-            errorMessageBuilder.code("error.identificationType.noChangesEntity");
+            errorMessageBuilder.code("error.people.noChangesEntity");
 
             // errorMessageBuilder.resolvableArg("Identification name");
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
@@ -363,221 +381,227 @@ public class PeopleValidator /* implements Validator */ {
             // MessageBuilder().error().defaultText("No room is available at
             // this hotel").build());
 
-            validationContext.getMessageContext().addMessage(new MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
+            // validationContext.getMessageContext().addMessage(new
+            // MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
 
             return;
         }
 
-        if (StringUtils.isBlank(identificationType.getName())) {
+        if (StringUtils.isBlank(people.getIdentification())) {
 
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-
-            errorMessageBuilder.source("name");
+            errorMessageBuilder.source("identification");
             errorMessageBuilder.code("error.required");
 
-            errorMessageBuilder.resolvableArg("Identification name");
-            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-
-        } else {
-            logger.info("++++++++++++++++++++++++++++++++ingreso a la validacion");
-
-            identificationType.setName(StringUtils.capitalize(identificationType.getName().toLowerCase()));
-
-            // List<IdentificationType> identifications =
-            // identificationTypeService.findByName(identificationType.getName(),
-            // 1, 1);
-            //
-            // if (identifications != null && identifications.size() != 0) {
-            //
-            // MessageBuilder errorMessageBuilder = new
-            // MessageBuilder().error();
-            // errorMessageBuilder.source("name");
-            // errorMessageBuilder.code("error.identificationType.duplicateName");
-            // validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-            // }
-
-            IdentificationType identificationTypeToQuery = new IdentificationType();
-            identificationTypeToQuery.setName(identificationType.getName());
-
-            // List<Tuple> identifications =
-            // identificationTypeService.findByIdentificationType(identificationType,
-            // 1, 1);
-
-            List<Tuple> identifications = identificationTypeService.findByIdentificationType(identificationTypeToQuery, 1, 1);
-            // List<IdentificationType> identifications =
-            // identificationTypeService.findByName(identificationType.getName(),
-            // 1, 1);
-
-            if (identifications != null && identifications.size() != 0) {
-
-                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-                errorMessageBuilder.source("name");
-                errorMessageBuilder.code("error.identificationType.duplicateName");
-                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-            }
-
-        }
-
-        if (StringUtils.isBlank(identificationType.getMnemonic())) {
-
-            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("mnemonic");
-            errorMessageBuilder.code("error.required");
-            errorMessageBuilder.resolvableArg("Identification mnemonic");
+            errorMessageBuilder.resolvableArg("Identification");
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
 
         } else {
 
-            identificationType.setMnemonic(identificationType.getMnemonic().toUpperCase());
+            people.setIdentification((people.getIdentification().toLowerCase()));
 
-            // List<Tuple> identifications =
-            // identificationTypeService.findByIdentificationType(identificationType,
-            // 1, 1);
-            //
-            // if (identifications != null && identifications.size() != 0) {
+            People peopleDao = peopleService.findByIdentificationAndIdentificationTypeAndIdNot(people.getIdentification(),
+                    people.getIdentificationType(), people.getId());
+
+            if (peopleDao != null) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("identification");
+                errorMessageBuilder.code("error.people.duplicateIdentification");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+                errorMessageBuilder.source("identificationType");
+                errorMessageBuilder.code("error.people.duplicateIdentification");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+        }
+
+        if (StringUtils.isBlank(people.getName())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("name");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setName(people.getName().toLowerCase());
+
+        }
+
+        if (StringUtils.isBlank(people.getLastName())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("lastName");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Last Name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setLastName(people.getLastName().toLowerCase());
+
+        }
+        
+        
+        
+        if (StringUtils.isBlank(people.getEmail())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("email");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Email");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setEmail(people.getEmail().toLowerCase());
+
+            Pattern p = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+            Matcher m = p.matcher(people.getEmail());
+
+            if (!m.find()) {
+
+                // if
+                // (!people.getPassword().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"))
+                // {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("email");
+                errorMessageBuilder.code("error.people.emailPattern");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            } else {
+                
+                People peopleDao = peopleService.findByEmailAndIdNot(people.getEmail(),people.getId());
+                
+                
+                if (peopleDao != null) {
+
+                    MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                    errorMessageBuilder.source("email");
+                    errorMessageBuilder.code("error.people.duplicateEmail");
+                    validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+                }
+                
+            }
+
+        }
+
+        if (people.getBornDate() == null) {
+
+            logger.info("ffffffffffffffffffffffffffffffffffff");
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("bornDate");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Born Date");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+        } else {
+
+            logger.info("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+
+            // fixme: handle typemissMatch problem
+            LocalDate today = LocalDate.now();
+            today = today.minus(18, ChronoUnit.YEARS);
+
+            if (people.getBornDate().isAfter(today)) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("bornDate");
+                errorMessageBuilder.code("error.people.adult");
+
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+        }
+        
+        
+        if (StringUtils.isBlank(people.getUsername())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("username");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("User name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+
+            people.setUsername(people.getUsername().toLowerCase());
+
+            People peopleDao = peopleService.findByUsernameAndIdNot(people.getUsername(), people.getId());
+
+            if (peopleDao != null) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("username");
+                errorMessageBuilder.code("error.people.duplicateUsername");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+        }
+
+        if (StringUtils.isBlank(people.getPassword())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("password");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Password");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            // people.setPassword(people.getPassword().toLowerCase());
+
+            // if
+            // (!people.getPassword().matches("\\Q^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$\\E"))
+            // {
             //
             // MessageBuilder errorMessageBuilder = new
             // MessageBuilder().error();
-            // errorMessageBuilder.source("mnemonic");
-            // errorMessageBuilder.code("error.identificationType.duplicateMnemonic");
+            // errorMessageBuilder.source("password");
+            // errorMessageBuilder.code("error.people.passwordPattern");
             // validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            //
+            // }
+
+            Pattern p = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$");
+            Matcher m = p.matcher(people.getPassword());
+
+            if (!m.find()) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("password");
+                errorMessageBuilder.code("error.people.passwordPattern");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+            //
+            // Pattern p =
+            // Pattern.compile("\\Q^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,8}$\\E");
+            // Matcher m = p.matcher(people.getPassword());
+            //
+            // if (m.matches()){
+            //
             // }
 
         }
 
-        if (StringUtils.isBlank(identificationType.getDescription())) {
+        if (people.getGroups() == null || people.getGroups().size() == 0) {
 
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("description");
-            errorMessageBuilder.code("error.required");
-            errorMessageBuilder.resolvableArg("Description");
+            errorMessageBuilder.source("groups");
+            errorMessageBuilder.code("error.people.groups.mandatory");
+
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setPassword(people.getPassword().toLowerCase());
         }
 
     }
 
-    public void validateEditEntityfff(IdentificationType identificationType, ValidationContext validationContext) {
-
-        // This one is being called automatically by spring web flow
-        logger.info(" Se realiza la validacion");
-
-        logger.info("vlor del id:" + identificationType.getId());
-
-        IdentificationType identificationTypeOnDataBase = identificationTypeService.findById(identificationType.getId());
-
-        logger.info("test " + identificationType.toString());
-
-        logger.info("from database " + identificationTypeOnDataBase.toString());
-
-        if (identificationTypeOnDataBase.equals(identificationType)) {
-            // logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
-
-            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("global");
-
-            errorMessageBuilder.code("error.identificationType.noChangesEntity");
-
-            // errorMessageBuilder.resolvableArg("Identification name");
-            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-
-            // validationContext.getMessageContext().addMessage( new
-            // MessageBuilder().error().defaultText("No room is available at
-            // this hotel").build());
-
-            validationContext.getMessageContext().addMessage(new MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
-
-            return;
-        }
-
-        if (StringUtils.isBlank(identificationType.getName())) {
-
-            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-
-            errorMessageBuilder.source("name");
-            errorMessageBuilder.code("error.required");
-
-            errorMessageBuilder.resolvableArg("Identification name");
-            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-
-            return;
-
-        }
-
-        if (StringUtils.isBlank(identificationType.getMnemonic())) {
-
-            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("mnemonic");
-            errorMessageBuilder.code("error.required");
-            errorMessageBuilder.resolvableArg("Identification mnemonic");
-            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-            return;
-
-        }
-
-        logger.info("++++++++++++++++++++++++++++++++ingreso a la validacion");
-
-        identificationType.setName(StringUtils.capitalize(identificationType.getName().toLowerCase()));
-        identificationType.setMnemonic(identificationType.getMnemonic().toUpperCase());
-
-        IdentificationType identification = identificationTypeService.findOneByIdentificationType(identificationType, 1, 1);
-        // List<IdentificationType> identifications =
-        // identificationTypeService.findByName(identificationType.getName(), 1,
-        // 1);
-
-        logger.info("********************************************************");
-
-        logger.info(identificationType);
-
-        logger.info("--------------------------------------------------------");
-
-        logger.info(identification);
-
-        logger.info("-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-
-        if (identification != null && identification.getName() != null) {
-
-            if (identificationType.getName().equals(identification.getName())) {
-
-                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-                errorMessageBuilder.source("name");
-                errorMessageBuilder.code("error.identificationType.duplicateName");
-                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-
-            }
-
-            if (identificationType.getMnemonic().equals(identification.getMnemonic())) {
-
-                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-                errorMessageBuilder.source("mnemonic");
-                errorMessageBuilder.code("error.identificationType.duplicateMnemonic");
-                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-
-            }
-
-        }
-
-        if (StringUtils.isBlank(identificationType.getDescription())) {
-
-            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("description");
-            errorMessageBuilder.code("error.required");
-            errorMessageBuilder.resolvableArg("Description");
-            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-        }
-
-    }
-
-    public void validateAddEntityFuncionalDos(IdentificationType identificationType, MessageContext validationContext) {
-
-        logger.info("Se realiza la validacionfffffffffffffffffffffffffffffffffffffffffffffff");
-        if (identificationType.getName() == null) {
-            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("name");
-            // errorMessageBuilder.code("error.page.selectdeliveryoptions.deliverydate.required");
-            // validationContext.addMessage(errorMessageBuilder.build());
-            validationContext.addMessage(errorMessageBuilder.build());
-            // return new EventFactorySupport().error(this);
-        }
-    }
 
 }

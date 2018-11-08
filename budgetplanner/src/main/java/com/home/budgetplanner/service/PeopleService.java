@@ -25,7 +25,15 @@ public interface PeopleService extends BaseService<People, Long> {
     
     
     public People findByUsername(String username);
-
     
+   
+    public People findByIdentificationAndIdentificationTypeAndIdNot(String identification, IdentificationType identificationType, Long id);
+
+
+    public People findByEmail(String email);
+
+    public People findByEmailAndIdNot(String email, Long id);
+        
+    public People findByUsernameAndIdNot(String username, Long id);
     
 }
