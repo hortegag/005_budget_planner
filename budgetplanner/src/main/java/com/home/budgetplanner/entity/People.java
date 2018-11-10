@@ -66,7 +66,7 @@ public class People implements Serializable {
     }
 
     @ToString.Exclude
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH },fetch=FetchType.EAGER)
     @JoinColumn(name = "id_identification_type")
     private IdentificationType identificationType;
     

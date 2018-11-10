@@ -42,6 +42,9 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
     public People findById(Long id) {
 
         logger.info(">>>>>>>>>>>>>>>>>>>>>> se realiza la consulta por id " + id);
+        logger.info(peopleDAO.findById(id).getIdentificationType());
+
+        logger.info(peopleDAO.findById(id).getGroups());
         // TODO Auto-generated method stub
         return peopleDAO.findById(id);
     }

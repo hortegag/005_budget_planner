@@ -47,6 +47,54 @@
                         <!-- keep track of the id that is being updated -->
                         <!-- <input type="hidden" th:field="*{id}" /> -->
 
+
+                        <div class="form-group">
+
+                            <label
+                                for="identificationType"
+                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
+
+
+                            <select
+                                id="identificationType"
+                                th:field="*{identificationType}"
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{identificationType}')} ? is-invalid">
+                                <option
+                                    th:each="type : ${selectableIdentificationTypes}"
+                                    th:value="${type.id}"
+                                    th:text="${type.name}"
+                                    th:selected="${ type.name == people.identificationType.name }">IdentificationType</option>
+                            </select>
+                            <p
+                                th:if="${#fields.hasErrors('identificationType')}"
+                                th:errors="*{identificationType}"
+                                class="invalid-feedback">identificationType Error</p>
+                        </div>
+                        
+                        
+
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="identification"
+                                th:text="#{people.entity.identification}">Identification label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identification}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identification')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identification.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identification')}"
+                                th:errors="*{identification}"
+                                class="invalid-feedback">identification Error</p>
+                        </div>
+
+
                         <div class="form-group">
 
                             <label
@@ -92,13 +140,122 @@
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('email')} ? is-invalid"
                                 id="description"
-                                th:placeholder="#{people.entity.email.placeholder}"  />
+                                th:placeholder="#{people.entity.email.placeholder}" />
                             <p
                                 th:if="${#fields.hasErrors('email')}"
                                 th:errors="*{email}"
                                 class="invalid-feedback">email Error</p>
 
                         </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="bornDate"
+                                th:text="#{people.entity.bornDate}">Born Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{bornDate}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('bornDate')} ? is-invalid"
+                                id="bornDate"
+                                th:placeholder="#{people.entity.bornDate.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('bornDate')}"
+                                th:errors="*{bornDate}"
+                                class="invalid-feedback">bornDate Error</p>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label
+                                for="username"
+                                th:text="#{people.entity.username}">Username:</label>
+                            <input
+                                type="text"
+                                th:field="*{username}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('username')} ? is-invalid"
+                                id="username"
+                                th:placeholder="#{people.entity.username.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('username')}"
+                                th:errors="*{username}"
+                                class="invalid-feedback">username Error</p>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="password"
+                                th:text="#{people.entity.password}">Password label:</label>
+                            <input
+                                type="password"
+                                th:field="*{password}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('password')} ? is-invalid"
+                                id="password"
+                                th:placeholder="#{people.entity.password.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('password')}"
+                                th:errors="*{password}"
+                                class="invalid-feedback">password Error</p>
+                        </div>
+
+    <div class="form-group">
+
+                            <label
+                                for="enabled"
+                                th:text="#{people.entity.enabled}">Enabled label:</label>
+
+
+                            <select
+                                id="identificationType"
+                                th:field="*{enabled}"
+                                class="custom-select">
+                                <option
+                                    th:value="Y"
+                                    th:text="YES">IdentificationType</option>
+                                <option
+                                    th:value="N"
+                                    th:text="NO">IdentificationType</option>
+                            </select>
+
+
+                            <p
+                                th:if="${#fields.hasErrors('enabled')}"
+                                th:errors="*{enabled}"
+                                class="invalid-feedback">enabled Error</p>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="groups"
+                                th:text="#{people.entity.group}">group label:</label>
+
+
+                            <select
+                                id="groups"
+                                th:field="*{groups}"
+                                multiple="multiple"
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid">
+
+                                <option
+                                    th:each="type : ${selectableGroup}"
+                                    th:value="${type.id}"
+                                    th:text="${type.name}">group</option>
+                            </select>
+                            <p
+                                th:if="${#fields.hasErrors('groups')}"
+                                th:errors="*{groups}"
+                                class="invalid-feedback">group Error</p>
+                        </div>
+
 
                         <div
                             th:if="${#fields.hasErrors('global')}"

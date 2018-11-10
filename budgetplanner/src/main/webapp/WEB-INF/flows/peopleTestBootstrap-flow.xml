@@ -84,7 +84,6 @@
                 expression="peopleController.initializeSelectableGroup()"
                 result="flashScope.selectableGroup" />
 
-            
         </on-render>
 
         <transition
@@ -141,6 +140,17 @@
         id="editEntity"
         view="#{directorio}/peopleEdit"
         model="people">
+
+        <on-render>
+            <evaluate
+                expression="peopleController.initializeSelectableIdentificationTypes()"
+                result="flashScope.selectableIdentificationTypes" />
+            <evaluate
+                expression="peopleController.initializeSelectableGroup()"
+                result="flashScope.selectableGroup" />
+
+
+        </on-render>
 
 
         <transition
