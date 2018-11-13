@@ -56,10 +56,21 @@
         <transition
             on="edit"
             to="editEntity">
-            <evaluate
-                expression="servicio.findById(requestParameters.id)"
+            
+
+             <evaluate
+                expression="peopleController.findById(requestParameters.id)"
+ 
                 result="flowScope.people" />
 
+<!--
+
+              <evaluate
+                expression="servicio.findById(requestParameters.id)"
+ 
+                result="flowScope.people" />
+-->
+ 
         </transition>
 
         <transition
@@ -117,7 +128,11 @@
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.save(flowScope.people)" />
+            
+            <evaluate expression="peopleController.save(flowScope.people)" /> 
+
+
+<!--          <evaluate expression="servicio.save(flowScope.people)" />    -->   
             <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         </transition>
 
@@ -138,7 +153,7 @@
 
     <view-state
         id="editEntity"
-        view="#{directorio}/peopleEdit"
+        view="#{directorio}/peopleEditTest"
         model="people">
 
         <on-render>
@@ -179,7 +194,10 @@
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.save(flowScope.people)" />
+       <!--    <evaluate expression="servicio.save(flowScope.people)" />   -->  
+       
+        <evaluate expression="peopleController.save(flowScope.people)" />
+       
             <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         </transition>
 

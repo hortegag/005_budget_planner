@@ -37,6 +37,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.home.budgetplanner.converter.StringToEntityConverter;
 import com.home.budgetplanner.entity.Groups;
 import com.home.budgetplanner.entity.IdentificationType;
+import com.home.budgetplanner.formatter.GroupsFormatter;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -241,14 +242,22 @@ public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvc
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
             registry.addConverter(identificationTypeConverter());
-            registry.addConverter(groupConverter());
+            //registry.addConverter(groupConverter());
 
+            registry.addFormatter(groupsFormatter());
 
 
             //registry.addConverter(categoryConverter());
     }
     
 
+   
+    
+    @Bean
+    public GroupsFormatter groupsFormatter() {
+        return new GroupsFormatter();
+    }
+    
     @Bean
     @Order(1)
     public StringToEntityConverter identificationTypeConverter() {

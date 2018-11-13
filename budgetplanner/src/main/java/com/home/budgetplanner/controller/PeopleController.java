@@ -1,5 +1,6 @@
 package com.home.budgetplanner.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,6 +35,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.HttpEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.google.common.collect.Lists;
 
@@ -48,6 +50,11 @@ public class PeopleController {
 
     @Autowired
     private IdentificationTypeService identificationTypeService;
+    
+    @Autowired
+    private transient PasswordEncoder        passwordEncoder;
+    
+    
     
     @Autowired
     private GroupService groupService;
@@ -314,4 +321,46 @@ public class PeopleController {
      * 
      * return contactPage; }
      */
+    
+    
+    public PeopleDTO findById(Long id){
+        
+        PeopleDTO peopleDTO = PeopleDTO.build(peopleService.findById(new Long(id)));
+        
+        return peopleDTO;
+        
+    }
+    
+    
+  public void save(PeopleDTO peopleDTO){
+        
+        //PeopleDTO peopleDTO = PeopleDTO.build(peopleService.findById(new Long(id)));
+      
+         List<Groups> groups = new ArrayList<>();
+        
+        for (String groupid : peopleDTO.getGroups()) {
+            
+            groups.add(groupService.findById(new Long(groupid)));
+            
+        }
+        IdentificationType identificationType = identificationTypeService.findById(new Long (peopleDTO.getIdentificationType()));
+        
+        People people = PeopleDTO.dtoToEntity(peopleDTO, groups, identificationType);
+        
+        peopleService.save(people);
+        
+        
+    }
+  
+  
+  public People save(People people) {
+
+      people.setPassword(passwordEncoder.encode(people.getPassword()));
+
+      return peopleService.save(people);
+  }
+  
+  
+  
+  
 }

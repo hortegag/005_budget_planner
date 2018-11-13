@@ -47,7 +47,7 @@
                         <!-- keep track of the id that is being updated -->
                         <!-- <input type="hidden" th:field="*{id}" /> -->
 
-
+                        ¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬This is a test¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
                         <div class="form-group">
 
                             <label
@@ -64,7 +64,7 @@
                                     th:each="type : ${selectableIdentificationTypes}"
                                     th:value="${type.id}"
                                     th:text="${type.name}"
-                                    th:selected="${ type.name == people.identificationType.name }">IdentificationType</option>
+                                    th:selected="${ type.name == people.identificationType }">IdentificationType</option>
                             </select>
                             <p
                                 th:if="${#fields.hasErrors('identificationType')}"
@@ -185,7 +185,7 @@
                                 class="invalid-feedback">username Error</p>
                         </div>
 
-
+                        <!-- 
                         <div class="form-group">
 
                             <label
@@ -203,7 +203,7 @@
                                 th:errors="*{password}"
                                 class="invalid-feedback">password Error</p>
                         </div>
-
+ -->
                         <div class="form-group">
 
                             <label
@@ -249,7 +249,7 @@
                                     th:each="type : ${selectableGroup}"
                                     th:value="${type.id}"
                                     th:text="${type.name}"
-                                    th:attr="selected=${people.isValidGroup(type)==true}?'selected'">group</option>
+                                    th:attr="selected=${people.groups.contains(type.name)==true}?'selected'">group</option>
 
 
                             </select>
@@ -261,31 +261,37 @@
  -->
 
 <!-- 
-                        <div class="form-group">
-                            <label th:text="#{people.entity.group}">group label:</label>
+                        <div class="form-group" th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid" >
+                            <label th:text="#{people.entity.group}" th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid">group label:</label>
 
 
                             <div
                                 class="form-check"
-                                th:each="type : ${selectableGroup}">
+                                th:each="type : ${selectableGroup}" th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid" >
                                 <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    th:id="${type.id}"
-                                    name="groups"
-                                    th:value="${type.id}"
-                                    th:checked="${people.isValidGroup(type)}" />
+                                    th:field="*{groups}"
+                                    th:value="${type.name}" 
+                                    th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid" />
                                 <label
                                     class="form-check-label"
                                     th:for="${type.id}"
-                                    th:text="${type.name}">Group</label>
+                                    th:text="${type.name}"
+                                    th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid" >Group</label>
                             </div>
+                            <p
+                                th:if="${#fields.hasErrors('groups')}"
+                                th:errors="*{groups}"
+                                class="invalid-feedback">group Error</p>
 
-                        </div> 
+                        </div>
+
  -->
 
 
-                        User hobbies (checkboxes): vffffffffffffffffffffff
+
+                        User hobbies (checkboxes):
                         <div th:each="type : ${selectableGroup}">
                             <input
                                 type="checkbox"
@@ -296,7 +302,6 @@
                                  th:for="${{type}}"
                                 th:text="${type.name}">Cinema</label>
                         </div>
-
 
 
 

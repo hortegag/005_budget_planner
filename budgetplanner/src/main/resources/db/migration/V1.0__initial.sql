@@ -139,6 +139,8 @@ insert into groups_roles values (4001,5001);
 
 --dsmith
 insert into users_groups values (4000,2004);
+insert into users_groups values (4001,2004);
+
 --hortega
 insert into users_groups values (4001,2003);
 

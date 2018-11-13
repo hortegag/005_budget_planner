@@ -3,6 +3,8 @@ package com.home.budgetplanner.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,14 +20,19 @@ import com.home.budgetplanner.service.PeopleService;
 @Service
 public class GroupServiceImpl implements GroupService, Serializable {
 
+    private static final Logger    logger = LogManager.getLogger(GroupServiceImpl.class);
+
     @Autowired
     private PagingGroupsRepository pagingGroupsRepository;
 
     @Override
     public Groups findById(Long id) {
 
+        
+        logger.info("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| se realiza la consulta del grupo por id " + id);
+        logger.info(pagingGroupsRepository.findById(id));
         // TODO Auto-generated method stub
-        return null;
+        return pagingGroupsRepository.findById(id).get();
     }
 
     @Override

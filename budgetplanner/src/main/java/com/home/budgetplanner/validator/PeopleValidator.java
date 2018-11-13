@@ -25,6 +25,7 @@ import org.springframework.webflow.action.EventFactorySupport;
 import org.springframework.webflow.execution.Event;
 
 import com.home.budgetplanner.BudgetplannerApplication;
+import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.repository.PagingPeopleRepository;
@@ -311,7 +312,7 @@ public class PeopleValidator /* implements Validator */ {
 
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
         } else {
-            people.setPassword(people.getPassword().toLowerCase());
+            //people.setPassword(people.getPassword().toLowerCase());
         }
 
         // if (StringUtils.isBlank(identificationType.getMnemonic())) {
@@ -597,9 +598,223 @@ public class PeopleValidator /* implements Validator */ {
             errorMessageBuilder.code("error.people.groups.mandatory");
 
             validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
-        } else {
-            people.setPassword(people.getPassword().toLowerCase());
+        } //else {
+            //people.setPassword(people.getPassword().toLowerCase());
+        //}
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void validateEditEntity(PeopleDTO people, ValidationContext validationContext) {
+
+        // This one is being called automatically by spring web flow
+        logger.info(" Se realiza la validacion");
+
+        logger.info("vlor del id:" + people.getId());
+
+        People peopleOnDataBase = peopleService.findById(people.getId());
+
+        logger.info("test " + peopleService.toString());
+
+        logger.info("from database " + peopleOnDataBase.toString());
+
+        if (peopleOnDataBase.equals(people)) {
+            // logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("global");
+
+            errorMessageBuilder.code("error.people.noChangesEntity");
+
+            // errorMessageBuilder.resolvableArg("Identification name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            // validationContext.getMessageContext().addMessage( new
+            // MessageBuilder().error().defaultText("No room is available at
+            // this hotel").build());
+
+            // validationContext.getMessageContext().addMessage(new
+            // MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
+
+            return;
         }
+
+        if (StringUtils.isBlank(people.getIdentification())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("identification");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Identification");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+        } else {
+
+            people.setIdentification((people.getIdentification().toLowerCase()));
+
+            People peopleDao =null;
+//            People peopleDao = peopleService.findByIdentificationAndIdentificationTypeAndIdNot(people.getIdentification(),
+//                    people.getIdentificationType(), people.getId());
+
+            if (peopleDao != null) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("identification");
+                errorMessageBuilder.code("error.people.duplicateIdentification");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+                errorMessageBuilder.source("identificationType");
+                errorMessageBuilder.code("error.people.duplicateIdentification");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+        }
+
+        if (StringUtils.isBlank(people.getName())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("name");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setName(people.getName().toLowerCase());
+
+        }
+
+        if (StringUtils.isBlank(people.getLastName())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("lastName");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Last Name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setLastName(people.getLastName().toLowerCase());
+
+        }
+        
+        
+        
+        if (StringUtils.isBlank(people.getEmail())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("email");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Email");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+            people.setEmail(people.getEmail().toLowerCase());
+
+            Pattern p = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+            Matcher m = p.matcher(people.getEmail());
+
+            if (!m.find()) {
+
+                // if
+                // (!people.getPassword().matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$"))
+                // {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("email");
+                errorMessageBuilder.code("error.people.emailPattern");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            } else {
+                
+                People peopleDao = peopleService.findByEmailAndIdNot(people.getEmail(),people.getId());
+                
+                
+                if (peopleDao != null) {
+
+                    MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                    errorMessageBuilder.source("email");
+                    errorMessageBuilder.code("error.people.duplicateEmail");
+                    validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+                }
+                
+            }
+
+        }
+
+        if (people.getBornDate() == null) {
+
+            logger.info("ffffffffffffffffffffffffffffffffffff");
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("bornDate");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("Born Date");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+        } else {
+
+            logger.info("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+
+            // fixme: handle typemissMatch problem
+            LocalDate today = LocalDate.now();
+            today = today.minus(18, ChronoUnit.YEARS);
+
+            if (people.getBornDate().isAfter(today)) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("bornDate");
+                errorMessageBuilder.code("error.people.adult");
+
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+
+        }
+        
+        
+        if (StringUtils.isBlank(people.getUsername())) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("username");
+            errorMessageBuilder.code("error.required");
+
+            errorMessageBuilder.resolvableArg("User name");
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } else {
+
+            people.setUsername(people.getUsername().toLowerCase());
+
+            People peopleDao = peopleService.findByUsernameAndIdNot(people.getUsername(), people.getId());
+
+            if (peopleDao != null) {
+
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("username");
+                errorMessageBuilder.code("error.people.duplicateUsername");
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+
+            }
+        }
+
+
+
+        if (people.getGroups() == null || people.getGroups().size() == 0) {
+
+            MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+            errorMessageBuilder.source("groups");
+            errorMessageBuilder.code("error.people.groups.mandatory");
+
+            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+        } 
 
     }
 

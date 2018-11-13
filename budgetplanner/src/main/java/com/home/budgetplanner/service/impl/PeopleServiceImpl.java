@@ -6,12 +6,14 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.validator.internal.engine.groups.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.home.budgetplanner.BudgetplannerApplication;
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
+import com.home.budgetplanner.entity.Groups;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.repository.PagingPeopleRepository;
@@ -35,8 +37,8 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
     @Autowired
     private transient PagingPeopleRepository pagingPeopleRepository;
 
-    @Autowired
-    private transient PasswordEncoder        passwordEncoder;
+//    @Autowired
+//    private transient PasswordEncoder        passwordEncoder;
 
     @Override
     public People findById(Long id) {
@@ -65,7 +67,7 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
     @Override
     public People save(People entity) {
 
-        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+       // entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 
         return peopleDAO.save(entity);
     }
@@ -159,10 +161,19 @@ public class PeopleServiceImpl implements PeopleService, Serializable {
     }
     
     public People findByUsernameAndIdNot(String username, Long id){
+        
+       
+        
+        //test.co
+        
+        //test.getGroups().
                 
         return pagingPeopleRepository.findByUsernameAndIdNot(username, id);
 
     }
+    
+    
+  
     
 
 }

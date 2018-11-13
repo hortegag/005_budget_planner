@@ -3,6 +3,7 @@ package com.home.budgetplanner.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -81,7 +82,17 @@ public class People implements Serializable {
           name = "id_person"), 
         inverseJoinColumns = @JoinColumn(
           name = "id_group")) 
-    private Collection<Groups> groups;
+    private List<Groups> groups;
+    
+    
+ public boolean isValidGroup(Groups group){
+     boolean contain =false ;  
+     if (group != null && this.groups != null){
+            contain = this.groups.contains(group);
+        }
+
+        return contain;
+    }
     
 
 }
