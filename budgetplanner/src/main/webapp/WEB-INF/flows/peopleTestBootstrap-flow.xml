@@ -78,7 +78,7 @@
             to="confirmDeleteEntity">
             <evaluate
                 expression="servicio.findById(requestParameters.id)"
-                result="flowScope.identificationType" />
+                result="flowScope.people" />
         </transition>
     </view-state>
 
