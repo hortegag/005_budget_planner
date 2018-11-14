@@ -47,6 +47,8 @@ public class PeopleDTO implements Serializable {
 
     private String                        password;
 
+    private String                        identificationTypeId;
+
     // private static final SimpleDateFormat dateFormatter = new
     // SimpleDateFormat("dd/MM/yyyy hh:mm aaa");
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -68,12 +70,12 @@ public class PeopleDTO implements Serializable {
 
         return new PeopleDTO(people.getId(), people.getName(), people.getLastName(), people.getEmail(), people.getBornDate(),
                 people.getIdentification(), (people.getIdentificationType() != null) ? people.getIdentificationType().getName() : null, text,
-                groupsOfPeople, people.getEnabled(), people.getUsername(), people.getPassword());
+                groupsOfPeople, people.getEnabled(), people.getUsername(), people.getPassword(), (people.getIdentificationType() != null) ? String.valueOf(people.getIdentificationType().getId()) : null);
 
     }
 
     public PeopleDTO(Long id, String name, String lastName, String email, LocalDate bornDate, String identification, String identificationType,
-            String bornDateString, List<String> groups, String enabled, String username, String password) {
+            String bornDateString, List<String> groups, String enabled, String username, String password, String identificationTypeId) {
         super();
         this.id = id;
         this.name = name;
@@ -87,6 +89,7 @@ public class PeopleDTO implements Serializable {
         this.enabled = enabled;
         this.username = username;
         this.password = password;
+        this.identificationTypeId = identificationTypeId;
     }
 
     public static People dtoToEntity(PeopleDTO peopleDTO, List<Groups> groups, IdentificationType identificationType) {

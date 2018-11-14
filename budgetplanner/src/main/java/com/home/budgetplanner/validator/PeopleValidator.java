@@ -621,28 +621,25 @@ public class PeopleValidator /* implements Validator */ {
         logger.info("vlor del id:" + people.getId());
 
         People peopleOnDataBase = peopleService.findById(people.getId());
+        
+        
+        PeopleDTO peopleOnDataBaseDto = PeopleDTO.build(peopleOnDataBase);
 
         logger.info("test " + peopleService.toString());
 
         logger.info("from database " + peopleOnDataBase.toString());
 
-        if (peopleOnDataBase.equals(people)) {
+        if (peopleOnDataBaseDto.equals(people)) {
             // logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ya existe ");
 
             MessageBuilder errorMessageBuilder = new MessageBuilder().error();
-            errorMessageBuilder.source("global");
+            //errorMessageBuilder.source("global");
 
-            errorMessageBuilder.code("error.people.noChangesEntity");
+           // errorMessageBuilder.code("error.people.noChangesEntity");
 
-            // errorMessageBuilder.resolvableArg("Identification name");
-            validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            //validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+            validationContext.getMessageContext().addMessage(new MessageBuilder().error().code("error.people.noChangesEntity").build());
 
-            // validationContext.getMessageContext().addMessage( new
-            // MessageBuilder().error().defaultText("No room is available at
-            // this hotel").build());
-
-            // validationContext.getMessageContext().addMessage(new
-            // MessageBuilder().error().code("error.identificationType.noChangesEntity").build());
 
             return;
         }

@@ -343,7 +343,7 @@ public class PeopleController {
             groups.add(groupService.findById(new Long(groupid)));
             
         }
-        IdentificationType identificationType = identificationTypeService.findById(new Long (peopleDTO.getIdentificationType()));
+        IdentificationType identificationType = identificationTypeService.findById(new Long (peopleDTO.getIdentificationTypeId()));
         
         People people = PeopleDTO.dtoToEntity(peopleDTO, groups, identificationType);
         
