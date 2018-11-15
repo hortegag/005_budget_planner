@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.7"
+	 default-schema="public" default-owner="postgres">
+<database name="liga_test" encoding="UTF8" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="jugadores">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="780" y="40"/>
+	<column name="id_jugador" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="tipo_documento">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="numero_documento">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="nombres">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="apellidos">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="fecha_nacimiento">
+		<type name="date" length="0"/>
+	</column>
+	<column name="correo">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="jugadores_pk" type="pk-constr" table="public.jugadores">
+		<columns names="id_jugador" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="usuarios">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1820" y="40"/>
+	<column name="id_usuario" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="nombre">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="clave">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="usuarios_pk" type="pk-constr" table="public.usuarios">
+		<columns names="id_usuario" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="roles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2080" y="40"/>
+	<column name="id_rol" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="nombre">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="descripcion">
+		<type name="varchar" length="1000"/>
+	</column>
+	<constraint name="roles_pk" type="pk-constr" table="public.roles">
+		<columns names="id_rol" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="usuarios_roles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1960" y="180"/>
+	<column name="id_permiso">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<relationship name="usuarios_has_many_usuarios_roles" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3ae648"
+	 src-table="public.usuarios"
+	 dst-table="public.usuarios_roles"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="0" y="0"/>
+	</label>
+</relationship>
+
+<relationship name="roles_has_many_usuarios_roles" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3e89fc"
+	 src-table="public.roles"
+	 dst-table="public.usuarios_roles"
+	 src-required="false" dst-required="false"/>
+
+<table name="torneos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="740" y="540"/>
+	<column name="id_torneo" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="nombre">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="fecha_inicio">
+		<type name="date" length="0"/>
+	</column>
+	<column name="fecha_fin">
+		<type name="date" length="0"/>
+	</column>
+	<column name="fecha_inicio_inscripcion">
+		<type name="date" length="0"/>
+	</column>
+	<column name="fecha_fin_inscripcion">
+		<type name="date" length="0"/>
+	</column>
+	<column name="cantidad_equipos">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="torneos_pk" type="pk-constr" table="public.torneos">
+		<columns names="id_torneo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="equipos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="300"/>
+	<column name="id_equipo" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="nombre">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="pais">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="provincia">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="ciudad">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="sector">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="equipos_pk" type="pk-constr" table="public.equipos">
+		<columns names="id_equipo" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="inscripciones">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="120" y="140"/>
+	<column name="id_inscripcion">
+		<type name="bigint" length="0"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="id_equipo" index="2"/>
+		<object name="id_jugador" index="3"/>
+		<object name="id_torneo" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="equipos_fk" index="2"/>
+		<object name="jugadores_fk" index="0"/>
+		<object name="torneos_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="jugadores_has_many_inscripciones" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#131b84"
+	 src-table="public.jugadores"
+	 dst-table="public.inscripciones"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="equipos_has_many_inscripciones" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#178116"
+	 src-table="public.equipos"
+	 dst-table="public.inscripciones"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="torneos_has_many_inscripciones" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ecd850"
+	 src-table="public.torneos"
+	 dst-table="public.inscripciones"
+	 src-required="false" dst-required="false"/>
+
+<constraint name="inscripcion_jugador" type="uq-constr" table="public.inscripciones">
+	<columns names="id_torneo,id_equipo,id_jugador" ref-type="src-columns"/>
+</constraint>
+
+<table name="canchas">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="120" y="940"/>
+	<column name="id_cancha" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="nombre">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="ubicacion">
+		<type name="varchar" length="500"/>
+	</column>
+	<constraint name="canchas_pk" type="pk-constr" table="public.canchas">
+		<columns names="id_cancha" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="fase_grupos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="400"/>
+	<column name="id_fase">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="grupo">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="partidos_jugados">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="partidos_ganados">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="partidos_empatados">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="partidos_perdidos">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="goles_a_favor">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="goles_en_contra">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="goles_diferencia">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="puntos">
+		<type name="smallint" length="0"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="id_equipo" index="2"/>
+		<object name="id_torneo" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="equipos_fk" index="1"/>
+		<object name="torneos_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="torneos_has_many_fase_grupos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b2a73a"
+	 src-table="public.torneos"
+	 dst-table="public.fase_grupos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="equipos_has_many_fase_grupos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a749bc"
+	 src-table="public.equipos"
+	 dst-table="public.fase_grupos"
+	 src-required="false" dst-required="false"/>
+
+<table name="fase_eliminatorias">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="120" y="680"/>
+	<column name="id_fase" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="grupo">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="ganador">
+		<type name="varchar" length="1"/>
+	</column>
+	<column name="tipo_fase">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="fase_eliminatorias_pk" type="pk-constr" table="public.fase_eliminatorias">
+		<columns names="id_fase" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_equipo" index="2"/>
+		<object name="id_torneo" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="equipos_fk" index="1"/>
+		<object name="torneos_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="torneos_has_many_fase_eliminatorias" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#de3ced"
+	 src-table="public.torneos"
+	 dst-table="public.fase_eliminatorias"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="equipos_has_many_fase_eliminatorias" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#82bc7e"
+	 src-table="public.equipos"
+	 dst-table="public.fase_eliminatorias"
+	 src-required="false" dst-required="false"/>
+
+<table name="partidos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1320" y="560"/>
+	<column name="id_partido" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="goles_equipo_1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="goles_equipo_2">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="fecha_partido">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="partidos_pk" type="pk-constr" table="public.partidos">
+		<columns names="id_partido" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_cancha" index="7"/>
+		<object name="id_equipo_1" index="2"/>
+		<object name="id_equipo_2" index="3"/>
+		<object name="id_torneo" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="canchas_fk" index="3"/>
+		<object name="equipos_fk" index="1"/>
+		<object name="equipos_fk1" index="2"/>
+		<object name="torneos_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="torneos_has_many_partidos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d9d0c3"
+	 src-table="public.torneos"
+	 dst-table="public.partidos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="equipos_has_many_partidos" type="rel1n"
+	 src-col-pattern="{sc}_1"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#45c1f9"
+	 src-table="public.equipos"
+	 dst-table="public.partidos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="equipos2_has_many_partidos" type="rel1n"
+	 src-col-pattern="{sc}_2"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#67a013"
+	 src-table="public.equipos"
+	 dst-table="public.partidos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="canchas_has_many_partidos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#9c49c5"
+	 src-table="public.canchas"
+	 dst-table="public.partidos"
+	 src-required="false" dst-required="false"/>
+
+<table name="partidos_goles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1780" y="500"/>
+	<column name="id_gol">
+		<type name="bigint" length="0"/>
+	</column>
+</table>
+
+<relationship name="jugadores_has_many_partidos_goles" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b4564e"
+	 src-table="public.jugadores"
+	 dst-table="public.partidos_goles"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="partidos_has_many_partidos_goles" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#086023"
+	 src-table="public.partidos"
+	 dst-table="public.partidos_goles"
+	 src-required="false" dst-required="false"/>
+
+<table name="goleadores">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1460" y="160"/>
+	<column name="id_goleador">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="goles">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<relationship name="jugadores_has_many_goleadores" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#844db3"
+	 src-table="public.jugadores"
+	 dst-table="public.goleadores"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="torneos_has_many_goleadores" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#4a3330"
+	 src-table="public.torneos"
+	 dst-table="public.goleadores"
+	 src-required="false" dst-required="false"/>
+
+<table name="administrador_equipos">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1380" y="0"/>
+	<column name="id_administrador">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="correo">
+		<type name="varchar" length="200"/>
+	</column>
+
+	<customidxs object-type="column">
+		<object name="id_equipo" index="2"/>
+		<object name="id_usuario" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="equipos_fk" index="1"/>
+		<object name="usuarios_fk" index="0"/>
+	</customidxs>
+</table>
+
+<relationship name="usuarios_has_many_administrador_equipos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#232f67"
+	 src-table="public.usuarios"
+	 dst-table="public.administrador_equipos"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="equipos_has_many_administrador_equipos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#bc26fc"
+	 src-table="public.equipos"
+	 dst-table="public.administrador_equipos"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

@@ -1,0 +1,133 @@
+
+Hands-On Full Stack Development with Spring Boot 2.0 and React: Build modern ...
+
+https://books.google.com.ec/books?id=au1mDwAAQBAJ&printsec=frontcover&dq=spring+boot&hl=en&sa=X&ved=0ahUKEwii7JG6pv_cAhWOulMKHQNJD5c4ChDoAQhIMAY#v=onepage&q=spring%20boot&f=false
+
+
+Spring: Microservices with Spring Boot: Build and deploy microservices with ...
+
+https://books.google.com.ec/books?id=NZRRDwAAQBAJ&printsec=frontcover&dq=spring+boot&hl=en&sa=X&ved=0ahUKEwi5q-Lzpf_cAhUDt1MKHVTCBQ8Q6AEISTAG#v=onepage&q=spring%20boot&f=false
+
+
+Spring 5.0 Cookbook: Recipes to build, test, and run Spring applications ...
+https://books.google.com.ec/books?id=AJpGDwAAQBAJ&printsec=frontcover&dq=spring+boot&hl=en&sa=X&ved=0ahUKEwiTloPaqP_cAhUOulMKHR9NCdA4MhDoAQg4MAM#v=onepage&q=spring%20boot&f=false
+
+
+
+Building RESTful Web Services with Spring 5: Leverage the power of Spring 5 ...
+https://books.google.com.ec/books?id=stRJDwAAQBAJ&pg=PA46&dq=spring+crud&hl=en&sa=X&ved=0ahUKEwiT2brEqf_cAhWS2FMKHSCRB3AQ6AEIJzAA#v=onepage&q=spring%20crud&f=false
+
+
+Spring MVC: Designing Real-World Web Applications
+https://books.google.com.ec/books?id=GqDcDgAAQBAJ&printsec=frontcover&dq=spring+crud&hl=en&sa=X&ved=0ahUKEwiT2brEqf_cAhWS2FMKHSCRB3AQ6AEITjAG#v=onepage&q=spring%20crud&f=false
+
+Spring MVC Cookbook
+
+https://books.google.com.ec/books?id=nGtLDAAAQBAJ&printsec=frontcover&dq=spring+crud&hl=en&sa=X&ved=0ahUKEwiY2LiGqv_cAhWPuVMKHXjoDoEQ6AEIQDAE#v=onepage&q=CRUD&f=false
+
+
+
+Spring: Developing Java Applications for the Enterprise
+https://books.google.com.ec/books?id=SVQoDwAAQBAJ&printsec=frontcover&dq=spring+boot&hl=en&sa=X&ved=0ahUKEwjKsbq5qP_cAhUR31MKHa0aAww4KBDoAQg5MAM#v=onepage&q=crud&f=false
+
+
+CRUD Examples page
+https://www.safaribooksonline.com/library/view/spring-mvc-designing/9781787126398/ch06s14.html
+
+
+Beginning Spring Boot 2: Applications and Microservices with the Spring ... (Examples of validation errors)
+
+https://books.google.com.ec/books?id=9pY3DwAAQBAJ&printsec=frontcover&dq=spring+thymeleaf+validate+forms&hl=en&sa=X&ved=0ahUKEwiZmMPV5ojdAhViplkKHQLLA7AQ6AEIOzAD#v=onepage&q=validating&f=false
+
+
+
+
+Explanations of databinding and basic concepts of spring
+https://www.safaribooksonline.com/library/view/spring-developing-java/9781787127555/ch11s03.html
+
+Spring web flow --> avoid double form submission 
+https://www.safaribooksonline.com/library/view/Pro+Spring+MVC:+With+Web+Flow/9781430241553/Chapter10.html#s146-146
+
+Pivotal Certified Spring Web Application developer
+https://www.safaribooksonline.com/library/view/pivotal-certified-spring/9781484208083/9781484208090_Ch07_1.xhtml
+
+
+
+
+
+
+
+
+
+
+Pagination jqgrid and data jpa
+https://www.safaribooksonline.com/library/view/pro-springfourth-edition/9781430261520/9781430261513_Ch16_2_Ext.xhtml#cXXX.1132
+
+Pagination with spring data add PageableArgumentResolver
+https://docs.spring.io/spring-data/data-jpa/docs/1.0.3.RELEASE/reference/html/#web-pagination
+
+
+
+http://localhost:9090/budgetplanner/people/listgrid?rows=3&page=1&sidx=birthDateString&sord=asc
+
+
+
+
+https://github.com/karelp90/control_asp/blob/master/src/main/java/com/ensat/configuration/WebConfig.java
+
+
+http://localhost:9090/budgetplanner/people/listgridTest?page=0&size=5&sort=bornDate,desc
+
+
+
+Como utilizar los selects en formularios y guardarlos en la base de datos
+Libro  pro spring mvc with webflow
+ver chapter 12 y booked shared
+Se usa converters para tomar el id enviador y seleccionado en el combo box y cargar de la base de datos el objeto para que pueda ser guardado con normalidad
+
+ver
+StringToEntityConverter
+public void addFormatters(FormatterRegistry registry)  dentro WebMvcContextConfiguration
+
+
+Real World examples applications 
+Chapter 3 Taskify converter and select
+Chpater 6 UserFormatter.java convert from id to entity loading from database
+
+
+pro spring 4th edtition- chapter 16 Contact grid ajax
+
+
+web flow configuration service
+
+https://github.com/DISID/springlets/blob/master/springlets-webflow/src/main/java/io/springlets/webflow/config/SpringletsWebFlowConfiguration.java
+
+
+Spring Security
+
+https://www.safaribooksonline.com/library/view/spring-security-31/9781849518260/ch03.html
+
+
+https://www.safaribooksonline.com/videos/securing-java-web/9781771375306/9781771375306-video233596?autoplay=false
+
+
+
+https://www.baeldung.com/role-and-privilege-for-spring-security-registration
+
+
+https://www.devglan.com/spring-security/spring-boot-security-password-encoding-bcrypt-encoder
+
+bcryp encoder
+https://www.devglan.com/spring-security/spring-boot-security-password-encoding-bcrypt-encoder
+https://www.mkyong.com/spring-security/spring-security-password-hashing-example/
+https://www.safaribooksonline.com/library/view/spring-security-/9781787129511/a2be2e5d-2bb0-4e38-a9af-85143e415b5c.xhtml
+
+Get the name of the current logged user
+https://www.thymeleaf.org/doc/articles/springsecurity.html
+
+
+boostrap 4 and tables 
+
+
+https://www.safaribooksonline.com/library/view/bootstrap-4-cookbook/9781785889295/3a668db6-0575-4a7d-a134-01ce13a5144a.xhtml
+http://www.jquery-bootgrid.com/GettingStarted --> jquery bootgrid

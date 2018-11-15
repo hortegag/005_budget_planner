@@ -1,0 +1,228 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.0.3.RELEASE)
+
+2018-08-31 21:10:08.237  INFO 5081 --- [  restartedMain] c.h.b.SpringBootWebApplication           : Starting SpringBootWebApplication on hector-Lenovo-Z50-75 with PID 5081 (/home/hector/cursos/harvard_cs_50/proyecto_java/proyecto/budgetplanner/target/classes started by hector in /home/hector/cursos/harvard_cs_50/proyecto_java/proyecto/budgetplanner)
+2018-08-31 21:10:08.251  INFO 5081 --- [  restartedMain] c.h.b.SpringBootWebApplication           : No active profile set, falling back to default profiles: default
+2018-08-31 21:10:08.977  INFO 5081 --- [  restartedMain] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@14581f8b: startup date [Fri Aug 31 21:10:08 ECT 2018]; root of context hierarchy
+2018-08-31 21:10:13.196  INFO 5081 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$EnhancerBySpringCGLIB$$d45ca881] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-31 21:10:13.301  INFO 5081 --- [  restartedMain] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2018-08-31 21:10:13.454  INFO 5081 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2fc4e382] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-08-31 21:10:14.439  INFO 5081 --- [  restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 9090 (http)
+2018-08-31 21:10:14.508  INFO 5081 --- [  restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2018-08-31 21:10:14.510  INFO 5081 --- [  restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet Engine: Apache Tomcat/8.5.31
+2018-08-31 21:10:14.539  INFO 5081 --- [ost-startStop-1] o.a.c.c.AprLifecycleListener             : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+2018-08-31 21:10:15.184  INFO 5081 --- [ost-startStop-1] o.a.j.s.TldScanner                       : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-08-31 21:10:15.195  INFO 5081 --- [ost-startStop-1] o.a.c.c.C.[.[.[/budgetplanner]           : Initializing Spring embedded WebApplicationContext
+2018-08-31 21:10:15.196  INFO 5081 --- [ost-startStop-1] o.s.w.c.ContextLoader                    : Root WebApplicationContext: initialization completed in 6231 ms
+2018-08-31 21:10:17.504  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.FilterRegistrationBean         : Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-08-31 21:10:17.506  INFO 5081 --- [ost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2018-08-31 21:10:17.507  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.FilterRegistrationBean         : Mapping filter: 'httpTraceFilter' to: [/*]
+2018-08-31 21:10:17.507  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.FilterRegistrationBean         : Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2018-08-31 21:10:17.508  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.FilterRegistrationBean         : Mapping filter: 'resourceUrlEncodingFilter' to: [/*]
+2018-08-31 21:10:17.508  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.ServletRegistrationBean        : Servlet dispatcherServlet mapped to [/]
+2018-08-31 21:10:17.512  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.ServletRegistrationBean        : Servlet webServlet mapped to [/h2-console/*]
+2018-08-31 21:10:17.515  INFO 5081 --- [ost-startStop-1] o.s.b.w.s.ServletRegistrationBean        : Servlet messageDispatcherServlet mapped to [/services/*]
+2018-08-31 21:10:17.759  INFO 5081 --- [  restartedMain] o.f.c.i.u.VersionPrinter                 : Flyway Community Edition 5.0.7 by Boxfuse
+2018-08-31 21:10:17.789  INFO 5081 --- [  restartedMain] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2018-08-31 21:10:18.261  INFO 5081 --- [  restartedMain] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2018-08-31 21:10:18.280  INFO 5081 --- [  restartedMain] o.f.c.i.d.DatabaseFactory                : Database: jdbc:h2:mem:testdb (H2 1.4)
+2018-08-31 21:10:18.611  INFO 5081 --- [  restartedMain] o.f.c.i.c.DbValidate                     : Successfully validated 1 migration (execution time 00:00.148s)
+2018-08-31 21:10:18.772  INFO 5081 --- [  restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: "PUBLIC"."flyway_schema_history"
+2018-08-31 21:10:18.861  INFO 5081 --- [  restartedMain] o.f.c.i.c.DbMigrate                      : Current version of schema "PUBLIC": << Empty Schema >>
+2018-08-31 21:10:18.878  INFO 5081 --- [  restartedMain] o.f.c.i.c.DbMigrate                      : Migrating schema "PUBLIC" to version 1.0 - initial
+2018-08-31 21:10:18.965  INFO 5081 --- [  restartedMain] o.f.c.i.c.DbMigrate                      : Successfully applied 1 migration to schema "PUBLIC" (execution time 00:00.251s)
+2018-08-31 21:10:19.357  INFO 5081 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-08-31 21:10:19.414  INFO 5081 --- [  restartedMain] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-08-31 21:10:19.639  INFO 5081 --- [  restartedMain] o.h.Version                              : HHH000412: Hibernate Core {5.2.17.Final}
+2018-08-31 21:10:19.643  INFO 5081 --- [  restartedMain] o.h.c.Environment                        : HHH000206: hibernate.properties not found
+2018-08-31 21:10:19.750  INFO 5081 --- [  restartedMain] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-08-31 21:10:19.901 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration boolean -> org.hibernate.type.BooleanType@693fc38
+2018-08-31 21:10:19.902 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration boolean -> org.hibernate.type.BooleanType@693fc38
+2018-08-31 21:10:19.902 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Boolean -> org.hibernate.type.BooleanType@693fc38
+2018-08-31 21:10:19.904 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration numeric_boolean -> org.hibernate.type.NumericBooleanType@22b7e4a3
+2018-08-31 21:10:19.906 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration true_false -> org.hibernate.type.TrueFalseType@2503962c
+2018-08-31 21:10:19.908 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration yes_no -> org.hibernate.type.YesNoType@464b6bc1
+2018-08-31 21:10:19.911 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration byte -> org.hibernate.type.ByteType@301bf3ff
+2018-08-31 21:10:19.911 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration byte -> org.hibernate.type.ByteType@301bf3ff
+2018-08-31 21:10:19.911 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Byte -> org.hibernate.type.ByteType@301bf3ff
+2018-08-31 21:10:19.913 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration character -> org.hibernate.type.CharacterType@5420ef2b
+2018-08-31 21:10:19.913 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration char -> org.hibernate.type.CharacterType@5420ef2b
+2018-08-31 21:10:19.914 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Character -> org.hibernate.type.CharacterType@5420ef2b
+2018-08-31 21:10:19.917 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration short -> org.hibernate.type.ShortType@1ff67b5e
+2018-08-31 21:10:19.917 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration short -> org.hibernate.type.ShortType@1ff67b5e
+2018-08-31 21:10:19.918 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Short -> org.hibernate.type.ShortType@1ff67b5e
+2018-08-31 21:10:19.920 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration integer -> org.hibernate.type.IntegerType@4bceaa14
+2018-08-31 21:10:19.920 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration int -> org.hibernate.type.IntegerType@4bceaa14
+2018-08-31 21:10:19.920 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Integer -> org.hibernate.type.IntegerType@4bceaa14
+2018-08-31 21:10:19.924 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration long -> org.hibernate.type.LongType@7719070b
+2018-08-31 21:10:19.924 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration long -> org.hibernate.type.LongType@7719070b
+2018-08-31 21:10:19.925 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Long -> org.hibernate.type.LongType@7719070b
+2018-08-31 21:10:19.929 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration float -> org.hibernate.type.FloatType@3cc781b6
+2018-08-31 21:10:19.929 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration float -> org.hibernate.type.FloatType@3cc781b6
+2018-08-31 21:10:19.930 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Float -> org.hibernate.type.FloatType@3cc781b6
+2018-08-31 21:10:19.933 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration double -> org.hibernate.type.DoubleType@3de5c671
+2018-08-31 21:10:19.934 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration double -> org.hibernate.type.DoubleType@3de5c671
+2018-08-31 21:10:19.934 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Double -> org.hibernate.type.DoubleType@3de5c671
+2018-08-31 21:10:19.937 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration big_decimal -> org.hibernate.type.BigDecimalType@27fe8d6a
+2018-08-31 21:10:19.938 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.math.BigDecimal -> org.hibernate.type.BigDecimalType@27fe8d6a
+2018-08-31 21:10:19.940 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration big_integer -> org.hibernate.type.BigIntegerType@147aa78d
+2018-08-31 21:10:19.941 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.math.BigInteger -> org.hibernate.type.BigIntegerType@147aa78d
+2018-08-31 21:10:19.943 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration string -> org.hibernate.type.StringType@14e56ea7
+2018-08-31 21:10:19.943 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.String -> org.hibernate.type.StringType@14e56ea7
+2018-08-31 21:10:19.945 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration nstring -> org.hibernate.type.StringNVarcharType@3c2a8e67
+2018-08-31 21:10:19.947 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration ncharacter -> org.hibernate.type.CharacterNCharType@a0f5bc1
+2018-08-31 21:10:19.950 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration url -> org.hibernate.type.UrlType@7dc2abb
+2018-08-31 21:10:19.950 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.net.URL -> org.hibernate.type.UrlType@7dc2abb
+2018-08-31 21:10:19.952 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration Duration -> org.hibernate.type.DurationType@39866017
+2018-08-31 21:10:19.952 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.Duration -> org.hibernate.type.DurationType@39866017
+2018-08-31 21:10:19.955 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration Instant -> org.hibernate.type.InstantType@2ca60026
+2018-08-31 21:10:19.955 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.Instant -> org.hibernate.type.InstantType@2ca60026
+2018-08-31 21:10:19.958 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration LocalDateTime -> org.hibernate.type.LocalDateTimeType@3b9a1a0c
+2018-08-31 21:10:19.958 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.LocalDateTime -> org.hibernate.type.LocalDateTimeType@3b9a1a0c
+2018-08-31 21:10:19.961 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration LocalDate -> org.hibernate.type.LocalDateType@1e0dfd0c
+2018-08-31 21:10:19.961 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.LocalDate -> org.hibernate.type.LocalDateType@1e0dfd0c
+2018-08-31 21:10:19.964 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration LocalTime -> org.hibernate.type.LocalTimeType@49985e55
+2018-08-31 21:10:19.964 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.LocalTime -> org.hibernate.type.LocalTimeType@49985e55
+2018-08-31 21:10:19.967 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@737cbc3a
+2018-08-31 21:10:19.967 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.OffsetDateTime -> org.hibernate.type.OffsetDateTimeType@737cbc3a
+2018-08-31 21:10:19.970 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration OffsetTime -> org.hibernate.type.OffsetTimeType@128e0e43
+2018-08-31 21:10:19.970 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.OffsetTime -> org.hibernate.type.OffsetTimeType@128e0e43
+2018-08-31 21:10:19.977 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@1bcce9ee
+2018-08-31 21:10:19.977 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.time.ZonedDateTime -> org.hibernate.type.ZonedDateTimeType@1bcce9ee
+2018-08-31 21:10:19.981 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration date -> org.hibernate.type.DateType@2369bd35
+2018-08-31 21:10:19.981 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.sql.Date -> org.hibernate.type.DateType@2369bd35
+2018-08-31 21:10:19.984 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration time -> org.hibernate.type.TimeType@2e19a837
+2018-08-31 21:10:19.984 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.sql.Time -> org.hibernate.type.TimeType@2e19a837
+2018-08-31 21:10:19.987 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration timestamp -> org.hibernate.type.TimestampType@785de749
+2018-08-31 21:10:19.987 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.sql.Timestamp -> org.hibernate.type.TimestampType@785de749
+2018-08-31 21:10:19.988 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.Date -> org.hibernate.type.TimestampType@785de749
+2018-08-31 21:10:19.990 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration dbtimestamp -> org.hibernate.type.DbTimestampType@299596f5
+2018-08-31 21:10:19.993 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration calendar -> org.hibernate.type.CalendarType@419766ef
+2018-08-31 21:10:19.995 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.Calendar -> org.hibernate.type.CalendarType@419766ef
+2018-08-31 21:10:19.995 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.GregorianCalendar -> org.hibernate.type.CalendarType@419766ef
+2018-08-31 21:10:19.997 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration calendar_date -> org.hibernate.type.CalendarDateType@8609bdb
+2018-08-31 21:10:19.999 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration locale -> org.hibernate.type.LocaleType@543c1c7d
+2018-08-31 21:10:19.999 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.Locale -> org.hibernate.type.LocaleType@543c1c7d
+2018-08-31 21:10:20.000 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration currency -> org.hibernate.type.CurrencyType@132107bc
+2018-08-31 21:10:20.001 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.Currency -> org.hibernate.type.CurrencyType@132107bc
+2018-08-31 21:10:20.003 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration timezone -> org.hibernate.type.TimeZoneType@18c00e2f
+2018-08-31 21:10:20.003 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.TimeZone -> org.hibernate.type.TimeZoneType@18c00e2f
+2018-08-31 21:10:20.005 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration class -> org.hibernate.type.ClassType@5f97fbab
+2018-08-31 21:10:20.005 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Class -> org.hibernate.type.ClassType@5f97fbab
+2018-08-31 21:10:20.008 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration uuid-binary -> org.hibernate.type.UUIDBinaryType@279b38a9
+2018-08-31 21:10:20.008 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.util.UUID -> org.hibernate.type.UUIDBinaryType@279b38a9
+2018-08-31 21:10:20.009 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration uuid-char -> org.hibernate.type.UUIDCharType@abaf927
+2018-08-31 21:10:20.012 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration binary -> org.hibernate.type.BinaryType@114a7679
+2018-08-31 21:10:20.012 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration byte[] -> org.hibernate.type.BinaryType@114a7679
+2018-08-31 21:10:20.012 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration [B -> org.hibernate.type.BinaryType@114a7679
+2018-08-31 21:10:20.014 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration wrapper-binary -> org.hibernate.type.WrapperBinaryType@78dc0f40
+2018-08-31 21:10:20.014 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration Byte[] -> org.hibernate.type.WrapperBinaryType@78dc0f40
+2018-08-31 21:10:20.015 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration [Ljava.lang.Byte; -> org.hibernate.type.WrapperBinaryType@78dc0f40
+2018-08-31 21:10:20.018 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration row_version -> org.hibernate.type.RowVersionType@39aae1cc
+2018-08-31 21:10:20.020 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration image -> org.hibernate.type.ImageType@5b94f26
+2018-08-31 21:10:20.022 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration characters -> org.hibernate.type.CharArrayType@3408913e
+2018-08-31 21:10:20.023 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration char[] -> org.hibernate.type.CharArrayType@3408913e
+2018-08-31 21:10:20.023 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration [C -> org.hibernate.type.CharArrayType@3408913e
+2018-08-31 21:10:20.025 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration wrapper-characters -> org.hibernate.type.CharacterArrayType@70af6473
+2018-08-31 21:10:20.026 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration [Ljava.lang.Character; -> org.hibernate.type.CharacterArrayType@70af6473
+2018-08-31 21:10:20.026 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration Character[] -> org.hibernate.type.CharacterArrayType@70af6473
+2018-08-31 21:10:20.029 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration text -> org.hibernate.type.TextType@3afc4915
+2018-08-31 21:10:20.031 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration ntext -> org.hibernate.type.NTextType@1c31b7f
+2018-08-31 21:10:20.039 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration blob -> org.hibernate.type.BlobType@7e73620
+2018-08-31 21:10:20.040 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.sql.Blob -> org.hibernate.type.BlobType@7e73620
+2018-08-31 21:10:20.041 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration materialized_blob -> org.hibernate.type.MaterializedBlobType@41009f55
+2018-08-31 21:10:20.049 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration clob -> org.hibernate.type.ClobType@5b236953
+2018-08-31 21:10:20.049 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.sql.Clob -> org.hibernate.type.ClobType@5b236953
+2018-08-31 21:10:20.057 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration nclob -> org.hibernate.type.NClobType@76ae8ca2
+2018-08-31 21:10:20.058 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.sql.NClob -> org.hibernate.type.NClobType@76ae8ca2
+2018-08-31 21:10:20.059 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration materialized_clob -> org.hibernate.type.MaterializedClobType@2782d7bb
+2018-08-31 21:10:20.060 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration materialized_nclob -> org.hibernate.type.MaterializedNClobType@407e6340
+2018-08-31 21:10:20.064 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration serializable -> org.hibernate.type.SerializableType@4dc31348
+2018-08-31 21:10:20.074 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration object -> org.hibernate.type.ObjectType@4d2749e7
+2018-08-31 21:10:20.074 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration java.lang.Object -> org.hibernate.type.ObjectType@4d2749e7
+2018-08-31 21:10:20.076 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_date -> org.hibernate.type.AdaptedImmutableType@1a3fb753
+2018-08-31 21:10:20.076 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_time -> org.hibernate.type.AdaptedImmutableType@6d20bd82
+2018-08-31 21:10:20.076 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_timestamp -> org.hibernate.type.AdaptedImmutableType@1881f978
+2018-08-31 21:10:20.076 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_dbtimestamp -> org.hibernate.type.AdaptedImmutableType@ef74bfe
+2018-08-31 21:10:20.077 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_calendar -> org.hibernate.type.AdaptedImmutableType@6915e05c
+2018-08-31 21:10:20.077 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_calendar_date -> org.hibernate.type.AdaptedImmutableType@1318c51
+2018-08-31 21:10:20.077 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_binary -> org.hibernate.type.AdaptedImmutableType@16ecef36
+2018-08-31 21:10:20.078 DEBUG 5081 --- [  restartedMain] o.h.t.BasicTypeRegistry                  : Adding type registration imm_serializable -> org.hibernate.type.AdaptedImmutableType@22f0feae
+2018-08-31 21:10:20.170  INFO 5081 --- [  restartedMain] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2018-08-31 21:10:20.925 TRACE 5081 --- [  restartedMain] o.h.t.TypeFactory                        : Scoping types to session factory org.hibernate.internal.SessionFactoryImpl@1a9ec218
+2018-08-31 21:10:21.521  INFO 5081 --- [  restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-08-31 21:10:22.168  WARN 5081 --- [  restartedMain] o.t.t.TemplateMode                       : [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+2018-08-31 21:10:22.669  WARN 5081 --- [  restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-08-31 21:10:22.826  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/hello/greeting]}" onto public java.lang.String com.home.budgetplanner.controller.HelloControlller.greeting(java.lang.String,org.springframework.ui.Model)
+2018-08-31 21:10:22.841  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/identificationType/list],methods=[GET]}" onto public java.lang.String com.home.budgetplanner.controller.IdentificationTypeController.listIdentificationType(org.springframework.ui.Model)
+2018-08-31 21:10:22.844  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/identificationType/list],methods=[POST]}" onto public java.lang.String com.home.budgetplanner.controller.IdentificationTypeController.searchCustomers(java.lang.String,int,int,org.springframework.ui.Model)
+2018-08-31 21:10:22.845  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/identificationType/showFormForAdd],methods=[GET]}" onto public java.lang.String com.home.budgetplanner.controller.IdentificationTypeController.showFormForAdd(org.springframework.ui.Model)
+2018-08-31 21:10:22.845  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/identificationType/showFormForAdd],methods=[POST]}" onto public java.lang.String com.home.budgetplanner.controller.IdentificationTypeController.saveIdentificationType(com.home.budgetplanner.entity.IdentificationType,org.springframework.validation.BindingResult,org.springframework.web.bind.support.SessionStatus)
+2018-08-31 21:10:22.846  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/welcome]}" onto public java.lang.String com.home.budgetplanner.controller.WelcomeController.welcome(java.util.Map<java.lang.String, java.lang.Object>)
+2018-08-31 21:10:22.860  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-31 21:10:22.861  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-08-31 21:10:22.993  INFO 5081 --- [  restartedMain] o.s.w.s.h.SimpleUrlHandlerMapping        : Mapped URL path [/resources/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-08-31 21:10:23.187  INFO 5081 --- [  restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@14581f8b: startup date [Fri Aug 31 21:10:08 ECT 2018]; root of context hierarchy
+2018-08-31 21:10:25.157  INFO 5081 --- [  restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ffa6c4f9-ae0e-4d72-9a6d-c2daf356be35
+
+2018-08-31 21:10:25.580  INFO 5081 --- [  restartedMain] o.s.s.w.DefaultSecurityFilterChain       : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a804fec, org.springframework.security.web.context.SecurityContextPersistenceFilter@7c5ff7c0, org.springframework.security.web.header.HeaderWriterFilter@617c7608, org.springframework.security.web.csrf.CsrfFilter@1e58e3a7, org.springframework.security.web.authentication.logout.LogoutFilter@7119946e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@64cb9f6c, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@3d8381a9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2851e18d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@131d1cee, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78ccf898, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4fb1ef3, org.springframework.security.web.session.SessionManagementFilter@3097dd7b, org.springframework.security.web.access.ExceptionTranslationFilter@7afb45e2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@38a10619]
+2018-08-31 21:10:26.772  INFO 5081 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2018-08-31 21:10:26.813  INFO 5081 --- [  restartedMain] o.s.b.a.e.w.EndpointLinksResolver        : Exposing 2 endpoint(s) beneath base path '/actuator'
+2018-08-31 21:10:26.845  INFO 5081 --- [  restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2018-08-31 21:10:26.847  INFO 5081 --- [  restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2018-08-31 21:10:26.849  INFO 5081 --- [  restartedMain] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-08-31 21:10:27.000  INFO 5081 --- [  restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2018-08-31 21:10:27.004  INFO 5081 --- [  restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-08-31 21:10:27.022  INFO 5081 --- [  restartedMain] o.s.j.e.a.AnnotationMBeanExporter        : Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-08-31 21:10:27.186  INFO 5081 --- [  restartedMain] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 9090 (http) with context path '/budgetplanner'
+2018-08-31 21:10:27.199  INFO 5081 --- [  restartedMain] c.h.b.SpringBootWebApplication           : Started SpringBootWebApplication in 20.105 seconds (JVM running for 22.136)
+2018-08-31 21:11:04.377  INFO 5081 --- [nio-9090-exec-1] o.a.c.c.C.[.[.[/budgetplanner]           : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-08-31 21:11:04.378  INFO 5081 --- [nio-9090-exec-1] o.s.w.s.DispatcherServlet                : FrameworkServlet 'dispatcherServlet': initialization started
+2018-08-31 21:11:04.495  INFO 5081 --- [nio-9090-exec-1] o.s.w.s.DispatcherServlet                : FrameworkServlet 'dispatcherServlet': initialization completed in 117 ms
+2018-08-31 21:11:15.950  INFO 5081 --- [nio-9090-exec-5] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+Hibernate: 
+    select
+        identifica0_.id_identification_type as id_ident1_0_,
+        identifica0_.description as descript2_0_,
+        identifica0_.mnemonic as mnemonic3_0_,
+        identifica0_.name as name4_0_ 
+    from
+        identification_type identifica0_
+2018-08-31 21:11:16.275 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([id_ident1_0_] : [BIGINT]) - [1001]
+2018-08-31 21:11:16.290 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([descript2_0_] : [VARCHAR]) - [Cedula de Identidad de la persona]
+2018-08-31 21:11:16.292 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([mnemonic3_0_] : [VARCHAR]) - [CI]
+2018-08-31 21:11:16.292 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([name4_0_] : [VARCHAR]) - [Cedula]
+2018-08-31 21:11:16.295 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([id_ident1_0_] : [BIGINT]) - [1002]
+2018-08-31 21:11:16.296 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([descript2_0_] : [VARCHAR]) - [Dummy Identification]
+2018-08-31 21:11:16.296 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([mnemonic3_0_] : [VARCHAR]) - [DM]
+2018-08-31 21:11:16.296 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([name4_0_] : [VARCHAR]) - [Dummy]
+2018-08-31 21:11:16.297 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([id_ident1_0_] : [BIGINT]) - [1003]
+2018-08-31 21:11:16.297 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([descript2_0_] : [VARCHAR]) - [Pasaporte de la persona]
+2018-08-31 21:11:16.297 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([mnemonic3_0_] : [VARCHAR]) - [PS]
+2018-08-31 21:11:16.297 TRACE 5081 --- [nio-9090-exec-5] o.h.t.d.s.BasicExtractor                 : extracted value ([name4_0_] : [VARCHAR]) - [Pasaporte]
+2018-08-31 21:11:16.330 TRACE 5081 --- [nio-9090-exec-5] o.h.t.CollectionType                     : Created collection wrapper: [com.home.budgetplanner.entity.IdentificationType.people#1001]
+2018-08-31 21:11:16.334 TRACE 5081 --- [nio-9090-exec-5] o.h.t.CollectionType                     : Created collection wrapper: [com.home.budgetplanner.entity.IdentificationType.people#1002]
+2018-08-31 21:11:16.335 TRACE 5081 --- [nio-9090-exec-5] o.h.t.CollectionType                     : Created collection wrapper: [com.home.budgetplanner.entity.IdentificationType.people#1003]
+2018-08-31 21:11:17.387  INFO 5081 --- [nio-9090-exec-5] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    531423 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    6921698 nanoseconds spent preparing 1 JDBC statements;
+    416534 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    21070652 nanoseconds spent executing 1 flushes (flushing a total of 3 entities and 3 collections);
+    126134 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+
