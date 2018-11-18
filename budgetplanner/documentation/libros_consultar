@@ -131,3 +131,16 @@ boostrap 4 and tables
 
 https://www.safaribooksonline.com/library/view/bootstrap-4-cookbook/9781785889295/3a668db6-0575-4a7d-a134-01ce13a5144a.xhtml
 http://www.jquery-bootgrid.com/GettingStarted --> jquery bootgrid
+
+
+Pendientes:
+
+Actualizar los formularios para que se pueda regresar a editar el texto cuando se ingresa o modifica una entidad.
+Cambiar plugin de fecha para que formatee automaticamente la fecha con lso simbolos //
+Cambiar pantalla de login para que diga user name y poner etiquetas deinternationalization.
+
+
+
+
+
+

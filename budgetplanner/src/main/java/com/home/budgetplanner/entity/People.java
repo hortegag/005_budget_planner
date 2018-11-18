@@ -15,9 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,7 +32,6 @@ import lombok.ToString;
 @Entity()
 @Data()
 @Table(name = "people")
-@NoArgsConstructor
 @AllArgsConstructor
 public class People implements Serializable {
 
@@ -93,6 +95,39 @@ public class People implements Serializable {
 
         return contain;
     }
+ 
+ 
+     @JsonIgnore
+     @OneToMany(mappedBy = "people", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch=FetchType.LAZY)
+     private List<Transactions> transactions;
+
+
+    public People(Long id, String name, String lastName, String email, LocalDate bornDate, String identification, String username, String password,
+            String enabled, IdentificationType identificationType, List<Groups> groups) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.bornDate = bornDate;
+        this.identification = identification;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.identificationType = identificationType;
+        this.groups = groups;
+    }
+
+
+    public People() {
+        super();
+    }
+    
+    
     
 
+    
+     
+
+     
 }
