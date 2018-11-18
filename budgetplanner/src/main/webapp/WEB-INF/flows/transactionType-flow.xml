@@ -111,23 +111,15 @@
 
     <view-state
         id="confirmCreateEntity"
-        view="#{directorio}/peopleConfirmCreate"
+        view="#{directorio}/transactionTypeConfirmCreate"
         model="identificationType">
 
 
         <transition
             on="confirm"
             to="success">
-            
-            <evaluate expression="peopleController.save(flowScope.people)" /> 
-
-
-<!--          <evaluate expression="servicio.save(flowScope.people)" />    -->   
-            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" /> 
         </transition>
-
-        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
-
 
         <transition
             on="cancel"

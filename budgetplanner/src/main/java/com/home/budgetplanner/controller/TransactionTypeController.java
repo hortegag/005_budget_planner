@@ -26,6 +26,7 @@ import com.home.budgetplanner.controller.form.TransactionTypeDTOGrid;
 import com.home.budgetplanner.entity.Groups;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
+import com.home.budgetplanner.entity.TransactionType;
 import com.home.budgetplanner.service.GroupService;
 import com.home.budgetplanner.service.IdentificationTypeService;
 import com.home.budgetplanner.service.PeopleService;
@@ -47,17 +48,16 @@ import com.google.common.collect.Lists;
 @RequestMapping("/transactionType")
 public class TransactionTypeController {
 
-    private static final Logger       logger = LogManager.getLogger(BudgetplannerApplication.class);
+    private static final Logger    logger = LogManager.getLogger(BudgetplannerApplication.class);
 
     @Autowired
-    private PeopleService             peopleService;
+    private PeopleService          peopleService;
 
     @Autowired
-    private TransactionTypeService    transactionTypeService;
-
+    private TransactionTypeService transactionTypeService;
 
     @Autowired
-    private GroupService              groupService;
+    private GroupService           groupService;
 
     @ResponseBody
     @RequestMapping(value = "/listGridByNameAndDescription", method = RequestMethod.GET, produces = "application/json")
@@ -69,8 +69,8 @@ public class TransactionTypeController {
         // Process order by
         Sort sort = null;
         String orderBy = searchForm.getSidx();
-        //if (orderBy != null && orderBy.equals("bornDateString"))
-        //    orderBy = "bornDate";
+        // if (orderBy != null && orderBy.equals("bornDateString"))
+        // orderBy = "bornDate";
 
         if (orderBy != null && searchForm.getSord() != null) {
             if (searchForm.getSord().equals("desc")) {
@@ -97,7 +97,8 @@ public class TransactionTypeController {
         if (StringUtils.isBlank(searchForm.getName()) && StringUtils.isBlank(searchForm.getDescription())) {
             contactPage = transactionTypeService.findAllTransactionsTypeByPage(pageRequest);
         } else {
-            contactPage = transactionTypeService.findTransactionsTypeByNameOrDescriptionPage(searchForm.getName(), searchForm.getDescription(), pageRequest);
+            contactPage = transactionTypeService.findTransactionsTypeByNameOrDescriptionPage(searchForm.getName(), searchForm.getDescription(),
+                    pageRequest);
 
         }
 
@@ -119,50 +120,12 @@ public class TransactionTypeController {
         return pageable;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/listgridTestWrap", method = RequestMethod.GET, produces = "application/json")
-    public PageWrapper<People> listGridTestWrap(@PageableDefault Pageable pageable, RequestContext requestContext) {
-
-        logger.info("Listing contacts for grid with page: {}", pageable);
-
-        Page<People> contactPage = peopleService.findAllByPage(pageable);
-
-        // Construct the grid data that will return as JSON data
-        // PeopleGrid contactGrid = new PeopleGrid();
-
-        // contactGrid.setCurrentPage(contactPage.getNumber() + 1);
-        // contactGrid.setTotalPages(contactPage.getTotalPages());
-        // contactGrid.setTotalRecords(contactPage.getTotalElements());
-
-        PageWrapper<People> page = new PageWrapper<People>(contactPage, "/listgridTestWrap");
-
-        requestContext.getFlowScope().put("page", page);
-        requestContext.getFlashScope().put("page", page);
-
-        // contactGrid.setPeopleData(Lists.newArrayList(contactPage.iterator()));
-
-        return page;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/listgridTestHate", method = RequestMethod.GET, produces = "application/json")
-    public Page<People> listGridTestHate(Pageable pageable) {
-
-        logger.info("Listing contacts for grid with page: {}", pageable);
-
-        Page<People> contactPage = peopleService.findAllByPage(pageable);
-
-        return contactPage;
-    }
-
     public TransactionTypeDTO initializeTransactionTypeDTO() {
 
         TransactionTypeDTO transactionTypeDTO = new TransactionTypeDTO();
 
         return transactionTypeDTO;
     }
-
-
 
     public List<Groups> initializeSelectableGroup() {
 
@@ -171,26 +134,6 @@ public class TransactionTypeController {
 
     }
 
-    /*
-     * @GetMapping("/testPeopleBootstrapTres")
-     * 
-     * //@RequestMapping(value = "/testPeopleBootstrapTres", method =
-     * RequestMethod.GET, produces = "application/json") public Page<People>
-     * listGridTestHate(Pageable pageable) {
-     * 
-     * logger.info("Listing contacts for grid with page: {}", pageable);
-     * 
-     * model.addAttribute("identificationsType", identificationsType);
-     * 
-     * return "identificationType/list-identificationsType";
-     * 
-     * Page<People> contactPage = peopleService.findAllByPage(pageable);
-     * 
-     * @GetMapping("/list")
-     * 
-     * return contactPage; }
-     */
-
     public PeopleDTO findById(Long id) {
 
         PeopleDTO peopleDTO = PeopleDTO.build(peopleService.findById(new Long(id)));
@@ -198,28 +141,16 @@ public class TransactionTypeController {
         return peopleDTO;
 
     }
-/*
-    public void save(PeopleDTO peopleDTO) {
 
+    public void save(TransactionTypeDTO transactionTypeDTO) {
 
+        TransactionType transactionType = TransactionTypeDTO.dtoToEntity(transactionTypeDTO);
 
-        List<Groups> groups = new ArrayList<>();
+        transactionTypeService.save(transactionType);
 
-        for (String groupid : peopleDTO.getGroups()) {
-
-            groups.add(groupService.findById(new Long(groupid)));
-
-        }
-        IdentificationType identificationType = identificationTypeService.findById(new Long(peopleDTO.getIdentificationTypeId()));
-
-        People people = PeopleDTO.dtoToEntity(peopleDTO, groups, identificationType);
-
-        peopleService.save(people);
-
-    }*/
+    }
 
     public People save(People people) {
-
 
         return peopleService.save(people);
     }

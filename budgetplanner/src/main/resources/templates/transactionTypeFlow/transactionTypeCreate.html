@@ -50,7 +50,7 @@
                         th:action="${flowExecutionUrl}"
                         method="post"
                         autocomplete="off">
-  
+
                         <div class="form-group">
                             <label
                                 for="name"
@@ -85,6 +85,8 @@
                                 class="invalid-feedback">description Error</p>
 
                         </div>
+                        
+<!--             
                         <div class="form-group">
 
                             <label
@@ -103,7 +105,32 @@
                                 class="invalid-feedback">entryType Error</p>
 
                         </div>
-                  
+ -->
+
+                        <div class="form-group">
+
+                            <label
+                                for="entryType"
+                                th:text="#{transactionType.entity.entryType}">entryType:</label>
+                            <select
+                                id="entryType"
+                                th:field="*{entryType}"
+                                class="custom-select">
+                                <option
+                                    th:value="DEBIT"
+                                    th:text="DEBIT">entryType</option>
+                                <option
+                                    th:value="CREDIT"
+                                    th:text="CREDIT">entryType</option>
+                            </select>
+
+
+                            <p
+                                th:if="${#fields.hasErrors('entryType')}"
+                                th:errors="*{entryType}"
+                                class="invalid-feedback">entry Error</p>
+                        </div>
+
 
                         <input
                             id="addTransactionType"
@@ -137,19 +164,6 @@
 
         </div>
  -->
-        <script type="text/javascript">
-									$(function() {
-										console.log('ttttttttt');
-										$('#bornDate').datepicker({
-											dateFormat : 'dd-mm-yy',
-                                            yearRange: '-120:+0',
-                                            changeMonth: true,
-											changeYear : true
-										});
-										//$("#datepicker").datepicker();
-
-									});
-								</script>
 
         <!-- enable to test ajax -->
         <!--
