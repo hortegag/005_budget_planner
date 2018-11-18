@@ -26,7 +26,6 @@
         id="list"
         view="#{directorio}/transactionTypeList">
 
-        <!-- <attribute></attribute> <attribute name="page" value="flowScope.pagetest"></attribute> -->
         <transition
             on="search"
             to="list">
@@ -50,7 +49,6 @@
 
                 result="flowScope.transactionType" />
 
-            <!-- <evaluate expression="servicio.findById(requestParameters.id)" result="flowScope.people" /> -->
 
         </transition>
 
@@ -59,7 +57,7 @@
             to="confirmDeleteEntity">
             <evaluate
                 expression="servicio.findById(requestParameters.id)"
-                result="flowScope.people" />
+                result="flowScope.transactionType" />
         </transition>
     </view-state>
 
@@ -108,8 +106,6 @@
 
 
     </view-state>
-
-    <!-- <end-state id="success" view="redirect:welcome"> -->
 
 
 
@@ -164,7 +160,7 @@
 
     <view-state
         id="confirmDeleteEntity"
-        view="#{directorio}/peopleConfirmDelete"
+        view="#{directorio}/transactionTypeConfirmDelete"
         model="transactionType">
 
 
@@ -183,7 +179,6 @@
     </view-state>
 
 
-    <!-- <view-state id="success" /> -->
 
     <view-state id="failure" />
 
