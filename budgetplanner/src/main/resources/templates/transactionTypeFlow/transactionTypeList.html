@@ -118,7 +118,7 @@
                 class="btn btn-primary"
                 name="_eventId_add"
                 type="submit"
-                th:value="#{people.list.add.button}"></input>
+                th:value="#{identificationType.list.add.button}"></input>
           
         </form>
 
@@ -158,15 +158,14 @@
 											regional : language
 										});*/
 
-									var urlList = '[(@{/people/listGridBynameAndLastName})]';
+
+
+									var urlList = '[(@{/transactionType/listGridByNameAndDescription})]';
 									var tableId = '[(#{people.list.search.table.id})]';
-									var tableActions = '[(#{people.list.search.table.actions})]';
-									var tableName = '[(#{people.list.search.table.name})]';
-									var tableLastName = '[(#{people.list.search.table.lastName})]';
-									var tableEmail = '[(#{people.list.search.table.email})]';
-									var tableBornDate = '[(#{people.list.search.table.bornDate})]';
-									var tableIdentification = '[(#{people.list.search.table.identification})]';
-									var tableIdentificationType = '[(#{people.list.search.table.identificationType})]';
+									var tableActions = '[(#{transactionType.list.search.table.actions})]';
+									var tableName = '[(#{transactionType.list.search.table.name})]';
+									var tableDescription = '[(#{transactionType.list.search.table.description})]';
+									var tableEntryType = '[(#{transactionType.list.search.table.entryType})]';
 
 									//var testEditTwo = '[[${flowExecutionUrl}]]';
 									var testEditTwo = '[(${flowExecutionUrl})]';
@@ -186,11 +185,8 @@
 															colNames : [
 																	tableActions,
 																	tableName,
-																	tableLastName,
-																	tableEmail,
-																	tableBornDate,
-																	tableIdentification,
-																	tableIdentificationType ],
+																	tableDescription,
+																	tableEntryType],
 															colModel : [
 																	{
 																		name : 'act',
@@ -204,28 +200,13 @@
 																		width : 100
 																	},
 																	{
-																		name : 'lastName',
-																		index : 'lastName',
-																		width : 100
-																	},
-																	{
-																		name : 'email',
-																		index : 'email',
+																		name : 'description',
+																		index : 'description',
 																		width : 150
 																	},
 																	{
-																		name : 'bornDateString',
-																		index : 'bornDate',
-																		width : 65
-																	},
-																	{
-																		name : 'identification',
-																		index : 'identification',
-																		width : 100
-																	},
-																	{
-																		name : 'identificationType',
-																		index : 'identificationType',
+																		name : 'entryType',
+																		index : 'entryType',
 																		width : 100
 																	}
 

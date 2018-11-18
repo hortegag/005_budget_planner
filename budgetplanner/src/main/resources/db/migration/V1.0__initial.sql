@@ -206,3 +206,13 @@ ALTER TABLE public.transactions ADD CONSTRAINT custom_transaction_type_fk FOREIG
 REFERENCES public.custom_transaction_type (id_custom_transaction_type)
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
+
+
+
+insert into transaction_type values (6001, 'SALARY', 'Salary earned this month', 'CREDIT');
+insert into transaction_type values (6002, 'FOOD', 'Money spent on food', 'DEBIT');
+insert into transaction_type values (6003, 'ENTERTEINMENT', 'Money spent on enterteinment', 'DEBIT');
+
+
+
+
