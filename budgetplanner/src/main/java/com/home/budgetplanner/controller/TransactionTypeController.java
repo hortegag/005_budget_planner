@@ -155,11 +155,11 @@ public class TransactionTypeController {
         return contactPage;
     }
 
-    public People initializePeople() {
+    public TransactionTypeDTO initializeTransactionTypeDTO() {
 
-        People people = new People();
+        TransactionTypeDTO transactionTypeDTO = new TransactionTypeDTO();
 
-        return people;
+        return transactionTypeDTO;
     }
 
 

@@ -20,7 +20,7 @@
             name="flowScope.directorio"
             value="'transactionTypeFlow'" />
         <!-- <evaluate expression="peopleController.listGridTest(peopleController.initializePageable())" result="flowScope.test" /> -->
-
+<!-- 
         <evaluate
             expression="peopleController.listGridTestWrap(peopleController.initializePageable(), flowRequestContext)"
             result="flowScope.page" />
@@ -29,7 +29,7 @@
             name="flowScope.peoples"
             value="flowScope.page.getContent()" />
 
-        <!-- <set name="flowScope.pagetest" value="flowScope.test" /> -->
+        <set name="flowScope.pagetest" value="flowScope.test" /> -->
 
     </on-start>
 
@@ -41,16 +41,14 @@
         <transition
             on="search"
             to="list">
-            <evaluate
-                expression="identificationTypeController.searchIdentifications(flowScope.searchIdentificationTypeForm)"
-                result="flowScope.identificationsType" />
+ 
         </transition>
         <transition
             on="add"
             to="addEntity">
             <evaluate
-                expression="peopleController.initializePeople()"
-                result="flowScope.people" />
+                expression="transactionTypeController.initializeTransactionTypeDTO()"
+                result="flowScope.transactionType" />
         </transition>
 
         <transition
@@ -85,17 +83,9 @@
 
     <view-state
         id="addEntity"
-        view="#{directorio}/peopleCreate"
-        model="people">
-        <on-render>
-            <evaluate
-                expression="peopleController.initializeSelectableIdentificationTypes()"
-                result="flashScope.selectableIdentificationTypes" />
-            <evaluate
-                expression="peopleController.initializeSelectableGroup()"
-                result="flashScope.selectableGroup" />
-
-        </on-render>
+        view="#{directorio}/transactionTypeCreate"
+        model="transactionType">
+   
 
         <transition
             on="save"

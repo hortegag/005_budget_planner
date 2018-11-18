@@ -70,25 +70,25 @@
                         </div>
                         <div class="form-group">
                             <label
-                                for="lastName"
+                                for="description"
                                 th:text="#{transactionType.entity.description}">description label:</label>
                             <input
                                 type="text"
                                 th:field="*{description}"
                                 class="form-control"
                                 th:classappend="${#fields.hasErrors('description')} ? is-invalid"
-                                id="lastName"
+                                id="description"
                                 th:placeholder="#{transactionType.entity.description.placeholder}" />
                             <p
-                                th:if="${#fields.hasErrors('lastName')}"
-                                th:errors="*{lastName}"
+                                th:if="${#fields.hasErrors('description')}"
+                                th:errors="*{description}"
                                 class="invalid-feedback">description Error</p>
 
                         </div>
                         <div class="form-group">
 
                             <label
-                                for="email"
+                                for="entryType"
                                 th:text="#{transactionType.entity.entryType}">entryType label:</label>
                             <input
                                 type="text"
@@ -102,18 +102,17 @@
                                 th:errors="*{entryType}"
                                 class="invalid-feedback">entryType Error</p>
 
-
                         </div>
                   
 
                         <input
-                            id="addPerson"
+                            id="addTransactionType"
                             class="btn btn-primary"
                             name="_eventId_save"
                             type="submit"
                             th:value="#{transactionType.add.save.button}"></input>
                         <input
-                            id="cancelAddPerson"
+                            id="cancelAddTransactionType"
                             class="btn btn-dark"
                             name="_eventId_cancel"
                             type="submit"

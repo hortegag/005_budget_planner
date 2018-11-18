@@ -62,13 +62,13 @@
 
         <div class="form-group">
             <label
-                for="searchLastName"
-                th:text="#{transactionType.list.search.filter.description}">searchIdentification</label>
+                for="searchDescription"
+                th:text="#{transactionType.list.search.filter.description}">searchDescription</label>
 
             <input
-                id="searchLastName"
+                id="searchDescription"
                 type="text"
-                name="searchLastName"
+                name="searchDescription"
                 class="form-control"
                 th:placeholder="#{transactionType.list.search.filter.description.placeholder}" />
 
@@ -106,7 +106,7 @@
         </div>
         <h2
             class="mt-5"
-            th:text="#{identificationType.list.search.result.title}"></h2>
+            th:text="#{transactionType.list.search.result.title}"></h2>
 
 
         <form
@@ -118,10 +118,14 @@
                 class="btn btn-primary"
                 name="_eventId_add"
                 type="submit"
-                th:value="#{identificationType.list.add.button}"></input>
+                th:value="#{transacctionTypeType.list.add.button}"></input>
           
         </form>
 
+
+<!-- valid message when we ar a wroking with the request of web flow. But in this case with are working with ajax -->
+
+<!-- 
         <div
             class="mt-5"
             th:if="${#lists.isEmpty(peoples)}">
@@ -131,7 +135,7 @@
                 <p th:text="#{identificationType.list.search.empty.results}"></p>
             </div>
         </div>
-
+-->
         <hr />
         <div class="mt-5">
             <table id="list">
@@ -161,7 +165,7 @@
 
 
 									var urlList = '[(@{/transactionType/listGridByNameAndDescription})]';
-									var tableId = '[(#{people.list.search.table.id})]';
+									var tableId = '[(#{transactionType.list.search.table.id})]';
 									var tableActions = '[(#{transactionType.list.search.table.actions})]';
 									var tableName = '[(#{transactionType.list.search.table.name})]';
 									var tableDescription = '[(#{transactionType.list.search.table.description})]';
@@ -299,7 +303,7 @@
 											var searchName = jQuery(
 													"#searchName").val();
 											var searchLastName = jQuery(
-													"#searchLastName").val();
+													"#searchDescription").val();
 											jQuery("#list")
 													.jqGrid(
 															'setGridParam',
@@ -307,7 +311,7 @@
 																url : urlList
 																		+ "?name="
 																		+ searchName
-																		+ "&lastName="
+																		+ "&description="
 																		+ searchLastName,
 																page : 1
 															}).trigger(

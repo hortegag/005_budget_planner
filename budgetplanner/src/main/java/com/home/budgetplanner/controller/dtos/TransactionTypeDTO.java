@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+ @Data
 // @NoArgsConstructor
 //@AllArgsConstructor
 public class TransactionTypeDTO implements Serializable {
@@ -37,6 +37,7 @@ public class TransactionTypeDTO implements Serializable {
        return new TransactionTypeDTO(transactionType.getId(), transactionType.getName(), transactionType.getDescription(), transactionType.getEntryType());
 
     }
+    
 
     public TransactionTypeDTO(Long id, String name, String description, String entryType) {
         super();
@@ -50,6 +51,11 @@ public class TransactionTypeDTO implements Serializable {
         TransactionType transactionType = new TransactionType(transactionTypeDTO.getId(), transactionTypeDTO.getName(), transactionTypeDTO.getDescription(), transactionTypeDTO.getEntryType());
         return transactionType;
 
+    }
+
+
+    public TransactionTypeDTO() {
+        super();
     }
 
 }
