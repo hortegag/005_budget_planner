@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow
+    xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+    start-state="list">
+
+    <secured
+        attributes="ROLE_ADMIN"
+        match="any" />
+
+
+    <var
+        name="servicio"
+        class="com.home.budgetplanner.service.impl.PeopleServiceImpl" />
+    <on-start>
+        <set
+            name="flowScope.directorio"
+            value="'peopleFlow'" />
+        <!-- <evaluate expression="peopleController.listGridTest(peopleController.initializePageable())" result="flowScope.test" /> -->
+
+        <evaluate
+            expression="peopleController.listGridTestWrap(peopleController.initializePageable(), flowRequestContext)"
+            result="flowScope.page" />
+
+        <set
+            name="flowScope.peoples"
+            value="flowScope.page.getContent()" />
+
+        <!-- <set name="flowScope.pagetest" value="flowScope.test" /> -->
+
+    </on-start>
+
+    <view-state
+        id="list"
+        view="#{directorio}/peopleTestBootstrapTres">
+
+        <!-- <attribute></attribute> <attribute name="page" value="flowScope.pagetest"></attribute> -->
+        <transition
+            on="search"
+            to="list">
+            <evaluate
+                expression="identificationTypeController.searchIdentifications(flowScope.searchIdentificationTypeForm)"
+                result="flowScope.identificationsType" />
+        </transition>
+        <transition
+            on="add"
+            to="addEntity">
+            <evaluate
+                expression="peopleController.initializePeople()"
+                result="flowScope.people" />
+        </transition>
+
+        <transition
+            on="edit"
+            to="editEntity">
+            
+
+             <evaluate
+                expression="peopleController.findById(requestParameters.id)"
+ 
+                result="flowScope.people" />
+
+<!--
+
+              <evaluate
+                expression="servicio.findById(requestParameters.id)"
+ 
+                result="flowScope.people" />
+-->
+ 
+        </transition>
+
+        <transition
+            on="delete"
+            to="confirmDeleteEntity">
+            <evaluate
+                expression="servicio.findById(requestParameters.id)"
+                result="flowScope.people" />
+        </transition>
+    </view-state>
+
+
+    <view-state
+        id="addEntity"
+        view="#{directorio}/peopleCreate"
+        model="people">
+        <on-render>
+            <evaluate
+                expression="peopleController.initializeSelectableIdentificationTypes()"
+                result="flashScope.selectableIdentificationTypes" />
+            <evaluate
+                expression="peopleController.initializeSelectableGroup()"
+                result="flashScope.selectableGroup" />
+
+        </on-render>
+
+        <transition
+            on="save"
+            to="confirmCreateEntity">
+            <!--<evaluate expression="servicio.save(flowScope.identificationType)" /> -->
+            <!--<evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="cancel" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false">
+        </transition>
+
+        <transition on="updateData">
+            <!-- <render fragments="[//div[@id='data']]" /> -->
+            <render fragments="hoteldata" />
+
+        </transition>
+
+    </view-state>
+
+    <view-state
+        id="confirmCreateEntity"
+        view="#{directorio}/peopleConfirmCreate"
+        model="identificationType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            
+            <evaluate expression="peopleController.save(flowScope.people)" /> 
+
+
+<!--          <evaluate expression="servicio.save(flowScope.people)" />    -->   
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
+
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+    <!-- <end-state id="success" view="redirect:welcome"> -->
+
+
+
+    <view-state
+        id="editEntity"
+        view="#{directorio}/peopleEditTest"
+        model="people">
+
+        <on-render>
+            <evaluate
+                expression="peopleController.initializeSelectableIdentificationTypes()"
+                result="flashScope.selectableIdentificationTypes" />
+            <evaluate
+                expression="peopleController.initializeSelectableGroup()"
+                result="flashScope.selectableGroup" />
+
+
+        </on-render>
+
+
+        <transition
+            on="save"
+            to="confirmEditEntity">
+            <!-- <evaluate expression="servicio.save(flowScope.identificationType)" /> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" 
+                /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false">
+        </transition>
+    </view-state>
+
+
+
+    <view-state
+        id="confirmEditEntity"
+        view="#{directorio}/peopleConfirmEdit"
+        model="people">
+
+
+        <transition
+            on="confirm"
+            to="success">
+       <!--    <evaluate expression="servicio.save(flowScope.people)" />   -->  
+       
+        <evaluate expression="peopleController.save(flowScope.people)" />
+       
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
+
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+
+
+
+    <view-state
+        id="confirmDeleteEntity"
+        view="#{directorio}/peopleConfirmDelete"
+        model="people">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="servicio.deleteById(flowScope.people.id)" />
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+    <!-- <view-state id="success" /> -->
+
+    <view-state id="failure" />
+
+
+    <end-state id="success"></end-state>
+    <end-state id="cancel"></end-state>
+
+</flow>
