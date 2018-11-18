@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+<head>
+<title th:text="#{transactionType.list.title}"></title>
+
+
+<!-- 
+<script
+    th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"
+    src=""></script>
+ -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css">
+
+<link
+    rel="stylesheet"
+    th:href="@{/jqgrid/css/ui.jqgrid-bootstrap4.css}" />
+
+
+<!-- 
+<script
+    th:src="@{/jqgrid/js/i18n/grid.locale-en.js}"
+    src=""></script>
+ -->
+<script
+    th:src="@{'/jqgrid/js/i18n/grid.locale-'+${#locale}+'.js'}"
+    src=""></script>
+
+<script
+    th:src="@{/jqgrid/js/jquery.jqGrid.min.js}"
+    src=""></script>
+
+
+
+</head>
+<body>
+    <div layout:fragment="content">
+
+        <h1
+            class="mt-5"
+            th:text="#{transactionType.list.title}"></h1>
+        <!-- You cand add the action attribute or you can skip it, If you skip it the browser will call the same url in the bar direction but in the case with a post method. -->
+        <!-- th:action="@{/identificationType/list}" -->
+
+
+        <div class="form-group">
+            <label
+                for="searchName"
+                th:text="#{transactionType.list.search.filter.name}">searchName</label>
+
+            <input
+                id="searchName"
+                type="text"
+                name="searchName"
+                class="form-control"
+                th:placeholder="#{transactionType.list.search.filter.name.placeholder}" />
+        </div>
+
+        <div class="form-group">
+            <label
+                for="searchLastName"
+                th:text="#{transactionType.list.search.filter.description}">searchIdentification</label>
+
+            <input
+                id="searchLastName"
+                type="text"
+                name="searchLastName"
+                class="form-control"
+                th:placeholder="#{transactionType.list.search.filter.description.placeholder}" />
+
+
+        </div>
+        <input
+            id=submitButton
+            class="btn btn-primary"
+            name="_eventId_search"
+            type="submit"
+            th:value="#{transactionType.list.search.button}"></input>
+
+        <div>
+            <!--     Name
+            <br>
+            <input
+                type="text"
+                id="searchName"
+                name="searchName" />  -->
+
+            <!--   LastName
+            <br>
+            <input
+                type="text"
+                id="searchLastName"
+                name="searchLastName" />  -->
+            <!--      <button
+                onclick="gridReload()"
+                id="submitButton"
+                style="margin-left: 30px;">Search</button>    -->
+
+            <!-- <button
+                id="submitButton"
+                style="margin-left: 30px;">Search</button>  -->
+        </div>
+        <h2
+            class="mt-5"
+            th:text="#{identificationType.list.search.result.title}"></h2>
+
+
+        <form
+            action="#"
+            th:action="${flowExecutionUrl}"
+            method="post">
+            <input
+                id="addPeople"
+                class="btn btn-primary"
+                name="_eventId_add"
+                type="submit"
+                th:value="#{people.list.add.button}"></input>
+          
+        </form>
+
+        <div
+            class="mt-5"
+            th:if="${#lists.isEmpty(peoples)}">
+            <div
+                class="alert alert-warning"
+                role="alert">
+                <p th:text="#{identificationType.list.search.empty.results}"></p>
+            </div>
+        </div>
+
+        <hr />
+        <div class="mt-5">
+            <table id="list">
+            </table>
+            <div id="pager"></div>
+        </div>
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+									$.jgrid.defaults.styleUI = 'Bootstrap4';
+									//$.jgrid.defaults.iconSet = 'Octicons';
+									$.jgrid.defaults.iconSet = "fontAwesome";
+									$.jgrid.defaults.width = 'auto';
+									$.jgrid.defaults.responsive = true;
+
+									var language = '[(${#locale})]';
+									/*
+									 $.jgrid.setRegional('grid', {
+									 regional : 'es'
+									 });
+									 */
+									/*	$.jgrid.setRegional('jqGrid', {
+											regional : language
+										});*/
+
+									var urlList = '[(@{/people/listGridBynameAndLastName})]';
+									var tableId = '[(#{people.list.search.table.id})]';
+									var tableActions = '[(#{people.list.search.table.actions})]';
+									var tableName = '[(#{people.list.search.table.name})]';
+									var tableLastName = '[(#{people.list.search.table.lastName})]';
+									var tableEmail = '[(#{people.list.search.table.email})]';
+									var tableBornDate = '[(#{people.list.search.table.bornDate})]';
+									var tableIdentification = '[(#{people.list.search.table.identification})]';
+									var tableIdentificationType = '[(#{people.list.search.table.identificationType})]';
+
+									//var testEditTwo = '[[${flowExecutionUrl}]]';
+									var testEditTwo = '[(${flowExecutionUrl})]';
+									var testEditTwo = '[(@{"~"+${flowExecutionUrl}})] ';
+									var editUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=edit)})]";
+									var deleteUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
+
+									console.log("test:" + urlList);
+									$(function() {
+										$("#list")
+												.jqGrid(
+														{
+															url : urlList,
+															datatype : 'json',
+															//regional : 'es',
+															mtype : 'GET',
+															colNames : [
+																	tableActions,
+																	tableName,
+																	tableLastName,
+																	tableEmail,
+																	tableBornDate,
+																	tableIdentification,
+																	tableIdentificationType ],
+															colModel : [
+																	{
+																		name : 'act',
+																		index : 'act',
+																		width : 70,
+																		sortable : false
+																	},
+																	{
+																		name : 'name',
+																		index : 'name',
+																		width : 100
+																	},
+																	{
+																		name : 'lastName',
+																		index : 'lastName',
+																		width : 100
+																	},
+																	{
+																		name : 'email',
+																		index : 'email',
+																		width : 150
+																	},
+																	{
+																		name : 'bornDateString',
+																		index : 'bornDate',
+																		width : 65
+																	},
+																	{
+																		name : 'identification',
+																		index : 'identification',
+																		width : 100
+																	},
+																	{
+																		name : 'identificationType',
+																		index : 'identificationType',
+																		width : 100
+																	}
+
+															],
+															jsonReader : {
+																root : "peopleData",
+																page : "currentPage",
+																total : "totalPages",
+																records : "totalRecords",
+																repeatitems : false,
+																id : "id"
+															},
+															//styleUI : 'Bootstrap',
+															//guiStyle : "bootstrap4",
+															//iconSet : "fontAwesome",
+															pager : '#pager',
+															rowNum : 10,
+															rowList : [ 1, 10,
+																	20, 30 ],
+															sortname : 'name',
+															sortorder : 'asc',
+															viewrecords : true,
+															gridview : true,
+															width : 1100,
+															//height : 200,
+															//width : '800',
+															//shrinkToFit : false,
+															height : 'auto',
+															//width : 500,
+															//caption : '${labelContactList}',
+															//onSelectRow : function(
+															//		id) {
+															//	document.location.href = "${showContactUrl}/"
+															//			+ id;
+															//},
+															gridComplete : function() {
+																var ids = jQuery(
+																		"#list")
+																		.jqGrid(
+																				'getDataIDs');
+																for (var i = 0; i < ids.length; i++) {
+																	var cl = ids[i];
+																	be = "<input style='height:22px;width:20px;' type='button' value='E' onclick=\"jQuery('#rowed2').editRow('"
+																			+ cl
+																			+ "');\"  />";
+																	se = "<input style='height:22px;width:20px;' type='button' value='S' onclick=\"jQuery('#rowed2').saveRow('"
+																			+ cl
+																			+ "');\"  />";
+																	ce = "<input style='height:22px;width:20px;' type='button' value='C' onclick=\"jQuery('#rowed2').restoreRow('"
+																			+ cl
+																			+ "');\" />";
+
+																	editUrlWithParameters = editUrl
+																			+ '&id='
+																			+ cl;
+																	deleteUrlWithParameters = deleteUrl
+																			+ '&id='
+																			+ cl;
+																	//console.log(testEditThree);
+																	testEdit = "<a href='"+editUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
+																	testDelete = " <a href='"+deleteUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
+
+																	jQuery(
+																			"#list")
+																			.jqGrid(
+																					'setRowData',
+																					ids[i],
+																					{
+																						act : testEdit
+																								+ testDelete
+																					///+ ce
+																					});
+																}
+															}
+
+														});
+										//$("#list").jqGrid("setFrozenColumns");
+										jQuery("#list").jqGrid('navGrid',
+												"#pager", {
+													edit : false,
+													add : false,
+													del : false,
+													search : false
+												});
+
+										function gridReload() {
+
+											console
+													.log("fffffffffffffffffffffffffffff----------------");
+											var searchName = jQuery(
+													"#searchName").val();
+											var searchLastName = jQuery(
+													"#searchLastName").val();
+											jQuery("#list")
+													.jqGrid(
+															'setGridParam',
+															{
+																url : urlList
+																		+ "?name="
+																		+ searchName
+																		+ "&lastName="
+																		+ searchLastName,
+																page : 1
+															}).trigger(
+															"reloadGrid");
+										}
+										var numeroDocumento = document
+												.querySelector("#submitButton");
+
+										numeroDocumento.addEventListener(
+												'click', function(event) {
+													return gridReload(event);
+												});
+
+									});
+									/*
+									 function gridReload() {
+									 console
+									 .log("tettttttttt----------------");
+									 var nm_mask = jQuery("#item_nm").val();
+									 var cd_mask = jQuery("#search_cd")
+									 .val();
+									 jQuery("#bigset").jqGrid(
+									 'setGridParam',
+									 {
+									 url : "bigset.php?nm_mask="
+									 + nm_mask
+									 + "&cd_mask="
+									 + cd_mask,
+									 page : 1
+									 }).trigger("reloadGrid");
+									 }
+									
+									 */
+								</script>
+
+    </div>
+
+
+
+
+</body>
+</html>

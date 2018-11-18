@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+<head>
+<title th:text="#{people.add.title}"></title>
+<!-- 
+<script
+    type="text/javascript"
+    th:src="@{/resources/dojo/dojo.js}"></script>
+<script
+    type="text/javascript"
+    th:src="@{/resources/spring/Spring.js}"></script>
+<script
+    type="text/javascript"
+    th:src="@{/resources/spring/Spring-Dojo.js}"></script>
+    
+     -->
+
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <!-- 
+    Put Optional next to a label instead an asterisk in required field. Using optional it is more readable, an easy to understand to the user that is filling the form.
+    https://blog.optimalworkshop.com/designing-form-fields-optional-versus-required
+    https://uxdesign.cc/form-field-required-vs-optional-9b4d7cdbf400
+
+
+ -->
+        <p class="mt-5"></p>
+        <!-- 		
+		<form action="#"
+			th:action="@{/identificationType/saveIdentificationType}"
+			th:object="${identificationType}" method="post">   -->
+
+        <!-- th:action="@{/identificationType/showFormForAdd}" -->
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3
+                        class="card-title"
+                        th:text="#{transactionType.add.title}"></h3>
+                </div>
+                <div class="card-body">
+                    <form
+                        id="formPeople"
+                        th:object="${transactionType}"
+                        th:action="${flowExecutionUrl}"
+                        method="post"
+                        autocomplete="off">
+  
+                        <div class="form-group">
+                            <label
+                                for="name"
+                                th:text="#{transactionType.entity.name}">Name label::</label>
+                            <input
+                                type="text"
+                                th:field="*{name}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('name')} ? is-invalid"
+                                id="name"
+                                th:placeholder="#{transactionType.entity.name.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('name')}"
+                                th:errors="*{name}"
+                                class="invalid-feedback">Name Error</p>
+
+                        </div>
+                        <div class="form-group">
+                            <label
+                                for="lastName"
+                                th:text="#{transactionType.entity.description}">description label:</label>
+                            <input
+                                type="text"
+                                th:field="*{description}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('description')} ? is-invalid"
+                                id="lastName"
+                                th:placeholder="#{transactionType.entity.description.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('lastName')}"
+                                th:errors="*{lastName}"
+                                class="invalid-feedback">description Error</p>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label
+                                for="email"
+                                th:text="#{transactionType.entity.entryType}">entryType label:</label>
+                            <input
+                                type="text"
+                                th:field="*{entryType}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('entryType')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{transactionType.entity.entryType.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('entryType')}"
+                                th:errors="*{entryType}"
+                                class="invalid-feedback">entryType Error</p>
+
+
+                        </div>
+                  
+
+                        <input
+                            id="addPerson"
+                            class="btn btn-primary"
+                            name="_eventId_save"
+                            type="submit"
+                            th:value="#{transactionType.add.save.button}"></input>
+                        <input
+                            id="cancelAddPerson"
+                            class="btn btn-dark"
+                            name="_eventId_cancel"
+                            type="submit"
+                            th:value="#{transactionType.add.cancel.button}"></input>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 
+        <div class="wrapper">
+
+            <p>
+                Date:
+                <input
+                    type="text"
+                    id="datepicker"
+                    class="form-control">
+            </p>
+
+
+        </div>
+ -->
+        <script type="text/javascript">
+									$(function() {
+										console.log('ttttttttt');
+										$('#bornDate').datepicker({
+											dateFormat : 'dd-mm-yy',
+                                            yearRange: '-120:+0',
+                                            changeMonth: true,
+											changeYear : true
+										});
+										//$("#datepicker").datepicker();
+
+									});
+								</script>
+
+        <!-- enable to test ajax -->
+        <!--
+        <form
+            id="triggerform"
+            method="post"
+            th:action="@{'~'+${flowExecutionUrl}}">
+            <input
+                name="nameClient"
+                value="hecthor" />
+            <input
+                type="submit"
+                id="doUpdate"
+                name="_eventId_updateData"
+                value="Update now!" />
+        </form>
+
+
+        <div id="data">
+            This is a content to be changed
+            <p th:text="${param.nameClient}">Test</p>
+        </div>
+        <div
+            id="hoteldata"
+            th:fragment="hoteldata">
+            This is a content to be changed
+            <p th:text="${param.nameClient}">Test</p>
+        </div>
+
+
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+            
+                                    //review chapther 12 of pro spring mv
+                                    //https://www.safaribooksonline.com/library/view/pro-spring-mvc/9781430241553/Chapter12.html
+									$(function() {
+										var submit = $('#doUpdate');
+
+										$("#triggerform")
+												.submit(
+														function(event) {
+															//alert("Handler for .submit() called.");
+
+															var form = $('#triggerform');
+															var event = submit
+																	.attr('name');
+															var data = form
+																	.serialize()
+																	+ '&'
+																	+ event
+																	+ '='
+																	+ event
+																	+ '&ajaxSource='
+																	+ submit
+																			.attr('id');
+
+															$
+																	.ajax({
+																		type : "POST",
+																		dataType : 'text',
+																		data : data,
+                                                                        //$(
+																			//	"#triggerform")
+																			//	.serialize()
+																				//+ "&_eventId=updateData"
+																				//+ "&_eventId_updateData=_eventId_updateData"
+																			//	+ "&ajaxSource=true",
+
+																		url : form.attr( 'action' ),
+                                                                        //$(
+																		//		"#triggerform")
+																		//		.attr(
+																		//				"action")
+																				//+ "&_eventId=updateData"
+																				//+ "&_eventId_updateData=_eventId_updateData"
+																		//		+ "&ajaxSource=true",
+																		success : function(
+																				result) {
+																			$(
+																					'#hoteldata')
+																					.replaceWith(
+																							result);
+																		}
+																	});
+
+															return false;
+															//event.preventDefault();
+														});
+
+									});
+								</script>
+-->
+    </div>
+</body>
+</html>
