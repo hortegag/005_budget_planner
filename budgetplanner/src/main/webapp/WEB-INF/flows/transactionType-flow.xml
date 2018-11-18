@@ -14,22 +14,11 @@
 
     <var
         name="servicio"
-        class="com.home.budgetplanner.service.impl.PeopleServiceImpl" />
+        class="com.home.budgetplanner.service.impl.TransactionTypeServiceImpl" />
     <on-start>
         <set
             name="flowScope.directorio"
             value="'transactionTypeFlow'" />
-        <!-- <evaluate expression="peopleController.listGridTest(peopleController.initializePageable())" result="flowScope.test" /> -->
-<!-- 
-        <evaluate
-            expression="peopleController.listGridTestWrap(peopleController.initializePageable(), flowRequestContext)"
-            result="flowScope.page" />
-
-        <set
-            name="flowScope.peoples"
-            value="flowScope.page.getContent()" />
-
-        <set name="flowScope.pagetest" value="flowScope.test" /> -->
 
     </on-start>
 
@@ -41,7 +30,7 @@
         <transition
             on="search"
             to="list">
- 
+
         </transition>
         <transition
             on="add"
@@ -54,21 +43,15 @@
         <transition
             on="edit"
             to="editEntity">
-            
 
-             <evaluate
+
+            <evaluate
                 expression="transactionTypeController.findById(requestParameters.id)"
- 
+
                 result="flowScope.transactionType" />
 
-<!--
+            <!-- <evaluate expression="servicio.findById(requestParameters.id)" result="flowScope.people" /> -->
 
-              <evaluate
-                expression="servicio.findById(requestParameters.id)"
- 
-                result="flowScope.people" />
--->
- 
         </transition>
 
         <transition
@@ -85,16 +68,13 @@
         id="addEntity"
         view="#{directorio}/transactionTypeCreate"
         model="transactionType">
-   
+
 
         <transition
             on="save"
             to="confirmCreateEntity">
-            <!--<evaluate expression="servicio.save(flowScope.identificationType)" /> -->
-            <!--<evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         </transition>
 
-        <!-- <transition on="cancel" to="cancel" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
         <transition
             on="cancel"
             to="cancel"
@@ -118,7 +98,7 @@
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" /> 
+            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" />
         </transition>
 
         <transition
@@ -135,8 +115,8 @@
 
     <view-state
         id="editEntity"
-        view="#{directorio}/identificationTypeEdit"
-        model="identificationType">
+        view="#{directorio}/transactionTypeEdit"
+        model="transactionType">
 
 
 
@@ -144,11 +124,8 @@
         <transition
             on="save"
             to="confirmEditEntity">
-            <!-- <evaluate expression="servicio.save(flowScope.identificationType)" /> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" 
-                /> -->
         </transition>
 
-        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
         <transition
             on="cancel"
             to="cancel"
@@ -160,21 +137,17 @@
 
     <view-state
         id="confirmEditEntity"
-        view="#{directorio}/peopleConfirmEdit"
-        model="people">
+        view="#{directorio}/transactionTypeConfirmEdit"
+        model="transactionType">
 
 
         <transition
             on="confirm"
             to="success">
-       <!--    <evaluate expression="servicio.save(flowScope.people)" />   -->  
-       
-        <evaluate expression="peopleController.save(flowScope.people)" />
-       
-            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+
+            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" />
         </transition>
 
-        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
 
 
         <transition
@@ -192,14 +165,13 @@
     <view-state
         id="confirmDeleteEntity"
         view="#{directorio}/peopleConfirmDelete"
-        model="people">
+        model="transactionType">
 
 
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.deleteById(flowScope.people.id)" />
-            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+            <evaluate expression="servicio.deleteById(flowScope.transactionType.id)" />
         </transition>
 
         <transition
