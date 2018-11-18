@@ -134,11 +134,11 @@ public class TransactionTypeController {
 
     }
 
-    public PeopleDTO findById(Long id) {
+    public TransactionTypeDTO findById(Long id) {
 
-        PeopleDTO peopleDTO = PeopleDTO.build(peopleService.findById(new Long(id)));
+        TransactionTypeDTO transactionTypeDTO = TransactionTypeDTO.build(transactionTypeService.findById(new Long(id)));
 
-        return peopleDTO;
+        return transactionTypeDTO;
 
     }
 
@@ -154,5 +154,7 @@ public class TransactionTypeController {
 
         return peopleService.save(people);
     }
+    
+
 
 }

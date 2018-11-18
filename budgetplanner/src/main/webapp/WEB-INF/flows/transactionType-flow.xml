@@ -57,9 +57,9 @@
             
 
              <evaluate
-                expression="peopleController.findById(requestParameters.id)"
+                expression="transactionTypeController.findById(requestParameters.id)"
  
-                result="flowScope.people" />
+                result="flowScope.transactionType" />
 
 <!--
 
@@ -135,19 +135,10 @@
 
     <view-state
         id="editEntity"
-        view="#{directorio}/peopleEditTest"
-        model="people">
-
-        <on-render>
-            <evaluate
-                expression="peopleController.initializeSelectableIdentificationTypes()"
-                result="flashScope.selectableIdentificationTypes" />
-            <evaluate
-                expression="peopleController.initializeSelectableGroup()"
-                result="flashScope.selectableGroup" />
+        view="#{directorio}/identificationTypeEdit"
+        model="identificationType">
 
 
-        </on-render>
 
 
         <transition
