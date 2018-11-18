@@ -24,14 +24,13 @@ import lombok.AllArgsConstructor;
 
 @Entity()
 @Data()
-@Table(name = "identification_type")
-@NoArgsConstructor
+@Table(name = "transaction_type")
+// @NoArgsConstructor
 @AllArgsConstructor
 
-@EqualsAndHashCode(exclude={"people"})
-//@ToString(excludes={"people"})
-@ToString(exclude={"people"})
-
+@EqualsAndHashCode(exclude = { "transactions" })
+// @ToString(excludes={"people"})
+@ToString(exclude = { "transactions" })
 
 public class TransactionType implements Serializable {
 
@@ -39,18 +38,26 @@ public class TransactionType implements Serializable {
     @GeneratedValue
     @Setter(AccessLevel.NONE)
     @Column(name = "id_transaction_type")
-    private Long         id;
+    private Long               id;
 
-    private String       name;
+    private String             name;
 
-    private String       description;
-    
-    @Column(name = "entry_type")    
-    private String       entryType;
-    
+    private String             description;
+
+    @Column(name = "entry_type")
+    private String             entryType;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "transactionType", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy = "transactionType", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+            CascadeType.REFRESH }, fetch = FetchType.LAZY)
     private List<Transactions> transactions;
-   
+
+    public TransactionType(Long id, String name, String description, String entryType) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.entryType = entryType;
+    }
 
 }
