@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow
+    xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+    start-state="list">
+
+    <secured
+        attributes="ROLE_ADMIN"
+        match="any" />
+
+
+    <var
+        name="servicio"
+        class="com.home.budgetplanner.service.impl.TransactionTypeServiceImpl" />
+    <on-start>
+        <set
+            name="flowScope.directorio"
+            value="'transactionFlow'" />
+
+    </on-start>
+
+    <view-state
+        id="list"
+        view="#{directorio}/transactionList">
+
+        <transition
+            on="search"
+            to="list">
+
+        </transition>
+        <transition
+            on="add"
+            to="addEntity">
+            <evaluate
+                expression="transactionTypeController.initializeTransactionTypeDTO()"
+                result="flowScope.transactionType" />
+        </transition>
+
+        <transition
+            on="edit"
+            to="editEntity">
+
+
+            <evaluate
+                expression="transactionTypeController.findById(requestParameters.id)"
+
+                result="flowScope.transactionType" />
+
+
+        </transition>
+
+        <transition
+            on="delete"
+            to="confirmDeleteEntity">
+            <evaluate
+                expression="servicio.findById(requestParameters.id)"
+                result="flowScope.transactionType" />
+        </transition>
+    </view-state>
+
+
+    <view-state
+        id="addEntity"
+        view="#{directorio}/transactionTypeCreate"
+        model="transactionType">
+
+
+        <transition
+            on="save"
+            to="confirmCreateEntity">
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false">
+        </transition>
+
+        <transition on="updateData">
+            <!-- <render fragments="[//div[@id='data']]" /> -->
+            <render fragments="hoteldata" />
+
+        </transition>
+
+    </view-state>
+
+    <view-state
+        id="confirmCreateEntity"
+        view="#{directorio}/transactionTypeConfirmCreate"
+        model="identificationType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" />
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+
+    <view-state
+        id="editEntity"
+        view="#{directorio}/transactionTypeEdit"
+        model="transactionType">
+
+
+
+
+        <transition
+            on="save"
+            to="confirmEditEntity">
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false">
+        </transition>
+    </view-state>
+
+
+
+    <view-state
+        id="confirmEditEntity"
+        view="#{directorio}/transactionTypeConfirmEdit"
+        model="transactionType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+
+            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" />
+        </transition>
+
+
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+
+
+
+    <view-state
+        id="confirmDeleteEntity"
+        view="#{directorio}/transactionTypeConfirmDelete"
+        model="transactionType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="servicio.deleteById(flowScope.transactionType.id)" />
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+
+    <view-state id="failure" />
+
+
+    <end-state id="success"></end-state>
+    <end-state id="cancel"></end-state>
+
+</flow>

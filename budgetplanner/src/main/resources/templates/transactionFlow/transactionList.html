@@ -152,7 +152,7 @@
 
 
 
-									var urlList = '[(@{/transaction/listGridByNameAndDescription})]';
+									var urlList = '[(@{/transactions/listGridByNameAndDescription})]';
 									var tableId = '[(#{transactionType.list.search.table.id})]';
 									var tableActions = '[(#{transactionType.list.search.table.actions})]';
 									var tableName = '[(#{transactionType.list.search.table.name})]';
@@ -187,8 +187,8 @@
 																		sortable : false
 																	},
 																	{
-																		name : 'name',
-																		index : 'name',
+																		name : 'transactionDateString',
+																		index : 'transactionDateString',
 																		width : 100
 																	},
 																	{
@@ -197,14 +197,14 @@
 																		width : 150
 																	},
 																	{
-																		name : 'entryType',
-																		index : 'entryType',
+																		name : 'value',
+																		index : 'value',
 																		width : 100
 																	}
 
 															],
 															jsonReader : {
-																root : "peopleData",
+																root : "transactionsData",
 																page : "currentPage",
 																total : "totalPages",
 																records : "totalRecords",
@@ -218,7 +218,7 @@
 															rowNum : 10,
 															rowList : [ 1, 10,
 																	20, 30 ],
-															sortname : 'name',
+															sortname : 'description',
 															sortorder : 'asc',
 															viewrecords : true,
 															gridview : true,
