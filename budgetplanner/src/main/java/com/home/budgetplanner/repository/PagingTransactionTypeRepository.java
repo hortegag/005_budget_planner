@@ -14,10 +14,14 @@ import com.home.budgetplanner.entity.TransactionType;
 
 public interface PagingTransactionTypeRepository extends PagingAndSortingRepository<TransactionType, Long> {
 
-    List<People> findByName(String name);
-
 
     Page<TransactionType> findByNameOrDescription(String name, String description, Pageable pageable);
+    
+    TransactionType findByName(String name);
+    
+    TransactionType findByNameAndIdNot(String name, Long id);
+
+
      
 
 }

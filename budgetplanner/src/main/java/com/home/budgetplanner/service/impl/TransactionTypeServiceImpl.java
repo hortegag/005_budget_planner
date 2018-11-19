@@ -110,6 +110,21 @@ public class TransactionTypeServiceImpl implements TransactionTypeService, Seria
         return pagingTransactionTypeRepository.count();
     }
 
-    
 
-}
+    @Override
+    public TransactionType findByName(String name) {
+        
+        return pagingTransactionTypeRepository.findByName(name);
+        
+    }
+
+
+    @Override
+    public TransactionType findByNameAndIdNot(String name, Long id) {
+        
+        return pagingTransactionTypeRepository.findByNameAndIdNot(name, id);
+        
+        
+    }
+
+}       

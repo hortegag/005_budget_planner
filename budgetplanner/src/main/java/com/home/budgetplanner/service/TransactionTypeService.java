@@ -18,6 +18,8 @@ public interface TransactionTypeService extends BaseService<TransactionType, Lon
 
     public Page<TransactionTypeDTO> findAllTransactionsTypeByPage(Pageable pageable);
     
+    public TransactionType findByName(String name);
     
+    public TransactionType findByNameAndIdNot(String name, Long id);
     
 }
