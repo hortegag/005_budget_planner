@@ -41,6 +41,8 @@ public class TransactionsDTO implements Serializable {
     private String                        transactionType;
     private String                        person;
     private String                        transactionTypeId;
+    
+    private String                        transactionTypeEntryType;
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -48,11 +50,11 @@ public class TransactionsDTO implements Serializable {
 
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
-        String text = transactions.getTransacctionDate().format(formatter);
+        String text = transactions.getTransactionDate().format(formatter);
 
-        return new TransactionsDTO(transactions.getId(), transactions.getTransacctionDate(), text, transactions.getDescription(),
+        return new TransactionsDTO(transactions.getId(), transactions.getTransactionDate(), text, transactions.getDescription(),
                 transactions.getCurrentBalance().toString(), transactions.getValue().toString(), transactions.getTransactionType().getName(),
-                transactions.getTransactionType().getId().toString());
+                transactions.getTransactionType().getId().toString(), transactions.getTransactionType().getEntryType());
 
     }
 
@@ -72,7 +74,7 @@ public class TransactionsDTO implements Serializable {
     }
 
     public TransactionsDTO(Long id, LocalDate transactionDate, String transactionDateString, String description, String currentBalance, String value,
-            String transactionType, String transactionTypeId) {
+            String transactionType, String transactionTypeId, String transactionTypeEntryType) {
         super();
         this.id = id;
         this.transactionDate = transactionDate;
@@ -81,7 +83,8 @@ public class TransactionsDTO implements Serializable {
         this.currentBalance = currentBalance;
         this.value = value;
         this.transactionType = transactionType;
-        this.transactionType = transactionTypeId;
+        this.transactionTypeId = transactionTypeId;
+        this.transactionTypeEntryType = transactionTypeEntryType;
 
     }
 

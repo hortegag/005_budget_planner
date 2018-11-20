@@ -42,7 +42,7 @@ public class Transactions implements Serializable {
 
     @Column(name = "transaction_date")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate       transacctionDate;
+    private LocalDate       transactionDate;
 
     private String          description;
 

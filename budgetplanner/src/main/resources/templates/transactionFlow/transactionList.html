@@ -153,11 +153,23 @@
 
 
 									var urlList = '[(@{/transactions/listGridByNameAndDescription})]';
-									var tableId = '[(#{transactionType.list.search.table.id})]';
-									var tableActions = '[(#{transactionType.list.search.table.actions})]';
-									var tableName = '[(#{transactionType.list.search.table.name})]';
-									var tableDescription = '[(#{transactionType.list.search.table.description})]';
+									var tableId = '[(#{transaction.list.search.table.id})]';
+									var tableActions = '[(#{transaction.list.search.table.actions})]';
+									var tableDate = '[(#{transaction.list.search.table.date})]';
+									var tableDescription = '[(#{transaction.list.search.table.description})]';
+                                    var tableCurrentBalance = '[(#{transaction.list.search.table.currentBalance})]';
+                                    var tableValue = '[(#{transaction.list.search.table.value})]';
+                                    var tableTransactionType = '[(#{transaction.list.search.table.transactionType})]';
+                                    
+                                    
+                                    
+                                    
 									var tableEntryType = '[(#{transactionType.list.search.table.entryType})]';
+                                    
+                                    
+                                    
+                                    
+                                    
 
 									//var testEditTwo = '[[${flowExecutionUrl}]]';
 									var testEditTwo = '[(${flowExecutionUrl})]';
@@ -176,9 +188,12 @@
 															mtype : 'GET',
 															colNames : [
 																	tableActions,
-																	tableName,
+																	tableDate,
 																	tableDescription,
-																	tableEntryType],
+                                                                    tableCurrentBalance,
+                                                                    tableValue,
+                                                                    tableTransactionType,
+                                                                    tableEntryType],
 															colModel : [
 																	{
 																		name : 'act',
@@ -188,7 +203,7 @@
 																	},
 																	{
 																		name : 'transactionDateString',
-																		index : 'transactionDateString',
+																		index : 'transactionDate',
 																		width : 100
 																	},
 																	{
@@ -196,11 +211,27 @@
 																		index : 'description',
 																		width : 150
 																	},
+                                                                    {
+                                                                        name : 'currentBalance',
+                                                                        index : 'currentBalance',
+                                                                        width : 100
+                                                                    },
 																	{
 																		name : 'value',
 																		index : 'value',
 																		width : 100
-																	}
+																	},
+                                                                    {
+                                                                        name : 'transactionType',
+                                                                        index : 'transactionType',
+                                                                        width : 100
+                                                                    },
+                                                                    {
+                                                                        name : 'transactionTypeEntryType',
+                                                                        index : 'transactionTypeEntryType',
+                                                                        width : 100
+                                                                    }
+                                                                    
 
 															],
 															jsonReader : {
