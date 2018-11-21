@@ -16,7 +16,6 @@ CREATE TABLE public.identification_type(
 
 -- object: public.people | type: TABLE --
 -- DROP TABLE IF EXISTS public.people CASCADE;
-
 CREATE TABLE public.people(
 	id_person bigint NOT NULL,
 	name varchar(500),
@@ -27,13 +26,15 @@ CREATE TABLE public.people(
 	username varchar(500) NOT NULL,
 	password varchar(500),
 	enabled varchar(1),
+	current_balance numeric(30,2),
+	income numeric(30,2),
+	expense numeric(30,2),
 	id_identification_type bigint,
 	CONSTRAINT people_pk PRIMARY KEY (id_person),
 	CONSTRAINT unique_user_ct UNIQUE (username),
 	CONSTRAINT unique_email_ct UNIQUE (email)
 
 );
-
 -- object: identification_type_fk | type: CONSTRAINT --
 -- ALTER TABLE public.people DROP CONSTRAINT IF EXISTS identification_type_fk CASCADE;
 ALTER TABLE public.people ADD CONSTRAINT identification_type_fk FOREIGN KEY (id_identification_type)
@@ -49,27 +50,27 @@ insert into identification_type values (1002,'Dummy','DM','Dummy Identification'
 insert into identification_type values (1003,'Passport','PS','Pasaporte de la persona');
 
 
-insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y',1001);
-insert into people values (2004,'Dummy','Smith','dsmith@hotmail.com','1989-01-27','PASS_123XYZ','dsmith','$2a$10$d4HxrYDWhHt7bQaL914PluHCy1MH6B6kWiQ1sc8wbV7.ivK7tL/SO','Y',1003);
+insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y', 0, 0, 0,1001);
+insert into people values (2004,'Dummy','Smith','dsmith@hotmail.com','1989-01-27','PASS_123XYZ','dsmith','$2a$10$d4HxrYDWhHt7bQaL914PluHCy1MH6B6kWiQ1sc8wbV7.ivK7tL/SO','Y', 0, 0, 0,1003);
 
-insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','hhercules','Y',1003);
-insert into people values (2006,'RagnaK','Simons','rsimons@hotmail.com','1983-02-01','PASS_123XYYssz','rsimons','rsimons','Y',1003);
+insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','hhercules','Y', 0, 0, 0, 1003);
+insert into people values (2006,'RagnaK','Simons','rsimons@hotmail.com','1983-02-01','PASS_123XYYssz','rsimons','rsimons','Y',0, 0, 0, 1003);
 
-insert into people values (2007,'Lakherta','lonbeida','llombeida@hotmail.com','1984-03-03','PASS_1XrykRssz','llombeida','llombeida','Y',1003);
-
-
+insert into people values (2007,'Lakherta','lonbeida','llombeida@hotmail.com','1984-03-03','PASS_1XrykRssz','llombeida','llombeida','Y', 0, 0, 0, 1003);
 
 
 
-insert into people values (2008,'Jake','Piguave','jpiguave@hotmail.com','1983-01-27','PASS_1234XYZ','jpiguave','jpiguave','Y',1003);
-insert into people values (2009,'Xavier','Chucuca','xchuchuca@hotmail.com','1995-12-27','PASf4xwYzyc','xchuchuca','xchuchuca','Y',1003);
-insert into people values (2010,'Ney','Díaz','ndiaz@hotmail.com','1980-02-01','PASS_1234XYYssz','ndiaz','ndiaz','Y',1003);
-insert into people values (2011,'Sol','Domenech','smoenech@hotmail.com','1983-03-03','PASS_14XrykRssz','sdomenech','sdomenech','Y',1003);
 
-insert into people values (2012,'Danny','Tevez','dtevez@hotmail.com','1979-01-27','PASS_1235XYZ','dtevez','dtevez','Y',1003);
-insert into people values (2013,'Emy','Pereira','epereira@hotmail.com','1980-12-27','PASf5xwYzyc','epereira','epereira','Y',1003);
-insert into people values (2014,'Catalina','Jhonson','cjhonson@hotmail.com','1981-02-01','PASS_1235XYYssz','cjhonson','cjhonson','Y',1003);
-insert into people values (2015,'Natasha','Larson','nlarson@hotmail.com','1982-03-03','PASS_15XrykRssz','nlarson','nlarson','Y',1003);
+
+insert into people values (2008,'Jake','Piguave','jpiguave@hotmail.com','1983-01-27','PASS_1234XYZ','jpiguave','jpiguave','Y', 0, 0, 0, 1003);
+insert into people values (2009,'Xavier','Chucuca','xchuchuca@hotmail.com','1995-12-27','PASf4xwYzyc','xchuchuca','xchuchuca','Y',  0, 0, 0, 1003);
+insert into people values (2010,'Ney','Díaz','ndiaz@hotmail.com','1980-02-01','PASS_1234XYYssz','ndiaz','ndiaz','Y',  0, 0, 0, 1003);
+insert into people values (2011,'Sol','Domenech','smoenech@hotmail.com','1983-03-03','PASS_14XrykRssz','sdomenech','sdomenech','Y', 0, 0, 0, 1003);
+
+insert into people values (2012,'Danny','Tevez','dtevez@hotmail.com','1979-01-27','PASS_1235XYZ','dtevez','dtevez','Y', 0, 0, 0, 1003);
+insert into people values (2013,'Emy','Pereira','epereira@hotmail.com','1980-12-27','PASf5xwYzyc','epereira','epereira','Y', 0, 0, 0, 1003);
+insert into people values (2014,'Catalina','Jhonson','cjhonson@hotmail.com','1981-02-01','PASS_1235XYYssz','cjhonson','cjhonson','Y',  0, 0, 0, 1003);
+insert into people values (2015,'Natasha','Larson','nlarson@hotmail.com','1982-03-03','PASS_15XrykRssz','nlarson','nlarson','Y', 0, 0, 0, 1003);
 
 
 

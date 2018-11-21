@@ -1,5 +1,6 @@
 package com.home.budgetplanner.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,13 +167,50 @@ public class TransactionsController {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
         People people = peopleService.findByUsername(userName);
-
+        
         TransactionType transactionType = transactionTypeService.findByName(transactionsDTO.getTransactionType());
+     
+        
+       
+        
+       // if (transactionsDTO.getTransactionTypeEntryType().equals("DEBIT")) {
+        if ( transactionType.getEntryType().equals("DEBIT")) {
+            
+            
+            people.setExpense( people.getExpense().add(new BigDecimal(transactionsDTO.getValue())) );
+            people.setCurrentBalance( people.getCurrentBalance().subtract(new BigDecimal(transactionsDTO.getValue())) );
+            
+            
+        } else {
+            
+            people.setIncome(  people.getIncome().add(new BigDecimal(transactionsDTO.getValue()))  ); 
+            
+            people.setCurrentBalance( people.getCurrentBalance().add(new BigDecimal(transactionsDTO.getValue())) );
+            
+            
+
+        }
+
+        
+        peopleService.save(people);
+
         
         Transactions transaction = TransactionsDTO.dtoToEntity(transactionsDTO, transactionType, people);
 
         transactionsService.save(transaction);
 
+    }
+    
+    
+    public People initializePeople(){
+        
+        
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        People people = peopleService.findByUsername(userName);
+        
+        return people;
+        
     }
 
    // public People save(People people) {

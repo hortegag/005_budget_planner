@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import javax.persistence.Tuple;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,27 +106,43 @@ public class TransactionValidator {
         } else {
             
             
-            String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+            if ( NumberUtils.isParsable(transactionsDTO.getValue()) ) {
+                BigDecimal value = new BigDecimal(transactionsDTO.getValue());
+                value = value.abs();
 
-            People people = peopleService.findByUsername(userName);
-            
-            Transactions transaction = transactionService.findTopByPeopleOrderByIdDesc(people);
-            
-            
-            BigDecimal value = new BigDecimal(transactionsDTO.getValue());
-            
-            value = value.abs();
+            } else {
+                
+                MessageBuilder errorMessageBuilder = new MessageBuilder().error();
+                errorMessageBuilder.source("value");
+                errorMessageBuilder.code("error.transaction.validNumber");
 
-            
-            if (transactionsDTO.getTransactionTypeEntryType().equals("DEBIT")){
-                value = value.multiply(new BigDecimal(-1));
+                validationContext.getMessageContext().addMessage(errorMessageBuilder.build());
+                
             }
+                
+            
+            
+           // String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+           // People people = peopleService.findByUsername(userName);
+            
+            //Transactions transaction = transactionService.findTopByPeopleOrderByIdDesc(people);
             
             
             
             
-            transactionsDTO.setCurrentBalance( String.valueOf(
-            transaction.getCurrentBalance().add(  value  ) ));
+
+            
+            //if (transactionsDTO.getTransactionTypeEntryType().equals("DEBIT")){
+            //    value = value.multiply(new BigDecimal(-1));
+            //}
+            
+            
+            
+            //It is better to manage the current Balance in the people entity because, the user can change to debits o credits. and that is going to affect the balance each time
+            //the user makes an update.
+            //transactionsDTO.setCurrentBalance( String.valueOf(
+            //transaction.getCurrentBalance().add(  value  ) ));
             
            // transactionsDTO.setDescription((transactionnTypeDTO.getDescription().toUpperCase()));
             

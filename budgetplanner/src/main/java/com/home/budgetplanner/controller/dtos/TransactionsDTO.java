@@ -60,8 +60,12 @@ public class TransactionsDTO implements Serializable {
 
     public static Transactions dtoToEntity(TransactionsDTO transactionsDTO, TransactionType transactionType, People people) {
 
+  //    Transactions transactions =  new Transactions(transactionsDTO.getId(), transactionsDTO.getTransactionDate(), transactionsDTO.getDescription(),
+  //              new BigDecimal(transactionsDTO.getCurrentBalance()), new BigDecimal(transactionsDTO.getValue()), transactionType, people);
+      
       Transactions transactions =  new Transactions(transactionsDTO.getId(), transactionsDTO.getTransactionDate(), transactionsDTO.getDescription(),
-                new BigDecimal(transactionsDTO.getCurrentBalance()), new BigDecimal(transactionsDTO.getValue()), transactionType, people);
+              new BigDecimal(0), new BigDecimal(transactionsDTO.getValue()), transactionType, people);
+
 
    
         return transactions;

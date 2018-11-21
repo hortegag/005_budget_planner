@@ -54,7 +54,7 @@
 
 
 
-
+<!-- 
                         <div class="form-group">
 
                             <label
@@ -80,7 +80,7 @@
                                 th:errors="*{transactionTypeEntryType}"
                                 class="invalid-feedback">transactionTypeEntryType Error</p>
                         </div>
-                        
+    -->                     
                         
 
 
@@ -100,7 +100,7 @@
                                 <option
                                     th:each="type : ${selectableTransactionTypes}"
                                     th:value="${type.name}"
-                                    th:text="${type.name}">transactionType</option>
+                                    th:text="${type.name +' | ' +   type.entryType}">transactionType</option>
                             </select>
                             <p
                                 th:if="${#fields.hasErrors('transactionType')}"

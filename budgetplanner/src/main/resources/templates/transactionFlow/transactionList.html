@@ -39,7 +39,59 @@
 </head>
 <body>
     <div layout:fragment="content">
+            <h1
+            class="mt-5"></h1>
+   
+       <div class="card">
+ 
+                <div class="card-header">
+                    <h3
+                        class="card-title"
+                        th:text="#{transaction.list.balance.title}"></h3>
+                </div>
+                <div class="card-body">
 
+               
+
+                        <div class="form-group row">
+                            <label
+                                for="transactionType"
+                                class="col-sm-3 col-form-label font-weight-bold"
+                                th:text="#{transaction.list.balance.currentBalance}">currentBalance</label>
+                            <label
+                                for="transactionType"
+                                class="col-sm-9 col-form-label"
+                                th:text="${people.currentBalance}">currentBalance</label>
+
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label
+                                for="transactionDate"
+                                class="col-sm-3 col-form-label font-weight-bold"
+                                th:text="#{transaction.list.balance.income}">income</label>
+                            <label
+                                for="transactionDate"
+                                class="col-sm-9 col-form-label"
+                                th:text="${people.income}">income</label>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="description"
+                                class="col-sm-3 col-form-label font-weight-bold"
+                                th:text="#{transaction.list.balance.expense}">expense</label>
+                            <label
+                                for="description"
+                                class="col-sm-9 col-form-label"
+                                th:text="${people.expense}">expense</label>
+
+                        </div>
+
+                </div>
+            </div>
         <h1
             class="mt-5"
             th:text="#{transaction.list.title}"></h1>
@@ -190,7 +242,7 @@
 																	tableActions,
 																	tableDate,
 																	tableDescription,
-                                                                    tableCurrentBalance,
+                                                                    //tableCurrentBalance,
                                                                     tableValue,
                                                                     tableTransactionType,
                                                                     tableEntryType],
@@ -211,11 +263,11 @@
 																		index : 'description',
 																		width : 150
 																	},
-                                                                    {
-                                                                        name : 'currentBalance',
-                                                                        index : 'currentBalance',
-                                                                        width : 100
-                                                                    },
+                                                                    //{
+                                                                        //name : 'currentBalance',
+                                                                        //index : 'currentBalance',
+                                                                        //width : 100
+                                                                    //},
 																	{
 																		name : 'value',
 																		index : 'value',
@@ -249,8 +301,8 @@
 															rowNum : 10,
 															rowList : [ 1, 10,
 																	20, 30 ],
-															sortname : 'description',
-															sortorder : 'asc',
+															sortname : 'transactionDate',
+															sortorder : 'desc',
 															viewrecords : true,
 															gridview : true,
 															width : 1100,

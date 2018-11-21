@@ -1,6 +1,7 @@
 package com.home.budgetplanner.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +58,13 @@ public class People implements Serializable {
     private String username;
     private String password;
     private String enabled;
+    
+    
+    
+    @Column(name = "current_balance")
+    private BigDecimal currentBalance;
+    private BigDecimal income;
+    private BigDecimal expense;
     
     
     public boolean isEnable(){

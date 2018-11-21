@@ -26,6 +26,13 @@
         id="list"
         view="#{directorio}/transactionList">
 
+        <on-render>
+            <evaluate
+                expression="transactionsController.initializePeople()"
+                result="flashScope.people" />
+        </on-render>
+
+
         <transition
             on="search"
             to="list">
