@@ -22,4 +22,7 @@ public interface TransactionTypeService extends BaseService<TransactionType, Lon
     
     public TransactionType findByNameAndIdNot(String name, Long id);
     
+    public List<TransactionType> findAllByOrderByIdAsc();
+
+    
 }

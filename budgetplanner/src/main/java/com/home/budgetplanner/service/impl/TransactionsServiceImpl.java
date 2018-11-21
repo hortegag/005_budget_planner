@@ -32,6 +32,7 @@ import com.home.budgetplanner.service.TransactionsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,6 +69,8 @@ public class TransactionsServiceImpl implements TransactionsService, Serializabl
     }
 
     @Override
+    @Transactional
+
     public Transactions save(Transactions entity) {
 
         return pagingTransactionsRepository.save(entity);
@@ -155,6 +158,35 @@ public class TransactionsServiceImpl implements TransactionsService, Serializabl
 
  
 
+    public Transactions  findTopByPeopleOrderByIdDesc(People people){
+        
+        
+        
+        
+        
+        return pagingTransactionsRepository.findTopByPeopleOrderByIdDesc(people);
+        
+    }
+    
+    
+//    @Transactional()
+//     public Transactions saveTest(TransactionsDTO transactionsDTO) {
+//        
+//        
+//        
+//        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//
+//        People people = peopleService.findByUsername(userName);
+//
+//        TransactionType transactionType = transactionTypeService.findByName(transactionsDTO.getTransactionType());
+//        
+//        Transactions transaction = TransactionsDTO.dtoToEntity(transactionsDTO, transactionType, people);
+//
+//        transactionsService.save(transaction);
+//        
+//
+//        return pagingTransactionsRepository.save(entity);
+//    }
 
 
 

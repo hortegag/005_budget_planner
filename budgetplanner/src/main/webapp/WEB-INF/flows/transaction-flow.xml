@@ -35,8 +35,8 @@
             on="add"
             to="addEntity">
             <evaluate
-                expression="transactionTypeController.initializeTransactionTypeDTO()"
-                result="flowScope.transactionType" />
+                expression="transactionsController.initializeTransactionDTO()"
+                result="flowScope.transaction" />
         </transition>
 
         <transition
@@ -64,9 +64,14 @@
 
     <view-state
         id="addEntity"
-        view="#{directorio}/transactionTypeCreate"
-        model="transactionType">
+        view="#{directorio}/transactionCreate"
+        model="transaction">
 
+        <on-render>
+            <evaluate
+                expression="transactionsController.initializeSelectableTransactionTypes()"
+                result="flashScope.selectableTransactionTypes" />
+        </on-render>
 
         <transition
             on="save"
@@ -89,14 +94,14 @@
 
     <view-state
         id="confirmCreateEntity"
-        view="#{directorio}/transactionTypeConfirmCreate"
-        model="identificationType">
+        view="#{directorio}/transactionConfirmCreate"
+        model="transaction">
 
 
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" />
+            <evaluate expression="transactionsController.save(flowScope.transaction)" />
         </transition>
 
         <transition

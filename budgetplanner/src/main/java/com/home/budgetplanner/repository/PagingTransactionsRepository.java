@@ -24,9 +24,8 @@ public interface PagingTransactionsRepository extends PagingAndSortingRepository
     
     
     Page<Transactions> findByPeople(People people, Pageable pageable);
-
-
-
+    
+    Transactions findTopByPeopleOrderByIdDesc(People people);
     
 
 }

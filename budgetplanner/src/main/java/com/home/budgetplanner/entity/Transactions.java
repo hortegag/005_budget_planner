@@ -51,12 +51,19 @@ public class Transactions implements Serializable {
     private BigDecimal      value;
 
     @ToString.Exclude
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    //removed to avoid problem of:  detached entity passed to persist
+   // @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "id_transaction_type")
     private TransactionType transactionType;
 
     @ToString.Exclude
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    
+    //removed to avoid problem of:  detached entity passed to persist
+    //@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch = FetchType.EAGER)
+    
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "id_person")
     private People          people;
 

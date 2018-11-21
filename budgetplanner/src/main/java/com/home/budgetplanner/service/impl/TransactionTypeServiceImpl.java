@@ -126,5 +126,15 @@ public class TransactionTypeServiceImpl implements TransactionTypeService, Seria
         
         
     }
+    
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<TransactionType> findAllByOrderByIdAsc(){
+     
+        return pagingTransactionTypeRepository.findAllByOrderByIdAsc();
+        
+    }
+
 
 }       

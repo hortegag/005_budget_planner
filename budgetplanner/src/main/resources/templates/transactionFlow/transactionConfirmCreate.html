@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+<head>
+<title th:text="#{transaction.add.confirm.title}"></title>
+</head>
+<body>
+    <div layout:fragment="content">
+
+
+        <!-- 		
+		<form action="#"
+			th:action="@{/identificationType/saveIdentificationType}"
+			th:object="${identificationType}" method="post">   -->
+
+        <!-- th:action="@{/identificationType/showFormForAdd}" -->
+
+
+
+        <!-- mt-5 <p th:text="#{identificationType.add.confirm.question}">question</p> -->
+
+
+        <p class="mt-5"></p>
+
+
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3
+                        class="card-title"
+                        th:text="#{transaction.add.confirm.title}"></h3>
+                </div>
+                <div class="card-body">
+
+                    <form
+                        action="#"
+                        th:object="${transaction}"
+                        th:action="${flowExecutionUrl}"
+                        method="post">
+
+
+
+                        <div class="form-group row">
+                            <label
+                                for="transactionType"
+                                class="col-sm-3 col-form-label font-weight-bold"
+                                th:text="#{transaction.entity.transactionType}">transactionType</label>
+                            <label
+                                for="transactionType"
+                                class="col-sm-9 col-form-label"
+                                th:text="*{transactionType}">transactionType</label>
+
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label
+                                for="transactionDate"
+                                class="col-sm-3 col-form-label font-weight-bold"
+                                th:text="#{transaction.entity.date}">transactionDate</label>
+                            <label
+                                for="transactionDate"
+                                class="col-sm-9 col-form-label"
+                                th:text="*{transactionDate}">transactionDate</label>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label
+                                for="description"
+                                class="col-sm-3 col-form-label font-weight-bold"
+                                th:text="#{transaction.entity.description}">description</label>
+                            <label
+                                for="description"
+                                class="col-sm-9 col-form-label"
+                                th:text="*{description}">description</label>
+
+                        </div>
+
+
+                        <input
+                            id="confirmCreateTransactionType"
+                            class="btn btn-primary"
+                            name="_eventId_confirm"
+                            type="submit"
+                            th:value="#{transaction.add.confirm.button.confirm}"></input>
+                        <input
+                            id="cancelCreateTransactionType"
+                            class="btn btn-dark"
+                            name="_eventId_cancel"
+                            type="submit"
+                            th:value="#{transaction.add.confirm.button.cancel}"></input>
+
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+    </div>
+</body>
+</html>

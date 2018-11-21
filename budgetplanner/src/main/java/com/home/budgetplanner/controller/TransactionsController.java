@@ -30,6 +30,7 @@ import com.home.budgetplanner.entity.Groups;
 import com.home.budgetplanner.entity.IdentificationType;
 import com.home.budgetplanner.entity.People;
 import com.home.budgetplanner.entity.TransactionType;
+import com.home.budgetplanner.entity.Transactions;
 import com.home.budgetplanner.service.GroupService;
 import com.home.budgetplanner.service.IdentificationTypeService;
 import com.home.budgetplanner.service.PeopleService;
@@ -59,10 +60,10 @@ public class TransactionsController {
     private PeopleService          peopleService;
 
     @Autowired
-    private TransactionsService transactionsService;
+    private TransactionsService    transactionsService;
 
     @Autowired
-    private GroupService           groupService;
+    private TransactionTypeService transactionTypeService;
 
     @ResponseBody
     @RequestMapping(value = "/listGridByNameAndDescription", method = RequestMethod.GET, produces = "application/json")
@@ -97,24 +98,25 @@ public class TransactionsController {
 
         }
 
-        
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        
+
         People people = peopleService.findByUsername(userName);
-        
-        
+
         Page<TransactionsDTO> contactPage;
         // Page<People> contactPage = peopleService.findAllByPage(pageRequest);
         // if (StringUtils.isBlank(searchForm.getName()) &&
         // StringUtils.isBlank(searchForm.getDescription())) {
         if (StringUtils.isBlank(searchForm.getDescription())) {
-            
-            //contactPage = transactionsService.findAllTransactionsByPage(pageRequest);            
+
+            // contactPage =
+            // transactionsService.findAllTransactionsByPage(pageRequest);
             contactPage = transactionsService.findAllTransactionsByPeople(people, pageRequest);
-            
+
         } else {
-            
-            //contactPage = transactionsService.findTransactionsByDescriptionPage(searchForm.getDescription(), pageRequest);
+
+            // contactPage =
+            // transactionsService.findTransactionsByDescriptionPage(searchForm.getDescription(),
+            // pageRequest);
             contactPage = transactionsService.findByDescriptionAndPeople(searchForm.getDescription(), people, pageRequest);
 
         }
@@ -137,39 +139,45 @@ public class TransactionsController {
         return pageable;
     }
 
-    public TransactionTypeDTO initializeTransactionTypeDTO() {
+    public TransactionsDTO initializeTransactionDTO() {
 
-        TransactionTypeDTO transactionTypeDTO = new TransactionTypeDTO();
+        TransactionsDTO transactionsDTO = new TransactionsDTO();
 
-        return transactionTypeDTO;
+        return transactionsDTO;
     }
 
-    public List<Groups> initializeSelectableGroup() {
+    public List<TransactionType> initializeSelectableTransactionTypes() {
 
-        return groupService.findAllOrderByIdAsc();
-        // selectableGroup
+        return transactionTypeService.findAllByOrderByIdAsc();
 
     }
 
- //   public TransactionTypeDTO findById(Long id) {
+    // public TransactionTypeDTO findById(Long id) {
 
- //       TransactionTypeDTO transactionTypeDTO = TransactionTypeDTO.build(transactionTypeService.findById(new Long(id)));
+    // TransactionTypeDTO transactionTypeDTO =
+    // TransactionTypeDTO.build(transactionTypeService.findById(new Long(id)));
 
- //       return transactionTypeDTO;
+    // return transactionTypeDTO;
 
- //   }
+    // }
 
-//    public void save(TransactionTypeDTO transactionTypeDTO) {
+    public void save(TransactionsDTO transactionsDTO) {
 
-//        TransactionType transactionType = TransactionTypeDTO.dtoToEntity(transactionTypeDTO);
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
-//        transactionTypeService.save(transactionType);
+        People people = peopleService.findByUsername(userName);
 
-//    }
+        TransactionType transactionType = transactionTypeService.findByName(transactionsDTO.getTransactionType());
+        
+        Transactions transaction = TransactionsDTO.dtoToEntity(transactionsDTO, transactionType, people);
 
-    public People save(People people) {
+        transactionsService.save(transaction);
 
-        return peopleService.save(people);
     }
+
+   // public People save(People people) {
+
+        //return peopleService.save(people);
+    //}
 
 }

@@ -22,5 +22,7 @@ public interface TransactionsService extends BaseService<Transactions, Long> {
     public Page<TransactionsDTO> findAllTransactionsByPeople(People people, Pageable pageable);
 
     public Page<TransactionsDTO> findByDescriptionAndPeople(String description, People people, Pageable pageable);
+    
+    public Transactions  findTopByPeopleOrderByIdDesc(People people);
 
 }

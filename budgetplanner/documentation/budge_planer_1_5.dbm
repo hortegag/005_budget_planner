@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.9"
+	 default-schema="public" default-owner="postgres">
+<database name="personal_transactions" encoding="UTF8" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="groups">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1940" y="20"/>
+	<column name="id_group" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="1000"/>
+	</column>
+	<constraint name="roles_pk" type="pk-constr" table="public.groups">
+		<columns names="id_group" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users_groups">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1420" y="140"/>
+
+	<customidxs object-type="column">
+		<object name="id_group" index="0"/>
+		<object name="id_person" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="groups_fk" index="0"/>
+		<object name="people_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="roles_has_many_usuarios_roles" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#3e89fc"
+	 src-table="public.groups"
+	 dst-table="public.users_groups"
+	 src-required="false" dst-required="false"/>
+
+<table name="transactions">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="780" y="480"/>
+	<column name="id_transaction" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="1000"/>
+	</column>
+	<column name="current_balance">
+		<type name="numeric" length="30" precision="2"/>
+	</column>
+	<column name="value">
+		<type name="numeric" length="30" precision="2"/>
+	</column>
+	<column name="current_balance_cp">
+		<type name="numeric" length="30" precision="2"/>
+	</column>
+	<constraint name="transactions_pk" type="pk-constr" table="public.transactions">
+		<columns names="id_transaction" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_custom_transaction_type" index="5"/>
+		<object name="id_person" index="6"/>
+		<object name="id_transaction_type" index="4"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="custom_transaction_type_fk" index="3"/>
+		<object name="people_fk" index="0"/>
+		<object name="transaction_type_fk" index="2"/>
+	</customidxs>
+</table>
+
+<table name="transaction_type">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="260" y="400"/>
+	<column name="id_transaction_type" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="1000"/>
+	</column>
+	<column name="entry_type">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="transaction_type_pk" type="pk-constr" table="public.transaction_type">
+		<columns names="id_transaction_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="custom_transaction_type">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="240" y="740"/>
+	<column name="id_custom_transaction_type" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="1000"/>
+	</column>
+	<column name="entry_type">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="custome_transaction_type_pk" type="pk-constr" table="public.custom_transaction_type">
+		<columns names="id_custom_transaction_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="people">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="860" y="120"/>
+	<column name="id_person" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="last_name">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="email">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="born_date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="identification">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="username" not-null="true">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="password">
+		<type name="varchar" length="500"/>
+	</column>
+	<column name="enabled">
+		<type name="varchar" length="1"/>
+	</column>
+	<column name="current_balance">
+		<type name="numeric" length="30" precision="2"/>
+	</column>
+	<column name="income">
+		<type name="numeric" length="30" precision="2"/>
+	</column>
+	<column name="expense">
+		<type name="numeric" length="30" precision="2"/>
+	</column>
+	<constraint name="people_pk" type="pk-constr" table="public.people">
+		<columns names="id_person" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="unique_user_ct" type="uq-constr" table="public.people">
+		<columns names="username" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="unique_email_ct" type="uq-constr" table="public.people">
+		<columns names="email" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_identification_type" index="12"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="identification_type_fk" index="0"/>
+	</customidxs>
+</table>
+
+<table name="identification_type">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="340" y="60"/>
+	<column name="id_identification_type" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="mnemonic">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="500"/>
+	</column>
+	<constraint name="identification_type_pk" type="pk-constr" table="public.identification_type">
+		<columns names="id_identification_type" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="roles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1980" y="500"/>
+	<column name="id_rol" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="name">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="description">
+		<type name="varchar" length="500"/>
+	</column>
+	<constraint name="options_pk" type="pk-constr" table="public.roles">
+		<columns names="id_rol" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="groups_roles">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="2000" y="300"/>
+
+	<customidxs object-type="column">
+		<object name="id_group" index="0"/>
+		<object name="id_rol" index="1"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="groups_fk" index="0"/>
+		<object name="roles_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="roles_has_many_roles_options" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#d1a36e"
+	 src-table="public.groups"
+	 dst-table="public.groups_roles"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="options_has_many_roles_options" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6bf25e"
+	 src-table="public.roles"
+	 dst-table="public.groups_roles"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="identification_type_has_many_people" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ede624"
+	 src-table="public.identification_type"
+	 dst-table="public.people"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="people_has_many_transactions" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#36acdf"
+	 src-table="public.people"
+	 dst-table="public.transactions"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="transaction_type_has_many_transactions" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#0f82df"
+	 src-table="public.transaction_type"
+	 dst-table="public.transactions"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="custome_transaction_type_has_many_transactions" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#ba62bd"
+	 src-table="public.custom_transaction_type"
+	 dst-table="public.transactions"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="people_has_many_usuarios_grupos" type="rel1n"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#08c58a"
+	 src-table="public.people"
+	 dst-table="public.users_groups"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
