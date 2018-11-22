@@ -23,6 +23,8 @@ public interface PagingTransactionTypeRepository extends PagingAndSortingReposit
     TransactionType findByNameAndIdNot(String name, Long id);
     
     List<TransactionType> findAllByOrderByIdAsc();
+    
+    List<TransactionType> findAllByEntryTypeOrderByIdAsc(String entryType);
 
 
 

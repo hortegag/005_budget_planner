@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+<head>
+<title th:text="#{transaction.edit.title}"></title>
+</head>
+<body>
+    <div layout:fragment="content">
+
+
+        <p class="mt-5"></p>
+       <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3
+                        class="card-title"
+                        th:text="#{transaction.edit.title}"></h3>
+                </div>
+                <div class="card-body">
+                    <form
+                        id="formPeople"
+                        th:object="${transaction}"
+                        th:action="${flowExecutionUrl}"
+                        method="post"
+                        autocomplete="off">
+
+
+
+
+<!-- 
+                        <div class="form-group">
+
+                            <label
+                                for="transactionTypeEntryType"
+                                th:text="#{transaction.entity.entryType}">transactionEntryType label:</label>
+
+
+                            <select
+                                id="transactionTypeEntryType"
+                                th:field="*{transactionTypeEntryType}"
+                                class="custom-select">
+                                <option
+                                    th:value="DEBIT"
+                                    th:text="DEBIT">transactionEntryType</option>
+                                <option
+                                    th:value="CREDIT"
+                                    th:text="CREDIT">transactionEntryType</option>
+                            </select>
+
+
+                            <p
+                                th:if="${#fields.hasErrors('transactionTypeEntryType')}"
+                                th:errors="*{transactionTypeEntryType}"
+                                class="invalid-feedback">transactionTypeEntryType Error</p>
+                        </div>
+    -->                     
+                        
+
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="transactionType"
+                                th:text="#{transaction.entity.transactionType}">transactionType Date label:</label>
+
+
+                            <select
+                                id="transactionType"
+                                th:field="*{transactionType}"
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{transactionType}')} ? is-invalid">
+                                <option
+                                    th:each="type : ${selectableTransactionTypes}"
+                                    th:value="${type.name}"
+                                    th:text="${type.name +' | ' +   type.entryType}"
+                                    th:selected="${ type.name == transaction.transactionType }">transactionType</option>
+                            </select>
+                            <p
+                                th:if="${#fields.hasErrors('transactionType')}"
+                                th:errors="*{transactionTypeId}"
+                                class="invalid-feedback">transactionType Error</p>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label
+                                for="transactionDate"
+                                th:text="#{transaction.entity.date}">transactionDate label:</label>
+                            <input
+                                type="text"
+                                th:field="*{transactionDate}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('transactionDate')} ? is-invalid"
+                                id="transactionDate"
+                                th:placeholder="#{transaction.entity.date.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('transactionDate')}"
+                                th:errors="*{transactionDate}"
+                                class="invalid-feedback">transactionDate Error</p>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label
+                                for="description"
+                                th:text="#{transaction.entity.description}">description label:</label>
+                            <input
+                                type="text"
+                                th:field="*{description}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('description')} ? is-invalid"
+                                id="description"
+                                th:placeholder="#{transaction.entity.description.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('description')}"
+                                th:errors="*{description}"
+                                class="invalid-feedback">description Error</p>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label
+                                for="value"
+                                th:text="#{transaction.entity.value}">value label:</label>
+                            <input
+                                type="text"
+                                th:field="*{value}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('value')} ? is-invalid"
+                                id="value"
+                                th:placeholder="#{transaction.entity.value.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('value')}"
+                                th:errors="*{value}"
+                                class="invalid-feedback">value Error</p>
+
+                        </div>
+
+                       
+
+
+                        <input
+                            id="editTransaction"
+                            class="btn btn-primary"
+                            name="_eventId_save"
+                            type="submit"
+                            th:value="#{transaction.edit.save.button}"></input>
+                        <input
+                            id="cancelEditTransaction"
+                            class="btn btn-dark"
+                            name="_eventId_cancel"
+                            type="submit"
+                            th:value="#{transaction.edit.cancel.button}"></input>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</body>
+</html>

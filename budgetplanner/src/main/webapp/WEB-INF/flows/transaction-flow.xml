@@ -52,9 +52,9 @@
 
 
             <evaluate
-                expression="transactionTypeController.findById(requestParameters.id)"
+                expression="transactionsController.findById(requestParameters.id)"
 
-                result="flowScope.transactionType" />
+                result="flowScope.transaction" />
 
 
         </transition>
@@ -123,8 +123,17 @@
 
     <view-state
         id="editEntity"
-        view="#{directorio}/transactionTypeEdit"
-        model="transactionType">
+        view="#{directorio}/transactionEdit"
+        model="transaction">
+        
+        
+        <on-render>
+            <evaluate
+                expression="transactionsController.initializeSelectableTransactionTypesByEntry(transaction.transactionTypeEntryType)"
+                result="flashScope.selectableTransactionTypes" />
+                
+                
+        </on-render>
 
 
 
@@ -145,15 +154,15 @@
 
     <view-state
         id="confirmEditEntity"
-        view="#{directorio}/transactionTypeConfirmEdit"
-        model="transactionType">
+        view="#{directorio}/transactionConfirmEdit"
+        model="transaction">
 
 
         <transition
             on="confirm"
             to="success">
 
-            <evaluate expression="transactionTypeController.save(flowScope.transactionType)" />
+            <evaluate expression="transactionsController.update(flowScope.transaction)" />
         </transition>
 
 
