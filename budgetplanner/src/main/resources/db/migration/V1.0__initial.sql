@@ -50,7 +50,7 @@ insert into identification_type values (1002,'Dummy','DM','Dummy Identification'
 insert into identification_type values (1003,'Passport','PS','Pasaporte de la persona');
 
 
-insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y', 0, 0, 0,1001);
+insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y', 295, 300, 5,1001);
 insert into people values (2004,'Dummy','Smith','dsmith@hotmail.com','1989-01-27','PASS_123XYZ','dsmith','$2a$10$d4HxrYDWhHt7bQaL914PluHCy1MH6B6kWiQ1sc8wbV7.ivK7tL/SO','Y', 0, 0, 0,1003);
 
 insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','hhercules','Y', 0, 0, 0, 1003);

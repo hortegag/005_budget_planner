@@ -63,8 +63,8 @@
             on="delete"
             to="confirmDeleteEntity">
             <evaluate
-                expression="servicio.findById(requestParameters.id)"
-                result="flowScope.transactionType" />
+                expression="transactionsController.findById(requestParameters.id)"
+                result="flowScope.transaction" />
         </transition>
     </view-state>
 
@@ -181,14 +181,14 @@
 
     <view-state
         id="confirmDeleteEntity"
-        view="#{directorio}/transactionTypeConfirmDelete"
-        model="transactionType">
+        view="#{directorio}/transactionConfirmDelete"
+        model="transaction">
 
 
         <transition
             on="confirm"
             to="success">
-            <evaluate expression="servicio.deleteById(flowScope.transactionType.id)" />
+            <evaluate expression="transactionsController.delete(flowScope.transaction)" />
         </transition>
 
         <transition

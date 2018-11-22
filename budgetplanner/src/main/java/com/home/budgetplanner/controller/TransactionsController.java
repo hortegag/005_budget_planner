@@ -202,6 +202,46 @@ public class TransactionsController {
     }
     
     
+   
+    
+    
+    
+    public People initializePeople(){
+        
+        
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        People people = peopleService.findByUsername(userName);
+        
+        return people;
+        
+    }
+
+   // public People save(People people) {
+
+        //return peopleService.save(people);
+    //}
+    
+    
+    
+    public TransactionsDTO findById(Long id) {
+
+        TransactionsDTO transactionsDTO = TransactionsDTO.build(transactionsService.findById(new Long(id)));
+
+        return transactionsDTO;
+
+    }
+    
+    
+    public List<TransactionType> initializeSelectableTransactionTypesByEntry(String entryType) {
+
+        return transactionTypeService.findAllByEntryTypeOrderByIdAsc(entryType);
+
+    }
+    
+    
+    
+    
     
     public void update(TransactionsDTO transactionsDTO) {
 
@@ -262,36 +302,63 @@ public class TransactionsController {
     
     
     
-    public People initializePeople(){
-        
-        
+    
+    public void delete(TransactionsDTO transactionsDTO) {
+
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 
         People people = peopleService.findByUsername(userName);
         
-        return people;
+        TransactionType transactionType = transactionTypeService.findByName(transactionsDTO.getTransactionType());
+     
+       // Transactions transaction = new Transactions();
+        Transactions transaction = transactionsService.findById(transactionsDTO.getId());
+
         
-    }
+        
+        
+        //transaction.getValue();
+      
+     //   BigDecimal valueBd = new BigDecimal( transactionsDTO.getValue());
+    //    transaction.getValue().compareTo(valueBd  );
+        
+     //  if (  transaction.getValue().compareTo(valueBd  ) !=0 ) {
+           
+           if ( transactionType.getEntryType().equals("DEBIT")) {
+               people.setExpense(people.getExpense().subtract(transaction.getValue()));
+               people.setCurrentBalance( people.getCurrentBalance().add (transaction.getValue() )) ;
 
-   // public People save(People people) {
+               
+              // people.setExpense( people.getExpense().add(new BigDecimal(transactionsDTO.getValue())) );
+              // people.setCurrentBalance( people.getCurrentBalance().subtract(new BigDecimal(transactionsDTO.getValue())) );
+               
+           } else {
+               
+               
+               people.setIncome(  people.getIncome().subtract( transaction.getValue()  )  ); 
+               
+               people.setCurrentBalance( people.getCurrentBalance().subtract(   transaction.getValue()   ) );
+         
+               
+               //people.setIncome(  people.getIncome().add(new BigDecimal(transactionsDTO.getValue()))  ); 
+               
+               //people.setCurrentBalance( people.getCurrentBalance().add(new BigDecimal(transactionsDTO.getValue())) );
+            
+               
+               
+           }
+         
+       //}
+        
+        
+        peopleService.save(people);
 
-        //return peopleService.save(people);
-    //}
-    
-    
-    
-    public TransactionsDTO findById(Long id) {
+        
+        transactionsService.deleteById(transactionsDTO.getId());
+        
+        //Transactions transactionToStore = TransactionsDTO.dtoToEntity(transactionsDTO, transactionType, people);
 
-        TransactionsDTO transactionsDTO = TransactionsDTO.build(transactionsService.findById(new Long(id)));
-
-        return transactionsDTO;
-
-    }
-    
-    
-    public List<TransactionType> initializeSelectableTransactionTypesByEntry(String entryType) {
-
-        return transactionTypeService.findAllByEntryTypeOrderByIdAsc(entryType);
+        //transactionsService.save(transactionToStore);
 
     }
     
