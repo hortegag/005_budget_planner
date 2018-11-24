@@ -1,6 +1,7 @@
 package com.home.budgetplanner.service.impl;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.home.budgetplanner.BudgetplannerApplication;
+import com.home.budgetplanner.controller.dtos.DataDTO;
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.controller.dtos.TransactionTypeDTO;
 import com.home.budgetplanner.controller.dtos.TransactionsDTO;
@@ -187,6 +189,32 @@ public class TransactionsServiceImpl implements TransactionsService, Serializabl
 //
 //        return pagingTransactionsRepository.save(entity);
 //    }
+    
+    
+    @Override
+    public List<DataDTO> findTransactionSum(){
+        
+        return pagingTransactionsRepository.findTransactionSum();
+        
+    }
+    
+    @Override
+    
+    public List<DataDTO> findTransactionSumByEntryType(String entryType){
+        
+        return pagingTransactionsRepository.findTransactionSumByEntryType(entryType);
+        
+    }
+    
+    @Override
+    public  List<Object[][]> findTransactionSumByEntryTypeAndDay(String entryType, LocalDate startDate, LocalDate endDate) {
+        
+        
+        return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDay(entryType, startDate, endDate);
+    }
+
+
+
 
 
 

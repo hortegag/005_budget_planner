@@ -1,6 +1,7 @@
 package com.home.budgetplanner.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.webflow.execution.RequestContext;
 
 import com.home.budgetplanner.BudgetplannerApplication;
+import com.home.budgetplanner.controller.dtos.DataDTO;
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.controller.dtos.TransactionTypeDTO;
 import com.home.budgetplanner.controller.dtos.TransactionsDTO;
+import com.home.budgetplanner.controller.form.DataDTOGrid;
 import com.home.budgetplanner.controller.form.PeopleDTOGrid;
 import com.home.budgetplanner.controller.form.PeopleGrid;
 import com.home.budgetplanner.controller.form.SearchPeopleForm;
+import com.home.budgetplanner.controller.form.SearchStatisticsOfTransactionsForm;
 import com.home.budgetplanner.controller.form.SearchTransactionTypeForm;
 import com.home.budgetplanner.controller.form.SearchTransactionsForm;
 import com.home.budgetplanner.controller.form.TransactionTypeDTOGrid;
@@ -361,6 +365,180 @@ public class TransactionsController {
         //transactionsService.save(transactionToStore);
 
     }
+    
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/listGridD3", method = RequestMethod.GET, produces = "application/json")
+    //public List<DataDTO> testD3(){
+    //public DataDTOGrid testD3(){
+    public List<DataDTOGrid> testD3(){
+        
+        List<DataDTO> lista = new ArrayList<>();
+        
+        
+        DataDTO first = new DataDTO();
+        
+        first.setLabel("y");
+        first.setValue(new BigDecimal("10.59"));
+        lista.add(first);
+        
+
+        DataDTO second = new DataDTO();
+        
+        
+        
+        second.setLabel("z");
+        second.setValue(new BigDecimal("03.20"));  
+        lista.add(second);
+
+       
+        List<DataDTO> test   = transactionsService.findTransactionSum();
+        logger.info("**************************************************************************");
+        logger.info(test);
+        
+        
+        DataDTOGrid dataDTOGrid = new DataDTOGrid();
+        
+        //dataDTOGrid.setValues(lista);
+        
+        dataDTOGrid.setValues(test);
+        
+        
+        
+        List<DataDTOGrid> listaValues = new ArrayList<>();
+        
+        listaValues.add(dataDTOGrid);
+        return listaValues;
+        
+       // return lista;
+       // return dataDTOGrid;
+        
+    }
+    
+    
+    
+
+    @ResponseBody
+    @RequestMapping(value = "/listGridD3Pie", method = RequestMethod.GET, produces = "application/json")
+    //public List<DataDTO> testD3(){
+    //public DataDTOGrid testD3(){
+    public List<DataDTO> testD3Pie(){
+        
+        
+        
+        List<DataDTO> test   = transactionsService.findTransactionSum();
+        logger.info("**************************************************************************");
+        logger.info(test);
+        
+        List<DataDTO> lista = new ArrayList<>();
+        
+        
+        DataDTO first = new DataDTO();
+        
+        first.setLabel("y");
+        first.setValue(new BigDecimal("20.59"));
+        lista.add(first);
+        
+
+        DataDTO second = new DataDTO();
+        
+        
+        
+        second.setLabel("z");
+        second.setValue(new BigDecimal("40.20"));  
+        lista.add(second);
+
+       
+        
+        
+        
+        DataDTOGrid dataDTOGrid = new DataDTOGrid();
+        
+        dataDTOGrid.setValues(lista);
+        
+        
+        List<DataDTOGrid> listaValues = new ArrayList<>();
+        
+        listaValues.add(dataDTOGrid);
+       // return listaValues;
+        
+        return test;
+       // return dataDTOGrid;
+        
+    }
+    
+    
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/listTransactionsByEntryType", method = RequestMethod.GET, produces = "application/json")
+    //public List<DataDTO> testD3(){
+    //public DataDTOGrid testD3(){
+    public List<DataDTOGrid> findTransactionSumByEntryType(SearchStatisticsOfTransactionsForm searchStatisticsOfTransactionsForm){
+        
+        List<DataDTO> lista = new ArrayList<>();
+        
+        
+       
+        List<DataDTO> test   = transactionsService.findTransactionSumByEntryType(searchStatisticsOfTransactionsForm.getEntryType());
+       
+        
+        
+        DataDTOGrid dataDTOGrid = new DataDTOGrid();
+        
+        //dataDTOGrid.setValues(lista);
+        
+        dataDTOGrid.setValues(test);
+        
+        
+        
+        List<DataDTOGrid> listaValues = new ArrayList<>();
+        
+        listaValues.add(dataDTOGrid);
+        
+        
+        logger.info("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+        String date = "2018-11-01";
+
+        //default, ISO_LOCAL_DATE 
+        LocalDate startDate = LocalDate.parse(date);
+        
+        String endDate = "2018-11-30";
+
+        //default, ISO_LOCAL_DATE 
+        LocalDate endLocalDate = LocalDate.parse(endDate);
+     
+        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),startDate, endLocalDate);
+
+        
+        logger.info("//////////prueba group//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+        logger.info(listByDay.size());
+
+        logger.info(listByDay);
+        
+        //for (Object[][] pruebaGroup : listByDay){
+            
+            for (Object[] maxAvgSalary : listByDay) {
+                logger.info("max avg salary: " + maxAvgSalary[0]);
+                System.out.println("min avg salary: " + maxAvgSalary[1]);
+            }
+            
+        //}
+        
+       
+       // logger.info(pruebaGroup);
+        
+        
+        
+        return listaValues;
+        
+       // return lista;
+       // return dataDTOGrid;
+        
+    }
+    
+    
     
 
 }

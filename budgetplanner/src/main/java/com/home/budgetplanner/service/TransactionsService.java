@@ -1,10 +1,13 @@
 package com.home.budgetplanner.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 
+import com.home.budgetplanner.controller.dtos.DataDTO;
 import com.home.budgetplanner.controller.dtos.PeopleDTO;
 import com.home.budgetplanner.controller.dtos.TransactionTypeDTO;
 import com.home.budgetplanner.controller.dtos.TransactionsDTO;
@@ -24,5 +27,13 @@ public interface TransactionsService extends BaseService<Transactions, Long> {
     public Page<TransactionsDTO> findByDescriptionAndPeople(String description, People people, Pageable pageable);
     
     public Transactions  findTopByPeopleOrderByIdDesc(People people);
+    
+    public List<DataDTO> findTransactionSum();
+    
+    public List<DataDTO> findTransactionSumByEntryType(String entryType);
+    
+    public  List<Object[][]> findTransactionSumByEntryTypeAndDay(String entryType, LocalDate startDate, LocalDate endDate);  
+
+
 
 }

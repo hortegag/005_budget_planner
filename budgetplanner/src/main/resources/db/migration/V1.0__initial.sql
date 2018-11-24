@@ -215,8 +215,8 @@ insert into transaction_type values (6002, 'FOOD', 'Money spent on food', 'DEBIT
 insert into transaction_type values (6003, 'ENTERTEINMENT', 'Money spent on enterteinment', 'DEBIT');
 
 
-insert into transactions values (7001, '1983-02-01', 'SALARY PAYMENT', 300, 300, 6001, null, 2003);
-insert into transactions values (7002, '1983-02-02', 'LUNCH SUBMARINE', 255, 5, 6002, null, 2003);
+insert into transactions values (7001, '2018-11-01', 'SALARY PAYMENT', 300, 300, 6001, null, 2003);
+insert into transactions values (7002, '2018-11-02', 'LUNCH SUBMARINE', 255, 5, 6002, null, 2003);
 
 
 

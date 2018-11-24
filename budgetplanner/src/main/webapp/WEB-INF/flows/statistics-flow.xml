@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow
+    xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+    start-state="list">
+
+
+
+
+    <!-- <var name="servicio" class="com.home.budgetplanner.service.impl.IdentificationTypeServiceImpl"/> -->
+
+    <var
+        name="servicio"
+        class="com.home.budgetplanner.service.impl.IdentificationTypeServiceImpl" />
+    <on-start>
+        <set
+            name="flowScope.directorio"
+            value="'statisticsFlow'" />
+        <evaluate
+            expression="identificationTypeController.initializeForm()"
+            result="flowScope.searchIdentificationTypeForm" />
+        <evaluate
+            expression="servicio.findAll()"
+            result="flowScope.identificationsType" />
+
+    </on-start>
+
+    <view-state
+        id="list"
+        view="#{directorio}/statisticsList"
+        model="flowScope.searchIdentificationTypeForm">
+
+
+        <transition
+            on="search"
+            to="list">
+            <evaluate
+                expression="identificationTypeController.searchIdentifications(flowScope.searchIdentificationTypeForm)"
+                result="flowScope.identificationsType" />
+        </transition>
+        <transition
+            on="add"
+            to="addEntity">
+            <evaluate
+                expression="identificationTypeController.initializeIdentificationType()"
+                result="flowScope.identificationType" />
+
+        </transition>
+
+        <transition
+            on="edit"
+            to="editEntity">
+            <evaluate
+                expression="servicio.findById(requestParameters.id)"
+                result="flowScope.identificationType" />
+
+        </transition>
+
+        <transition
+            on="delete"
+            to="confirmDeleteEntity">
+            <evaluate
+                expression="servicio.findById(requestParameters.id)"
+                result="flowScope.identificationType" />
+
+        </transition>
+
+    </view-state>
+
+
+    <view-state
+        id="addEntity"
+        view="#{directorio}/identificationType-form"
+        model="identificationType">
+
+
+        <transition
+            on="save"
+            to="confirmCreateEntity">
+            <!--<evaluate expression="servicio.save(flowScope.identificationType)" /> -->
+            <!--<evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="cancel" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false">
+        </transition>
+
+
+    </view-state>
+
+    <view-state
+        id="confirmCreateEntity"
+        view="#{directorio}/identificationTypeConfirmCreate"
+        model="identificationType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="servicio.save(flowScope.identificationType)" />
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
+
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+    <!-- <end-state id="success" view="redirect:welcome"> -->
+
+
+
+    <view-state
+        id="editEntity"
+        view="#{directorio}/editIdentificationType"
+        model="identificationType">
+
+
+        <transition
+            on="save"
+            to="confirmEditEntity">
+            <!-- <evaluate expression="servicio.save(flowScope.identificationType)" /> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" 
+                /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false">
+        </transition>
+    </view-state>
+
+
+
+    <view-state
+        id="confirmEditEntity"
+        view="#{directorio}/identificationTypeConfirmEdit"
+        model="identificationType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="servicio.save(flowScope.identificationType)" />
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <!-- <transition on="cancel" to="list" bind="false"> <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> </transition> -->
+
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+
+
+
+    <view-state
+        id="confirmDeleteEntity"
+        view="#{directorio}/identificationTypeConfirmDelete"
+        model="identificationType">
+
+
+        <transition
+            on="confirm"
+            to="success">
+            <evaluate expression="servicio.deleteById(flowScope.identificationType.id)" />
+            <!-- <evaluate expression="servicio.findAll()" result="flowScope.identificationsType" /> -->
+        </transition>
+
+        <transition
+            on="cancel"
+            to="cancel"
+            bind="false"></transition>
+
+
+    </view-state>
+
+
+    <!-- <view-state id="success" /> -->
+
+    <view-state id="failure" />
+
+
+    <end-state id="success"></end-state>
+    <end-state id="cancel"></end-state>
+
+</flow>

@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/default}">
+<head>
+<title th:text="#{people.list.title}"></title>
+
+
+<!-- 
+<script
+    th:src="@{/webjars/jquery/3.3.1-1/jquery.js}"
+    src=""></script>
+ -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.css">
+
+<link
+    rel="stylesheet"
+    th:href="@{/jqgrid/css/ui.jqgrid-bootstrap4.css}" />
+
+
+<!-- 
+<script
+    th:src="@{/jqgrid/js/i18n/grid.locale-en.js}"
+    src=""></script>
+ -->
+<script
+    th:src="@{'/jqgrid/js/i18n/grid.locale-'+${#locale}+'.js'}"
+    src=""></script>
+
+<script
+    th:src="@{/jqgrid/js/jquery.jqGrid.min.js}"
+    src=""></script>
+
+
+<script
+    th:src="@{/d3/d3.min.js}"
+    src=""></script>
+
+<link
+    th:href="@{/d3/nv.d3.css}"
+    rel="stylesheet">
+
+
+<script
+    th:src="@{/d3/nv.d3.js}"
+    src=""></script>
+
+<style >
+
+
+
+#chart1 svg {
+  height: 400px;
+}
+
+#chart2 svg {
+  height: 400px;
+}
+
+#chart3 svg {
+  height: 400px;
+}
+
+
+
+
+</style>
+
+</head>
+<body>
+
+
+
+
+
+    <div layout:fragment="content">
+
+
+
+           <h1
+            class="mt-5"
+            th:text="#{people.list.title}"></h1>
+            
+            
+                <div class="card">
+                
+                   <div class="card-header">
+                            <h3
+                                class="card-title"
+                                th:text="#{statistics.bar.title}"></h3>
+                        </div>
+                        <div class="card-body">
+                        
+                             <div id="chart1">
+                                <svg></svg>
+                            </div>
+                        
+                        </div>
+                    </div>            
+              <h1 class="mt-1"></h1>
+                <div class="card">
+                
+                   <div class="card-header">
+                            <h3
+                                class="card-title"
+                                th:text="#{statistics.bar.title}"></h3>
+                        </div>
+                        <div class="card-body">
+                        
+                            <div id="chart2">
+                                <svg></svg>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    
+                              <h1 class="mt-1"></h1>
+                <div class="card">
+                
+                   <div class="card-header">
+                            <h3
+                                class="card-title"
+                                th:text="#{statistics.bar.title}"></h3>
+                        </div>
+                        <div class="card-body">
+                        
+                            <div id="chart4">
+                                <svg></svg>
+                            </div>
+                        
+                        </div>
+                    </div> 
+                    
+                    
+                 <h1 class="mt-1"></h1>
+                <div class="card">
+                
+                   <div class="card-header">
+                            <h3
+                                class="card-title"
+                                th:text="#{statistics.bar.title}"></h3>
+                        </div>
+                        <div class="card-body">
+                        
+                            <div id="chart5">
+                                <svg></svg>
+                            </div>
+                        
+                        </div>
+                    </div>                        
+
+        <div class="form-group">
+        
+     
+      
+        
+        
+        
+             
+        <div id="chart3">
+            <svg></svg>
+        </div>
+        
+        
+            ------------------------------------------------------------------------------------------------------------------
+            <label
+                for="searchName"
+                th:text="#{people.list.search.filter.name}">searchName</label>
+
+            <input
+                id="searchName"
+                type="text"
+                name="searchName"
+                class="form-control"
+                th:placeholder="#{people.list.search.filter.name.placeholder}" />
+        </div>
+
+        <div class="form-group">
+            <label
+                for="searchLastName"
+                th:text="#{people.list.search.filter.lastName}">searchIdentification</label>
+
+            <input
+                id="searchLastName"
+                type="text"
+                name="searchLastName"
+                class="form-control"
+                th:placeholder="#{people.list.search.filter.lastName.placeholder}" />
+
+
+        </div>
+        <input
+            id=submitButton
+            class="btn btn-primary"
+            name="_eventId_search"
+            type="submit"
+            th:value="#{identificationType.list.search.button}"></input>
+
+        <div>
+            <!--     Name
+            <br>
+            <input
+                type="text"
+                id="searchName"
+                name="searchName" />  -->
+
+            <!--   LastName
+            <br>
+            <input
+                type="text"
+                id="searchLastName"
+                name="searchLastName" />  -->
+            <!--      <button
+                onclick="gridReload()"
+                id="submitButton"
+                style="margin-left: 30px;">Search</button>    -->
+
+            <!-- <button
+                id="submitButton"
+                style="margin-left: 30px;">Search</button>  -->
+        </div>
+        <h2
+            class="mt-5"
+            th:text="#{identificationType.list.search.result.title}"></h2>
+
+
+        <form
+            action="#"
+            th:action="${flowExecutionUrl}"
+            method="post">
+            <input
+                id="addPeople"
+                class="btn btn-primary"
+                name="_eventId_add"
+                type="submit"
+                th:value="#{people.list.add.button}"></input>
+
+        </form>
+
+        <div
+            class="mt-5"
+            th:if="${#lists.isEmpty(peoples)}">
+            <div
+                class="alert alert-warning"
+                role="alert">
+                <p th:text="#{identificationType.list.search.empty.results}"></p>
+            </div>
+        </div>
+
+        <hr />
+        <div class="mt-5">
+            <table id="list">
+            </table>
+            <div id="pager"></div>
+        </div>
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+									$.jgrid.defaults.styleUI = 'Bootstrap4';
+									//$.jgrid.defaults.iconSet = 'Octicons';
+									$.jgrid.defaults.iconSet = "fontAwesome";
+									$.jgrid.defaults.width = 'auto';
+									$.jgrid.defaults.responsive = true;
+
+									var language = '[(${#locale})]';
+									/*
+									 $.jgrid.setRegional('grid', {
+									 regional : 'es'
+									 });
+									 */
+									/*	$.jgrid.setRegional('jqGrid', {
+											regional : language
+										});*/
+
+									var urlList = '[(@{/people/listGridBynameAndLastName})]';
+									var tableId = '[(#{people.list.search.table.id})]';
+									var tableActions = '[(#{people.list.search.table.actions})]';
+									var tableName = '[(#{people.list.search.table.name})]';
+									var tableLastName = '[(#{people.list.search.table.lastName})]';
+									var tableEmail = '[(#{people.list.search.table.email})]';
+									var tableBornDate = '[(#{people.list.search.table.bornDate})]';
+									var tableIdentification = '[(#{people.list.search.table.identification})]';
+									var tableIdentificationType = '[(#{people.list.search.table.identificationType})]';
+
+									//var testEditTwo = '[[${flowExecutionUrl}]]';
+									var testEditTwo = '[(${flowExecutionUrl})]';
+									var testEditTwo = '[(@{"~"+${flowExecutionUrl}})] ';
+									var editUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=edit)})]";
+									var deleteUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
+
+									console.log("test:" + urlList);
+									$(function() {
+										$("#list")
+												.jqGrid(
+														{
+															url : urlList,
+															datatype : 'json',
+															//regional : 'es',
+															mtype : 'GET',
+															colNames : [
+																	tableActions,
+																	tableName,
+																	tableLastName,
+																	tableEmail,
+																	tableBornDate,
+																	tableIdentification,
+																	tableIdentificationType ],
+															colModel : [
+																	{
+																		name : 'act',
+																		index : 'act',
+																		width : 70,
+																		sortable : false
+																	},
+																	{
+																		name : 'name',
+																		index : 'name',
+																		width : 100
+																	},
+																	{
+																		name : 'lastName',
+																		index : 'lastName',
+																		width : 100
+																	},
+																	{
+																		name : 'email',
+																		index : 'email',
+																		width : 150
+																	},
+																	{
+																		name : 'bornDateString',
+																		index : 'bornDate',
+																		width : 65
+																	},
+																	{
+																		name : 'identification',
+																		index : 'identification',
+																		width : 100
+																	},
+																	{
+																		name : 'identificationType',
+																		index : 'identificationType',
+																		width : 100
+																	}
+
+															],
+															jsonReader : {
+																root : "peopleData",
+																page : "currentPage",
+																total : "totalPages",
+																records : "totalRecords",
+																repeatitems : false,
+																id : "id"
+															},
+															//styleUI : 'Bootstrap',
+															//guiStyle : "bootstrap4",
+															//iconSet : "fontAwesome",
+															pager : '#pager',
+															rowNum : 10,
+															rowList : [ 1, 10,
+																	20, 30 ],
+															sortname : 'name',
+															sortorder : 'asc',
+															viewrecords : true,
+															gridview : true,
+															width : 1100,
+															//height : 200,
+															//width : '800',
+															//shrinkToFit : false,
+															height : 'auto',
+															//width : 500,
+															//caption : '${labelContactList}',
+															//onSelectRow : function(
+															//		id) {
+															//	document.location.href = "${showContactUrl}/"
+															//			+ id;
+															//},
+															gridComplete : function() {
+																var ids = jQuery(
+																		"#list")
+																		.jqGrid(
+																				'getDataIDs');
+																for (var i = 0; i < ids.length; i++) {
+																	var cl = ids[i];
+																	be = "<input style='height:22px;width:20px;' type='button' value='E' onclick=\"jQuery('#rowed2').editRow('"
+																			+ cl
+																			+ "');\"  />";
+																	se = "<input style='height:22px;width:20px;' type='button' value='S' onclick=\"jQuery('#rowed2').saveRow('"
+																			+ cl
+																			+ "');\"  />";
+																	ce = "<input style='height:22px;width:20px;' type='button' value='C' onclick=\"jQuery('#rowed2').restoreRow('"
+																			+ cl
+																			+ "');\" />";
+
+																	editUrlWithParameters = editUrl
+																			+ '&id='
+																			+ cl;
+																	deleteUrlWithParameters = deleteUrl
+																			+ '&id='
+																			+ cl;
+																	//console.log(testEditThree);
+																	testEdit = "<a href='"+editUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
+																	testDelete = " <a href='"+deleteUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
+
+																	jQuery(
+																			"#list")
+																			.jqGrid(
+																					'setRowData',
+																					ids[i],
+																					{
+																						act : testEdit
+																								+ testDelete
+																					///+ ce
+																					});
+																}
+															}
+
+														});
+										//$("#list").jqGrid("setFrozenColumns");
+										jQuery("#list").jqGrid('navGrid',
+												"#pager", {
+													edit : false,
+													add : false,
+													del : false,
+													search : false
+												});
+
+										function gridReload() {
+
+											console
+													.log("fffffffffffffffffffffffffffff----------------");
+											var searchName = jQuery(
+													"#searchName").val();
+											var searchLastName = jQuery(
+													"#searchLastName").val();
+											jQuery("#list")
+													.jqGrid(
+															'setGridParam',
+															{
+																url : urlList
+																		+ "?name="
+																		+ searchName
+																		+ "&lastName="
+																		+ searchLastName,
+																page : 1
+															}).trigger(
+															"reloadGrid");
+										}
+										var numeroDocumento = document
+												.querySelector("#submitButton");
+
+										numeroDocumento.addEventListener(
+												'click', function(event) {
+													return gridReload(event);
+												});
+
+									});
+									/*
+									 function gridReload() {
+									 console
+									 .log("tettttttttt----------------");
+									 var nm_mask = jQuery("#item_nm").val();
+									 var cd_mask = jQuery("#search_cd")
+									 .val();
+									 jQuery("#bigset").jqGrid(
+									 'setGridParam',
+									 {
+									 url : "bigset.php?nm_mask="
+									 + nm_mask
+									 + "&cd_mask="
+									 + cd_mask,
+									 page : 1
+									 }).trigger("reloadGrid");
+									 }
+									
+									 */
+								</script>
+
+
+
+        <script>
+									historicalBarChart = [ {
+										key : "Cumulative Return",
+										values : [ {
+											"label" : "salary test fer",
+											"value" : 2900.765957771107
+										}, {
+											"label" : "B",
+											"value" : 0
+										}, {
+											"label" : "C",
+											"value" : 32.807804682612
+										}, {
+											"label" : "D",
+											"value" : 196.45946739256
+										}, {
+											"label" : "E",
+											"value" : 0.19434030906893
+										}, {
+											"label" : "F",
+											"value" : 98.079782601442
+										}, {
+											"label" : "G",
+											"value" : 13.925743130903
+										}, {
+											"label" : "H",
+											"value" : 5.1387322875705
+										} ]
+									} ];
+
+
+                                    
+                                    
+                                    var urlListtest = '[(@{/transactions/listGridD3})]';
+                                    
+                                    
+                                    
+                                    
+                                    d3.json(urlListtest, function (data) {
+                                        console.log("fffffffffffffffffffffffffffffffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                                        //console.log(historicalBarChart);
+                                        historicalBarChart= data;
+                                        // console.log(historicalBarChart);
+                                        
+                                        nv
+                                            .addGraph(function() {
+                                                var chart = nv.models
+                                                        .discreteBarChart()
+                                                        .x(function(d) {
+                                                            return d.label
+                                                        }).y(function(d) {
+                                                            return d.value
+                                                        }).staggerLabels(false)
+                                                        //.staggerLabels(historicalBarChart[0].values.length > 8)
+                                                        .showValues(true)
+                                                        .color(['#18ce70', '#cc2c10', '#486192'])
+                                                        .duration(250);
+
+                                                d3.select('#chart1 svg').datum(
+                                                        historicalBarChart)
+                                                        .call(chart);
+
+                                                nv.utils
+                                                        .windowResize(chart.update);
+                                                return chart;
+                                            });
+                                        
+                                        
+                                        
+                                        
+                                    });
+                                    
+                                    
+                                    var urlListIncome = '[(@{/transactions/listTransactionsByEntryType?entryType=CREDIT})]';
+                                    
+                                    
+                                    d3.json(urlListIncome, function (data) {
+                                        //console.log(historicalBarChart);
+                                        historicalBarChartIncome= data;
+                                        // console.log(historicalBarChart);
+                                        
+                                        nv
+                                            .addGraph(function() {
+                                                var chartIncome = nv.models
+                                                        .discreteBarChart()
+                                                        .x(function(d) {
+                                                            return d.label
+                                                        }).y(function(d) {
+                                                            return d.value
+                                                        }).staggerLabels(false)
+                                                        //.staggerLabels(historicalBarChart[0].values.length > 8)
+                                                        .showValues(true)
+                                                        //.color(['#18ce70', '#cc2c10', '#486192'])
+                                                        .duration(250);
+
+                                                d3.select('#chart2 svg').datum(
+                                                        historicalBarChartIncome)
+                                                        .call(chartIncome);
+
+                                                nv.utils
+                                                        .windowResize(chartIncome.update);
+                                                return chartIncome;
+                                            });
+                                        
+                                    });
+                                    
+                                    
+                                    
+                                                   
+                                    var urlListIncome = '[(@{/transactions/listTransactionsByEntryType?entryType=DEBIT})]';
+                                    
+                                    
+                                    d3.json(urlListIncome, function (data) {
+                                        //console.log(historicalBarChart);
+                                        historicalBarChartExpense= data;
+                                        // console.log(historicalBarChart);
+                                        
+                                        nv
+                                            .addGraph(function() {
+                                                var chartExpense = nv.models
+                                                        .discreteBarChart()
+                                                        .x(function(d) {
+                                                            return d.label
+                                                        }).y(function(d) {
+                                                            return d.value
+                                                        }).staggerLabels(false)
+                                                        //.staggerLabels(historicalBarChart[0].values.length > 8)
+                                                        .showValues(true)
+                                                        //.color(['#18ce70', '#cc2c10', '#486192'])
+                                                        .duration(250);
+
+                                                d3.select('#chart4 svg').datum(
+                                                        historicalBarChartExpense)
+                                                        .call(chartExpense);
+
+                                                nv.utils
+                                                        .windowResize(chartExpense.update);
+                                                return chartExpense;
+                                            });
+                                        
+                                    });
+                                    
+                                    
+                                    var urlListtestPie = '[(@{/transactions/listGridD3Pie})]';
+                                    
+                                    
+                                    d3.json(urlListtestPie, function (data) {
+                                        console.log(data);
+                                        
+                                      
+                                        //Donut chart example
+                                        nv.addGraph(function() {
+                                          var chart = nv.models.pieChart()
+                                              .x(function(d) { return d.label })
+                                              .y(function(d) { return d.value })
+                                              .showLabels(true)     //Display pie labels
+                                              .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+                                              .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+                                              .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
+                                              .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
+                                              .color(['#18ce70', '#cc2c10'])
+                                              ;
+                                        
+                                            d3.select("#chart3 svg")
+                                                .datum(data)
+                                                .transition().duration(350)
+                                                .call(chart);
+                                        
+                                          return chart;
+                                        });
+                                        
+                                        
+                                        
+                                                                                
+                                        
+                                        //Pie chart example data. Note how there is only a single array of key-value pairs.
+                                        function exampleData() {
+                                          return  [
+                                              { 
+                                                "label": "One",
+                                                "value" : 29.765957771107
+                                              } , 
+                                              { 
+                                                "label": "Two",
+                                                "value" : 0
+                                              } , 
+                                              { 
+                                                "label": "Three",
+                                                "value" : 32.807804682612
+                                              } , 
+                                              { 
+                                                "label": "Four",
+                                                "value" : 196.45946739256
+                                              } , 
+                                              { 
+                                                "label": "Five",
+                                                "value" : 0.19434030906893
+                                              } , 
+                                              { 
+                                                "label": "Six",
+                                                "value" : 98.079782601442
+                                              } , 
+                                              { 
+                                                "label": "Seven",
+                                                "value" : 13.925743130903
+                                              } , 
+                                              { 
+                                                "label": "Eight",
+                                                "value" : 5.1387322875705
+                                              }
+                                            ];
+                                        }
+                                    
+                                    
+                                    });
+                                    
+                                    
+                                    
+
+                                
+                                
+                                // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
+    var chart;
+    var data;
+    var legendPosition = "top";
+    var randomizeFillOpacity = function() {
+        var rand = Math.random(0,1);
+        for (var i = 0; i < 100; i++) { // modify sine amplitude
+            data[4].values[i].y = Math.sin(i/(5 + rand)) * .4 * rand - .25;
+        }
+        data[4].fillOpacity = rand;
+        chart.update();
+    };
+    var toggleLegend = function() {
+        if (legendPosition == "top") {
+            legendPosition = "bottom";
+        } else {
+            legendPosition = "top";
+        }
+        chart.legendPosition(legendPosition);
+        chart.update();
+    };
+    nv.addGraph(function() {
+        chart = nv.models.lineChart()
+            .options({
+                duration: 300,
+                useInteractiveGuideline: true
+            })
+        ;
+        // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
+        chart.xAxis
+            .axisLabel("Time (s)")
+            .tickFormat(d3.format(',.1f'))
+            .staggerLabels(true)
+        ;
+        chart.yAxis
+            .axisLabel('Voltage (v)')
+            .tickFormat(function(d) {
+                if (d == null) {
+                    return 'N/A';
+                }
+                return d3.format(',.2f')(d);
+            })
+        ;
+        data = sinAndCos();
+        console.log(data);
+        d3.select('#chart5').append('svg')
+            .datum(data)
+            .call(chart);
+        nv.utils.windowResize(chart.update);
+        return chart;
+    });
+    function sinAndCos() {
+        var sin = [],
+            sin2 = [],
+            cos = [],
+            rand = [],
+            rand2 = []
+            ;
+        for (var i = 0; i < 100; i++) {
+            sin.push({x: i, y: i % 10 == 5 ? null : Math.sin(i/10) }); //the nulls are to show how defined works
+            sin2.push({x: i, y: Math.sin(i/5) * 0.4 - 0.25});
+            cos.push({x: i, y: .5 * Math.cos(i/10)});
+            rand.push({x:i, y: Math.random() / 10});
+            rand2.push({x: i, y: Math.cos(i/10) + Math.random() / 10 })
+        }
+        return [
+            {
+                area: true,
+                values: sin,
+                key: "Sine Wave",
+                color: "#ff7f0e",
+                strokeWidth: 4,
+                classed: 'dashed'
+            },
+            {
+                values: cos,
+                key: "Cosine Wave",
+                color: "#2ca02c"
+            },
+            {
+                values: rand,
+                key: "Random Points",
+                color: "#2222ff"
+            },
+            {
+                values: rand2,
+                key: "Random Cosine",
+                color: "#667711",
+                strokeWidth: 3.5
+            },
+            {
+                area: true,
+                values: sin2,
+                key: "Fill opacity",
+                color: "#EF9CFB",
+                fillOpacity: .1
+            }
+        ];
+    }
+
+									
+								</script>
+
+
+    </div>
+
+
+
+
+
+
+</body>
+</html>

@@ -72,6 +72,9 @@ public class WebMvcConfig /*extends WebMvcConfigurerAdapter {*/implements WebMvc
         //registry.addResourceHandler("/jqgrid/**").addResourceLocations("/jqgrid/");
         
         registry.addResourceHandler("/jqgrid/**").addResourceLocations("classpath:/static/jqgrid/");
+        
+        registry.addResourceHandler("/d3/**").addResourceLocations("classpath:/static/d3/");
+
 
   
         registry.addResourceHandler("/**").addResourceLocations(CLASSPATH_RESOURCE_LOCATIONS);
