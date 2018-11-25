@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/defaultRegister}">
+<head>
+<title th:text="#{people.add.title}"></title>
+<!-- 
+<script
+    type="text/javascript"
+    th:src="@{/resources/dojo/dojo.js}"></script>
+<script
+    type="text/javascript"
+    th:src="@{/resources/spring/Spring.js}"></script>
+<script
+    type="text/javascript"
+    th:src="@{/resources/spring/Spring-Dojo.js}"></script>
+    
+     -->
+
+
+</head>
+<body>
+    <div layout:fragment="content">
+        <!-- 
+    Put Optional next to a label instead an asterisk in required field. Using optional it is more readable, an easy to understand to the user that is filling the form.
+    https://blog.optimalworkshop.com/designing-form-fields-optional-versus-required
+    https://uxdesign.cc/form-field-required-vs-optional-9b4d7cdbf400
+
+
+ -->
+        <p class="mt-5"></p>
+        <!-- 		
+		<form action="#"
+			th:action="@{/identificationType/saveIdentificationType}"
+			th:object="${identificationType}" method="post">   -->
+
+        <!-- th:action="@{/identificationType/showFormForAdd}" -->
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h3
+                        class="card-title"
+                        th:text="#{people.add.title}"></h3>
+                </div>
+                <div class="card-body">
+                    <form
+                        id="formPeople"
+                        th:object="${people}"
+                        th:action="${flowExecutionUrl}"
+                        method="post"
+                        autocomplete="off">
+                        <!-- 
+		<form action="#" th:object="${identificationType}" method="post">
+		-->
+
+                        <!--	
+		<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />  -->
+
+                        <!-- keep track of the id that is being updated -->
+                        <!-- <input type="hidden" th:field="*{id}" /> -->
+
+
+                        <!--  //th:field="*{type}" -->
+
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="identificationType"
+                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
+
+
+                            <select
+                                id="identificationType"
+                                th:field="*{identificationType}"
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{identificationType}')} ? is-invalid">
+                                <option
+                                    th:each="type : ${selectableIdentificationTypes}"
+                                    th:value="${type.id}"
+                                    th:text="${type.name}">IdentificationType</option>
+                            </select>
+                            <p
+                                th:if="${#fields.hasErrors('identificationType')}"
+                                th:errors="*{identificationType}"
+                                class="invalid-feedback">identificationType Error</p>
+                        </div>
+
+                        <!-- 
+
+                        <div class="form-group">
+
+                            <label
+                                for="identificationType"
+                                th:text="#{people.entity.identificationType}">identificationType Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identificationType}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identificationType')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identificationType.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identificationType')}"
+                                th:errors="*{identificationType}"
+                                class="invalid-feedback">identificationType Error</p>
+                        </div>  -->
+
+                        <div class="form-group">
+
+                            <label
+                                for="identification"
+                                th:text="#{people.entity.identification}">Identification Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{identification}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('identification')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.identification.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('identification')}"
+                                th:errors="*{identification}"
+                                class="invalid-feedback">identification Error</p>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label
+                                for="name"
+                                th:text="#{people.entity.name}">Name label::</label>
+                            <input
+                                type="text"
+                                th:field="*{name}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('name')} ? is-invalid"
+                                id="name"
+                                th:placeholder="#{people.entity.name.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('name')}"
+                                th:errors="*{name}"
+                                class="invalid-feedback">Name Error</p>
+
+                        </div>
+                        <div class="form-group">
+                            <label
+                                for="lastName"
+                                th:text="#{people.entity.lastName}">Last Name label:</label>
+                            <input
+                                type="text"
+                                th:field="*{lastName}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('lastName')} ? is-invalid"
+                                id="lastName"
+                                th:placeholder="#{people.entity.lastName.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('lastName')}"
+                                th:errors="*{lastName}"
+                                class="invalid-feedback">lastName Error</p>
+
+                        </div>
+                        <div class="form-group">
+
+                            <label
+                                for="email"
+                                th:text="#{people.entity.email}">Email label:</label>
+                            <input
+                                type="text"
+                                th:field="*{email}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('email')} ? is-invalid"
+                                id="email"
+                                th:placeholder="#{people.entity.email.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('email')}"
+                                th:errors="*{email}"
+                                class="invalid-feedback">email Error</p>
+
+
+                        </div>
+                        <div class="form-group">
+
+                            <label
+                                for="bornDate"
+                                th:text="#{people.entity.bornDate}">Born Date label:</label>
+                            <input
+                                type="text"
+                                th:field="*{bornDate}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('bornDate')} ? is-invalid"
+                                id="bornDate"
+                                th:placeholder="#{people.entity.bornDate.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('bornDate')}"
+                                th:errors="*{bornDate}"
+                                class="invalid-feedback">bornDate Error</p>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label
+                                for="username"
+                                th:text="#{people.entity.username}">Username:</label>
+                            <input
+                                type="text"
+                                th:field="*{username}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('username')} ? is-invalid"
+                                id="username"
+                                th:placeholder="#{people.entity.username.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('username')}"
+                                th:errors="*{username}"
+                                class="invalid-feedback">username Error</p>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="password"
+                                th:text="#{people.entity.password}">Password label:</label>
+                            <input
+                                type="password"
+                                th:field="*{password}"
+                                class="form-control"
+                                th:classappend="${#fields.hasErrors('password')} ? is-invalid"
+                                id="password"
+                                th:placeholder="#{people.entity.password.placeholder}" />
+                            <p
+                                th:if="${#fields.hasErrors('password')}"
+                                th:errors="*{password}"
+                                class="invalid-feedback">password Error</p>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label
+                                for="enabled"
+                                th:text="#{people.entity.enabled}">Enabled label:</label>
+
+
+                            <select
+                                id="identificationType"
+                                th:field="*{enabled}"
+                                class="custom-select">
+                                <option
+                                    th:value="Y"
+                                    th:text="YES">IdentificationType</option>
+                                <option
+                                    th:value="N"
+                                    th:text="NO">IdentificationType</option>
+                            </select>
+
+
+                            <p
+                                th:if="${#fields.hasErrors('enabled')}"
+                                th:errors="*{enabled}"
+                                class="invalid-feedback">enabled Error</p>
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label
+                                for="groups"
+                                th:text="#{people.entity.group}">group label:</label>
+
+
+                            <select
+                                id="groups"
+                                th:field="*{groups}"
+                                multiple="multiple"
+                                class=" custom-select form-control"
+                                th:classappend="${#fields.hasErrors('*{groups}')} ? is-invalid">
+
+                                <option
+                                    th:each="type : ${selectableGroup}"
+                                    th:value="${type.id}"
+                                    th:text="${type.name}">group</option>
+                            </select>
+                            <p
+                                th:if="${#fields.hasErrors('groups')}"
+                                th:errors="*{groups}"
+                                class="invalid-feedback">group Error</p>
+                        </div>
+
+
+
+                        <input
+                            id="addPerson"
+                            class="btn btn-primary"
+                            name="_eventId_save"
+                            type="submit"
+                            th:value="#{people.add.save.button}"></input>
+                        <input
+                            id="cancelAddPerson"
+                            class="btn btn-dark"
+                            name="_eventId_cancel"
+                            type="submit"
+                            th:value="#{people.add.cancel.button}"></input>
+
+                       
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 
+        <div class="wrapper">
+
+            <p>
+                Date:
+                <input
+                    type="text"
+                    id="datepicker"
+                    class="form-control">
+            </p>
+
+
+        </div>
+ -->
+        <script type="text/javascript">
+									$(function() {
+										console.log('ttttttttt');
+										$('#bornDate').datepicker({
+											dateFormat : 'dd-mm-yy',
+											yearRange : '-120:+0',
+											changeMonth : true,
+											changeYear : true
+										});
+										//$("#datepicker").datepicker();
+
+									});
+								</script>
+
+        <!-- enable to test ajax -->
+        <!--
+        <form
+            id="triggerform"
+            method="post"
+            th:action="@{'~'+${flowExecutionUrl}}">
+            <input
+                name="nameClient"
+                value="hecthor" />
+            <input
+                type="submit"
+                id="doUpdate"
+                name="_eventId_updateData"
+                value="Update now!" />
+        </form>
+
+
+        <div id="data">
+            This is a content to be changed
+            <p th:text="${param.nameClient}">Test</p>
+        </div>
+        <div
+            id="hoteldata"
+            th:fragment="hoteldata">
+            This is a content to be changed
+            <p th:text="${param.nameClient}">Test</p>
+        </div>
+
+
+
+        <script
+            type="text/javascript"
+            th:inline="javascript">
+            
+                                    //review chapther 12 of pro spring mv
+                                    //https://www.safaribooksonline.com/library/view/pro-spring-mvc/9781430241553/Chapter12.html
+									$(function() {
+										var submit = $('#doUpdate');
+
+										$("#triggerform")
+												.submit(
+														function(event) {
+															//alert("Handler for .submit() called.");
+
+															var form = $('#triggerform');
+															var event = submit
+																	.attr('name');
+															var data = form
+																	.serialize()
+																	+ '&'
+																	+ event
+																	+ '='
+																	+ event
+																	+ '&ajaxSource='
+																	+ submit
+																			.attr('id');
+
+															$
+																	.ajax({
+																		type : "POST",
+																		dataType : 'text',
+																		data : data,
+                                                                        //$(
+																			//	"#triggerform")
+																			//	.serialize()
+																				//+ "&_eventId=updateData"
+																				//+ "&_eventId_updateData=_eventId_updateData"
+																			//	+ "&ajaxSource=true",
+
+																		url : form.attr( 'action' ),
+                                                                        //$(
+																		//		"#triggerform")
+																		//		.attr(
+																		//				"action")
+																				//+ "&_eventId=updateData"
+																				//+ "&_eventId_updateData=_eventId_updateData"
+																		//		+ "&ajaxSource=true",
+																		success : function(
+																				result) {
+																			$(
+																					'#hoteldata')
+																					.replaceWith(
+																							result);
+																		}
+																	});
+
+															return false;
+															//event.preventDefault();
+														});
+
+									});
+								</script>
+-->
+    </div>
+</body>
+</html>

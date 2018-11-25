@@ -77,8 +77,11 @@ public interface PagingTransactionsRepository extends PagingAndSortingRepository
             "FROM " +
             "    transactions v " +
             " JOIN transaction_type tt ON v.id_transaction_type=tt.id_transaction_type "+
+            " JOIN people p ON v.id_person = p.id_person  "+
             "WHERE "+
             "    tt.entry_type = :entryType " +
+            " AND p.username = :username " +
+
            // "    AND v.transaction_date between :startDate AND :endDate " + 
            " AND v.transaction_date between :startDate AND :endDate " + 
             "GROUP BY " +
@@ -92,7 +95,7 @@ public interface PagingTransactionsRepository extends PagingAndSortingRepository
             )
     
     
-    List<Object[][]> findTransactionSumByEntryTypeAndDay(@Param("entryType") String entryType, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);  
+    List<Object[][]> findTransactionSumByEntryTypeAndDay(@Param("entryType") String entryType, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate, @Param("username") String userName);  
     
     
     
@@ -101,25 +104,28 @@ public interface PagingTransactionsRepository extends PagingAndSortingRepository
     @Query("SELECT " +
             "    new com.home.budgetplanner.controller.dtos.DataDTO(v.transactionType.name, SUM(v.value)) " +
             "FROM " +
-            "    Transactions v " +
+            "    Transactions v INNER JOIN v.people p " +
             "WHERE "+
             "    v.transactionType.entryType = :entryType " +
+            " AND p.username= :username "+
             " AND v.transactionDate between :startDate AND :endDate "+
             "GROUP BY " +
             "    v.transactionType.name "
             )
-     List<DataDTO> findTransactionSumByEntryTypeAndDate(@Param("entryType") String entryType,  @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+     List<DataDTO> findTransactionSumByEntryTypeAndDate(@Param("entryType") String entryType,  @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate,  @Param("username") String userName);
     
     
     
     @Query("SELECT " +
             "    new com.home.budgetplanner.controller.dtos.DataDTO(v.transactionType.entryType, SUM(v.value)) " +
             "FROM " +
-            "    Transactions v " +
+            "    Transactions v INNER JOIN v.people p " +
             "WHERE "+
-            " v.transactionDate between :startDate AND :endDate "+
+            "     v.transactionDate between :startDate AND :endDate "+
+            " AND "+
+            "     p.username= :username "+
             "GROUP BY " +
             "    v.transactionType.entryType ")
-     List<DataDTO> findTransactionIncomeAndExpenseByDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+     List<DataDTO> findTransactionIncomeAndExpenseByDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate,  @Param("username") String username);
 
 }

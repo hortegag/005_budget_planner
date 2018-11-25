@@ -207,16 +207,16 @@ public class TransactionsServiceImpl implements TransactionsService, Serializabl
     }
     
     @Override
-    public  List<Object[][]> findTransactionSumByEntryTypeAndDay(String entryType, LocalDate startDate, LocalDate endDate) {
+    public  List<Object[][]> findTransactionSumByEntryTypeAndDay(String entryType, LocalDate startDate, LocalDate endDate, String userName) {
         
         
-        return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDay(entryType, startDate, endDate);
+        return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDay(entryType, startDate, endDate, userName);
     }
     
     @Override
-    public List<DataDTO> findTransactionSumByEntryTypeAndDate(String entryType, LocalDate startDate, LocalDate endDate){
+    public List<DataDTO> findTransactionSumByEntryTypeAndDate(String entryType, LocalDate startDate, LocalDate endDate, String userName){
        
-        return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDate(entryType, startDate, endDate);
+        return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDate(entryType, startDate, endDate, userName);
 
         
     }
@@ -224,9 +224,9 @@ public class TransactionsServiceImpl implements TransactionsService, Serializabl
     
     
     @Override
-    public List<DataDTO> findTransactionIncomeAndExpenseByDate(LocalDate startDate, LocalDate endDate){
+    public List<DataDTO> findTransactionIncomeAndExpenseByDate(LocalDate startDate, LocalDate endDate, String username){
         
-        return pagingTransactionsRepository.findTransactionIncomeAndExpenseByDate(startDate, endDate);
+        return pagingTransactionsRepository.findTransactionIncomeAndExpenseByDate(startDate, endDate, username);
         
         
     }

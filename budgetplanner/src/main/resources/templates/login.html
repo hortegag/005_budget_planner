@@ -18,7 +18,7 @@
     rel="icon"
     href="../../../../favicon.ico">
 
-<title>Signin Template for Bootstrap</title>
+<title>Sign in</title>
 
 
 
@@ -27,7 +27,7 @@
 <div layout:fragment="content">
 
 
-    
+
 
     <form
         class="form-signin"
@@ -42,7 +42,7 @@
             th:if="${param.error}">
             <span class="card-title">Invalid user name or password</span>
         </div>
-        
+
         <div
             id="errorMessage"
             class="alert alert-secondary"
@@ -50,7 +50,7 @@
             th:if="${param.logout}">
             <span class="card-title">You have successfully been logged out.</span>
         </div>
-        
+
 
         <label
             for="username"
@@ -60,7 +60,7 @@
             id="username"
             name="username"
             class="form-control"
-            placeholder="Email address"
+            placeholder="Username"
             required
             autofocus>
         <label
@@ -73,7 +73,7 @@
             class="form-control"
             placeholder="Password"
             required>
-        <div class="checkbox mb-3">
+        <!-- <div class="checkbox mb-3">
             <label>
                 <input
                     type="checkbox"
@@ -81,14 +81,30 @@
                 Remember me
             </label>
         </div>
-        
-  
-        
+         -->
+
+
         <button
             class="btn btn-lg btn-primary btn-block"
             type="submit">Sign in</button>
+
+<h3>
+        <a
+            class="mt-2 nav-link"
+            href="#"
+            th:href="@{/registerFlow}"
+            th:text="#{menu.register.new.account}">people Botstrap ok</a>
+</h3>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </form>
 
+    <!--                <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="#"
+                            th:href="@{/peopleTestBootstrap}"
+                            th:text="#{menu.register.new.account}">people Botstrap ok</a>
+                    </li>
+ -->
 </div>
 </html>

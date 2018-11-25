@@ -32,11 +32,11 @@ public interface TransactionsService extends BaseService<Transactions, Long> {
     
     public List<DataDTO> findTransactionSumByEntryType(String entryType);
     
-    public  List<Object[][]> findTransactionSumByEntryTypeAndDay(String entryType, LocalDate startDate, LocalDate endDate);  
+    public  List<Object[][]> findTransactionSumByEntryTypeAndDay(String entryType, LocalDate startDate, LocalDate endDate, String userName);  
     
-    public List<DataDTO> findTransactionSumByEntryTypeAndDate(String entryType, LocalDate startDate, LocalDate endDate);
+    public List<DataDTO> findTransactionSumByEntryTypeAndDate(String entryType, LocalDate startDate, LocalDate endDate, String userName);
     
-    public List<DataDTO> findTransactionIncomeAndExpenseByDate(LocalDate startDate, LocalDate endDate);
+    public List<DataDTO> findTransactionIncomeAndExpenseByDate(LocalDate startDate, LocalDate endDate, String username);
 
 
 }

@@ -498,105 +498,11 @@ public class TransactionsController {
         
         listaValues.add(dataDTOGrid);
         
-        
-        logger.info("/////////////////////fecha///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-        logger.info(searchStatisticsOfTransactionsForm.getStatisticDate());
-        //String date = "2018-11-01";
-        
-        LocalDate startDate;
-        if (searchStatisticsOfTransactionsForm.getStatisticDate()==null) {
-            
-            startDate = LocalDate.now();
-            
-        } else {
-            
-            startDate = LocalDate.parse(searchStatisticsOfTransactionsForm.getStatisticDate()+"-01");
-        }
-        logger.info(startDate);
-            
-        
-        
-        LocalDate start = startDate.withDayOfMonth(1);
-        LocalDate end = startDate.withDayOfMonth(startDate.lengthOfMonth());
-        
-        
-        logger.info("start: "+start);
-        logger.info("end: "+end);
-        
-        
-
-        
-       // LocalDate today = LocalDate.now();
-
-        
-        //String date = "2018-11";
-
-        //DateTimeFormatter formatter;W
-        //LocalDate.parse(text, formatter)
-        //default, ISO_LOCAL_DATE 
-        //LocalDate startDate = LocalDate.parse(date);
-        
-        
-        //String endDate = "2018-11-30";
-
-        //default, ISO_LOCAL_DATE 
-        //LocalDate endLocalDate = LocalDate.parse(endDate);
-     
-        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),start, end);
-
-        
-        logger.info("//////////prueba group//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-        logger.info(listByDay.size());
-
-        
-        List<DataDTO> listDTOByDay = new ArrayList<>();
-        //DataDTO dataDTO = new DataDTO();
-        
-        logger.info(listByDay);
-        
-        //for (Object[][] pruebaGroup : listByDay){
-            
-            for (Object[] maxAvgSalary : listByDay) {
-                
-                
-                
-                
-                String label =  String.valueOf(maxAvgSalary[0]);
-                BigDecimal value =  new BigDecimal(String.valueOf(maxAvgSalary[1]));
-                
-                DataDTO dataDTO = new DataDTO( label, value);
-                
-                listDTOByDay.add(dataDTO);
-                
-                logger.info("max avg salary: " + maxAvgSalary[0]);
-                System.out.println("min avg salary: " + maxAvgSalary[1]);
-                
-                
-            }
-            
-        //}
-        
-            
-            DataDTOGrid dataDTOGridByDay = new DataDTOGrid();
-            
-            
-            dataDTOGridByDay.setValues(listDTOByDay);
-            
-            
-            
-            List<DataDTOGrid> listaValuesByDay = new ArrayList<>();
-            
-            listaValuesByDay.add(dataDTOGridByDay);
-            
        
-       // logger.info(pruebaGroup);
         
         
         
         return listaValues;
-        
-       // return lista;
-       // return dataDTOGrid;
         
     }
     
@@ -632,9 +538,9 @@ public class TransactionsController {
         
        // List<DataDTO> lista = new ArrayList<>();
         
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         
-        
-        List<DataDTO> lista   = transactionsService.findTransactionSumByEntryTypeAndDate(searchStatisticsOfTransactionsForm.getEntryType(), start, end);
+        List<DataDTO> lista   = transactionsService.findTransactionSumByEntryTypeAndDate(searchStatisticsOfTransactionsForm.getEntryType(), start, end, userName);
        
         
         
@@ -681,9 +587,9 @@ public class TransactionsController {
         logger.info("start: "+start);
         logger.info("end: "+end);
  
-
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
        
-        List<DataDTO> test   = transactionsService.findTransactionIncomeAndExpenseByDate(start, end);
+        List<DataDTO> test   = transactionsService.findTransactionIncomeAndExpenseByDate(start, end, userName);
         logger.info("**************************************************************************");
         logger.info(test);
         
@@ -733,10 +639,12 @@ public class TransactionsController {
         LocalDate start = startDate.withDayOfMonth(1);
         LocalDate end = startDate.withDayOfMonth(startDate.lengthOfMonth());
         
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
         
 
      
-        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),start, end);
+        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),start, end, userName);
 
         logger.info(listByDay.size());
 
