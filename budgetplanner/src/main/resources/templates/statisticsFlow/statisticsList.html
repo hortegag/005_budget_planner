@@ -89,13 +89,15 @@
 
 
 
-    <div layout:fragment="content">
+    <div layout:fragment="content"> 
 
 
 
            <h1
             class="mt-5"
-            th:text="#{people.list.title}"></h1>
+            th:text="#{menu.statistics}"></h1>
+   
+                  
             
        <!--     <button id="update">Refresh Page</button> -->
             
@@ -115,6 +117,7 @@
             
            
             
+                <h1 class="mt-1"></h1>
             
                 <div class="card">
                 
@@ -125,12 +128,14 @@
                         </div>
                         <div class="card-body">
                         
-                             <div id="chart1">
+                            <div id="chart1">
                                 <svg></svg>
                             </div>
                         
                         </div>
-                    </div>            
+                 </div>  
+             
+                           
               <h1 class="mt-1"></h1>
                 <div class="card">
                 
@@ -164,434 +169,31 @@
                         
                         </div>
                     </div> 
-                    
-                    
-                 <h1 class="mt-1"></h1>
+                        <h1 class="mt-1"></h1>  
                 <div class="card">
                 
                    <div class="card-header">
                             <h3
                                 class="card-title"
-                                th:text="#{statistics.bar.title}"></h3>
+                                th:text="#{statistics.bar.expense.by.day.title}"></h3>
                         </div>
                         <div class="card-body">
                         
-                            <div id="chart5">
+                          <div id="chart6">
                                 <svg></svg>
                             </div>
                         
                         </div>
-                    </div>    
+                    </div>   
+                 
                     
                     
-                 <h1 class="mt-1"></h1>
-                <div class="card">
                 
-                   <div class="card-header">
-                            <h3
-                                class="card-title"
-                                th:text="#{statistics.bar.title}"></h3>
-                        </div>
-                        <div class="card-body">
-                        
-                            <div id="chart6">
-                                <svg></svg>
-                            </div>
-                        
-                        </div>
-                    </div>                                         
-
-        <div class="form-group">
-        
-     
-      
-        
-        
-        
-             
-        <div id="chart3">
-            <svg></svg>
-        </div>
-        
-        
-            ------------------------------------------------------------------------------------------------------------------
-            <label
-                for="searchName"
-                th:text="#{people.list.search.filter.name}">searchName</label>
-
-            <input
-                id="searchName"
-                type="text"
-                name="searchName"
-                class="form-control"
-                th:placeholder="#{people.list.search.filter.name.placeholder}" />
-        </div>
-
-        <div class="form-group">
-            <label
-                for="searchLastName"
-                th:text="#{people.list.search.filter.lastName}">searchIdentification</label>
-
-            <input
-                id="searchLastName"
-                type="text"
-                name="searchLastName"
-                class="form-control"
-                th:placeholder="#{people.list.search.filter.lastName.placeholder}" />
-
-
-        </div>
-        <input
-            id=submitButton
-            class="btn btn-primary"
-            name="_eventId_search"
-            type="submit"
-            th:value="#{identificationType.list.search.button}"></input>
-
-        <div>
-            <!--     Name
-            <br>
-            <input
-                type="text"
-                id="searchName"
-                name="searchName" />  -->
-
-            <!--   LastName
-            <br>
-            <input
-                type="text"
-                id="searchLastName"
-                name="searchLastName" />  -->
-            <!--      <button
-                onclick="gridReload()"
-                id="submitButton"
-                style="margin-left: 30px;">Search</button>    -->
-
-            <!-- <button
-                id="submitButton"
-                style="margin-left: 30px;">Search</button>  -->
-        </div>
-        <h2
-            class="mt-5"
-            th:text="#{identificationType.list.search.result.title}"></h2>
-
-
-        <form
-            action="#"
-            th:action="${flowExecutionUrl}"
-            method="post">
-            <input
-                id="addPeople"
-                class="btn btn-primary"
-                name="_eventId_add"
-                type="submit"
-                th:value="#{people.list.add.button}"></input>
-
-        </form>
-
-        <div
-            class="mt-5"
-            th:if="${#lists.isEmpty(peoples)}">
-            <div
-                class="alert alert-warning"
-                role="alert">
-                <p th:text="#{identificationType.list.search.empty.results}"></p>
-            </div>
-        </div>
-
-        <hr />
-        <div class="mt-5">
-            <table id="list">
-            </table>
-            <div id="pager"></div>
-        </div>
-
         <script
             type="text/javascript"
             th:inline="javascript">
-									$.jgrid.defaults.styleUI = 'Bootstrap4';
-									//$.jgrid.defaults.iconSet = 'Octicons';
-									$.jgrid.defaults.iconSet = "fontAwesome";
-									$.jgrid.defaults.width = 'auto';
-									$.jgrid.defaults.responsive = true;
-
-									var language = '[(${#locale})]';
-									/*
-									 $.jgrid.setRegional('grid', {
-									 regional : 'es'
-									 });
-									 */
-									/*	$.jgrid.setRegional('jqGrid', {
-											regional : language
-										});*/
-
-									var urlList = '[(@{/people/listGridBynameAndLastName})]';
-									var tableId = '[(#{people.list.search.table.id})]';
-									var tableActions = '[(#{people.list.search.table.actions})]';
-									var tableName = '[(#{people.list.search.table.name})]';
-									var tableLastName = '[(#{people.list.search.table.lastName})]';
-									var tableEmail = '[(#{people.list.search.table.email})]';
-									var tableBornDate = '[(#{people.list.search.table.bornDate})]';
-									var tableIdentification = '[(#{people.list.search.table.identification})]';
-									var tableIdentificationType = '[(#{people.list.search.table.identificationType})]';
-
-									//var testEditTwo = '[[${flowExecutionUrl}]]';
-									var testEditTwo = '[(${flowExecutionUrl})]';
-									var testEditTwo = '[(@{"~"+${flowExecutionUrl}})] ';
-									var editUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=edit)})]";
-									var deleteUrl = "[(@{'~'+${flowExecutionUrl}(_eventId=delete)})]";
-
-									console.log("test:" + urlList);
-									$(function() {
-										$("#list")
-												.jqGrid(
-														{
-															url : urlList,
-															datatype : 'json',
-															//regional : 'es',
-															mtype : 'GET',
-															colNames : [
-																	tableActions,
-																	tableName,
-																	tableLastName,
-																	tableEmail,
-																	tableBornDate,
-																	tableIdentification,
-																	tableIdentificationType ],
-															colModel : [
-																	{
-																		name : 'act',
-																		index : 'act',
-																		width : 70,
-																		sortable : false
-																	},
-																	{
-																		name : 'name',
-																		index : 'name',
-																		width : 100
-																	},
-																	{
-																		name : 'lastName',
-																		index : 'lastName',
-																		width : 100
-																	},
-																	{
-																		name : 'email',
-																		index : 'email',
-																		width : 150
-																	},
-																	{
-																		name : 'bornDateString',
-																		index : 'bornDate',
-																		width : 65
-																	},
-																	{
-																		name : 'identification',
-																		index : 'identification',
-																		width : 100
-																	},
-																	{
-																		name : 'identificationType',
-																		index : 'identificationType',
-																		width : 100
-																	}
-
-															],
-															jsonReader : {
-																root : "peopleData",
-																page : "currentPage",
-																total : "totalPages",
-																records : "totalRecords",
-																repeatitems : false,
-																id : "id"
-															},
-															//styleUI : 'Bootstrap',
-															//guiStyle : "bootstrap4",
-															//iconSet : "fontAwesome",
-															pager : '#pager',
-															rowNum : 10,
-															rowList : [ 1, 10,
-																	20, 30 ],
-															sortname : 'name',
-															sortorder : 'asc',
-															viewrecords : true,
-															gridview : true,
-															width : 1100,
-															//height : 200,
-															//width : '800',
-															//shrinkToFit : false,
-															height : 'auto',
-															//width : 500,
-															//caption : '${labelContactList}',
-															//onSelectRow : function(
-															//		id) {
-															//	document.location.href = "${showContactUrl}/"
-															//			+ id;
-															//},
-															gridComplete : function() {
-																var ids = jQuery(
-																		"#list")
-																		.jqGrid(
-																				'getDataIDs');
-																for (var i = 0; i < ids.length; i++) {
-																	var cl = ids[i];
-																	be = "<input style='height:22px;width:20px;' type='button' value='E' onclick=\"jQuery('#rowed2').editRow('"
-																			+ cl
-																			+ "');\"  />";
-																	se = "<input style='height:22px;width:20px;' type='button' value='S' onclick=\"jQuery('#rowed2').saveRow('"
-																			+ cl
-																			+ "');\"  />";
-																	ce = "<input style='height:22px;width:20px;' type='button' value='C' onclick=\"jQuery('#rowed2').restoreRow('"
-																			+ cl
-																			+ "');\" />";
-
-																	editUrlWithParameters = editUrl
-																			+ '&id='
-																			+ cl;
-																	deleteUrlWithParameters = deleteUrl
-																			+ '&id='
-																			+ cl;
-																	//console.log(testEditThree);
-																	testEdit = "<a href='"+editUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Edit user'> <i class='fas fa-pencil-alt'></i> </button></a>";
-																	testDelete = " <a href='"+deleteUrlWithParameters+"'><button type='button' class='btn btn-light' aria-label='Delete user'> <i class='fas fa-trash-alt'></i> </button></a>";
-
-																	jQuery(
-																			"#list")
-																			.jqGrid(
-																					'setRowData',
-																					ids[i],
-																					{
-																						act : testEdit
-																								+ testDelete
-																					///+ ce
-																					});
-																}
-															}
-
-														});
-										//$("#list").jqGrid("setFrozenColumns");
-										jQuery("#list").jqGrid('navGrid',
-												"#pager", {
-													edit : false,
-													add : false,
-													del : false,
-													search : false
-												});
-
-										function gridReload() {
-
-											console
-													.log("fffffffffffffffffffffffffffff----------------");
-											var searchName = jQuery(
-													"#searchName").val();
-											var searchLastName = jQuery(
-													"#searchLastName").val();
-											jQuery("#list")
-													.jqGrid(
-															'setGridParam',
-															{
-																url : urlList
-																		+ "?name="
-																		+ searchName
-																		+ "&lastName="
-																		+ searchLastName,
-																page : 1
-															}).trigger(
-															"reloadGrid");
-										}
-										var numeroDocumento = document
-												.querySelector("#submitButton");
-
-										numeroDocumento.addEventListener(
-												'click', function(event) {
-													return gridReload(event);
-												});
-
-									});
-									/*
-									 function gridReload() {
-									 console
-									 .log("tettttttttt----------------");
-									 var nm_mask = jQuery("#item_nm").val();
-									 var cd_mask = jQuery("#search_cd")
-									 .val();
-									 jQuery("#bigset").jqGrid(
-									 'setGridParam',
-									 {
-									 url : "bigset.php?nm_mask="
-									 + nm_mask
-									 + "&cd_mask="
-									 + cd_mask,
-									 page : 1
-									 }).trigger("reloadGrid");
-									 }
-									
-									 */
-								</script>
-
-
-
-        <script>
-									historicalBarChart = [ {
-										key : "Cumulative Return",
-										values : [ {
-											"label" : "salary test fer",
-											"value" : 2900.765957771107
-										}, {
-											"label" : "B",
-											"value" : 0
-										}, {
-											"label" : "C",
-											"value" : 32.807804682612
-										}, {
-											"label" : "D",
-											"value" : 196.45946739256
-										}, {
-											"label" : "E",
-											"value" : 0.19434030906893
-										}, {
-											"label" : "F",
-											"value" : 98.079782601442
-										}, {
-											"label" : "G",
-											"value" : 13.925743130903
-										}, {
-											"label" : "H",
-											"value" : 5.1387322875705
-										} ]
-									} ];
-                                    
-                                    historicalBarChartTest = [ {
-                                        key : "Cumulative Return",
-                                        values : [ {
-                                            "label" : "salary test fer",
-                                            "value" : 2900.765957771107
-                                        }, {
-                                            "label" : "B",
-                                            "value" : 0
-                                        }, {
-                                            "label" : "C",
-                                            "value" : 32.807804682612
-                                        }, {
-                                            "label" : "D",
-                                            "value" : 196.45946739256
-                                        }, {
-                                            "label" : "E",
-                                            "value" : 0.19434030906893
-                                        }, {
-                                            "label" : "F",
-                                            "value" : 98.079782601442
-                                        }, {
-                                            "label" : "G",
-                                            "value" : 13.925743130903
-                                        }, {
-                                            "label" : "H",
-                                            "value" : 5.1387322875705
-                                        } ]
-                                    } ];
-
-
-                                    
+								
+									var historicalBarChart;
                                     
                                     //var urlListtest = '[(@{/transactions/listGridD3})]';
                                     
@@ -734,7 +336,7 @@
                                     });
                                     
                                     
-                                     var urlListExpenseByDay = '[(@{/transactions/listTransactionsByEntryTypeByDay?entryType=DEBIT})]';
+                                    var urlListExpenseByDay = '[(@{/transactions/listTransactionsByEntryTypeByDay?entryType=DEBIT})]';
                                     
                                     var chartExpenseByDay;
                                     
@@ -758,13 +360,22 @@
                                         };
                                         nv.addGraph(function() {
                                             chartExpenseByDay = nv.models.lineChart()
-                                                .useInteractiveGuideline(true)
-                                                .options({
-                                                    duration: 300,
-                                                    useInteractiveGuideline: true,
-                                                    showValues: true
-                                                })
-                                            ;
+                                            .useInteractiveGuideline(false)
+                                            // .useInteractiveGuideline(true).margin({ // Add some CSS Margin to the chart.
+                                            //        top: 30,
+                                            //        right: 20,
+                                            //        bottom: 50,
+                                            //        left: 40
+                                            //    })
+                                                
+                                             ;
+                                              //.useInteractiveGuideline(true)
+                                              //.options({
+                                              //     duration: 300,
+                                              //     useInteractiveGuideline: true,
+                                              //     showValues: true
+                                              //   })
+                                           // ;
                                             // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
                                             chartExpenseByDay.xAxis
                                                 .axisLabel("Day of the month")
@@ -792,195 +403,7 @@
                                        
                                         
                                     });
-                                    
-                                    
-                                    var urlListtestPie = '[(@{/transactions/listGridD3Pie})]';
-                                    
-                                    
-                                    d3.json(urlListtestPie, function (data) {
-                                        console.log(data);
-                                        
                                       
-                                        //Donut chart example
-                                        nv.addGraph(function() {
-                                          var chart = nv.models.pieChart()
-                                              .x(function(d) { return d.label })
-                                              .y(function(d) { return d.value })
-                                              .showLabels(true)     //Display pie labels
-                                              .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-                                              .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-                                              .donut(true)          //Turn on Donut mode. Makes pie chart look tasty!
-                                              .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
-                                              .color(['#18ce70', '#cc2c10'])
-                                              ;
-                                        
-                                            d3.select("#chart3 svg")
-                                                .datum(data)
-                                                .transition().duration(350)
-                                                .call(chart);
-                                        
-                                          return chart;
-                                        });
-                                        
-                                        
-                                        
-                                                                                
-                                        
-                                        //Pie chart example data. Note how there is only a single array of key-value pairs.
-                                        function exampleData() {
-                                          return  [
-                                              { 
-                                                "label": "One",
-                                                "value" : 29.765957771107
-                                              } , 
-                                              { 
-                                                "label": "Two",
-                                                "value" : 0
-                                              } , 
-                                              { 
-                                                "label": "Three",
-                                                "value" : 32.807804682612
-                                              } , 
-                                              { 
-                                                "label": "Four",
-                                                "value" : 196.45946739256
-                                              } , 
-                                              { 
-                                                "label": "Five",
-                                                "value" : 0.19434030906893
-                                              } , 
-                                              { 
-                                                "label": "Six",
-                                                "value" : 98.079782601442
-                                              } , 
-                                              { 
-                                                "label": "Seven",
-                                                "value" : 13.925743130903
-                                              } , 
-                                              { 
-                                                "label": "Eight",
-                                                "value" : 5.1387322875705
-                                              }
-                                            ];
-                                        }
-                                    
-                                    
-                                    });
-                                    
-                                    
-                                    
-// GLOBAL LAND-OCEAN TEMPERATURE INDEX
-
-var temperatureIndexJSON = [
-  {
-    key: "Temp +- Avg.",
-    values: [
-    {
-        "x": 1998,
-        "y": 0.45
-    },
-    {
-        "x": 1999,
-        "y": 0.48
-    },
-    {
-        "x": 2000,
-        "y": 0.5
-    },
-    {
-        "x": 2001,
-        "y": 0.52
-    },
-    {
-        "x": 2002,
-        "y": 0.55
-    },
-    {
-        "x": 2003,
-        "y": 0.58
-    },
-    {
-        "x": 2004,
-        "y": 0.6
-    },
-    {
-        "x": 2005,
-        "y": 0.61
-    },
-    {
-        "x": 2006,
-        "y": 0.61
-    },
-    {
-        "x": 2007,
-        "y": 0.61
-    },
-    {
-        "x": 2008,
-        "y": 0.62
-    },
-    {
-        "x": 2009,
-        "y": 0.62
-    },
-    {
-        "x": 2010,
-        "y": 0.62
-    },
-    {
-        "x": 2011,
-        "y": 0.63
-    },
-    {
-        "x": 2012,
-        "y": 0.67
-    },
-    {
-        "x": 2013,
-        "y": 0.71
-    },
-    {
-        "x": 2014,
-        "y": 0.77
-    },
-    {
-        "x": 2015,
-        "y": 0.83
-    },
-    {
-        "x": 2016,
-        "y": 0.89
-    },
-    {
-        "x": 2017,
-        "y": 0.95
-    }
-    ]
-  }
-];
-
-        nv.addGraph(function () {
-     var chart = nv.models.lineChart() // Initialise the lineChart object.
-         .useInteractiveGuideline(true) // Turn on interactive guideline (tooltips) 
-     ;
-     chart.xAxis
-         .axisLabel('TimeStamp (Year)') // Set the label of the xAxis (Vertical)
-     ;
-     chart.yAxis
-         .axisLabel('Degrees (c)') // Set the label of the xAxis (Horizontal)
-         .tickFormat(d3.format('.02f')) // Rounded Numbers Format.
-     ;
-     d3.select('#chart5 svg') // Select the ID of the html element we defined earlier.
-         .datum(temperatureIndexJSON) // Pass in the JSON
-         .transition().duration(500) // Set transition speed
-         .call(chart) // Call & Render the chart
-     ;
-     nv.utils.windowResize(chart.update); // Intitiate listener for window resize so the chart responds and changes width.
-     return;
- });
-                                
-   
-    
     
             function update() {
             
@@ -1023,6 +446,16 @@ var temperatureIndexJSON = [
                         nv.utils.windowResize(chartExpense.update);
                           
                    });
+                   
+                 var urlListExpenseByDayWithParameters='';
+                 var urlListExpenseByDayWithParameters = urlListExpenseByDay+"&statisticDate="+ statisticDate;
+                   
+                    d3.json(urlListExpenseByDayWithParameters, function (data) {
+                        chartDataExpenseByDay.datum(data).transition().duration(500).call(chartExpenseByDay);
+                        nv.utils.windowResize(chartExpenseByDay.update);
+                          
+                   });
+                   
             
        
             };
@@ -1056,9 +489,9 @@ var temperatureIndexJSON = [
 								</script>
 
 
-    </div>
+ 
 
-
+</div>
 
 
 
