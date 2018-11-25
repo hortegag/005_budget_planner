@@ -64,6 +64,19 @@
   height: 400px;
 }
 
+#chart4 svg {
+  height: 400px;
+}
+#chart5 svg {
+  height: 400px;
+}
+#chart6 svg {
+  height: 400px;
+}
+.ui-datepicker-calendar {
+    display: none;
+    }
+
 
 
 
@@ -83,6 +96,24 @@
            <h1
             class="mt-5"
             th:text="#{people.list.title}"></h1>
+            
+       <!--     <button id="update">Refresh Page</button> -->
+            
+            
+            
+                <div class="form-group row">
+                     <label  
+                        class="col-sm-3 col-form-label font-weight-bold"
+                        for="statisticDate" >Choose the month:</label>
+                     <input
+                        type="text"
+                        class="col-sm-9 col-form-label"
+                        id="statisticDate"/>
+                </div>
+            
+      
+            
+           
             
             
                 <div class="card">
@@ -106,7 +137,7 @@
                    <div class="card-header">
                             <h3
                                 class="card-title"
-                                th:text="#{statistics.bar.title}"></h3>
+                                th:text="#{statistics.bar.income.title}"></h3>
                         </div>
                         <div class="card-body">
                         
@@ -123,7 +154,7 @@
                    <div class="card-header">
                             <h3
                                 class="card-title"
-                                th:text="#{statistics.bar.title}"></h3>
+                                th:text="#{statistics.bar.expense.title}"></h3>
                         </div>
                         <div class="card-body">
                         
@@ -150,7 +181,25 @@
                             </div>
                         
                         </div>
-                    </div>                        
+                    </div>    
+                    
+                    
+                 <h1 class="mt-1"></h1>
+                <div class="card">
+                
+                   <div class="card-header">
+                            <h3
+                                class="card-title"
+                                th:text="#{statistics.bar.title}"></h3>
+                        </div>
+                        <div class="card-body">
+                        
+                            <div id="chart6">
+                                <svg></svg>
+                            </div>
+                        
+                        </div>
+                    </div>                                         
 
         <div class="form-group">
         
@@ -511,14 +560,51 @@
 											"value" : 5.1387322875705
 										} ]
 									} ];
+                                    
+                                    historicalBarChartTest = [ {
+                                        key : "Cumulative Return",
+                                        values : [ {
+                                            "label" : "salary test fer",
+                                            "value" : 2900.765957771107
+                                        }, {
+                                            "label" : "B",
+                                            "value" : 0
+                                        }, {
+                                            "label" : "C",
+                                            "value" : 32.807804682612
+                                        }, {
+                                            "label" : "D",
+                                            "value" : 196.45946739256
+                                        }, {
+                                            "label" : "E",
+                                            "value" : 0.19434030906893
+                                        }, {
+                                            "label" : "F",
+                                            "value" : 98.079782601442
+                                        }, {
+                                            "label" : "G",
+                                            "value" : 13.925743130903
+                                        }, {
+                                            "label" : "H",
+                                            "value" : 5.1387322875705
+                                        } ]
+                                    } ];
 
 
                                     
                                     
-                                    var urlListtest = '[(@{/transactions/listGridD3})]';
+                                    //var urlListtest = '[(@{/transactions/listGridD3})]';
+                                    
+                                    var urlListtest = '[(@{/transactions/listGridIncomeAndExpensesByDate})]';
                                     
                                     
                                     
+                                    
+                                    // Maintian an instance of the chart and 
+                                    var chartFirst;
+                                    
+                                    // Maintain an Instance of the SVG selection with its data
+                                    var chartDataFirst;
                                     
                                     d3.json(urlListtest, function (data) {
                                         console.log("fffffffffffffffffffffffffffffffffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
@@ -528,25 +614,29 @@
                                         
                                         nv
                                             .addGraph(function() {
-                                                var chart = nv.models
+                                                chartFirst = nv.models
                                                         .discreteBarChart()
                                                         .x(function(d) {
                                                             return d.label
                                                         }).y(function(d) {
                                                             return d.value
-                                                        }).staggerLabels(false)
+                                                        }).staggerLabels(true)
                                                         //.staggerLabels(historicalBarChart[0].values.length > 8)
+                                                        
                                                         .showValues(true)
                                                         .color(['#18ce70', '#cc2c10', '#486192'])
                                                         .duration(250);
+                                                        
+                                                        
+                                                        chartFirst.tooltip.enabled(false);
 
-                                                d3.select('#chart1 svg').datum(
-                                                        historicalBarChart)
-                                                        .call(chart);
+                                               chartDataFirst =  d3.select('#chart1 svg').datum(
+                                                        historicalBarChart);
+                                               chartDataFirst.call(chartFirst);
 
                                                 nv.utils
-                                                        .windowResize(chart.update);
-                                                return chart;
+                                                        .windowResize(chartFirst.update);
+                                                return chartFirst;
                                             });
                                         
                                         
@@ -555,8 +645,18 @@
                                     });
                                     
                                     
-                                    var urlListIncome = '[(@{/transactions/listTransactionsByEntryType?entryType=CREDIT})]';
+                                    //var urlListIncome = '[(@{/transactions/listTransactionsByEntryType?entryType=CREDIT})]';
                                     
+                                    var urlListIncome = '[(@{/transactions/listTransactionsByEntryTypeAndDate?entryType=CREDIT})]';
+                                    
+                                    
+                                    
+                                  // urlListIncome = urlListIncome+''?entryType=CREDIT';
+                                    
+                                    var chartIncome;
+                                    
+                                    // Maintain an Instance of the SVG selection with its data
+                                    var chartDataIncome;
                                     
                                     d3.json(urlListIncome, function (data) {
                                         //console.log(historicalBarChart);
@@ -565,21 +665,22 @@
                                         
                                         nv
                                             .addGraph(function() {
-                                                var chartIncome = nv.models
+                                         chartIncome = nv.models
                                                         .discreteBarChart()
                                                         .x(function(d) {
                                                             return d.label
                                                         }).y(function(d) {
                                                             return d.value
-                                                        }).staggerLabels(false)
+                                                        }).staggerLabels(true)
                                                         //.staggerLabels(historicalBarChart[0].values.length > 8)
                                                         .showValues(true)
                                                         //.color(['#18ce70', '#cc2c10', '#486192'])
                                                         .duration(250);
+                                             chartIncome.tooltip.enabled(false);
 
-                                                d3.select('#chart2 svg').datum(
-                                                        historicalBarChartIncome)
-                                                        .call(chartIncome);
+                                             chartDataIncome=   d3.select('#chart2 svg').datum(
+                                                        historicalBarChartIncome);
+                                             chartDataIncome.call(chartIncome);
 
                                                 nv.utils
                                                         .windowResize(chartIncome.update);
@@ -591,36 +692,104 @@
                                     
                                     
                                                    
-                                    var urlListIncome = '[(@{/transactions/listTransactionsByEntryType?entryType=DEBIT})]';
+                                    //var urlListExpense = '[(@{/transactions/listTransactionsByEntryType?entryType=DEBIT})]';
+                                    var urlListExpense = '[(@{/transactions/listTransactionsByEntryTypeAndDate?entryType=DEBIT})]';
+                                    
+                                    var chartExpense;
+                                    
+                                    // Maintain an Instance of the SVG selection with its data
+                                    var chartDataExpense;
                                     
                                     
-                                    d3.json(urlListIncome, function (data) {
+                                    d3.json(urlListExpense, function (data) {
                                         //console.log(historicalBarChart);
                                         historicalBarChartExpense= data;
                                         // console.log(historicalBarChart);
                                         
                                         nv
                                             .addGraph(function() {
-                                                var chartExpense = nv.models
+                                               chartExpense = nv.models
                                                         .discreteBarChart()
                                                         .x(function(d) {
                                                             return d.label
                                                         }).y(function(d) {
                                                             return d.value
-                                                        }).staggerLabels(false)
+                                                        }).staggerLabels(true)
                                                         //.staggerLabels(historicalBarChart[0].values.length > 8)
                                                         .showValues(true)
                                                         //.color(['#18ce70', '#cc2c10', '#486192'])
                                                         .duration(250);
 
-                                                d3.select('#chart4 svg').datum(
-                                                        historicalBarChartExpense)
-                                                        .call(chartExpense);
+                                               chartExpense.tooltip.enabled(false);
+                                               
+                                               chartDataExpense= d3.select('#chart4 svg').datum(
+                                                        historicalBarChartExpense);
+                                               chartDataExpense.call(chartExpense);
 
                                                 nv.utils
                                                         .windowResize(chartExpense.update);
                                                 return chartExpense;
                                             });
+                                        
+                                    });
+                                    
+                                    
+                                     var urlListExpenseByDay = '[(@{/transactions/listTransactionsByEntryTypeByDay?entryType=DEBIT})]';
+                                    
+                                    var chartExpenseByDay;
+                                    
+                                    // Maintain an Instance of the SVG selection with its data
+                                    var chartDataExpenseByDay;
+                                    
+                                    
+                                    d3.json(urlListExpenseByDay, function (data) {
+                                        console.log(data);  
+        
+                                        var legendPosition = "top";
+                                      
+                                        var toggleLegend = function() {
+                                            if (legendPosition == "top") {
+                                                legendPosition = "bottom";
+                                            } else {
+                                                legendPosition = "top";
+                                            }
+                                            chartExpenseByDay.legendPosition(legendPosition);
+                                            chartExpenseByDay.update();
+                                        };
+                                        nv.addGraph(function() {
+                                            chartExpenseByDay = nv.models.lineChart()
+                                                .useInteractiveGuideline(true)
+                                                .options({
+                                                    duration: 300,
+                                                    useInteractiveGuideline: true,
+                                                    showValues: true
+                                                })
+                                            ;
+                                            // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
+                                            chartExpenseByDay.xAxis
+                                                .axisLabel("Day of the month")
+                                                .tickFormat(d3.format(',.1f'))
+                                                .staggerLabels(true)
+                                            ;
+                                            chartExpenseByDay.yAxis
+                                                .axisLabel('Amount')
+                                                .tickFormat(function(d) {
+                                                    if (d == null) {
+                                                        return 'N/A';
+                                                    }
+                                                    return d3.format(',.2f')(d);
+                                                })
+                                            ;
+                                            //data = sinAndCos();
+                                            console.log("*****************************")
+                                            console.log(data);
+                                            //chartDataExpenseByDay = d3.select('#chart6').append('svg').datum(data);
+                                            chartDataExpenseByDay = d3.select('#chart6 svg').datum(data);
+                                            chartDataExpenseByDay.call(chartExpenseByDay);
+                                            nv.utils.windowResize(chartExpenseByDay.update);
+                                            return chartExpenseByDay;
+                                        });
+                                       
                                         
                                     });
                                     
@@ -700,108 +869,188 @@
                                     
                                     
                                     
+// GLOBAL LAND-OCEAN TEMPERATURE INDEX
 
-                                
-                                
-                                // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
-    var chart;
-    var data;
-    var legendPosition = "top";
-    var randomizeFillOpacity = function() {
-        var rand = Math.random(0,1);
-        for (var i = 0; i < 100; i++) { // modify sine amplitude
-            data[4].values[i].y = Math.sin(i/(5 + rand)) * .4 * rand - .25;
-        }
-        data[4].fillOpacity = rand;
-        chart.update();
-    };
-    var toggleLegend = function() {
-        if (legendPosition == "top") {
-            legendPosition = "bottom";
-        } else {
-            legendPosition = "top";
-        }
-        chart.legendPosition(legendPosition);
-        chart.update();
-    };
-    nv.addGraph(function() {
-        chart = nv.models.lineChart()
-            .options({
-                duration: 300,
-                useInteractiveGuideline: true
-            })
-        ;
-        // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
-        chart.xAxis
-            .axisLabel("Time (s)")
-            .tickFormat(d3.format(',.1f'))
-            .staggerLabels(true)
-        ;
-        chart.yAxis
-            .axisLabel('Voltage (v)')
-            .tickFormat(function(d) {
-                if (d == null) {
-                    return 'N/A';
-                }
-                return d3.format(',.2f')(d);
-            })
-        ;
-        data = sinAndCos();
-        console.log(data);
-        d3.select('#chart5').append('svg')
-            .datum(data)
-            .call(chart);
-        nv.utils.windowResize(chart.update);
-        return chart;
-    });
-    function sinAndCos() {
-        var sin = [],
-            sin2 = [],
-            cos = [],
-            rand = [],
-            rand2 = []
-            ;
-        for (var i = 0; i < 100; i++) {
-            sin.push({x: i, y: i % 10 == 5 ? null : Math.sin(i/10) }); //the nulls are to show how defined works
-            sin2.push({x: i, y: Math.sin(i/5) * 0.4 - 0.25});
-            cos.push({x: i, y: .5 * Math.cos(i/10)});
-            rand.push({x:i, y: Math.random() / 10});
-            rand2.push({x: i, y: Math.cos(i/10) + Math.random() / 10 })
-        }
-        return [
-            {
-                area: true,
-                values: sin,
-                key: "Sine Wave",
-                color: "#ff7f0e",
-                strokeWidth: 4,
-                classed: 'dashed'
-            },
-            {
-                values: cos,
-                key: "Cosine Wave",
-                color: "#2ca02c"
-            },
-            {
-                values: rand,
-                key: "Random Points",
-                color: "#2222ff"
-            },
-            {
-                values: rand2,
-                key: "Random Cosine",
-                color: "#667711",
-                strokeWidth: 3.5
-            },
-            {
-                area: true,
-                values: sin2,
-                key: "Fill opacity",
-                color: "#EF9CFB",
-                fillOpacity: .1
-            }
-        ];
+var temperatureIndexJSON = [
+  {
+    key: "Temp +- Avg.",
+    values: [
+    {
+        "x": 1998,
+        "y": 0.45
+    },
+    {
+        "x": 1999,
+        "y": 0.48
+    },
+    {
+        "x": 2000,
+        "y": 0.5
+    },
+    {
+        "x": 2001,
+        "y": 0.52
+    },
+    {
+        "x": 2002,
+        "y": 0.55
+    },
+    {
+        "x": 2003,
+        "y": 0.58
+    },
+    {
+        "x": 2004,
+        "y": 0.6
+    },
+    {
+        "x": 2005,
+        "y": 0.61
+    },
+    {
+        "x": 2006,
+        "y": 0.61
+    },
+    {
+        "x": 2007,
+        "y": 0.61
+    },
+    {
+        "x": 2008,
+        "y": 0.62
+    },
+    {
+        "x": 2009,
+        "y": 0.62
+    },
+    {
+        "x": 2010,
+        "y": 0.62
+    },
+    {
+        "x": 2011,
+        "y": 0.63
+    },
+    {
+        "x": 2012,
+        "y": 0.67
+    },
+    {
+        "x": 2013,
+        "y": 0.71
+    },
+    {
+        "x": 2014,
+        "y": 0.77
+    },
+    {
+        "x": 2015,
+        "y": 0.83
+    },
+    {
+        "x": 2016,
+        "y": 0.89
+    },
+    {
+        "x": 2017,
+        "y": 0.95
     }
+    ]
+  }
+];
+
+        nv.addGraph(function () {
+     var chart = nv.models.lineChart() // Initialise the lineChart object.
+         .useInteractiveGuideline(true) // Turn on interactive guideline (tooltips) 
+     ;
+     chart.xAxis
+         .axisLabel('TimeStamp (Year)') // Set the label of the xAxis (Vertical)
+     ;
+     chart.yAxis
+         .axisLabel('Degrees (c)') // Set the label of the xAxis (Horizontal)
+         .tickFormat(d3.format('.02f')) // Rounded Numbers Format.
+     ;
+     d3.select('#chart5 svg') // Select the ID of the html element we defined earlier.
+         .datum(temperatureIndexJSON) // Pass in the JSON
+         .transition().duration(500) // Set transition speed
+         .call(chart) // Call & Render the chart
+     ;
+     nv.utils.windowResize(chart.update); // Intitiate listener for window resize so the chart responds and changes width.
+     return;
+ });
+                                
+   
+    
+    
+            function update() {
+            
+            
+            
+                 var statisticDate = jQuery("#statisticDate").val();
+                 
+                 var urlBalanceWithParameters='';
+                 var urlBalanceWithParameters = urlListtest+"?statisticDate="+ statisticDate;
+                 
+                 
+                  d3.json(urlBalanceWithParameters, function (data) {
+                       //var data = historicalBarChartTest;
+            
+                        // Update the SVG with the new data and call chart
+                        chartDataFirst.datum(data).transition().duration(500).call(chartFirst);
+                        nv.utils.windowResize(chartFirst.update);
+                          
+                   });
+                   
+                 var urlListIncomeWithParameters='';
+                 var urlListIncomeWithParameters = urlListIncome+"&statisticDate="+ statisticDate;
+                   
+                   
+                    d3.json(urlListIncomeWithParameters, function (data) {            
+                        // Update the SVG with the new data and call chart
+                        chartDataIncome.datum(data).transition().duration(500).call(chartFirst);
+                        nv.utils.windowResize(chartIncome.update);
+                          
+                   });
+                   
+                   
+                   
+                                      
+                 var urlListExpenseWithParameters='';
+                 var urlListExpenseWithParameters = urlListExpense+"&statisticDate="+ statisticDate;
+                   
+                    d3.json(urlListExpenseWithParameters, function (data) {
+                        chartDataExpense.datum(data).transition().duration(500).call(chartFirst);
+                        nv.utils.windowResize(chartExpense.update);
+                          
+                   });
+            
+       
+            };
+            
+            // Update the CHART
+            d3.select("#update").on("click", update);
+            
+            
+            
+                                  $(function() {
+                                        $('#statisticDate').datepicker({
+                                            //dateFormat : 'dd-mm-yy',
+                                            dateFormat : 'yy-mm',
+                                            yearRange : '-120:+0',
+                                            changeMonth : true,
+                                            changeYear : true,
+                                            //changeDay: false,
+                                            showButtonPanel: true,
+                                            onClose: function(dateText, inst) { 
+                                                    $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+                                                    update();
+                                                }
+                                            
+                                        });
+                                        //$("#datepicker").datepicker();
+
+                                    });
+            
 
 									
 								</script>

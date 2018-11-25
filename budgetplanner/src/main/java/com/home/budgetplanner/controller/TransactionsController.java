@@ -2,6 +2,7 @@ package com.home.budgetplanner.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -498,34 +499,95 @@ public class TransactionsController {
         listaValues.add(dataDTOGrid);
         
         
-        logger.info("////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-        String date = "2018-11-01";
-
-        //default, ISO_LOCAL_DATE 
-        LocalDate startDate = LocalDate.parse(date);
+        logger.info("/////////////////////fecha///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+        logger.info(searchStatisticsOfTransactionsForm.getStatisticDate());
+        //String date = "2018-11-01";
         
-        String endDate = "2018-11-30";
+        LocalDate startDate;
+        if (searchStatisticsOfTransactionsForm.getStatisticDate()==null) {
+            
+            startDate = LocalDate.now();
+            
+        } else {
+            
+            startDate = LocalDate.parse(searchStatisticsOfTransactionsForm.getStatisticDate()+"-01");
+        }
+        logger.info(startDate);
+            
+        
+        
+        LocalDate start = startDate.withDayOfMonth(1);
+        LocalDate end = startDate.withDayOfMonth(startDate.lengthOfMonth());
+        
+        
+        logger.info("start: "+start);
+        logger.info("end: "+end);
+        
+        
+
+        
+       // LocalDate today = LocalDate.now();
+
+        
+        //String date = "2018-11";
+
+        //DateTimeFormatter formatter;W
+        //LocalDate.parse(text, formatter)
+        //default, ISO_LOCAL_DATE 
+        //LocalDate startDate = LocalDate.parse(date);
+        
+        
+        //String endDate = "2018-11-30";
 
         //default, ISO_LOCAL_DATE 
-        LocalDate endLocalDate = LocalDate.parse(endDate);
+        //LocalDate endLocalDate = LocalDate.parse(endDate);
      
-        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),startDate, endLocalDate);
+        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),start, end);
 
         
         logger.info("//////////prueba group//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
         logger.info(listByDay.size());
 
+        
+        List<DataDTO> listDTOByDay = new ArrayList<>();
+        //DataDTO dataDTO = new DataDTO();
+        
         logger.info(listByDay);
         
         //for (Object[][] pruebaGroup : listByDay){
             
             for (Object[] maxAvgSalary : listByDay) {
+                
+                
+                
+                
+                String label =  String.valueOf(maxAvgSalary[0]);
+                BigDecimal value =  new BigDecimal(String.valueOf(maxAvgSalary[1]));
+                
+                DataDTO dataDTO = new DataDTO( label, value);
+                
+                listDTOByDay.add(dataDTO);
+                
                 logger.info("max avg salary: " + maxAvgSalary[0]);
                 System.out.println("min avg salary: " + maxAvgSalary[1]);
+                
+                
             }
             
         //}
         
+            
+            DataDTOGrid dataDTOGridByDay = new DataDTOGrid();
+            
+            
+            dataDTOGridByDay.setValues(listDTOByDay);
+            
+            
+            
+            List<DataDTOGrid> listaValuesByDay = new ArrayList<>();
+            
+            listaValuesByDay.add(dataDTOGridByDay);
+            
        
        // logger.info(pruebaGroup);
         
@@ -535,6 +597,190 @@ public class TransactionsController {
         
        // return lista;
        // return dataDTOGrid;
+        
+    }
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/listTransactionsByEntryTypeAndDate", method = RequestMethod.GET, produces = "application/json")
+    //public List<DataDTO> testD3(){
+    //public DataDTOGrid testD3(){
+    public List<DataDTOGrid> findTransactionSumByEntryTypeAndDate(SearchStatisticsOfTransactionsForm searchStatisticsOfTransactionsForm){
+        
+        logger.info(searchStatisticsOfTransactionsForm.getStatisticDate());
+        //String date = "2018-11-01";
+        
+        LocalDate startDate;
+        if (searchStatisticsOfTransactionsForm.getStatisticDate()==null) {
+            
+            startDate = LocalDate.now();
+            
+        } else {
+            
+            startDate = LocalDate.parse(searchStatisticsOfTransactionsForm.getStatisticDate()+"-01");
+        }
+        logger.info(startDate);
+            
+        
+        
+        LocalDate start = startDate.withDayOfMonth(1);
+        LocalDate end = startDate.withDayOfMonth(startDate.lengthOfMonth());
+        
+        
+        logger.info("start: "+start);
+        logger.info("end: "+end);
+        
+       // List<DataDTO> lista = new ArrayList<>();
+        
+        
+        
+        List<DataDTO> lista   = transactionsService.findTransactionSumByEntryTypeAndDate(searchStatisticsOfTransactionsForm.getEntryType(), start, end);
+       
+        
+        
+        DataDTOGrid dataDTOGrid = new DataDTOGrid();
+        
+        dataDTOGrid.setValues(lista);
+        
+        
+        List<DataDTOGrid> listaValues = new ArrayList<>();
+        
+        listaValues.add(dataDTOGrid);
+
+        return listaValues;
+        
+    }
+    
+    
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/listGridIncomeAndExpensesByDate", method = RequestMethod.GET, produces = "application/json")
+    public List<DataDTOGrid> listGridIncomeAndExpensesByDate(SearchStatisticsOfTransactionsForm searchStatisticsOfTransactionsForm){
+        
+        
+        
+        
+        LocalDate startDate;
+        if (searchStatisticsOfTransactionsForm.getStatisticDate()==null) {
+            
+            startDate = LocalDate.now();
+            
+        } else {
+            
+            startDate = LocalDate.parse(searchStatisticsOfTransactionsForm.getStatisticDate()+"-01");
+        }
+        logger.info(startDate);
+            
+        
+        
+        LocalDate start = startDate.withDayOfMonth(1);
+        LocalDate end = startDate.withDayOfMonth(startDate.lengthOfMonth());
+        
+        
+        logger.info("start: "+start);
+        logger.info("end: "+end);
+ 
+
+       
+        List<DataDTO> test   = transactionsService.findTransactionIncomeAndExpenseByDate(start, end);
+        logger.info("**************************************************************************");
+        logger.info(test);
+        
+        
+        DataDTOGrid dataDTOGrid = new DataDTOGrid();
+        
+        //dataDTOGrid.setValues(lista);
+        
+        dataDTOGrid.setValues(test);
+        
+        
+        
+        List<DataDTOGrid> listaValues = new ArrayList<>();
+        
+        listaValues.add(dataDTOGrid);
+        return listaValues;
+        
+       // return lista;
+       // return dataDTOGrid;
+        
+    }
+    
+    
+    
+    
+    
+    @ResponseBody
+    @RequestMapping(value = "/listTransactionsByEntryTypeByDay", method = RequestMethod.GET, produces = "application/json")
+    //public List<DataDTO> testD3(){
+    //public DataDTOGrid testD3(){findTransactionSumByEntryTypeAndDay
+    public List<DataDTOGrid> findTransactionSumByEntryTypeByDay(SearchStatisticsOfTransactionsForm searchStatisticsOfTransactionsForm){
+        
+           
+        logger.info("/////////////////////findTransactionSumByEntryTypeByDay///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+        logger.info(searchStatisticsOfTransactionsForm.getStatisticDate());
+        
+        LocalDate startDate;
+        if (searchStatisticsOfTransactionsForm.getStatisticDate()==null) {
+            
+            startDate = LocalDate.now();
+            
+        } else {
+            
+            startDate = LocalDate.parse(searchStatisticsOfTransactionsForm.getStatisticDate()+"-01");
+        }
+        
+        LocalDate start = startDate.withDayOfMonth(1);
+        LocalDate end = startDate.withDayOfMonth(startDate.lengthOfMonth());
+        
+        
+
+     
+        List<Object[][]> listByDay   = transactionsService.findTransactionSumByEntryTypeAndDay(searchStatisticsOfTransactionsForm.getEntryType(),start, end);
+
+        logger.info(listByDay.size());
+
+        
+        List<DataDTO> listDTOByDay = new ArrayList<>();
+        
+        logger.info(listByDay);
+            
+            for (Object[] maxAvgSalary : listByDay) {
+                
+                BigDecimal x =  new BigDecimal(String.valueOf(maxAvgSalary[0]));  //String.valueOf(maxAvgSalary[0]);
+                BigDecimal y =  new BigDecimal(String.valueOf(maxAvgSalary[1]));
+                
+                DataDTO dataDTO = new DataDTO( x, y);
+                
+                listDTOByDay.add(dataDTO);
+                
+                logger.info("max avg salary: " + maxAvgSalary[0]);
+                System.out.println("min avg salary: " + maxAvgSalary[1]);
+                
+                
+            }
+            
+            DataDTOGrid dataDTOGridByDay = new DataDTOGrid();
+            
+            
+            dataDTOGridByDay.setValues(listDTOByDay);
+            dataDTOGridByDay.setKey("Expense by Day");
+            
+            
+            dataDTOGridByDay.setArea(true);
+
+            dataDTOGridByDay.setFillOpacity(new BigDecimal("0.1"));
+            
+            
+            
+            List<DataDTOGrid> listaValuesByDay = new ArrayList<>();
+            
+            listaValuesByDay.add(dataDTOGridByDay);
+
+        
+        
+        
+        return listaValuesByDay;
         
     }
     

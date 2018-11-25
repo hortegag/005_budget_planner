@@ -212,6 +212,26 @@ public class TransactionsServiceImpl implements TransactionsService, Serializabl
         
         return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDay(entryType, startDate, endDate);
     }
+    
+    @Override
+    public List<DataDTO> findTransactionSumByEntryTypeAndDate(String entryType, LocalDate startDate, LocalDate endDate){
+       
+        return pagingTransactionsRepository.findTransactionSumByEntryTypeAndDate(entryType, startDate, endDate);
+
+        
+    }
+    
+    
+    
+    @Override
+    public List<DataDTO> findTransactionIncomeAndExpenseByDate(LocalDate startDate, LocalDate endDate){
+        
+        return pagingTransactionsRepository.findTransactionIncomeAndExpenseByDate(startDate, endDate);
+        
+        
+    }
+
+
 
 
 

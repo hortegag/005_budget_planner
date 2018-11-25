@@ -6,5 +6,8 @@ import lombok.Data;
 public class SearchStatisticsOfTransactionsForm {
     
     private String entryType;
+    
+    private String statisticDate;
 
+    
 }

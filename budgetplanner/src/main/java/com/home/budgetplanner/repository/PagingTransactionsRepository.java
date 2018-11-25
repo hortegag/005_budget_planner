@@ -83,7 +83,9 @@ public interface PagingTransactionsRepository extends PagingAndSortingRepository
            " AND v.transaction_date between :startDate AND :endDate " + 
             "GROUP BY " +
           // "    date_part( 'day', v.transactionDate) ", nativeQuery =true
-           "    EXTRACT(DAY FROM v.transaction_date) ", nativeQuery =true
+           "    EXTRACT(DAY FROM v.transaction_date) "+
+           "ORDER BY "+
+              " v.transaction_date ", nativeQuery =true
             
 
           //  "   v.transaction_date ", nativeQuery =true
@@ -93,5 +95,31 @@ public interface PagingTransactionsRepository extends PagingAndSortingRepository
     List<Object[][]> findTransactionSumByEntryTypeAndDay(@Param("entryType") String entryType, @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);  
     
     
+    
+    
+    
+    @Query("SELECT " +
+            "    new com.home.budgetplanner.controller.dtos.DataDTO(v.transactionType.name, SUM(v.value)) " +
+            "FROM " +
+            "    Transactions v " +
+            "WHERE "+
+            "    v.transactionType.entryType = :entryType " +
+            " AND v.transactionDate between :startDate AND :endDate "+
+            "GROUP BY " +
+            "    v.transactionType.name "
+            )
+     List<DataDTO> findTransactionSumByEntryTypeAndDate(@Param("entryType") String entryType,  @Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    
+    
+    
+    @Query("SELECT " +
+            "    new com.home.budgetplanner.controller.dtos.DataDTO(v.transactionType.entryType, SUM(v.value)) " +
+            "FROM " +
+            "    Transactions v " +
+            "WHERE "+
+            " v.transactionDate between :startDate AND :endDate "+
+            "GROUP BY " +
+            "    v.transactionType.entryType ")
+     List<DataDTO> findTransactionIncomeAndExpenseByDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
 }

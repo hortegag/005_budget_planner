@@ -217,6 +217,15 @@ insert into transaction_type values (6003, 'ENTERTEINMENT', 'Money spent on ente
 
 insert into transactions values (7001, '2018-11-01', 'SALARY PAYMENT', 300, 300, 6001, null, 2003);
 insert into transactions values (7002, '2018-11-02', 'LUNCH SUBMARINE', 255, 5, 6002, null, 2003);
+insert into transactions values (7003, '2018-11-02', 'LUNCH SALAD', 255, 4.60, 6002, null, 2003);
+insert into transactions values (7004, '2018-11-02', 'DINNER OCTOPUS', 255, 7, 6002, null, 2003);
+insert into transactions values (7005, '2018-11-03', 'BREAKFAST CROSSAINT', 255, 4, 6002, null, 2003);
+insert into transactions values (7006, '2018-11-04', 'BREAKFAST MOVIES', 255, 19.38, 6003, null, 2003);
+
+
+
+
+
 
 
 
