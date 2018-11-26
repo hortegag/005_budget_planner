@@ -104,7 +104,7 @@ public class People implements Serializable {
         return contain;
     }
  
- 
+     @ToString.Exclude
      @JsonIgnore
      @OneToMany(mappedBy = "people", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH }, fetch=FetchType.LAZY)
      private List<Transactions> transactions;

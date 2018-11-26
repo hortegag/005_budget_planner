@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow
+    xmlns="http://www.springframework.org/schema/webflow"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+    start-state="list">
+
+    <secured
+        attributes="ROLE_USER, ROLE_ADMIN"
+        match="any" />
+
+
+    <on-start>
+        <set
+            name="flowScope.directorio"
+            value="'welcomeFlow'" />
+    
+
+    </on-start>
+
+    <view-state
+        id="list"
+        view="#{directorio}/welcome">
+
+    </view-state>
+
+
+    <end-state id="success"></end-state>
+    <end-state id="cancel"></end-state>
+
+</flow>

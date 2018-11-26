@@ -50,10 +50,10 @@ insert into identification_type values (1002,'Dummy','DM','Dummy Identification'
 insert into identification_type values (1003,'Passport','PS','Pasaporte de la persona');
 
 
-insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y', 295, 300, 5,1001);
+insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y', 94.07, 325.86, 231.79,1001);
 insert into people values (2004,'Dummy','Smith','dsmith@hotmail.com','1989-01-27','PASS_123XYZ','dsmith','$2a$10$d4HxrYDWhHt7bQaL914PluHCy1MH6B6kWiQ1sc8wbV7.ivK7tL/SO','Y', 0, 0, 0,1003);
 
-insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','$2a$10$MtyjKXjgipsY07OYc/nA0.Lojv2eGPI0.7OZfG5WXvwDCkHIB0cx.','Y', 0, 0, 0, 1003);
+insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','$2a$10$MtyjKXjgipsY07OYc/nA0.Lojv2eGPI0.7OZfG5WXvwDCkHIB0cx.','Y',  4928.85, 5016.00, 87.15, 1003);
 insert into people values (2006,'RagnaK','Simons','rsimons@hotmail.com','1983-02-01','PASS_123XYYssz','rsimons','rsimons','Y',0, 0, 0, 1003);
 
 insert into people values (2007,'Lakherta','lonbeida','llombeida@hotmail.com','1984-03-03','PASS_1XrykRssz','llombeida','llombeida','Y', 0, 0, 0, 1003);
@@ -218,6 +218,17 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 insert into transaction_type values (6001, 'SALARY', 'Salary earned this month', 'CREDIT');
 insert into transaction_type values (6002, 'FOOD', 'Money spent on food', 'DEBIT');
 insert into transaction_type values (6003, 'ENTERTEINMENT', 'Money spent on enterteinment', 'DEBIT');
+insert into transaction_type values (6004, 'PAYMENTS', 'PAYMENT OF BILL', 'DEBIT');
+insert into transaction_type values (6005, 'EDUCATION', 'PAYMENT OF COLLEGE OR UNIVERSITY', 'DEBIT');
+insert into transaction_type values (6006, 'HEALTH', 'PAYMENT OF DOCTOR APPOIMENT OR MEDICINE', 'DEBIT');
+insert into transaction_type values (6007, 'OTHER EXPENSES', 'PAYMENT OF DOCTOR APPOIMENT OR MEDICINE', 'DEBIT');
+insert into transaction_type values (6008, 'OTHER INCOMES', 'PAYMENT OF DOCTOR APPOIMENT OR MEDICINE', 'CREDIT');
+insert into transaction_type values (6009, 'GIFTS', 'PAYMENT OF DOCTOR APPOIMENT OR MEDICINE', 'CREDIT');
+
+
+
+
+
 
 
 insert into transactions values (7001, '2018-11-01', 'SALARY PAYMENT', 300, 300, 6001, null, 2003);
@@ -225,7 +236,27 @@ insert into transactions values (7002, '2018-11-02', 'LUNCH SUBMARINE', 255, 5, 
 insert into transactions values (7003, '2018-11-02', 'LUNCH SALAD', 255, 4.60, 6002, null, 2003);
 insert into transactions values (7004, '2018-11-02', 'DINNER OCTOPUS', 255, 7, 6002, null, 2003);
 insert into transactions values (7005, '2018-11-03', 'BREAKFAST CROSSAINT', 255, 4, 6002, null, 2003);
-insert into transactions values (7006, '2018-11-04', 'BREAKFAST MOVIES', 255, 19.38, 6003, null, 2003);
+insert into transactions values (7006, '2018-11-04', 'MOVIES', 255, 19.38, 6003, null, 2003);
+insert into transactions values (7007, '2018-11-05', 'HEART CARDIOGRAM', 255, 150.38, 6006, null, 2003);
+insert into transactions values (7008, '2018-11-06', 'DENTAL EXAMINATION', 255, 35.53, 6006, null, 2003);
+insert into transactions values (7009, '2018-11-07', 'GIFT FROM GRANDPA', 255, 25.86, 6009, null, 2003);
+insert into transactions values (7010, '2018-11-08', 'PAY OF LOTTERY TICKET', 255, 5.90, 6007, null, 2003);
+
+insert into transactions values (7011, '2018-11-01', 'SALARY PAYMENT', 300, 5000.50, 6001, null, 2005);
+insert into transactions values (7012, '2018-11-02', 'LUNCH BARBECUE', 255, 15, 6002, null, 2005);
+insert into transactions values (7013, '2018-11-02', 'LUNCH PIZZA', 255, 3, 6002, null, 2005);
+insert into transactions values (7014, '2018-11-02', 'DINNER CRABS', 255, 5, 6002, null, 2005);
+insert into transactions values (7015, '2018-11-03', 'BREAKFAST ACAI', 255, 2.50, 6002, null, 2005);
+insert into transactions values (7016, '2018-11-04', 'DANCE PUMTP IT', 255, 4.50, 6003, null, 2003);
+insert into transactions values (7017, '2018-11-05', 'X-RAY ON THE KNEE', 255, 25.86, 6006, null, 2005);
+insert into transactions values (7019, '2018-11-07', 'GIFT FROM AUNT', 255, 15.50, 6009, null, 2005);
+insert into transactions values (7020, '2018-11-08', 'GIFT FOR FATHERS BIRTHDAY', 255, 35.79, 6007, null, 2005);
+
+
+
+
+
+
 
 
 

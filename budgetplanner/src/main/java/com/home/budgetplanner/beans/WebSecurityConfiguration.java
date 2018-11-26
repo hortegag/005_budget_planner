@@ -28,7 +28,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
-                .defaultSuccessUrl("/welcome")
+                .defaultSuccessUrl("/statisticsFlow")
                 
                 .and()
                 .authorizeRequests()

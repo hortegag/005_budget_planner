@@ -1,5 +1,6 @@
 package com.home.budgetplanner.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -347,6 +348,17 @@ public class PeopleController {
         
         People people = PeopleDTO.dtoToEntity(peopleDTO, groups, identificationType);
         
+        if (people.getCurrentBalance()==null){
+            
+            people.setCurrentBalance(new BigDecimal("0"));
+            people.setIncome(new BigDecimal("0"));
+
+            people.setExpense(new BigDecimal("0"));
+            
+        }
+        
+     
+        
         peopleService.save(people);
         
         
@@ -354,7 +366,35 @@ public class PeopleController {
   
   
   public People save(People people) {
+      
+      if (people.getCurrentBalance()==null){
+          
+          people.setCurrentBalance(new BigDecimal("0"));
+          people.setIncome(new BigDecimal("0"));
 
+          people.setExpense(new BigDecimal("0"));
+          
+      }
+
+      people.setPassword(passwordEncoder.encode(people.getPassword()));
+
+      return peopleService.save(people);
+  }
+  
+  
+  public People saveNormalUser(People people) {
+      
+      List<Groups> groups = groupService.findByName("USERS");
+      
+      people.setGroups(groups);
+      
+      people.setCurrentBalance(new BigDecimal("0"));
+      people.setIncome(new BigDecimal("0"));
+
+      people.setExpense(new BigDecimal("0"));
+
+      
+      
       people.setPassword(passwordEncoder.encode(people.getPassword()));
 
       return peopleService.save(people);

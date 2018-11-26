@@ -12,5 +12,7 @@ public interface GroupService extends BaseService<Groups, Long> {
     public Page<Groups> findAllByPage(Pageable pageable);
     
     public List<Groups> findAllOrderByIdAsc();
+    
+    public List<Groups> findByName(String name);
 
 }

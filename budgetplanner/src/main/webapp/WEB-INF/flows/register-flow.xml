@@ -22,7 +22,7 @@
  
          <evaluate
                 expression="peopleController.initializePeople()"
-                result="flowScope.people" />
+                result="flowScope.register" />
 
 
 
@@ -35,7 +35,7 @@
     <view-state
         id="addEntity"
         view="#{directorio}/peopleCreate"
-        model="people">
+        model="register">
         <on-render>
             <evaluate
                 expression="peopleController.initializeSelectableIdentificationTypes()"
@@ -71,14 +71,14 @@
     <view-state
         id="confirmCreateEntity"
         view="#{directorio}/peopleConfirmCreate"
-        model="identificationType">
+        model="register">
 
 
         <transition
             on="confirm"
             to="success">
             
-            <evaluate expression="peopleController.save(flowScope.people)" /> 
+            <evaluate expression="peopleController.saveNormalUser(flowScope.register)" /> 
 
 
 <!--          <evaluate expression="servicio.save(flowScope.people)" />    -->   
@@ -106,7 +106,7 @@
     <view-state id="failure" />
 
 
-    <end-state id="success" view="externalRedirect:welcome"></end-state>
-    <end-state id="cancel" view="externalRedirect:welcome"></end-state>
+    <end-state id="success" view="externalRedirect:statisticsFlow"></end-state>
+    <end-state id="cancel" view="externalRedirect:statisticsFlow"></end-state>
 
 </flow>

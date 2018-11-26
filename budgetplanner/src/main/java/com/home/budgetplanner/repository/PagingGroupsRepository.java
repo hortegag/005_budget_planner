@@ -16,6 +16,9 @@ public interface PagingGroupsRepository  extends PagingAndSortingRepository<Grou
     List<Groups> findByName(String name);
     
     List<Groups> findAllByOrderByIdAsc();
+    
+   // Groups findGroupByName(String name);
+
 
     
 

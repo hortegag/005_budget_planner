@@ -70,5 +70,12 @@ public class GroupServiceImpl implements GroupService, Serializable {
         // TODO Auto-generated method stub
         return pagingGroupsRepository.findAllByOrderByIdAsc();
     }
+    
+    @Override
+    public List<Groups> findByName(String name) {
+        
+        return pagingGroupsRepository.findByName(name);
+    }
+
 
 }

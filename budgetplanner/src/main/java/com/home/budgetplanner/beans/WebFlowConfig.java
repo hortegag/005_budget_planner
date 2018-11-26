@@ -40,10 +40,7 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
                 .addFlowLocation("/WEB-INF/flows/transaction-flow.xml", "transactionFlow")
                 .addFlowLocation("/WEB-INF/flows/statistics-flow.xml", "statisticsFlow")
                 .addFlowLocation("/WEB-INF/flows/register-flow.xml", "registerFlow")
-
-
-                
-                
+                .addFlowLocation("/WEB-INF/flows/welcome-flow.xml", "welcomeFlow")
 
                 .addFlowLocationPattern("/WEB-INF/flows/*-flow.xml").build();
     }

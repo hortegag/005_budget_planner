@@ -16,6 +16,7 @@
         <form
             action="#"
             th:object="${searchIdentificationTypeForm}"
+            th:action="${flowExecutionUrl}"
             method="post"
             autocomplete="off">
 
@@ -66,6 +67,7 @@
 
         <form
             action="#"
+            th:action="${flowExecutionUrl}"
             method="post">
             <input
                 id="addIdentificationType"
