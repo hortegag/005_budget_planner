@@ -8,7 +8,7 @@
     start-state="list">
 
     <secured
-        attributes="ROLE_ADMIN"
+        attributes="ROLE_USER, ROLE_ADMIN"
         match="any" />
 
 

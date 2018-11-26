@@ -218,7 +218,10 @@ Recipe 06-07: Easily Add Dates to Your Inputs with jQuery UI Datepicker
 	transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
 }
 
-.ui-datepicker ui-datepicker-calendar td :hover :not (.ui-datepicker-current-day){
+.ui-datepicker ui-datepicker-calendar td :hover :not (
+.ui-datepicker-current-day
+
+){
 background-color: #eee;
 cursor: pointer;
 }
@@ -299,7 +302,10 @@ cursor: pointer;
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_ADMIN')">
                         <a
                             class="nav-link"
                             href="#"
@@ -307,7 +313,10 @@ cursor: pointer;
                             th:text="#{menu.identificationType}">identification types</a>
                     </li>
 
-                    <li class="nav-item">
+
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_TEST')">
                         <a
                             class="nav-link"
                             href="#"
@@ -315,7 +324,9 @@ cursor: pointer;
                             th:text="#{menu.people}">people</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_TEST')">
                         <a
                             class="nav-link"
                             href="#"
@@ -323,33 +334,39 @@ cursor: pointer;
                             th:text="#{menu.people}">people Test</a>
                     </li>
 
-
-                    <li class="nav-item">
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_ADMIN')">
                         <a
                             class="nav-link"
                             href="#"
                             th:href="@{/peopleTestBootstrap}"
                             th:text="#{menu.people}">people Botstrap ok</a>
                     </li>
-                    
-                    <li class="nav-item">
+
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_ADMIN')">
                         <a
                             class="nav-link"
                             href="#"
                             th:href="@{/transactionTypeFlow}"
                             th:text="#{menu.transactionType}">transactionType</a>
                     </li>
-                    
-                    
-                      <li class="nav-item">
+
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
                         <a
                             class="nav-link"
                             href="#"
                             th:href="@{/transactionFlow}"
                             th:text="#{menu.transaction}">transaction </a>
                     </li>
-                    
-                    <li class="nav-item">
+
+                    <li
+                        class="nav-item"
+                        sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
                         <a
                             class="nav-link"
                             href="#"
@@ -357,11 +374,7 @@ cursor: pointer;
                             th:text="#{menu.statistics}">statistics</a>
                     </li>
 
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="#">Pricing</a>
-                    </li>
+                 
                     <li class="nav-item dropdown">
                         <a
                             class="nav-link dropdown-toggle"
@@ -404,7 +417,10 @@ cursor: pointer;
                     <li
                         sec:authorize="isAuthenticated()"
                         class="nav-item">
-                        <a class="nav-link">Welcome <span sec:authentication="name">Bob</span> </a>
+                        <a class="nav-link">
+                            Welcome
+                            <span sec:authentication="name">Bob</span>
+                        </a>
                     </li>
 
                     <li

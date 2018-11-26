@@ -53,7 +53,7 @@ insert into identification_type values (1003,'Passport','PS','Pasaporte de la pe
 insert into people values (2003,'Hector','Ortega','hog_andy@hotmail.com','1990-01-27','0927210310','hortega','$2a$10$MgOjhHkZ3/jeFokibgVcP.MYEEF5Bkph/WiZ5lyTipewPKfwgsxrm','Y', 295, 300, 5,1001);
 insert into people values (2004,'Dummy','Smith','dsmith@hotmail.com','1989-01-27','PASS_123XYZ','dsmith','$2a$10$d4HxrYDWhHt7bQaL914PluHCy1MH6B6kWiQ1sc8wbV7.ivK7tL/SO','Y', 0, 0, 0,1003);
 
-insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','hhercules','Y', 0, 0, 0, 1003);
+insert into people values (2005,'Homero','Hercules','hhercules@hotmail.com','1991-12-27','PASfxwYzyc','hhercules','$2a$10$MtyjKXjgipsY07OYc/nA0.Lojv2eGPI0.7OZfG5WXvwDCkHIB0cx.','Y', 0, 0, 0, 1003);
 insert into people values (2006,'RagnaK','Simons','rsimons@hotmail.com','1983-02-01','PASS_123XYYssz','rsimons','rsimons','Y',0, 0, 0, 1003);
 
 insert into people values (2007,'Lakherta','lonbeida','llombeida@hotmail.com','1984-03-03','PASS_1XrykRssz','llombeida','llombeida','Y', 0, 0, 0, 1003);
@@ -144,6 +144,11 @@ insert into users_groups values (4001,2004);
 
 --hortega
 insert into users_groups values (4001,2003);
+
+--hhercules
+insert into users_groups values (4000,2005);
+
+
 
 
 

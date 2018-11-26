@@ -8,7 +8,9 @@
     start-state="list">
 
 
-
+    <secured
+        attributes="ROLE_USER, ROLE_ADMIN"
+        match="any" />
 
     <!-- <var name="servicio" class="com.home.budgetplanner.service.impl.IdentificationTypeServiceImpl"/> -->
 

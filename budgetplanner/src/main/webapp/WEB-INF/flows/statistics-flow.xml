@@ -7,7 +7,9 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
     start-state="list">
 
-
+    <secured
+        attributes="ROLE_USER, ROLE_ADMIN"
+        match="any" />
 
 
     <!-- <var name="servicio" class="com.home.budgetplanner.service.impl.IdentificationTypeServiceImpl"/> -->
